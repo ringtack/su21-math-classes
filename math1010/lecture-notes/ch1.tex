@@ -91,6 +91,27 @@ of  $P_1$ for some fixed integer $m$.
      \item  $\forall n\ge m$, if $P_n$ is true, then  $P_{n+1}$ is true.
    \end{enumerate}
 \end{theorem}
+Theorem $\S$ 1.1.2 follows from
+\begin{proposition}[Specific Case of (5)]{}
+  Let $m\in N$. Assume that a subset  $A\subset \{m, m+1, \ldots\} $ contains $m$ and $n+1$ whenever
+  it contains $n$. Then $A=\{ m,m+1,\ldots \}$.
+\end{proposition}
+\begin{proof}[Proof]
+  In Peano Axiom 5, we start from $ 1$; here, we start from $m$. Let $B=\{p=n-(m-1)\mid n\in A\} $.
+  Since $A\subset \{ m,m+1,\ldots \}$, $B\subset \{1, 2, \ldots\}=\N$. \\
+  We observe that $1\in B$ (because $1=m-(m-1)$, and $m\in A$ by definition). Assuming $p\in B$, we
+  have $p=n-(m-1)$ for some $n\in A$. Then $p+1=(n+1)-(m-1)\in B$, as we state that $n+1\in A$
+  whenever $n\in A$. Thus, using Peano Axiom 5, we see that $A=B$. \\
+  Now, by definition of $B$, we have
+  \begin{align*}
+    A &= \{n = p + \left( m-1 \right) \mid p \in B \}  \\
+      &=  \{n=p+\left( m-1 \right) \mid p \in \N\} \\
+      &=  \{m, m+1, \ldots\}  \\
+  \end{align*}
+\end{proof}
+
+
+
 
 \begin{example}
   Prove that \[
@@ -105,11 +126,93 @@ of  $P_1$ for some fixed integer $m$.
   .\] Assuming $n! > n^2$, we prove \[
   \left( n+1 \right)! > \left( n+1 \right) ^2
   .\] Using $P_n$ we have  \[
-  \left( n+1 \right)! = n!\left( n+1 \right) = \left( 1\cdot 2\cdot \ldots\cdot n \right) \cdot \left( n+1 \right) > n^2(n+1) > \left( n+1
-  \right) ^2
+  \left( n+1 \right)! = n!\left( n+1 \right) = \left( 1\cdot 2\cdot \ldots\cdot n \right) \cdot \left( n+1 \right) > n^2(n+1) > \left( n+1 \right) ^2
 .\] Thus $P_{n+1}$ is true. \\
 By the principle of induction, $P_n$ is true for all  $n\ge 4$.
+\end{proof} 
+
+
+\section{Rational Numbers}
+\begin{definition}[Integers]{}
+  The set of integers is denoted by \[
+    \Z=\{ \ldots -2,-1,0,1,2,\ldots \}
+  .\] 
+  A rigorous construction is omitted, and left as an exercise for the reader.
+\end{definition}
+
+\begin{definition}[Rational Numbers]{}
+  The set $\Q$ of rational numbers is \[
+    \Q = \{\frac{m}{n}\mid m,n\in \Z,n\neq 0\} 
+  .\] We say $\frac{m}{n}$ and $\frac{p}{q}$ are equal if \[
+  mq=np
+  .\]  We can define addition and multiplication of rational numbers in the usual way:
+  \begin{itemize}
+    \item (addition) $\frac{m}{n}+\frac{p}{q}=\frac{mq+np}{nq}$ 
+    \item (multiplication) $\frac{m}{n}\cdot \frac{p}{q} =  \frac{mp}{nq}$
+  \end{itemize}
+\end{definition}
+$\Q$ is a nice algebraic system, until we solve systems like $x^2=2$. It turns out that this
+equation has no rational roots; but we know that by the Pythagorean theorem, this equation has 
+positive roots.
+
+\begin{example}
+  Prove that $\sqrt{2} $ is not a rational number.
+\end{example}
+\begin{proof}[Proof]
+  Suppose that $\sqrt{2} \in \Q$; then $\sqrt{2} =\frac{p}{q}$ for some $p,q\in \Z$, and $p,q$ have
+  no common divisors other than $1$. Then
+  \begin{gather*}
+    2 = \frac{p^2}{q^2}\\
+    2q^2=p^2\\
+  \end{gather*}
+  This implies $p^2$ is even; but $p^2$ is even if and only if $p$ is even. Then $p=2n$ for some  $
+  n \in N$; $p^2=\left( 2n \right) ^2=4n^2$. From this, we get $2q^2=4n^2$, and so $q^2=2n^2$ and
+  $q$ is even as well. Since both $p,q$ are even, they have a common divisor
+   $2\neq 1$, a contradition. Thus $ \sqrt{2} $ is not rational.
 \end{proof}
+\begin{proposition}[Algebraic Numbers]{}
+  A number is an \textbf{algebraic number} if it satisfies the polynomial equation \[
+    c_nx^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0=0
+  ,\] where $ c_0,c_1,\ldots, c_n$ are integers, $c_n \neq 0, n\ge 1$. We say that the polynomial
+  equation has  \textbf{degree $n$}.
+\end{proposition}
+
+\begin{example}
+  $ \sqrt{2} $ is an algebraic number because it satisfies \[
+  x^2-2=0
+  .\] 
+\end{example}
+
+\begin{example}
+  Every rational number $x=\frac{p}{q}$ is an algebraic number because $x$ satisfies \[ qx-p=0 .\] 
+\end{example}
+
+\begin{example}
+  $x=\sqrt{2+\sqrt[3]{5} } $ is an algebraic number because
+  \begin{align*}
+    x^2 &= 2+\sqrt[3]{5}  \\
+    x^2-2 &= \sqrt[3]{5}  \\
+    \left( x^2-2 \right) ^3&=5
+  ,\end{align*} hence $x$ satisfies the polynomial \[
+    \left( x^2-2 \right) ^{3}-5=0
+  .\] 
+\end{example}
+
+From this, we see that algebraic numbers do not necessarily need to be rational numbers. The
+question now is: \textit{when does a polynomial of order $n$ have rational roots?} 
+
+\begin{theorem}[Rational Zeros Theorem]{rzt}
+  Let $ c_0,c_1,\ldots,c_n\in \Z, c_n\neq 0,c_0\neq 0$. Suppose $r$ is a rational root of
+  \begin{gather}
+    c_nx^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0=0 \label{eq1}
+  \end{gather}
+  Let $r=\frac{p}{q}, p,q\in \Z,q\neq 0, gdc(p,q)=1$. Then $p$ divides $ c_0$ and $q$ divides $c_n$.
+\end{theorem}
+\begin{remark}
+  Theorem \ref{rzt} allows us to find all possible rational roots of \ref{eq1}.
+\end{remark}
+
+
 
 
 
