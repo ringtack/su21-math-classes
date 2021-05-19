@@ -2,10 +2,9 @@
 pols1100/
 csci1951l/
 
-# Ignore build files except pdfs
-*/*/build/*
-!*/*/build/*.pdf
-
 # Ignore textbooks, but not syllabi
 */*.pdf
 !*syllabus*
+
+# Add the build directory
+!/*/**/build/
