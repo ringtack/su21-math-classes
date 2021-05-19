@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Except the .gitignore
+!.gitignore
+
+# Except lecture notes
+!*/lecture-notes/*

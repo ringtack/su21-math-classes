@@ -1,0 +1,159 @@
+\documentclass[math0540-lecture-notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Set Theory}
+
+Sets serve as a fundamental construct in higher-level mathematics. We start with a brief
+introduction to set theory.
+
+\section{Sets}
+\begin{definition}[Sets]{}
+  A \textbf{set} is a collection of elements.
+  \begin{enumerate}
+    \item $x \in X$ means $x$ is an element of $X$.
+    \item $x \not\in$ means $x$ is not an element of $X$.
+    \item $X \subset Y$ means $X$ is a subset of $Y$ (i.e. $\forall x\in X, x\in Y$.)
+    \item $X = Y \iff X \subset Y \land Y \subset X$.
+    \item $A \cap B := \{x \mid x\in A \land x\in B\}$ means set intersection.
+    \item $A \cup B := \{x \mid x\in A \lor x\in B\} $ means set union.
+    \item $A \setminus B := \{x \mid x\in A \land x\not\in B\}$ means set difference.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+Let \[
+  \Z = \{\ldots, -3, -2, -1, 0, 1, 2, \ldots\}
+.\] denote the set of integers, and let \[
+\mathbb{Z}^+ = \{0, 1, \ldots\} 
+.\]  denote the set of positive integers.
+\end{example}
+
+\subsection{Set Builder notation}
+Sets may be defined formally with set-builder notation: \[
+X = \{\ expression \mid rule \} 
+.\] 
+
+\begin{example}
+  \begin{enumerate}
+    \item Let $E$ represent the set of all even numbers. This set is expressed \[
+  E = \{n\in \Q\mid \exists k\in \Z~s.t.~n=2k\} 
+  .\] 
+\item Let $A$ represent the set of real numbers whose squares are rational numbers: \[
+A = \{a\in\R\mid a^2\in \Q\} 
+.\] 
+  \end{enumerate}
+\end{example}
+
+
+
+
+
+\subsection{Cartesian Products}
+\begin{definition}[Ordered Tuples]{}
+  An \textbf{ordered pair} is defined $(x, y)$. An $n$\textbf{-ordered tuple} is an ordered list
+  of $n$ items \[
+    \left(  x_1, \ldots,x_n\right)
+  .\] 
+\end{definition}
+
+\begin{definition}[Cartesian Products]{}
+  Let $A, B$ be sets. The \textbf{cartesian product} $A\times B$ is defined \[
+    A\times B := \{(a, b) \mid a\in A,b\in B\} 
+  .\] 
+  Similarly, define the $n$-fold cartesian product \[
+    A^{n} := A\times A\times \cdots \times A
+  .\] 
+\end{definition}
+
+\begin{example}
+  $\R^2$ and $\R^3$ are examples of commonly known Cartesian products, which represent the 2D- and
+  3D-plane respectively.
+\end{example}
+
+\begin{example}
+  $R ^{n}$ is a first example of a \textbf{vector space.} Let $n \in \Z^+\cup \{ 0 \}$:
+  \begin{enumerate}
+    \item (Addition in $R^{n}$) We define an \textbf{addition operation} on $\R^n$ by adding
+      coordinate-wise \[
+        \left( x_1,\ldots,x_n \right) + \left( y_1,\ldots,y_n \right)  = \left(
+        x_1+y_1,\ldots,x_n+y_n \right)
+      .\] 
+    \item (Scaling) Given $\left( x_1,\ldots,x_n \right)\in \R^{n}, \lambda\in \R$, we define \[
+        \lambda\cdot \left( x_1,\ldots,x_n \right)  = \left( \lambda x_1,\ldots,\lambda x_n \right)
+    .\] 
+  \end{enumerate}
+\end{example}
+\begin{remark}
+  $\R_0 = \{0\}$.
+\end{remark}
+
+
+\subsection{Functions}
+Let $A, B$ be sets. Informally, a function $f: A \to B $ deterministically returns an element $b\in
+B$ for each $a\in A$. We write $f(a) =b$.
+\begin{example}
+  The function $f: \R \to \R $ given by $f(x) = x^2$ maps $\R$ to the subset \[
+    S\subset \R = \{\left( x, x^2 \right) \mid x\in \R\}
+  .\] 
+\end{example}
+
+\begin{definition}[Functions]{}
+  Let $A, B$ be sets. A function $f: A \to B$ is a subset $G_f\subset A\times B$ such that $\forall
+  a\in A, !\exists b\in B~\text{s.t.}~\left( a,b \right) \in G_f$. We write $f(a)=b$ when  $\left(
+  a, b \right) \in G_f$.
+\end{definition}
+\begin{definition}[Codomain]{} 
+  Given a function $ f: A \to B$, $A$ is the \textbf{domain} of $f$, and $B$ is the
+  \textbf{codomain} or \textbf{target} of $f$. Let the \textbf{range} of $f$ be defined as \[
+    \{b\in B\mid f(a) = b, a\in A\}
+  .\] The range is the subset of $B$.
+\end{definition}
+
+
+
+\begin{definition}[Bijectivity]{}
+  Let $ f: A \to B$ be a function.
+  \begin{enumerate}
+    \item $f$ is \textbf{injective}, or an \textbf{injection}, if $ a_1,a_2\in A$ and $f(a_1)
+      = f(a_2) $ implies $ a_1=a_2$.
+    \item $f$ is \textbf{surjective}, or a \textbf{surjection}, if $\forall b\in B, \exists a\in
+      A~\text{s.t.}~f(a)=b$. Equivalently, the range is the whole codomain.
+    \item $f$ is \textbf{bijective}, or a \textbf{bijection}, if it is both injective and
+      surjective. Equivalently,  $\forall b\in B$, there is a unique $a\in A $ such that $f(a)=b$.
+  \end{enumerate}
+\end{definition}
+
+\section{Fields}
+
+Roughly speaking, a \textbf{field} is a set, together with operations addition and multiplication.
+Vector spaces may be defined \textit{over} fields.
+\begin{definition}[Fields]{}
+  A \textbf{field} is a set $\F$ containing elements named $0$ and $1$, together with binary
+  operations  $+$ and $\cdot $ satisfying:
+  \begin{itemize}
+    \item \textbf{commutativity}: $a+b=b+a, a\cdot b=b\cdot a~\forall a,b\in \F$.
+    \item \textbf{associativity}: $a+(b+c)=(a+b)+c~\forall a,b,c\in \F$.
+    \item \textbf{identities}: $0+a=a, 1\cdot a=a~\forall a\in \F$.
+    \item \textbf{additive inverse}: $\forall a\in \F, \exists b\in \F~\text{s.t.}~a+b=0$.
+    \item \textbf{multiplicative inverse}: $\forall a\in \F\setminus \{ 0 \}, \exists c\in
+      \F~\text{s.t.}~ac=1$.
+    \item \textbf{distributivity}: $a\cdot (b+c) = a\cdot b+a\cdot c~\forall a,b,c\in \F$.
+  \end{itemize}
+\end{definition}
+\begin{example}
+  $\R^{+}\setminus \{ 0 \}$ is \textbf{not} a field under $+,\cdot $.
+\end{example}
+
+\begin{example}
+  (Finite Fields) Let $p$ prime (e.g. $p=5$). Define \[
+      \F_p = \{0,\ldots,p-1\} 
+  ,\] with binary operations $+_p,\cdot_p $ given by addition and multiplication modulo p. We claim
+  (without proof) that $\F_p$ is a field.
+\end{example}
+
+
+
+
+
+
+\end{document}

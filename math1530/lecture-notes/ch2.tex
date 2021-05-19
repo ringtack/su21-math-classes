@@ -1,0 +1,112 @@
+\documentclass[math1530-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Groups: Part I}
+
+Groups are a fundamental baseline for abstract algebra. We start with motivating examples, then move
+on to a concrete definition.
+
+\section{Motivation}
+\subsection{Permutations}
+
+\begin{definition}[Permutations]{}
+  Let $X$ be a set. A \textbf{permutation} of $X$ is a bijective function \[\pi: X \to X\] with the
+    property: $\forall x\in X, !\exists x'\in X$ such that $\pi(x')=x$. This allows us to define an
+    inverse $\pi^{-1}$ to be the permutation \[
+    \pi^{-1}:X\to X
+  \] with the rule that $\pi^{-1}(x)=x'$, where $x'\in X$ is the unique element such that
+  $\pi(x')=x$. \\
+  The \textbf{identity permutation} of $X$ is the identity map \[
+    e:X\to X, e(x)=x \forall x\in X
+  .\] 
+\end{definition}
+In general, a \textit{permutation} of a set $X$ is a rule that ``mixes up'' the elements of $X$.
+
+\begin{example}
+  Let $X =\{1, 2, 3, 4 \} $. Then a permutation $\sigma: X \to X$ can be thought of as a shuffling of $X$ and
+  visualized as follows:
+  \begin{align*}
+    1 &\Rightarrow 2 \\
+    2 &\Rightarrow 3 \\
+    3 &\Rightarrow 1 \\
+    4 &\Rightarrow 4
+  \end{align*}
+  $\sigma^{-1}$ would be defined as
+  \begin{align*}
+    1 &\Rightarrow 3\\
+    2 &\Rightarrow 1\\
+    3 &\Rightarrow 2 \\
+    4 &\Rightarrow 4 
+  \end{align*}
+  Now, suppose $\tau$ is defined as $1\Rightarrow 1, 2\Rightarrow 3, 3\Rightarrow 2, 4\Rightarrow
+  4$. Then $\sigma\circ \tau$ is
+  \begin{align*}
+    1 &\Rightarrow 2 \\
+    2 &\Rightarrow 1 \\
+    3 &\Rightarrow 3 \\
+    4 &\Rightarrow 4
+  \end{align*}
+  and $\tau\circ \sigma$ is 
+  \begin{align*}
+    1 &\Rightarrow 3 \\
+    2 &\Rightarrow 2 \\
+    3 &\Rightarrow 1 \\
+    4 &\Rightarrow 4 
+  \end{align*}
+\end{example}
+
+From this, we gather some observations.
+\begin{itemize}
+  \item Given any 2 permutations, we can compose to get a new one.
+  \item There was a permutation that didn't do anything ($\sigma\circ \sigma^{-1}$).
+  \item We can invert any permutation.
+  \item If $\sigma,\tau$ are two permutations, then we don't necessarily have $\tau\circ
+    \sigma=\sigma\circ \tau$ (in other words, the group of permutations with composition is not
+    commutative).
+\end{itemize}
+
+\begin{definition}[Transformations]{}
+  Let $X$ be a figure in $\R^2$. Then $Trafo(X)$ is the set of transformations on $X$.
+\end{definition}
+
+Consider the symmetries of a square (involving reflections/rotations on a square) as a motivating
+example of transformations; are they invertible? commutative?
+
+\begin{remark}
+  Each transformation gives a permutation of the vertices $\{A,B,C,D\} $.
+\end{remark}
+
+
+\section{(Abstract) Groups}
+\begin{definition}[Groups]{}
+  A \textbf{group} $\{X, \cdot \}$ consists of a set $X$, together with a rule 
+  \begin{align*}
+    \cdot : G\times G &\to G\\
+    (g_1,g_2) &\mapsto g_1\cdot g_2
+  \end{align*}
+  satisfying the following axioms:
+  \begin{enumerate}
+    \item (identity) there is an element $e\in G$ such that \[
+        e\cdot g=g\cdot e=g
+      .\] for all $g\in G$.
+    \item (inverse) For all $g\in G$, there is an $h\in G$ such that \[
+      g\cdot h=h\cdot g=e
+      .\] The element $h$ is called $g^{-1}$, the inverse of $g$.
+    \item (associativity) Given $ g_1, g_2, g_3$, we have \[
+        g_1(g_2\cdot g_3) = (g_1\cdot g_2)g_3
+    .\] \\
+    If, in addition, the group satisfies
+  \item (commutative) Given $ g_1,g_2\in G$, we have \[
+    g_1\cdot g_2=g_2\cdot g_1
+  .\] 
+  \end{enumerate}
+  then $G$ is an \textbf{Abelian} group.
+\end{definition}
+
+
+
+
+
+
+
+\end{document}

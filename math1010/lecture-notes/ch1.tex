@@ -1,0 +1,117 @@
+\documentclass[math1010-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Real Numbers}
+In this class, we operate on the set of real numbers. It is important to rigorously define it, as
+well as all underlying sets of numbers (natural numbers, integers, rationals, etc).
+
+\section{Natural Numbers}
+\begin{definition}[Natural Numbers]{}
+  The set $\N = {1, 2, \ldots}$ is the set of natural numbers. Each integer $n$ has a
+  \textbf{successor}, $succ(n) = n + 1$. $1$ is not the successor of any number. \\
+  The following properties constitute the Peano Axioms of $\N$:
+  \begin{enumerate}
+    \item $1\in \N$.
+    \item $n\in \N \Rightarrow succ(n)=n+1 \in \N$
+    \item $\not\exists n ~\text{s.t.}~ succ(n) = 1$
+    \item If $n, m\in \N, succ(n) = succ(m)$, then $n=m$.
+    \item A subset $A\subset \N$ which contains $1$, and which contains  $n+1$ whenever it contains
+       $n$, must equal $\N$.
+  \end{enumerate}
+  We accept only these 5 axioms to prove all other properties of $\N$.
+\end{definition}
+(5) is the basis for the principle of induction.
+
+\begin{theorem}[Principle of Mathematical Induction]{}
+  Let $ P_1, P_2, \ldots$ be a list of statements. Assume the following:
+  \begin{enumerate}
+    \item $P_1$ is true. [ Basis of induction ] 
+    \item $\forall n\in N, n\ge 1$, if $P_n$ is true, then  $P_{n+1}$ is true. [ Inductive step ]
+  \end{enumerate}
+  Then all the statements $P_1, \ldots$ are true.
+\end{theorem}
+\begin{proof}[Proof]
+  Let $A$ be the set of integers $n$ for which  $P_n$ is true. We want to prove $A=\N$. We use (5)
+  to prove this. \\
+  Indeed, $1\in A$ by assumption 1. Assuming that $n\in A$ for some $n$, we prove that  $n+1\in A$.
+  This is true by assumption 2: if $n\in A$, then $P_n$ is true, hence  $P_{n+1}$ is true, hence
+  $n+1\in A$.
+  Thus, $A=\N$.
+\end{proof}
+
+\begin{example}
+  Prove that $2^{1}+2^2+\ldots+2^{n}=2^{n+1}-2$.
+\end{example}
+
+\begin{proof}
+  Let $P_n$: "$2^{1}+2^2+\ldots+2^{n}=2^{n+1}-2$".\\
+  $P_1$ is true because $2^{1}=2^2-2$. \\
+  For the induction step, we assume $P_n$ is true for some  $n$ and prove $P_{n+1}$ is true. Since
+   $P_n$ is true,  \[
+   2^{1}+2^2+\ldots+2^{n} = 2^{n+1}-2
+ .\]  $P_{n+1}$ states that  \[
+ 2^{1}+\ldots+2^{n}+2^{n+1} = 2^{\left( n+1 \right) +1}-2
+ .\] Using $P_n$ we have  \[
+ 2^1+\ldots+2^{n + 2^{n+1}} = \left( 2^{n+1}-2 \right) +2^{n+1} = 2\cdot 2^{n+1}-2=2^{\left( n+1
+ \right) +1}-2
+ ,\] Thus $P_{n+1}$ is true. 
+ By the principle of induction, $P_n$ is true for all  $n\ge 1$.
+\end{proof}
+
+
+\begin{example}
+  Let $x_1=1$ and define \[
+    x_{n+1}=\frac{1}{2}x_n+1
+  .\] 
+  Prove that $\forall x, x_n\le x_{n+1}$ (or, $x_n$ is inreasing).
+\end{example}
+
+\begin{proof}[Proof]
+  Let $P_n$: "$x_n\le x_{n+1}$". \\
+  $P_1$ is true because $x_1=1\le \frac{3}{2}=x_2$.\\
+  For the induction step, we assume $P_n$ is true for some  $n$ and prove $P_{n+1}$ is true. Since
+  $P_n$ is true,  \[
+    x_n \le x_{n+1}
+  .\] $P_{n+1}$ states that  \[
+  x_{n+1} \le x_{n+2}
+.\] Using $P_n$ we have  \[
+x_{n+1} = \frac{1}{2}x_n+1\le \frac{1}{2}x_{n+1}+1=x_{n+2} \hfill~\text{[by $P_n$, we know $x_n\le x_{n+1}$]}~
+\] Thus $P_{n+1}$ is true.\\
+By the principle of induction, $P_n$ is true for all $n\ge 1$.
+\end{proof}
+
+The principle of induction can be extended by allowing the first statement to begin at $P_m$ instead
+of  $P_1$ for some fixed integer $m$.
+
+ \begin{theorem}[Generalized Principle of Induction]{}
+   Let $m$ be an integer, and consider a list of statements $P_m,P_{m+1},\ldots$. Then all the
+   statements are true if the following two properties are true:
+   \begin{enumerate}
+     \item $P_m$ is true
+     \item  $\forall n\ge m$, if $P_n$ is true, then  $P_{n+1}$ is true.
+   \end{enumerate}
+\end{theorem}
+
+\begin{example}
+  Prove that \[
+  n! > n^2
+  .\] for all $n\ge 4$.
+\end{example}
+\begin{proof}[Proof]
+  Recall $n! = 1\cdot 2\cdot \ldots\cdot n$. Let $P_n$: "$n! > n^2$". We prove $P_n$ is true
+  $\forall n\ge 4$.\\
+  $P_4$ is true because  \[
+  4! = 24 > 16 = 4^2
+  .\] Assuming $n! > n^2$, we prove \[
+  \left( n+1 \right)! > \left( n+1 \right) ^2
+  .\] Using $P_n$ we have  \[
+  \left( n+1 \right)! = n!\left( n+1 \right) = \left( 1\cdot 2\cdot \ldots\cdot n \right) \cdot \left( n+1 \right) > n^2(n+1) > \left( n+1
+  \right) ^2
+.\] Thus $P_{n+1}$ is true. \\
+By the principle of induction, $P_n$ is true for all  $n\ge 4$.
+\end{proof}
+
+
+
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass[math1530-lecture-notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Set Theory}
+
+Set theory forms a basis for all of higher mathematics. We begin with a brief introduction.
+
+\section{Sets}
+
+\begin{definition}[Sets]{}
+  A \textbf{set} is a (possibly empty) collection of elements. If $S$ is a set and $a$ is
+  some object, then $a$ is either an element of $S$ or not. We write:
+  \begin{itemize}
+    \item $a\in S$ if $a$ is an element of $S$.
+    \item $a\not\in S$ if $a$ is not an element of $S$.
+  \end{itemize}
+\end{definition}
+The empty set is denoted $\varnothing$. We use $\left| S \right| $ or $\#S$ to denote the cardinality (number of
+elements) in a finite set.
+
+\begin{definition}[Natural Numbers]{}
+  The \textbf{natural numbers} are the set \[
+  \N = \{1, 2, \ldots\} 
+  .\] 
+  Formally, we define $\N$ as follows:
+  \begin{enumerate}
+    \item $ \N$ contains an initial element $1$.
+    \item $ \forall n\in \N$, there is an incremental rule that creates the next element $n+1$.
+    \item We can reach every element of $ \N$ by starting with $1$ and repeatedly adding $1$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  $ \N$ is \textit{totally ordered}. We say $m$ is less than $n$ if $n$ appears before $n$ when we
+  start from $1$ and add repeatedly. In this case we write $m<n$ or $m\le n$ if $m=n$.
+\end{remark}
+
+\begin{example}
+  Let \[\Z = \{\ldots, -1, 0, 1, \ldots\}\] denote the set of integers, and \[
+  Q = \{\frac{a}{b}\mid a,b\in \Z, b\neq 0\} 
+  .\] the set of rationals.
+\end{example}
+
+\begin{definition}[Set Operations]{}
+  Let $S, T$ be sets.
+  \begin{enumerate}
+    \item $S$ is a \textbf{subset} of $T$ if every element of $S$ is an element of $T$, i.e. $a\in S\to a\in T$. We write \[
+      S\subset T
+     .\]
+    \item The \textbf{union}  of $S$ and $T$ is the set of elements that belong to S or belong to T, denoted
+      \[
+      S\cup T = \{a\mid a\in S ~\text{or}~a\in T\}
+      .\] 
+    \item The \textbf{intersection} of $S$ and $T$ is the set of elements that belong to both S and
+      T, denoted \[
+      S\cap T = \{a\mid a\in S ~\text{and}~a \in T\}
+      .\] 
+    \item If $S\subset T$, the \textbf{complement} of $S$ in T is the set of elements in $T$ 
+      \textit{not} in $S$: \[
+      S^{c} = T - S = T\S = \{a\in T\mid a\not\in S\} 
+      .\]
+    \item The \textbf{product}  of $S$ and $T$ is the set of ordered pairs \[
+        S\times T = \{\left( a, b \right) \mid a\in S, b\in T\} 
+    .\] 
+    We have projection maps \begin{align*}
+      proj_1: S\times T &\longrightarrow S \\
+      \left( a,b \right)  &\longmapsto a
+    .\end{align*}
+    and \begin{align*}
+      proj_2: S\times T &\longrightarrow T \\
+      \left( a,b \right)  &\longmapsto b
+    .\end{align*}
+
+  \end{enumerate}
+\end{definition}
+
+These definitions extend to sets $ S_1, \ldots, S_n$:
+\begin{gather}
+  S_1 \cup \ldots \cup S_n = \bigcup_{i \in  I} S_i = \{a \mid a\in S_1 ~\text{and}~ \ldots
+  ~\text{and}~a\in S_n\} 
+\end{gather}
+
+\subsection{The Well-Ordering Principle}
+\begin{theorem}[Well-Ordering Principle]{}
+  Let $S\subset N$ be a non-empty subset of $\N$. Then $S$ has a \textit{minimal element}. That is,
+  $\exists m\in S ~\text{s.t.}~ n\ge m, \forall n\in S$. Informally, there exists a minimum element
+  that is smaller than all other natural elements.
+\end{theorem}
+\begin{proof}[Proof]
+  Since $ S$ is non-empty, we can pick $k\in S$.
+  By definition of $\N$, we can start with $1$ and add $1$ repeatedly to get $k$. So, there are only
+  $k$ elements of $ \N$ less than or equal to $k$: \[
+  1<2<\ldots<k-1<k
+  .\]
+  So, we can keep moving down from $k$, until we find an element $j\not\in S$; since there are no
+  smaller elements than $j+1\in S$, $j+1$ is the minimal element. 
+\end{proof}
+
+\section{Functions}
+\begin{definition}[Functions]{}
+  A \textbf{function}  from $S$ to $T$ is a rule that assigns some element of $T$ to each element of
+  $S$ : \[
+    f: S \to T, s\mapsto f(s) 
+  .\]
+  $S$ is the \textbf{domain} , and $T$ the \textbf{codomain}.
+\end{definition}
+
+\begin{definition}[Composition of Functions]{}
+  If $f: S \to T$ and $S: T\to U$, then the \textbf{composition} of $f$ and $g$ is \[
+    g \circ f = S \to  U, a\mapsto g(f(a))
+  .\] 
+\end{definition}
+
+\begin{definition}[Bijectivity]{}
+  Let $f:S\to T$ be a function.
+  \begin{enumerate}
+    \item $f$ is \textbf{injective} or one-to-one if distinct elements of $S$ go to distinct
+      elements of $T$. In other words, \[
+        f(a) = f(b) \to a=b
+      .\] 
+    \item $f$ is \textbf{surjective} or onto if every element of $T$ comes from some element in $S$:
+      \[
+        \forall t\in T, \exists s \in S ~\text{s.t.}~f(s) = t
+      .\] 
+    \item $f$ is \textbf{bijective}  if it is both injective and surjective.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[Invertibility]{}
+  Let $f:S\to T$ be a function. $f$ is \textbf{invertible} if \[
+    \exists g:T\to S, (g \circ f)(s) = s, s \in S ~\text{and}~ (f\circ g)(t) = t, t\in T
+  .\] 
+\end{definition}
+
+\begin{theorem}[Bijective iff Invertible]{}
+  Let $f:S\to T$ be a function. Then $f$ is invertible $\iff$ $f$ is bijective.
+\end{theorem}
+\begin{proof}[Proof]
+  Suppose first that $f$ is invertible. Let $g:T\to S$ denote the inverse. We need to prove that
+  $f$ is bijective. \\
+  To prove injectivity, suppose $f(a)=f(b)$ for some $a,b\in S$. Applying $g$ to both sides and
+  using the fact that $g$ is the inverse of $f$, we have \[
+    g(f(a)) = g(f(b)) \Rightarrow a = b
+  .\] Thus $f$ is injective. \\
+  To prove surjectivity, let $t\in T$; we need to find $s\in S$ such that $f(s) = t$. Using the
+  inverse, let  $s=g(t)$. Then  \[
+    f(s) = f(g(t)) = t
+  .\] Thus $f$ is surjective. \\
+  Since $f$ is both injective and surjective, $f$ is bijective. \\ \\
+  Now, suppose that $f$ is bijective. Then $ \forall t\in T, !\exists s \in S ~\text{s.t.}~f(s)=t$.
+  Define a new function $g:T\to S$ \[
+    g(t) := "\text{the unique}~ s \in S ~\text{s.t.}~f(s) = t"
+  .\] We now show that $(g\circ f)(s) = s$ and $(f\circ g)(t) = t$ for $s \in S, t \in T$. \\
+  Given $t\in T$, $f(g(t))) = t$ by definition of $t$. Given $s \in S$, we know that $s$ maps to
+  $f(s)$; so, by definition of $g$, $g(f(s)) = s$. \\
+  Thus, $g$ is the inverse of $f$.
+\end{proof}
+
+
+
+
+
+
+
+
+\end{document}
