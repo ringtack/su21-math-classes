@@ -1,8 +1,11 @@
-# Ignore everything
-*
+# Ignore non-math classes
+pols1100/
+csci1951l/
 
-# Except the .gitignore
-!.gitignore
+# Ignore build files except pdfs
+*/*/build/*
+!*/*/build/*.pdf
 
-# Except lecture notes
-!*/lecture-notes/*
+# Ignore textbooks, but not syllabi
+*/*.pdf
+!*syllabus*

@@ -1,0 +1,285 @@
+\documentclass{homework}
+\homework{1}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  Choose any three problems from 1.2(a-i) as a warmup. Then complete Exercise 1.3. \\
+  \begin{itemize}
+    \item 1.2: Use truth tables to prove:
+    \begin{itemize}
+      \item 1.2.a: $P \iff \neg(\neg P)$.
+      \item 1.2.c: $\left( P\Rightarrow Q \right) \iff\left( \neg Q\Rightarrow \neg P
+        \right)$.
+      \item 1.2.d: $\left( P\Rightarrow Q \right) \iff\left( \neg P \right) \lor Q $.
+    \end{itemize}
+    \item 1.3: Let P and Q be statements.
+      \begin{enumerate}[label=(\alph*)]
+        \item Prove that \[
+        P \veebar \neg P
+      \] is true, and explain why this justifies the Law of the Excluded Middle (which states that
+      exactly one of $P$ and $\neg P$ is true).
+        \item Prove that \[
+            \left( \neg Q\Rightarrow \neg P \right) \Rightarrow \left( P\Rightarrow Q \right)
+          \] is true, and explain why this justifies the method of Proof by Contradiction (which
+          states that in order to prove that $P$ is true, it suffices to show that $\neg P$ is
+          false).
+      \end{enumerate}
+  \end{itemize}
+\end{problem}
+
+\begin{solution}
+  \begin{itemize}
+    \item 
+      \begin{table}[htpb]
+        \centering
+        \caption{1.2.a}
+        \begin{tabular}{c|c|c}
+          P & $\neg P$ & $\neg(\neg P)$ \\
+          \toprule
+          \bottomrule
+          T & F & T \\
+          F & T & F
+        \end{tabular}
+      \end{table}
+    \item
+      \begin{table}[htpb]
+        \centering
+        \caption{1.2.c}
+        \begin{tabular}{c|c|c|c}
+          $P$ & $Q$ & $P\Rightarrow Q$ & $\neg Q \Rightarrow \neg P$ \\
+          \toprule
+          \bottomrule
+          T & T & T & T \\
+          T & F & F & F \\
+          F & T & T & T \\
+          F & F & T & T
+        \end{tabular}
+      \end{table}
+    \item
+      \begin{table}[htpb]
+        \centering
+        \caption{1.2.d}
+        \begin{tabular}{c|c|c|c|c}
+          $P$ & $Q$ & $\neg P$& $P\Rightarrow Q$ & $\neg P \lor Q$ \\
+          \toprule
+          \bottomrule
+          T & T & F & T & T \\
+          T & F & F & F & F \\
+          F & T & T & T & T \\
+          F & F & T & T & T
+        \end{tabular}
+      \end{table}
+      \clearpage
+    \item
+      \begin{table}[htpb]
+        \centering
+        \caption{1.3.a}
+        \begin{tabular}{c|c|c}
+          $P$ & $\neg P$ & $P\veebar \neg P$ \\
+          \toprule
+          \bottomrule
+          T & F & T \\
+          F & T & T 
+        \end{tabular}
+      \end{table}
+      Since the statement is true regardless of $P$, $P \veebar \neg P$ is true. This also
+      justifies the Law of the Excluded Middle, as an XOR statement is true only when one, but
+      not both, of the statements are true; hence only one of $P$ and $\neg P$ may be true at
+      once in order for $P \veebar \neg P$ to be true.
+    \item 
+      \begin{table}[htpb]
+        \centering
+        \caption{1.3.b}
+        \begin{tabular}{c|c|c|c|c|c|c}
+          $P$ & $Q$ & $\neg P$ &  $\neg Q$ & $P\Rightarrow Q$ & $\neg Q \Rightarrow \neg P$ & 
+          $\left( \neg Q \Rightarrow \neg P \right) \Rightarrow \left( P\Rightarrow Q \right) $\\
+          \toprule \bottomrule
+          T & T & F & F & T & T & T\\
+          T & F & F & T & F & F & T\\
+          F & T & T & F & T & T & T\\
+          F & F & T & T & T & T & T
+        \end{tabular}
+      \end{table}
+      Since the statement is true regardless of $P$ or $Q$, $\left( \neg Q \Rightarrow \neg P
+      \right) \Rightarrow \left( P\Rightarrow Q \right)$ is true. This also justifies Proof by
+      Contradiction: if $\neg P$ is false, then $P$ is necessarily true in order for
+      the above statement to be true as well (alternatively, from the Law of the Excluded Middle,
+      $\neg P$ being false necessarily implies that $P$ is true).
+  \end{itemize}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Complete Exercise 1.7: \textit{Prove each of the following formulas:} 
+  \begin{enumerate}[label=(\alph*)]
+    \item $S\cap \left( T \cup U \right) = \left( S\cap T \right) \cup \left( S\cap U \right)$
+    \item $S\cup \left( T\cap U \right) = \left( S\cup T \right) \cap \left( S\cup U \right)$
+    \item Suppose $S, T\subset U$. Then \[
+        \left( S\cup T \right) ^{c} = S^{c}\cap T^{c} ~\text{and}~ \left( S\cap T \right) ^{c}
+        =S^{c}\cup T^{c}
+      .\] 
+    \item $S\Delta T = \left( S\cup T \right) \setminus \left( S\cap T \right) = \left( S\setminus
+      T\right) \cup \left( T\setminus S \right) $
+  \end{enumerate}
+\end{problem}
+
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+  \item
+    \begin{proof}[Proof]
+      Let $e\in S\cap \left( T\cup U \right) $. Then $e$ is in $S$, and $e$ must also be in $T$ or
+      $U$. Equivalently, $e$ is in $S$ and $T$, or $e$ is in $S$ and $U$. Thus, $e\in \left( S\cap T
+      \right) \cup \left( S\cap U \right)$, and so $S\cap \left( T\cup U \right) \subset \left(
+    S\cap T \right) \cup \left( S\cap U \right) $.\\
+      Conversely, let $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$. Then $e$ is in
+      $S$ and $T$, or $e$ is in $S$ and $U$. Equivalently, $e$ must be in $S$; additionally, $e$ 
+      must be in $T$ or $U$. Thus, $e\in S\cap \left( T\cup U \right)$, and so $\left( S\cap T
+      \right) \cup \left( S\cap U \right) \subset S\cap \left( T\cup U \right) $. \\
+      Since both are subsets of each other, $S\cap \left( T\cup U \right) = \left( S\cap T
+      \right)\cup \left( S\cap U \right) $.
+    \end{proof}
+    
+  \item
+    \begin{proof}[Proof]
+      Let $e\in S\cup \left( T\cap U \right)$. Then $e$ is in $S$, or $e$ is in both $T$ and $U$.
+      Equivalently, $e$ is in $S$ or $T$, and $e$ must be in $S$ or $U$. Thus, $e\in \left( S\cup T
+      \right) \cap \left( S\cup U \right)$, and so $S\cup \left( T\cap U \right) \subset \left(
+    S\cup T \right) \cap \left( S\cup U \right) $. \\
+      Conversely, let $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$. Then $e$ is in
+      $S$ or $T$, and $e$ is in $S$ or $U$. If $e$ is not in $S$, then $e$ must be in $T$ and
+      $U$. If $e$ is not in $T$ and not in $U$, then $e$ must be in $S$. From this, we gather that
+      $e$ is in $S$, or $e$ is in $T$ and $U$. Thus, $e\in S\cup \left( T\cap U \right)$, and so
+      $\left( S\cup T \right) \cap \left( S\cup U \right) \subset S\cup \left( T\cap U \right)
+      $.\\
+      Since both are subsets of each other, $S\cup \left( T\cap U \right) = \left( S\cup T \right)
+      \cap \left( S\cup U \right).$
+    \end{proof}
+
+  \item 
+    \begin{proof}[Proof]
+      Let $e\in \left( S\cup T \right) ^{c}$. Then $e\in U$, and $e\not\in \left( S\cup T \right)$.
+      Equivalently, e is not in $S$ and $e$ is not in $T$. Then $e$ must be in $U$ and not in $S$, and
+      $e$ must be in $U$ and not in $T$. Thus, $e\in S^{c}\cap T^{c}$, and so $\left( S\cup T
+      \right) ^{c}\subset S^{c}\cap T^{c}$.\\
+    Conversely, let $e\in S^{c}\cap T^{c}$. Then  $e$ is in $U$ and $e$ is not in $S$, and $e$ is in
+    $U$ and  $e$ is not in $T$. Equivalently, $e$ is in $U$, and $e$ is not in either $T$ or $S$;
+    or, since $T$ and $S$ are subsets of $U$, $e$ is in the complement of $T$ or $S$. Thus, $e\in
+    \left( S\cup T \right) ^{c}$, and so $S^{c}\cap T^{c}\subset \left( S\cup T \right) ^{c}$.\\
+    Since both subsets are equal, $\left( S\cup T \right) ^{c}=S^{c}\cap T^{c}$. \\ \\
+    Now, let $e\in \left( S\cap T \right) ^{c}$. Then $e\in U$, and $e\not\in \left( S\cap T
+    \right)$. Equivalently, $e$ is in $U$, and $e$ is not in both $S$ and $T$ (but could be in $S$,
+    or in $T$). Then $e$ must be in $U$ and not
+    in $S$ (and thus possibly in $T$ without its overlap with $S$), or $e$ must be in $U$ and not in $T$ (and
+    thus possibly in $S$ without its overlap with $T$). Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap
+    T\right) ^{c} \subset S^{c}\cup T^{c}$.\\
+    Conversely, let $e\in S^{c}\cup T^{c}$. Then $e$ is in $U$ and not in $S$, or $e$ is in $U$ and
+    not in $T$. Equivalently,  $e$ is in $U$, and $e$ is not in both $S$ and $T$ (but could be in
+    just $S$ or just $T$ for the same reasons listed above); since $S$ and $T$ are subsets of $U$, $e$ is in the complement of $S$ 
+    and $T$. Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subset \left( S\cap 
+    T \right) ^{c}$.\\
+    Since both are subsets of each other, $\left( S\cap T \right) ^{c}=S^{c}\cup T^{c}$.
+    \end{proof}
+
+  \item 
+    \begin{proof}[Proof]
+      Let $e\in \left( S\cup T \right) \setminus \left( S\cap T \right) $. Then $e$ is in either
+      $S$ or $T$, but cannot be in both $S$ and $T$. Equivalently, the set $e$ is in cannot have any "overlap"
+      between sets $S$ and $T$. So, $e$ is either in $S\setminus T$ ($S$ without any potential
+      overlap with $T$) or $T\setminus S$ ($T$ without any potential overlap with $S$). Thus, $e\in
+      \left( S\setminus T \right) \cup \left( T\setminus S \right) $, and so $\left( S\cup T \right)
+      \setminus \left( S\cap T \right) \subset \left( S\setminus T \right) \cup \left( T\setminus S
+      \right) $.\\
+      Conversely, let $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $. Then
+      $e$ is in $S$ but not $T$, or $e$ is in $T$ but not $S$. From the first part of each
+      statement, we get that $e$ must be in $S$ or $T$; and from the second part of each statement 
+      we get that $e$ cannot be in the overlap between $S$ and $T$. Thus, we get the statement 
+      $e\in \left( S\cup T \right) \setminus \left( S\cap T\right) $, and so $\left( S\setminus 
+      T \right) \cup \left( T\setminus S \right) \subset \left( S\cup T \right) \setminus \left(
+    S\cap T \right) $.\\
+      Since both are subsets of each other, $\left( S\cup T \right) \setminus \left( S\cap T \right)
+      = \left( S\setminus T \right) \cup \left( T\setminus S \right) $.
+    \end{proof}
+\end{enumerate}
+From these problems, we observe that sets and logical statements are quite similar. A set is
+analogous to a logical statement, and the operators union and intersection resemble the logical
+``or'' and ``and'' respectively (specifically, given sets $S,T$, $e\in S\cup T$ is equivalent to
+$e\in S\lor e\in T$, and $e\in S\cap T$ is equivalent to $e\in S\land e\in T$). 
+Given a well defined complement of $S$, the complement $S^{c}$ is analogous
+to the logical "not" (just as only one of $P$ and  $\neg P$ may be true, only one of  $e\in S^{c}$
+and $e\in S$ may be true). The symmetric difference is analogous to the ``xor'' operator in the sense
+that an element $e$ being in $S\Delta T$ meaning $e$ is in $S$ or $T$, but not both, is similar in
+structure to notion that $P\veebar Q$ means that in order to be true, either P or Q could be true,
+but not both.
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  Complete Exercise 1.16:
+  \begin{itemize}
+    \item Let $S, T$ be finite sets with $\left| S \right| =\left| T \right| $, and let $f: S \to
+      T$ be a function from $S$ to $T$. Prove the following are equivalent:
+      \begin{itemize}
+        \item $f$ is injective.
+        \item $f$ is surjective.
+        \item $f$ is bijective.
+      \end{itemize}
+  \end{itemize}
+  and Exercise 1.17:
+  \begin{itemize}
+    \item Give an example of a function $f: \N \to \N$ that is injective, but not surjective.
+    \item Give an example of a function $f: \N \to \N$ that is surjective, but not injective.
+  \end{itemize}
+\end{problem}
+
+\begin{solution}
+  \begin{itemize}
+    \item (1.16)
+      \begin{proof}[Proof]
+        Let $n=\left| S \right| =\left| T \right| $. We start by showing $f$ injective implies $f$
+        surjective. Let $f$ be an injective function, and suppose that $f$ is not surjective. Then
+        $\exists t\in T$ such that $\forall s \in S, f(s)\neq t$; and so $\left|\image S\right|<n$.
+        By the definition of a function, every $s \in S$ is mapped to some element $f(s)\in T$; and
+        since $\left| S \right| = n$ and $\left| \image S\right|<n$, at least one $e\in \image S$ is
+        mapped to by at least two distinct elements $s,s'\in S$ (analogously, imagine each $e\in \image
+        S$ represents a ``hole'', and each $s \in S$ a pigeon; since there are at most $n-1$ holes,
+        and $n$ pigeons, by the PHP, at least one hole must have at least two distinct pigeons). \\
+        But this implies that $e=f(s)=f(s'), s\neq s'$, a contradiction to injectivity. Thus, if $f$
+        is injective, then $f$ is surjective as well.
+        \\ \\
+        Now, we show that $f$ surjective implies $f$ injective. Let $f$ be a surjective function, 
+        and suppose that $f$ is not injective. Then $ \exists s,s'\in S$ such that $f(s)=f(s'),
+        s\neq s'$. By definition of a function, each $s \in S$ is mapped to one and only one
+        $f(s)\in \image S$. But since $f$ is not injective, at least one $f(s) \in \image S$ is
+        mapped to by at least two distinct $s,s'\in S$, which implies that $\left| \image S \right|
+        < n$ (equivalently, at least one $t\in T$ is not mapped to by any $s \in S$), a contradiction
+        to surjectivity. Thus, if $f$ is surjective, then $f$ is injective as well.
+        \\
+        Since $f$ injective implies $f$ surjective, and $f$ surjective implies $f$ injective, if
+        $f$ is either injective or surjective, it is bijective as well; and trivially, $f$ bijective
+        implies both injective and surjective. Thus the three statements are equivalent.
+      \end{proof}
+    \item (1.17)
+      \begin{itemize}
+        \item Let \begin{align*}
+            f: \N &\longrightarrow \N \\
+            n &\longmapsto f(n) = n + 1
+          .\end{align*}
+          $f$ is injective, as no two $n_1,n_2\in \N$ share a $succ(n)$ unless  $n_1=n_2$
+          (equivalently, $n_1+1 = n_2 + 1$ implies  $n_1=n_2$). $f$ is also not surjective, as $1\not\in
+          \image f$.
+        \item Let \begin{align*}
+          f: \N &\longrightarrow \N \\
+          n &\longmapsto f(n) = \left\lceil \frac{n}{2} \right\rceil 
+        .\end{align*}
+        $f$ is surjective, as for any $k \in \N$, take $n = 2k \in \N$; then we get $f(n) =
+        \left\lceil \frac{2k}{2}\right\rceil = k$. On the other hand,  $f$ is not injective. Let
+        $n_1, n_2\in \N, n_1 = 1, n_2 =2$. Then $f(n_1)=f(n_2)=1$, but $n_1\neq n_2$.
+      \end{itemize}
+  \end{itemize}
+\end{solution}
+
+
+
+
+\end{document}

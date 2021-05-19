@@ -1,0 +1,146 @@
+\documentclass{homework}
+% replace -3 with HW number, maybe there's a better solution lol
+\homework{1}
+
+\begin{document}
+
+\begin{problem}{\S 1}\\
+  Indicate if each statement is true or false.
+  \begin{enumerate}[label=(\alph*)]
+    \item A statement and its negation may be both false.
+    \item $3\le 5$ and $10$ is odd.
+    \item $x>0$ or $x^3\le 0$.
+    \item If $2$ is odd, then $10$ is even.
+    \item $2$ is odd $\iff$ $4$ is odd.
+    \item $xy>0$ whenever $x>0$ and $y>0$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item false; a statement must be either true or false, so its negation must be the opposite.
+    \item false; 10 is not odd.
+    \item true; any x is either positive, or its cube is non-positive (the domain of $x^3$ is $\R$, so
+      $x\le 0$ is contained in $x^3$).
+    \item true; since 2 is not odd, the statement is always true regardless of the conclusion.
+    \item true; both statements are false, so the biconditional is true.
+    \item true; if x and y are both positive, then $xy$ must also be positive.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Construct truth tables to show that:
+  \begin{enumerate}
+    \item $\neg \left( p\lor q \right) \equiv \left( \neg p \right) \land \left( \neg q \right) $
+    \item $\neg\left( p \to q \right) \equiv p \land \left( \neg q \right) $
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{table}[htpb]
+    \centering
+    \caption{\S 2.1}
+    \begin{tabular}{c|c|c|c|c|c}
+      $p$ & $q$ & $\neg p$ & $\neg q$ & $\left( \neg p \right) \land \left( \neg q \right) $ &
+      $\neg \left( p \lor q \right) $ \\
+      \toprule
+      \bottomrule
+      T & T & F & F & F & F \\
+      T & F & F & T & F & F \\
+      F & T & T & F & F & F \\
+      F & F & T & T & T & T 
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[htpb]
+    \centering
+    \caption{\S 2.2}
+    \begin{tabular}{c|c|c|c}
+      $p$ & $q$ & $p \land \left( \neg q \right) $ & $\neg\left( p \to q \right) $ \\
+      \toprule
+      \bottomrule 
+      T & T & F & F \\
+      T & F & T & T \\
+      F & T & F & F \\
+      F & F & F & F \\
+    \end{tabular}
+  \end{table}
+\end{solution}
+
+\begin{problem}{\S 3}
+  Write the negation of each statement:
+  \begin{enumerate}[label=(\alph*)]
+    \item A circle of radius 1 has smaller area than a square of side 1.
+    \item It is sunny and windy.
+    \item I can finish the homework provided that I attend the class.
+    \item I can speak Spanish or Japanese.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+  \item A circle of radius 1 does not have a smaller area than a square of side 1.
+  \item It is not sunny or not windy.
+  \item I attend the class and I cannot finish the homework (D:).
+  \item I cannot speak Spanish and I cannot speak Japanese.
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 4}
+  Rewrite the following statements using quantifiers, then write the negation first using
+  quantifiers and then in common English:
+  \begin{enumerate}[label=(\alph*)]
+    \item If $x>3$, then there exists $y>0$ such that $x^2>9+y$.
+    \item For every $x\in A$ and $y\in B$, $\left| x-y \right| \ge 1$.
+    \item For every $M>0$, there exists $A>0$ such that if $\left| x \right| > A$ then $\left| f(x)
+      \right| > M$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+ \begin{enumerate}[label=(\alph*)]
+   \item 
+     \begin{itemize}[label=]
+       \item Rewrite using quantifiers: $x>3, \exists y>0, x^2>9+y$.
+       \item Negation using quantifiers: $x>3, \forall y>0, x^2\le  9+y$.
+       \item Negation in common English: $x>3$, and for every positive y, $x^2\le 9+y$.
+     \end{itemize}
+   \item 
+     \begin{itemize}[label=]
+       \item Rewrite using quantifiers: $\forall x\in A, y\in B, \left| x-y \right| \ge 1$.
+       \item Negation using quantifiers: $ \exists x\in A, y\in B~s.t.~ \left| x-y \right| < 1$.
+       \item Negation in common English: There exists an $x\in A$ and $y\in B$ where  $\left| x-y
+         \right| <1$.
+     \end{itemize}
+   \item
+     \begin{itemize}[label=]
+       \item Rewrite using quantifiers: $\forall M>0, \exists A>0~s.t.~\left| x \right| > A \to
+         \left| f(x) \right| > M$.
+       \item Negation using quantifiers: $\exists M>0, \forall A>0~s.t.~ \left| x \right| > A \land
+         \left| f(x) \right| \le  M$.
+       \item Negation in common English: There exists an $M>0$ where for all $A>0$, $\left| x
+         \right| > A$ and $\left| f(x) \right| \le  M$.
+     \end{itemize}
+ \end{enumerate} 
+\end{solution}
+
+\begin{problem}{\S 5}
+  A function $f$ is \textit{periodic} if there exists a $T>0$ such that for every $x$, $f(x+T) =
+  f(x)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Write the above definition using quantifiers.
+    \item By taking the negation, give the definition of \textit{non} periodic functions.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $\exists T>0~\text{s.t.}~ \forall x, f(x+T)=f(x) \to f ~\text{is periodic.}$ 
+    \item A function is \textit{non} periodic if for all $T>0$, there exists an $x$ such that $f(x+T) \neq f(x)$.
+  \end{enumerate}
+\end{solution}
+
+
+ 
+
+\end{document}
+
