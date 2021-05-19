@@ -8,3 +8,5 @@ taking this semester:
 - MATH1530: Abstract Algebra
 
 Within each folder, the specific directory structure and files included will be explained.
+
+`.pdf` files are located within the `build` directory.
