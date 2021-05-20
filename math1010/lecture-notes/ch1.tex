@@ -204,12 +204,46 @@ question now is: \textit{when does a polynomial of order $n$ have rational roots
 \begin{theorem}[Rational Zeros Theorem]{rzt}
   Let $ c_0,c_1,\ldots,c_n\in \Z, c_n\neq 0,c_0\neq 0$. Suppose $r$ is a rational root of
   \begin{gather}
-    c_nx^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0=0 \label{eq1}
+    P(x) = c_nx^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0=0 \label{eq1}
   \end{gather}
-  Let $r=\frac{p}{q}, p,q\in \Z,q\neq 0, gdc(p,q)=1$. Then $p$ divides $ c_0$ and $q$ divides $c_n$.
+  Let $r=\frac{p}{q}, p,q\in \Z,q\neq 0, \gcd(p,q)=1$. Then $p$ divides $ c_0$ and $q$ divides $c_n$.
 \end{theorem}
+\begin{proof}[Proof]
+  Suppose $r\in \Q$ is a rational root of \[
+    P(x) = c_nx^{n}+\ldots+c_1x+c_0
+    .\] Note that $r=\frac{p}{q}, p,q\in \Z, q\neq 0, \gcd(p,q)=1$. Then \[
+  P(r) = P(\frac{p}{q}) = c_n\left( \frac{p}{q} \right) ^{n} + \ldots + c_1\left( \frac{p}{q}
+  \right) + c_0 = 0
+  .\] Multiplying both sides by $q^{n}$, we have \[
+  c_np^{n} + c_{n-1}p^{n-1}q + \ldots + c_1pq^{n-1}+c_0q^{n} = 0
+  .\] Then
+  \begin{align*}
+    c_np^{n} + \ldots + c_1pq^{n-1} &= -c_0q^{n}\\
+    p\left( c_np^{n-1}+c_{n-1}p^{n-2}q+\ldots+c_1q^{n-1} \right) &= -c_0q^{n}
+  .\end{align*} Thus, $-c_0q^{n}$ is divisible by $p$. Since $\gcd{\left(p,q\right)}=1$, it follows
+  that $c_0$ is divisible by $p$. \\
+  Similarly, if we move $c_np^{n}$ to the other side, and factor out $q$, then we get  \[
+    q\left( c_{n-1}p^{n-1} + c_{n-2}p^{n-2}q+\ldots+c_1pq^{n-2} c_0q^{n-1}\right) = -c_np^{n}
+  ,\] and since $c_np^{n}$ is divisible by $q$ and $\gcd{\left(p,q\right)}=1$, $c_n$ is divisible by
+  $q$.
+
+  Thus, if $r=\frac{p}{q}$ is a rational root of $P(x)$, then $p \mid c_0$ and $q \mid c_n$.
+\end{proof}
+
 \begin{remark}
-  Theorem \ref{rzt} allows us to find all possible rational roots of \ref{eq1}.
+  Theorem \ref{rzt} allows us to find all possible rational roots of \ref{eq1}. Specifically, given
+  a \[
+    P(x) = c_nx^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0
+  ,\] if \[
+    a\in \{p \in \Z \mid p ~\text{divides}~ c_0\}, b\in \{q\in \Z\mid q ~\text{divides}~c_n\},
+  \]
+  then any rational root must have the form $\frac{a}{b}$.\\
+
+  For example, given \[
+    P(x) = 3x^3+x^2-8x+4
+  ,\] the only possible rational roots are \[
+    r = \pm 1, \pm \frac{1}{3}, \pm 2, \pm \frac{2}{3}, \pm 4, ~\text{and}~ \pm \frac{4}{3}
+  .\] 
 \end{remark}
 
 
