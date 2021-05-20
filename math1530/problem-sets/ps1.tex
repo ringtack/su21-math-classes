@@ -128,13 +128,19 @@
 \begin{enumerate}[label=(\alph*)]
   \item
     \begin{proof}[Proof]
-      Let $e\in S\cap \left( T\cup U \right) $. Then $e$ is in $S$, and $e$ must also be in $T$ or
-      $U$. Equivalently, $e$ is in $S$ and $T$, or $e$ is in $S$ and $U$. Thus, $e\in \left( S\cap T
-      \right) \cup \left( S\cap U \right)$, and so $S\cap \left( T\cup U \right) \subset \left(
-    S\cap T \right) \cup \left( S\cap U \right) $.\\
-      Conversely, let $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$. Then $e$ is in
-      $S$ and $T$, or $e$ is in $S$ and $U$. Equivalently, $e$ must be in $S$; additionally, $e$ 
-      must be in $T$ or $U$. Thus, $e\in S\cap \left( T\cup U \right)$, and so $\left( S\cap T
+      Let $e\in S\cap \left( T\cup U \right) $. Then
+      \begin{align*}
+        &\left( e\in S \right) \land \left( e\in T \lor e\in U \right) \\
+        = &\left( e\in S\land e\in T \right) \lor \left( e\in S\land e\in U \right)
+      .\end{align*}
+      Thus $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$, and so $S\cap \left( T\cup U 
+        \right) \subset \left( S\cap T \right) \cup \left( S\cap U \right) $.\\
+      Conversely, let $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$. Then
+      \begin{align*}
+        &\left( e\in S\land e\in T \right) \lor \left( e\in S\land e\in U \right) \\
+        = &~e\in S\land \left(e\in T\lor e\in U\right)
+      .\end{align*}
+      Thus, $e\in S\cap \left( T\cup U \right)$, and so $\left( S\cap T
       \right) \cup \left( S\cap U \right) \subset S\cap \left( T\cup U \right) $. \\
       Since both are subsets of each other, $S\cap \left( T\cup U \right) = \left( S\cap T
       \right)\cup \left( S\cap U \right) $.
@@ -142,65 +148,97 @@
     
   \item
     \begin{proof}[Proof]
-      Let $e\in S\cup \left( T\cap U \right)$. Then $e$ is in $S$, or $e$ is in both $T$ and $U$.
-      Equivalently, $e$ is in $S$ or $T$, and $e$ must be in $S$ or $U$. Thus, $e\in \left( S\cup T
-      \right) \cap \left( S\cup U \right)$, and so $S\cup \left( T\cap U \right) \subset \left(
-    S\cup T \right) \cap \left( S\cup U \right) $. \\
-      Conversely, let $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$. Then $e$ is in
-      $S$ or $T$, and $e$ is in $S$ or $U$. If $e$ is not in $S$, then $e$ must be in $T$ and
-      $U$. If $e$ is not in $T$ and not in $U$, then $e$ must be in $S$. From this, we gather that
-      $e$ is in $S$, or $e$ is in $T$ and $U$. Thus, $e\in S\cup \left( T\cap U \right)$, and so
-      $\left( S\cup T \right) \cap \left( S\cup U \right) \subset S\cup \left( T\cap U \right)
-      $.\\
-      Since both are subsets of each other, $S\cup \left( T\cap U \right) = \left( S\cup T \right)
-      \cap \left( S\cup U \right).$
+      Let $e\in S\cup \left( T\cap U \right)$. Then
+      \begin{align*}
+        &~e\in S\lor \left( e\in T\land e\in U \right) \\
+        = &\left( e\in S\lor e\in T \right) \land \left( e\in S\lor e\in U \right)
+      .\end{align*}
+      Thus $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$, and so $S\cup \left( T\cap U
+        \right) \subset \left( S\cup T \right) \cap \left( S\cup U \right) $. \\
+        Conversely, let $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$. Then 
+        \begin{align*}
+          &\left( e\in S\lor e\in T \right) \land \left( e\in S\lor e\in U \right) \\
+          &~e\in S\lor \left( e\in T\land e\in U \right)
+        .\end{align*}
+      Thus, $e\in S\cup \left( T\cap U \right)$, and so $\left( S\cup T \right) \cap \left( S\cup U 
+      \right) \subset S\cup \left( T\cap U \right) $.\\
+      Since both are subsets of each other, $s\cup \left( t\cap u \right) = \left( s\cup t \right)
+      \cap \left( s\cup u \right).$
     \end{proof}
 
   \item 
     \begin{proof}[Proof]
-      Let $e\in \left( S\cup T \right) ^{c}$. Then $e\in U$, and $e\not\in \left( S\cup T \right)$.
-      Equivalently, e is not in $S$ and $e$ is not in $T$. Then $e$ must be in $U$ and not in $S$, and
-      $e$ must be in $U$ and not in $T$. Thus, $e\in S^{c}\cap T^{c}$, and so $\left( S\cup T
-      \right) ^{c}\subset S^{c}\cap T^{c}$.\\
-    Conversely, let $e\in S^{c}\cap T^{c}$. Then  $e$ is in $U$ and $e$ is not in $S$, and $e$ is in
-    $U$ and  $e$ is not in $T$. Equivalently, $e$ is in $U$, and $e$ is not in either $T$ or $S$;
-    or, since $T$ and $S$ are subsets of $U$, $e$ is in the complement of $T$ or $S$. Thus, $e\in
-    \left( S\cup T \right) ^{c}$, and so $S^{c}\cap T^{c}\subset \left( S\cup T \right) ^{c}$.\\
-    Since both subsets are equal, $\left( S\cup T \right) ^{c}=S^{c}\cap T^{c}$. \\ \\
-    Now, let $e\in \left( S\cap T \right) ^{c}$. Then $e\in U$, and $e\not\in \left( S\cap T
-    \right)$. Equivalently, $e$ is in $U$, and $e$ is not in both $S$ and $T$ (but could be in $S$,
-    or in $T$). Then $e$ must be in $U$ and not
-    in $S$ (and thus possibly in $T$ without its overlap with $S$), or $e$ must be in $U$ and not in $T$ (and
-    thus possibly in $S$ without its overlap with $T$). Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap
-    T\right) ^{c} \subset S^{c}\cup T^{c}$.\\
-    Conversely, let $e\in S^{c}\cup T^{c}$. Then $e$ is in $U$ and not in $S$, or $e$ is in $U$ and
-    not in $T$. Equivalently,  $e$ is in $U$, and $e$ is not in both $S$ and $T$ (but could be in
-    just $S$ or just $T$ for the same reasons listed above); since $S$ and $T$ are subsets of $U$, $e$ is in the complement of $S$ 
-    and $T$. Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subset \left( S\cap 
-    T \right) ^{c}$.\\
-    Since both are subsets of each other, $\left( S\cap T \right) ^{c}=S^{c}\cup T^{c}$.
+        Let $e\in \left( S\cup T \right) ^{c}$. Then 
+        \begin{align*}
+          &~e\in U\land \neg \left( e \in S\lor e\in T\right) \\
+          = &~e\in U\land \left( e\not\in S\land  e\not\in T \right) \\
+          = &\left( e\in U\land e\not\in S\right) \land \left( e\in U\land e\not\in T \right) 
+        .\end{align*}
+        Thus, $e\in S^{c}\cap T^{c}$, and so $\left( S\cup T \right) ^{c}\subset S^{c}\cap T^{c}$.\\
+        Conversely, let $e\in S^{c}\cap T^{c}$. Then
+        \begin{align*}
+          &\left( e\in U\land e\not\in S \right) \land \left(  e\in U\land e\not\in T \right)\\
+          =&~e\in U\land \left( e\not\in S\land e\not\in T \right) \\
+          =&~e\in U\land \neg \left(  e\in S\lor e\in T\right) 
+        .\end{align*}
+      Thus, $e\in \left( S\cup T \right) ^{c}$, and so $S^{c}\cap T^{c}\subset \left( S\cup T 
+      \right) ^{c}$.\\
+      Since both subsets are equal, $\left( S\cup T \right) ^{c}=S^{c}\cap T^{c}$. \\ \\
+      Now, let $e\in \left( S\cap T \right) ^{c}$. Then 
+      \begin{align*}
+        &~e\in U\land \neg \left( e\in S\land e\in T \right) \\
+        &~e\in U\land \left( e\not\in S\lor e\not\in T \right) \\
+        &\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right) 
+      .\end{align*}
+      Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap T\right) ^{c} \subset S^{c}\cup T^{c}$.\\
+      Conversely, let $e\in S^{c}\cup T^{c}$. Then 
+      \begin{align*}
+        &\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right)\\
+        &~e\in U \land \left( e\not\in S\lor e\not\in T \right) \\
+        &~e\in U\land \neg \left( e\in S\land e\in T \right)
+      .\end{align*}
+      Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subset \left( S\cap 
+      T \right) ^{c}$.\\
+      Since both are subsets of each other, $\left( S\cap T \right) ^{c}=S^{c}\cup T^{c}$.
     \end{proof}
+
 
   \item 
     \begin{proof}[Proof]
-      Let $e\in \left( S\cup T \right) \setminus \left( S\cap T \right) $. Then $e$ is in either
-      $S$ or $T$, but cannot be in both $S$ and $T$. Equivalently, the set $e$ is in cannot have any "overlap"
-      between sets $S$ and $T$. So, $e$ is either in $S\setminus T$ ($S$ without any potential
-      overlap with $T$) or $T\setminus S$ ($T$ without any potential overlap with $S$). Thus, $e\in
-      \left( S\setminus T \right) \cup \left( T\setminus S \right) $, and so $\left( S\cup T \right)
-      \setminus \left( S\cap T \right) \subset \left( S\setminus T \right) \cup \left( T\setminus S
-      \right) $.\\
+      Let $e\in \left( S\cup T \right) \setminus \left( S\cap T \right) $. Then
+      \begin{align*}
+        &\left( e\in S\lor e\in T \right) \land \neg \left( e\in S\land e\in T \right) \\
+        &\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
+        &\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
+        \left( e\in S\lor e\in T \right)\land e\not\in T\right) \\
+        &\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
+        \right) \lor \left( \left(  e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in
+      T\right) \right) \\
+        &\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) 
+      .\end{align*}
+      Thus, $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $, and so $\left( S\cup T \right)
+      \setminus \left( S\cap T \right) \subset \left( S\setminus T \right) \cup \left( T\setminus S \right) $.\\
       Conversely, let $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $. Then
-      $e$ is in $S$ but not $T$, or $e$ is in $T$ but not $S$. From the first part of each
-      statement, we get that $e$ must be in $S$ or $T$; and from the second part of each statement 
-      we get that $e$ cannot be in the overlap between $S$ and $T$. Thus, we get the statement 
+      \begin{align*}
+        &\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) \\
+        &\left( e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in S \right) \\
+        &\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
+        \right) \lor \left( \left(  e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in
+      T\right) \right) \\
+        &\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
+        \left( e\in S\lor e\in T \right)\land e\not\in T\right) \\
+        &\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
+        &\left( e\in S\lor e\in T \right) \land \neg \left( e\in S\land e\in T \right)
+      .\end{align*}
+      Thus, we get the statement 
       $e\in \left( S\cup T \right) \setminus \left( S\cap T\right) $, and so $\left( S\setminus 
       T \right) \cup \left( T\setminus S \right) \subset \left( S\cup T \right) \setminus \left(
     S\cap T \right) $.\\
       Since both are subsets of each other, $\left( S\cup T \right) \setminus \left( S\cap T \right)
-      = \left( S\setminus T \right) \cup \left( T\setminus S \right) $.
+      = \left( S\setminus T \right) \cup \left( T\setminus S \right)$.
     \end{proof}
 \end{enumerate}
+
 From these problems, we observe that sets and logical statements are quite similar. A set is
 analogous to a logical statement, and the operators union and intersection resemble the logical
 ``or'' and ``and'' respectively (specifically, given sets $S,T$, $e\in S\cup T$ is equivalent to
@@ -245,15 +283,16 @@ but not both.
         S$ represents a ``hole'', and each $s \in S$ a pigeon; since there are at most $n-1$ holes,
         and $n$ pigeons, by the PHP, at least one hole must have at least two distinct pigeons). \\
         But this implies that $e=f(s)=f(s'), s\neq s'$, a contradiction to injectivity. Thus, if $f$
-        is injective, then $f$ is surjective as well.
+        is injective, then $f$ must be surjective as well.
         \\ \\
         Now, we show that $f$ surjective implies $f$ injective. Let $f$ be a surjective function, 
         and suppose that $f$ is not injective. Then $ \exists s,s'\in S$ such that $f(s)=f(s'),
         s\neq s'$. By definition of a function, each $s \in S$ is mapped to one and only one
         $f(s)\in \image S$. But since $f$ is not injective, at least one $f(s) \in \image S$ is
-        mapped to by at least two distinct $s,s'\in S$, which implies that $\left| \image S \right|
+        mapped to by at least two distinct $s,s'\in S$ (i.e. $\exists s,s'\in S, \exists
+        f(s),f(s')\in \image S, f(s)=f(s'), s\neq s'$), which implies that $\left| \image S \right|
         < n$ (equivalently, at least one $t\in T$ is not mapped to by any $s \in S$), a contradiction
-        to surjectivity. Thus, if $f$ is surjective, then $f$ is injective as well.
+        to surjectivity. Thus, if $f$ is surjective, then $f$ must be injective as well.
         \\
         Since $f$ injective implies $f$ surjective, and $f$ surjective implies $f$ injective, if
         $f$ is either injective or surjective, it is bijective as well; and trivially, $f$ bijective
