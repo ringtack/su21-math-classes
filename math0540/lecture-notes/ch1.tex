@@ -151,6 +151,121 @@ Vector spaces may be defined \textit{over} fields.
   (without proof) that $\F_p$ is a field.
 \end{example}
 
+\begin{example}
+  Let $\C=\{a+bi\mid a,b\in \R\} $. Elements of $\C$ are called \textbf{complex numbers}. Formally,
+  a complex number is an ordered pair $\left( a,b \right),a,b\in \R$. We define addition as \[
+    (a+bi)+(c+di) = (a+c)+(b+d)i
+  \] and multiplication as \[
+  (a+bi)(c+di) = (ac-bd)+(ad+bc)i
+  .\] 
+  Showing $ \C$ is a set is left as an exercise for the reader.
+\end{example}
+\begin{proposition}[$\C$ Multiplicative Inverse]{}
+  For every $\alpha\in \C\setminus \{ 0 \}$, there exists $\beta\in \C$ with $\alpha\cdot \beta=1$.
+\end{proposition}
+\begin{proof}[Proof]
+  Given $\alpha\in \C\setminus \{ 0 \}$, let us write $ \alpha=a+bi$. Then not both $a,b=0$. Let
+  $\beta=\frac{a}{a^2+b^2}+-\frac{b}{a^2+b^2}i$. Then $\alpha\beta=(a+bi)\left( \frac{a}{a^2+b^2}
+  +-\frac{b}{a^2+b^2}\right) =1$. \\
+  Thus $\forall \alpha\in \C\setminus \{ 0 \}, \exists \beta\in \C ~\text{s.t.}~\alpha\cdot \beta=1$.
+\end{proof}
+
+
+
+
+$\R^{n}$ and $\C^{n}$ are specific examples of fields, but by no means the only ones (for instance,
+$\F^{2}$ with addition and multiplication modulo 2 is a field). Fields serve as the underlying set
+of numbers and operations that vector spaces are built on. In this course, we focus primarily on
+$\R$ and $\C$; but many of the definitions, theorems, and proofs work interchangeably with abstract
+fields.
+
+
+
+\section{Vector Spaces}
+Vector spaces serve as the fundamental abstract structure of linear algebra. All future topics will
+build on vector spaces.
+\begin{definition}[Vector Spaces]{}
+  Given a field $\F$, A \textbf{vector space} over $\F$, denoted $V_\F$, is a set $V$, together with
+  vector addition on $V$ \begin{align*}
+    +: V\times V &\longrightarrow V\\
+  \end{align*} and scalar multiplication on $V$ \begin{align*}
+    \cdot : \F\times V &\longrightarrow V
+  \end{align*} satisfying the following properties:
+  \begin{itemize}
+    \item (additive associativity) For all $u,v,w\in V$, $u+(v+w)=(u+v)+w$.
+    \item (additive identity) There exists an element $0\in V$ such that $v+0=0+v=0$.
+    \item (additive inverse) For all $v\in V$, there exists $w\in V$ such that $v+w=w+v=0$. We
+      denote $w=-v$.
+    \item (commutativity) For all $v,w\in V$, $v+w=w+v$.
+    \item (scalar multiplicative associativity) For all $ \alpha,\beta\in \F, v\in V$,
+      $\alpha(\beta v)=(\alpha\beta)v$.
+    \item (scalar multiplicative identity) There exists an element $1\in \F$ such that $1v=v$ for
+      all  $v\in V$.
+    \item (Distributive Law I) For every $ \alpha\in \F$, $v,w\in V$, $a\cdot (v+w)=a\cdot v+a\cdot
+      w$.
+    \item (Distributive Law II) For every $\alpha,\beta\in \F, v\in V$, $(\alpha+\beta)\cdot
+      v=\alpha\cdot v+\beta\cdot v$.
+  \end{itemize}
+  We call elements of $\F$ \textbf{scalars}, and elements of $V$ \textbf{vectors}, or
+  \textbf{points}.
+\end{definition}
+
+\begin{example}
+  Let $\F$ be a field.
+  \begin{enumerate}
+    \item For some integers $n\ge 0$, $\F^{n}=\{\left( a_1,\ldots,a_n \right) \mid a_i\in \F \} $
+      with vector addition defined \[
+        (a_1,\ldots,a_n)+(b_1,\ldots,b_n) = (a_1+b_1,\ldots,a_n+b_n)
+      \] and scalar multiplication defined \[
+      \lambda\cdot (v_1,v_2,\ldots,v_n) = (\lambda v_1,\lambda v_2,\ldots,\lambda v_n)
+      .\] 
+      Note that $ F^{0}=\{ 0 \}$.
+    \item $\F^{\infty}=P\{ \left( a_1,a_2,a_3,\ldots \right)\mid a_j\in \F, j\in \N  \}$ with vector
+      addition and scalar multiplication defined similarly.
+    \item Let $S$ be any set; consider $\{ g:S\to\F \}$ be the set of functions from $S$ to $\F$.
+      Given $f,g:S\to \F$, $\lambda\in \F$, define vector addition $(f+g):S\to\F$ as \[
+        (f+g)(x) = f(x) + g(x)
+      \] and scalar multiplication $ \lambda f:S\to\F$ as \[
+      (\lambda f)(x) = \lambda f(x)
+      .\] 
+  \end{enumerate}
+\end{example}
+Perhaps counterintuitively, example 3 subsumes example 1! For example, let $S=\{1,2,\ldots,n\}$, and
+let $\R^{\{ 1,\ldots,n \}}$ be the set of all functions from $\{ 1,\ldots,n \}\to \R$. One such $f$
+may be \begin{align*}
+  f: \{ 1,\ldots,n \} &\longrightarrow \R \\
+  x &\longmapsto f(x) = x^2-3
+.\end{align*} But $f$ can also be thought of as an $n$-tuple. For instance, with $n=3$, we can
+define a function \[
+  f = (-2,1,6)\in \R^3
+.\] This is equivalent to $f(1)=-2,f(2)=1,f(3)=6$. Similarly, if $f(x) =e^{x}$, then $f\in \R^{\{
+1,2,3 \}}=\left( e,e^2,e^3 \right) \in \R^3$, since $f(1)=e, f(2)=e^2,f(3)=e^3$. \\
+
+In other words, every n-tuple $\left( x_1,x_2,\ldots,x_n \right) \in \R^n $ could be represented as a
+function $f:\{ 1,2,\ldots,n \}\to\R$, where $f(1)=x_1,f(2)=x_2,\ldots,f(n)=x_n$. The key insight here is that
+\textbf{the function $f$ is the $n$-tuple}; the one function $f(x)=e^{x}$ is equivalent to the
+$n$-tuple $\left( e,e^2,\ldots,e^{n} \right) $.\\
+
+From this, we get that the set of functions $\R^{\{ 1,\ldots,n \}}=\R^{n}$, the set of $n$-tuples.
+\begin{remark}
+  Reinterpret $F^{0}=\{\text{functions}~ f:\varnothing\longrightarrow \F \}$. How many functions
+  are there from $\varnothing\longrightarrow \F$?\\
+  One function $\varnothing=\varnothing\times \F$.
+\end{remark}
+
+\begin{example}
+  The set of continuous functions $f: \R \to \R$ forms a vector space over $\R$. In particular, the
+  sum of two continuous functions is continuous; and $a\cdot f$ is continuous for any $a\in \R$, and
+  $f$ continuous.
+\end{example}
+
+
+
+
+
+
+
+
 
 
 
