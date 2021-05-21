@@ -18,6 +18,172 @@
   \end{table}
 \end{solution}
 
+\begin{problem}{\S 2}
+  Let \begin{align*}
+    f: \R^2 &\longrightarrow \R^3 \\
+    (x,y) &\longmapsto f((x,y)) = (x,x+y,y)
+  .\end{align*}
+  \begin{enumerate}[label=(\alph*)]
+    \item Write down, using the definition of injectivity and preferably using universal
+      quantifiers, the statement that $f$ is injective, and the statement that $f$ is not injective.
+      Then prove the correct statement (that $f$ is injective).
+    \item Write down, using universal quantifiers, the statement that $f$ is surjective, and the
+      statement that $f$ is not surjective. Then prove the correct statement (that $f$ is not
+      surjective).
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $f$ is injective: For any $a,b\in \R^2$, if $f(a)=f(b)$, then $a=b$.\\
+      $f$ is not injective: There exists $a,b\in \R^2$ such that $f(a)=f(b)$ and $a\neq b$.\\
+      Now, we prove that $f$ is injective.
+      \begin{proof}[Proof]
+        Choose $(x_0,y_0),(x_1,y_1)\in \R^2$ such that $(x_0,x_0+y_0,y_0)=(x_1,x_1+y_1,y_1)$. From
+        this, we see that $ x_0=x_1, y_0=y_1$, so $(x_0,y_0)=(x_1,y_1)$ and thus $f$ is injective.
+      \end{proof}
+
+      \item $f$ is surjective: For any $v\in \R^3$, there exists an $u\in \R^2$ such that
+        $f(u)=v$.\\
+        $f$ is not surjective: There exists a $v\in \R^3$ such that for any $u\in \R^2$, $f(u)\neq
+        v$.\\
+        Now, we prove that $f$ is not surjective.
+        \begin{proof}[Proof]
+          Choose $(0,10,0)\in \R^3$. Clearly, for any $(x_0,y_0)\in \R^2$, if
+          $f((x_0,y_0))=(0,10,0)$, then $ x_0=y_0=0$; but then $ x_0+y_0=0\neq 10$. Thus $f$ is not
+          surjective.
+      \end{proof}
+  \end{enumerate}
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  Let $X$ be any set, and let $V$ be the set of all subsets of $X$. Define addition on $V$ as \[
+  A+B=A\Delta B
+\] for subsets $A,B\subseteq X$, and scalar multiplication on $V$ with scalars $ \F_2=\{ 0,1 \}$ as
+\[
+  0\cdot A=\varnothing, 1\cdot A=A
+\] for any subset $A\subseteq X$.\\
+Check that $V_{\F_2}$ is a vector space.
+\end{problem}
+
+\begin{solution}
+  In order to be a vector space, $V_{\F_2}$ must satisfy 6 properties:
+  \begin{itemize}
+    \item \textbf{Associativity}: We start with additive associativity. Let $A,B,C\subseteq X$. Then 
+      \begin{align*}
+        A\Delta\left( B\Delta C \right) &= \left( A\cap \left( \left( B\cap C^{c} \right) \cup
+        \left( C\cap B^{c} \right)  \right) ^{c} \right)\cup \left( \left( \left( B\cap C^{c} \right)
+    \cup \left( C\cap B^{c} \right) \right)\cap  A^{c}\right)  \\
+                                        &= \left( A\cap \left( \left( B^{c}\cup C \right) \cap
+                                            \left( C^{c}\cup B \right)  \right)  \right)\cup
+                                            \left(
+                                      \left( A^{c}\cap \left( B\cap C^{c} \right)  \right) \cup
+                                    \left( A^{c}\cap \left( C\cap B^{c} \right)  \right) \right)   \\
+                                        &= \left( A\cap \left( \left( B^{c}\cap C^{c} \right)\cup
+                                        \left( B^{c}\cap B \right) \right) \cup \left( \left(
+                                    C\cap C^{c}\right) \cup \left( C\cap B \right)  \right)  \right)
+                                    \cup \left( \left( A^{c}\cap \left( B\cap C^{c} \right)  \right)
+                                    \cup \left( A^{c}\cap \left( C\cap B^{c} \right)  \right)
+                                  \right) \\
+                                        &= \left( A\cap \left( \left( B^{c}\cap C^{c} \right)\cup
+                                        \left( B\cap C \right)   \right)  \right)  \cup \left(
+                                      \left(  A^{c}\cap B\cap C^{c} \right) \cup \left( A^{c}\cap
+                                    C\cap B^{c} \right) \right) \\
+                                        &= \left( \left( A\cap B^{c}\cap C^{c} \right)\cup \left(
+                                        A\cap B\cap C \right)   \right)\cup \left( \left( 
+                                    B\cap A^{c}\cap C^{c} \right) \cup \left( C\cap A^{c}\cap B^{c} \right) \right) 
+      .\end{align*} Conversely, 
+      \begin{align*}
+        \left( A\Delta B \right) \Delta C&= \left( \left( \left( A\cap B^{c} \right) \cup \left(
+        B\cap A^{c} \right) \right) \cap C^{c} \right) \cup \left( C\cap \left( \left(      A\cap B^{c} \right) \cup \left( B\cap A^{c} \right) \right)^{c}  \right)  \\
+                                         &= \left( \left( A\cap B^{c}\cap C^{c} \right) \cup \left(
+                                         B\cap A^{c}\cap C^{c}\right)  \right) \cup \left( C\cap
+                                       \left( \left( A^{c}\cup B \right) \cap \left( B^{c}\cup A \right)  \right)  \right)  \\
+                                       &= \left( \left( A\cap B^{c}\cap C^{c} \right) \cup \left(
+                                       B\cap A^{c}\cap C^{c}\right)  \right) \cup \left( C\cap
+                                     \left( \left( A^{c}\cap B^{c} \right) \cup \left( B\cap B^{c}
+                                         \right)  \right) \cup \left(\left( A^{c}\cap A \right) \cup \left(
+                                   A\cap B \right)  \right) \right) \\
+                                   &= \left( \left( A\cap B^{c}\cap C^{c} \right) \cup \left(
+                                   B\cap A^{c}\cap C^{c}\right)  \right) \cup \left( \left( C\cap
+                               A^{c}\cap B^{c} \right) \cup \left( C\cap A\cap B \right)  \right)
+      .\end{align*} Due to commutativity of union and intersection of sets, we observe that
+      $A\Delta\left( B\Delta C \right) = (A\Delta B)\Delta C$, and so it satisfies additive
+      associativity.\\
+
+      Now, we show scalar multiplicative associativity. Let $\alpha,\beta\in \F_2$. Then we show
+      associativity holds for the four possible cases:
+      \begin{itemize}
+        \item $1\cdot \left( 1\cdot A \right) = 1\cdot A=A=1\cdot A=(1\cdot 1)\cdot A$
+        \item $1\cdot \left( 0\cdot A \right) =1\cdot \varnothing=0\cdot A=(1\cdot 0)\cdot A$
+        \item $0\cdot \left( 1\cdot A \right) =0\cdot A=\varnothing=0\cdot A=\left( 0\cdot 1 \right)
+          \cdot A$
+        \item $0\cdot \left( 0\cdot A \right) =0\cdot \varnothing=\varnothing=0\cdot
+          \varnothing=\left( 0\cdot 0 \right) \cdot A$
+      \end{itemize} Thus scalar multiplicative associativity holds as well, and so associativity
+      holds.
+      
+    \item \textbf{Commutativity}: Let $A,B\subseteq X$. Then 
+      \begin{align*}
+        A\Delta B &= \left( A\setminus B \right) \cup \left( B\setminus A \right) \\
+                  &= \left( B\setminus A \right) \cup \left( A\setminus B \right)  \\
+                  &= B\Delta A
+      ,\end{align*} by commutativity of set union. Thus commutativity holds.
+
+    \item \textbf{Additive Identity}: Observe that for any $A\subseteq X$, \[
+      A\Delta \varnothing=\varnothing\Delta A = A
+      .\] Thus additive identity holds.
+      
+    \item \textbf{Additive Inverse}: For any $A\in X$, choose $A'=A^{c}\subseteq X$ (the complement
+      of A). Then \[
+        A\Delta A' = A' \Delta A = \varnothing
+      .\] Thus additive inverse holds.
+
+    \item \textbf{Multiplicative Identity}: Observe that for any $A\subseteq X$, \[
+      1\cdot A=A
+    \] by definition. Thus scalar multiplicative identity holds.
+
+  \item \textbf{Distributive Properties}: First we show that for any $\lambda\in \F_2, A,B \in X$,
+    $ \lambda\cdot (A+B)=\lambda\cdot A+\lambda\cdot B$:
+    \begin{align*}
+      \lambda\cdot \left( A+B \right) &= A+B \\
+      &= \lambda\cdot A+\lambda\cdot B
+    .\end{align*} The last statement holds true for both $\lambda=0$ and $\lambda=1$, and so the
+    first distributive property holds.\\
+
+    Now, we show that the second distributive property, $\left( \alpha+ \beta \right) A =
+    \alpha\cdot A+\beta\cdot A$, is true for all $\alpha,\beta\in \F_2,A\subseteq X$; we do this by
+    evaluating the three cases ($0+ 1=1+ 0=1$):
+    \begin{itemize}
+      \item If $\alpha=\beta=1$:
+        \begin{align*}
+          (1+ 1)\cdot A &= 0\cdot A \\
+          &= \varnothing \\
+          &= A\Delta A \\
+          &= 1\cdot A+1\cdot A
+        .\end{align*}
+      \item If $\alpha=0,\beta=1$:
+        \begin{align*}
+          (1+0)\cdot A&= 1\cdot A \\
+          &= A \\
+          &= A\Delta\varnothing \\
+          &= 1\cdot A+0\cdot A
+        .\end{align*}
+      \item If $\alpha=\beta=0$:
+        \begin{align*}
+          (0+0)\cdot A&= 0\cdot A \\
+          &= \varnothing \\
+          &= A\Delta A \\
+          &= 0\cdot A+0\cdot A \\
+        .\end{align*}
+    \end{itemize}
+    Thus the second distributive identity holds as well, and so distributive properties hold.
+
+  \end{itemize}
+\end{solution}
+
+
 
 
 \end{document}

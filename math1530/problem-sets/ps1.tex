@@ -158,7 +158,7 @@
         Conversely, let $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$. Then 
         \begin{align*}
           &\left( e\in S\lor e\in T \right) \land \left( e\in S\lor e\in U \right) \\
-          &~e\in S\lor \left( e\in T\land e\in U \right)
+          =&~e\in S\lor \left( e\in T\land e\in U \right)
         .\end{align*}
       Thus, $e\in S\cup \left( T\cap U \right)$, and so $\left( S\cup T \right) \cap \left( S\cup U 
       \right) \subset S\cup \left( T\cap U \right) $.\\
@@ -187,15 +187,15 @@
       Now, let $e\in \left( S\cap T \right) ^{c}$. Then 
       \begin{align*}
         &~e\in U\land \neg \left( e\in S\land e\in T \right) \\
-        &~e\in U\land \left( e\not\in S\lor e\not\in T \right) \\
-        &\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right) 
+        =&~e\in U\land \left( e\not\in S\lor e\not\in T \right) \\
+        =&\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right) 
       .\end{align*}
       Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap T\right) ^{c} \subset S^{c}\cup T^{c}$.\\
       Conversely, let $e\in S^{c}\cup T^{c}$. Then 
       \begin{align*}
         &\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right)\\
-        &~e\in U \land \left( e\not\in S\lor e\not\in T \right) \\
-        &~e\in U\land \neg \left( e\in S\land e\in T \right)
+        =&~e\in U \land \left( e\not\in S\lor e\not\in T \right) \\
+        =&~e\in U\land \neg \left( e\in S\land e\in T \right)
       .\end{align*}
       Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subset \left( S\cap 
       T \right) ^{c}$.\\
@@ -208,27 +208,27 @@
       Let $e\in \left( S\cup T \right) \setminus \left( S\cap T \right) $. Then
       \begin{align*}
         &\left( e\in S\lor e\in T \right) \land \neg \left( e\in S\land e\in T \right) \\
-        &\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
-        &\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
+        =&\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
+        =&\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
         \left( e\in S\lor e\in T \right)\land e\not\in T\right) \\
-        &\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
+        =&\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
         \right) \lor \left( \left(  e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in
       T\right) \right) \\
-        &\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) 
+        =&\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) 
       .\end{align*}
       Thus, $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $, and so $\left( S\cup T \right)
       \setminus \left( S\cap T \right) \subset \left( S\setminus T \right) \cup \left( T\setminus S \right) $.\\
       Conversely, let $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $. Then
       \begin{align*}
         &\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) \\
-        &\left( e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in S \right) \\
-        &\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
+        =&\left( e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in S \right) \\
+        =&\left( \left( e\in S\land e\not\in S \right) \lor \left( e\in T\land e\not\in S \right)
         \right) \lor \left( \left(  e\in S\land e\not\in T \right) \lor \left( e\in T\land e\not\in
       T\right) \right) \\
-        &\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
+        =&\left( \left( e\in S\lor e\in T \right) \land e\not\in S \right) \lor \left( 
         \left( e\in S\lor e\in T \right)\land e\not\in T\right) \\
-        &\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
-        &\left( e\in S\lor e\in T \right) \land \neg \left( e\in S\land e\in T \right)
+        =&\left( e\in S\lor e\in T \right) \land \left( e\not\in S\lor e\not\in T \right) \\
+        =&\left( e\in S\lor e\in T \right) \land \neg \left( e\in S\land e\in T \right)
       .\end{align*}
       Thus, we get the statement 
       $e\in \left( S\cup T \right) \setminus \left( S\cap T\right) $, and so $\left( S\setminus 

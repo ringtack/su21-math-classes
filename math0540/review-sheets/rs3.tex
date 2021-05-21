@@ -59,9 +59,15 @@
       \end{proof}
       
     \item Negation: There exists a field $\F$ and some $a,b\in \F, a\neq 0$ such that for any $x\in
-      \F$, $ax\neq b$. The \textbf{negation} is true.
+      \F$, $ax\neq b$. The \textbf{original statement} is true.
       \begin{proof}[Proof]
-        Choose $ \F=\Z, a=2,b=1$. Then $x=\frac{b}{a}=\frac{1}{2}\not\in \Z$.
+        Observe that
+         \begin{align*}
+          ax &= b \\
+          a^{-1}ax&= a^{-1}b \\
+          x&= a^{-1}b
+        .\end{align*} By definition of a field, multiplication is closed; and since $a^{-1},b\in
+        \F$, $a^{-1}b\in \F$, and we choose $x=a^{-1}b$.
       \end{proof}
 
     \item Negation: There exists some $a,b\in \Q$, not both zero, such that for any $c,d\in \Q$, \[
