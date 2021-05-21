@@ -1,0 +1,86 @@
+\documentclass{review-sheet}
+\homework{3}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Let $v=\left( 2+2i, -1+i \right) $.
+  \begin{enumerate}[label=(\alph*)]
+    \item Compute $\frac{1}{2}\cdot v$.
+    \item Compute $(3i)\cdot v$.
+    \item Compute $(-1+i)\cdot v$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $\frac{1}{2}\cdot v = \left( 1+i,-\frac{1}{2}+\frac{1}{2}i \right) $.
+    \item $(3i)v = (-6+6i, -3-3i)$.
+    \item $(-1+i)v = \left( (-1+i)(2+2i), (-1+i)^2 \right) = (-2-2i+2i-2,1-2i-1)=(-4,-2i)$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  For each of the following statements, write down its negation, then assert whether the original
+  statement or the negation is true. Finally, prove your assertion.
+  \begin{enumerate}[label=(\alph*)]
+    \item There is some $ \alpha\in \C$ such that $ \alpha\cdot (1+i,1-i)=(1,i)$.
+    \item For all $s \in \C$, there exists $t,u\in C$ such that $(1,s)=t(u,-i)$.
+    \item In any field  $\F$ and given any $a,b\in \F$ such that $a\neq 0$, there is some $x\in \F$
+      such that $ax=b$.
+    \item For every  $a,b\in \Q$ not both $0$, there exist $c,d\in \Q$ such that the following
+      equation holds true in $\R$: \[
+        \left( a+b\sqrt{3}  \right) \left( c+d\sqrt{3}  \right)  = 1
+      .\] 
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Negation: For all $\alpha\in \C$, $ \alpha\cdot (1+i,1-i) \neq (1,i)$. The
+      \textbf{negation} is true.
+      \begin{proof}[Proof]
+        Let $ \alpha\in \C$. Then
+        \begin{align*}
+          \alpha+\alpha i&= 1 \\
+          \alpha-\alpha i &= i
+        .\end{align*} Plugging the second equation into the first equation, we get
+        \begin{align*}
+          \alpha+\alpha^2i+\alpha^2&= 1 \\
+          \left( \alpha^2+\alpha \right) +\alpha^2i&=1+0i
+        .\end{align*} From this, we observe that $\alpha^2=0$, and so $\alpha=0$ as well. Then
+        $\alpha^2+\alpha=0\neq 1$, and so the negation is true.
+      \end{proof}
+      
+    \item Negation: There exists an $s \in \C$ such that for any $t,u\in \C, (1,s)\neq t\cdot
+      (u,-i).$ The \textbf{negation} is true.
+      \begin{proof}[Proof]
+        Let $s=0$. We observe that $s=0=-ti$, which holds true only when  $t=0$; thus  $t=0$ as
+        well. Then  $1\neq t\cdot u=0$.
+      \end{proof}
+      
+    \item Negation: There exists a field $\F$ and some $a,b\in \F, a\neq 0$ such that for any $x\in
+      \F$, $ax\neq b$. The \textbf{negation} is true.
+      \begin{proof}[Proof]
+        Choose $ \F=\Z, a=2,b=1$. Then $x=\frac{b}{a}=\frac{1}{2}\not\in \Z$.
+      \end{proof}
+
+    \item Negation: There exists some $a,b\in \Q$, not both zero, such that for any $c,d\in \Q$, \[
+        \left( a+b\sqrt{3}  \right) \left( c+d\sqrt{3}  \right)  \neq 1
+    .\] The \textbf{original statement} is true.
+    \begin{proof}[Proof]
+      Let $c=\frac{a}{a^2-3b^2}, d=-\frac{b}{a^2-3b^2}$. Then
+      \begin{align*}
+        &\left( a+b\sqrt{3}  \right) \left( \frac{a}{a^2-3b^2}-\frac{b}{a^2-3b^2}\sqrt{3}  \right)\\
+        &= \frac{a^2}{a^2-3b^2} -\frac{3b^2}{a^2-3b^2}\\
+        &=\frac{a^2-3b^2}{a^2-3b^2}\\
+        &=1
+      .\end{align*} (Because we know that  $a$ and $b$ are not both $0$, the denominator is nonzero.)
+    \end{proof}
+    
+      
+  \end{enumerate}
+\end{solution}
+
+
+
+\end{document}
