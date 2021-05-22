@@ -103,6 +103,96 @@ example of transformations; are they invertible? commutative?
   then $G$ is an \textbf{Abelian} group.
 \end{definition}
 
+Now, we observe some interesting properties that follow from the group axioms.
+\begin{proposition}[Group Properties]{}
+  Let $G$ be a group.
+  \begin{enumerate}
+    \item The identity element is unique.
+    \item Each element of $G$ has only one inverse.
+    \item If $g,h\in G$, then $(gh)^{-1}=h^{-1}g^{-1}$.
+    \item Given $g\in G$, $(g^{-1})^{-1}=g$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof of (b)]
+  Suppose $g\in G$and that both $h_1,h_2$ satisfy the inverse axiom. Then \[
+  g\cdot h_1=e=g\cdot h_2
+  .\]  By the inverse axiom, we multiply on the left by an inverse of $g $:
+  \begin{align*}
+    e\cdot h_1&= e\cdot h_2 \\
+    h_1&=h_2
+  .\end{align*} Thus the inverse is unique.
+\end{proof}
+
+\begin{definition}[Order]{}
+  \begin{itemize}
+    \item The \textbf{order}of a group $G$ is denoted  $\#G$ or  $\left| G \right| $ is the number of
+          elements in $G$ if finite, and $\infty$ if infinite.
+    \item If $G$ is a group and $g\in G$, the smallest $n$ in which $g^{n}=e$ is called \textbf{the
+      order of $g$}. If no $n$ exists, we say $g$ has infinite order.
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}[Individual Order and Group Order]{}
+  Suppose $G$ is a finite group and suppose $g^{n}=e$. Then the order of $g$ divides $n$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $n$ be the order of $g\in G$. Then, by long division, we can write \[
+ m=n\cdot g+r,~0\le r<m
+  .\]  Using this equality together with $g^{n}=e$ and $g^{m}=e$, we get \[
+  e=g^{n}=g^{m\cdot q+r}=\left( g^{m} \right) ^{q}\cdot g^{r} =e^{q}\cdot g^{r}=e\cdot g^{r}=g^{r}
+.\] We find that $g^{r}=e$; but $r<m$ and  $m$ is the order of $g$.
+
+[TODO]: Finish this exercise with a well-defined proof, not this bullshit
+\end{proof}
+
+\subsection{Examples of Groups}
+\begin{example}
+  $\Z,\Q,\R$ and $\C$ are all Abelian groups with respect to addition. However, $\Z$ is not a group
+  with respect to multiplication, as the multiplicative inverse does not exist. Additionally,
+  $\Q,\R,$ and $\C$ are not groups with respect to multiplication, due to zero; but $\Q\setminus \{
+  0\}, \R\setminus \{ 0 \}$, and $ \C\setminus \{ 0 \}$ are all groups under multiplication.
+\end{example}
+
+\begin{example}
+  Let $\Z/m\Z$ be the set of integers modulo $m$. Then  $\Z / m\Z$ is a group under addition
+  modulo $m$, $+_m$ ; $\Z / m\Z$ is finite with order $m$. We also observe that $\Z/m\Z$ is a cyclic
+  group.
+\end{example}
+
+\begin{example}
+  Let the set of $n\times n$ matrices be $M_n$. Then  $M_n$ is an Abelian group under addition, but
+  not multiplication (since not all matrices have inverses).\\
+
+  Let \[GL_n(\R)=\{M\in M_n\mid \det(M)\neq 0\}\], denote the \textbf{general linear group}. Then
+  $GL_n(\R)$ is a group using matrix multiplication (not Abelian though).
+\end{example}
+
+
+\subsection{Cyclic Groups}
+\begin{definition}[Cyclic Groups]{}
+  A group $G$ is \textbf{cyclic} if there is a $g\in G$ such that \[
+    G=\{ \ldots,g^{-2},g^{-1} ,e,g,g^2,g^3,\ldots\}
+  .\] We call $g$ a \textbf{generator}.
+\end{definition}
+
+Some examples of cyclic groups are $\Z$ and $\Z / m\Z$; both have generators $1$. Another one is
+the permutation group.
+\begin{definition}[Permutation Groups]{}
+  Given $X$ a set, let $S_X$ denote the  \textbf{symmetric group of $X$}, or the group of
+  permutations of $X$. If  \[
+    X=\{ 1,\ldots,n \}
+  ,\] we use the notation $S_n$.
+
+  Let $P_n$ be a regular  $n$-gon with vertices $1,\ldots,n$. The group of transformations of $P_n$
+  (e.g. rotations, reflections, and compositions of such) is called the  \textbf{dihedral group}
+  $D_n$. We will later prove that $D_n$ has order  $2n$.
+\end{definition}
+
+
+
+
+
+
 
 
 
