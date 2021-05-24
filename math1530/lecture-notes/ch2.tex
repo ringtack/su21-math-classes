@@ -168,6 +168,7 @@ Now, we observe some interesting properties that follow from the group axioms.
 \end{example}
 
 
+
 \subsection{Cyclic Groups}
 \begin{definition}[Cyclic Groups]{}
   A group $G$ is \textbf{cyclic} if there is a $g\in G$ such that \[
@@ -183,19 +184,78 @@ the permutation group.
     X=\{ 1,\ldots,n \}
   ,\] we use the notation $S_n$.
 
-  Let $P_n$ be a regular  $n$-gon with vertices $1,\ldots,n$. The group of transformations of $P_n$
+  Let $P_n$ be a regular  $n$-gon with vertices $1,\ldots,n$. The group of transformations of $D_n$
   (e.g. rotations, reflections, and compositions of such) is called the  \textbf{dihedral group}
   $D_n$. We will later prove that $D_n$ has order  $2n$.
 \end{definition}
 
 
+\section{Group Homomorphisms}
 
+\begin{definition}[Homomorphisms]{}
+  Let $ G_1, G_2$ be groups. A \textbf{homomorphism} from $G_1$ to $G_2$ is a function $\phi:
+  G_1\to G_2$ satisfying: \[
+    \phi(g_1\cdot_{G_1}g_2)=\phi(g_1)\cdot_{G_2}\phi(g_2)
+  .\] In other words, the map $\phi$ preserves the group operations.
+\end{definition}
 
+\begin{example}
+  Examples of homomorphisms:
+  \begin{itemize}
+    \item There exists a homomorphism from the dihedral group to the group $\pm 1$:  \[
+        \phi: D_n \to \{ \pm 1 \}
+      \], where $\phi(\sigma) = 1$ if rotation, $ \phi(\sigma)=-1$ if flip.
+    \item For $n\ge m\ge 1$, there is an injective homomorphism \[
+        f:S_m \to S_n
+      .\] Note that this homomorphism is \textit{not} surjective. More generally, if $X_1\subseteq
+      X_2$, then there is an injective homomorphism $f:S_{X_1} \to S_{X_2}$.
+    \item There is a homomorphism \[
+          \log: \left( \R,\times  \right) \to \left( \R,+ \right) 
+      .\] 
+    \item There is a homomorphism between the general linear group to the real numbers \begin{align*}
+        det: GL_n(\R) &\longrightarrow \R \\
+        AB &\longmapsto det(AB) = det(A)\cdot det(B)
+    .\end{align*}
+  \end{itemize}
+\end{example}
 
+\begin{definition}[Isomorphisms]{}
+  Groups $  G_1,G_2$ are \textbf{isomorphic} if there exists a \textbf{bijective homomorphism} $f:
+  G_1\to G_2$. In this case, $f$ is called an \textbf{isomorphism}.
+\end{definition}
 
+\begin{example}
+  Let $\mathcal{C}_n=\{ g_0,g_1,\ldots,g_{n-1} \}$ with operation $\cdot :\mathcal{C}_n\times
+  \mathcal{C}_n\to\mathcal{C}_n$ defined by \[
+    g_i \cdot g_j = \left\{ \begin{array}{rl} g_{i+j}, & i+j<n \\ g_{i+j-n}, & i+j\ge
+      n\end{array}\right.
+      \] then $\mathcal{C}_n$ is called the abstract cyclic group of order $n$.
+\end{example}
 
+We've now seen two examples of cyclic groups of order $n $: $\Z/n\Z$ and $\mathcal{C}_n$. Naturally,
+we wonder if these groups are actually different (from the perspective of group theory).
+Equivalently,  \textbf{are these two groups isomorphic}?
+\begin{example}
+  $ \Z / n\Z$ is isomorphic to $\mathcal{C}_n$ ($ \Z / n\Z\simeq \mathcal{C}_n$). Consider the map
+  \begin{align*}
+    \phi: \Z / n\Z &\longrightarrow \mc{C}_n \\
+    a &\longmapsto \phi(a) = g_a
+  .\end{align*} Then $\phi(a+b)=\phi(a)\cdot \phi(b)$ by definition of group operations. So $\phi$ 
+  is a homomorphism.\\
+  $\phi$ is surjective since $i\in \{ 0,\ldots,n-1 \}$ maps to $g_i\in \{ g_0,\ldots,g_{n-1} \}$.
+  \\Since $\Z / n\Z $ and $\mc{C}_n$ both have  $n$ elements, $\phi$ is injective as well. \\
+  So, $\phi$ is an isomorphism and $\mc{C}_n \simeq \Z / n\Z$.
+\end{example}
 
+Note that if a group is isomorphic, there isn't necessarily a unique isomorphism. Consider the same
+isomorphism as above, except map $a\mapsto g_{a+1}$. This is also an isomorphism.
 
+\begin{example}
+  Given any group $G$, and an element $g\in G$, then multiplication by $g$ permutes the elements of
+  $G$. This gives rise to an injective homomorphism $\phi: G \to S_G$.\\
+
+  This implies that by knowing every symmetric group, one knows much about every other group.
+\end{example}
 
 
 
