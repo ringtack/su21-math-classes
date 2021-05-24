@@ -90,9 +90,9 @@ Check that $V_{\F_2}$ is a vector space.
                                         \left( B\cap C \right)   \right)  \right)  \cup \left(
                                       \left(  A^{c}\cap B\cap C^{c} \right) \cup \left( A^{c}\cap
                                     C\cap B^{c} \right) \right) \\
-                                        &= \left( \left( A\cap B^{c}\cap C^{c} \right)\cup \left(
-                                        A\cap B\cap C \right)   \right)\cup \left( \left( 
-                                    B\cap A^{c}\cap C^{c} \right) \cup \left( C\cap A^{c}\cap B^{c} \right) \right) 
+                                        &= \left( A\cap B^{c}\cap C^{c} \right)\cup \left(
+                                        A\cap B\cap C \right)\cup \left( 
+                                    B\cap A^{c}\cap C^{c} \right) \cup \left( C\cap A^{c}\cap B^{c} \right)
       .\end{align*} Conversely, 
       \begin{align*}
         \left( A\Delta B \right) \Delta C&= \left( \left( \left( A\cap B^{c} \right) \cup \left(
@@ -105,10 +105,9 @@ Check that $V_{\F_2}$ is a vector space.
                                      \left( \left( A^{c}\cap B^{c} \right) \cup \left( B\cap B^{c}
                                          \right)  \right) \cup \left(\left( A^{c}\cap A \right) \cup \left(
                                    A\cap B \right)  \right) \right) \\
-                                   &= \left( \left( A\cap B^{c}\cap C^{c} \right) \cup \left(
-                                   B\cap A^{c}\cap C^{c}\right)  \right) \cup \left( \left( C\cap
-                               A^{c}\cap B^{c} \right) \cup \left( C\cap A\cap B \right)  \right)
-      .\end{align*} Due to commutativity of union and intersection of sets, we observe that
+                                   &= \left( A\cap B^{c}\cap C^{c} \right) \cup \left(
+                                   B\cap A^{c}\cap C^{c} \right) \cup \left( C\cap
+                               A^{c}\cap B^{c} \right) \cup \left( C\cap A\cap B \right)      .\end{align*} Due to commutativity of union and intersection of sets, we observe that
       $A\Delta\left( B\Delta C \right) = (A\Delta B)\Delta C$, and so it satisfies additive
       associativity.\\
 
@@ -116,7 +115,7 @@ Check that $V_{\F_2}$ is a vector space.
       associativity holds for the four possible cases:
       \begin{itemize}
         \item $1\cdot \left( 1\cdot A \right) = 1\cdot A=A=1\cdot A=(1\cdot 1)\cdot A$
-        \item $1\cdot \left( 0\cdot A \right) =1\cdot \varnothing=0\cdot A=(1\cdot 0)\cdot A$
+        \item $1\cdot \left( 0\cdot A \right) =1\cdot \varnothing=\varnothing=0\cdot A=(1\cdot 0)\cdot A$
         \item $0\cdot \left( 1\cdot A \right) =0\cdot A=\varnothing=0\cdot A=\left( 0\cdot 1 \right)
           \cdot A$
         \item $0\cdot \left( 0\cdot A \right) =0\cdot \varnothing=\varnothing=0\cdot
@@ -135,8 +134,7 @@ Check that $V_{\F_2}$ is a vector space.
       A\Delta \varnothing=\varnothing\Delta A = A
       .\] Thus additive identity holds.
       
-    \item \textbf{Additive Inverse}: For any $A\in X$, choose $A'=A^{c}\subseteq X$ (the complement
-      of A). Then \[
+    \item \textbf{Additive Inverse}: For any $A\in X$, choose $A'=A\subseteq X$. Then \[
         A\Delta A' = A' \Delta A = \varnothing
       .\] Thus additive inverse holds.
 
@@ -146,11 +144,21 @@ Check that $V_{\F_2}$ is a vector space.
 
   \item \textbf{Distributive Properties}: First we show that for any $\lambda\in \F_2, A,B \in X$,
     $ \lambda\cdot (A+B)=\lambda\cdot A+\lambda\cdot B$:
-    \begin{align*}
-      \lambda\cdot \left( A+B \right) &= A+B \\
-      &= \lambda\cdot A+\lambda\cdot B
-    .\end{align*} The last statement holds true for both $\lambda=0$ and $\lambda=1$, and so the
-    first distributive property holds.\\
+    \begin{itemize}
+      \item If $\lambda=0$: Let $C=A+B$. Then
+        \begin{align*}
+          0\cdot (A+B) &= 0\cdot C \\
+          &= \varnothing \\
+          &= \varnothing\Delta\varnothing \\
+          &= 0\cdot A+0\cdot B
+        .\end{align*}
+      \item If $\lambda=1$:
+        \begin{align*}
+          1\cdot (A+B) &= A+B \\
+          &= 1\cdot A+1\cdot B
+        .\end{align*}
+    \end{itemize}
+     Thus the first distributive property holds.
 
     Now, we show that the second distributive property, $\left( \alpha+ \beta \right) A =
     \alpha\cdot A+\beta\cdot A$, is true for all $\alpha,\beta\in \F_2,A\subseteq X$; we do this by
@@ -175,7 +183,7 @@ Check that $V_{\F_2}$ is a vector space.
           (0+0)\cdot A&= 0\cdot A \\
           &= \varnothing \\
           &= A\Delta A \\
-          &= 0\cdot A+0\cdot A \\
+          &= 0\cdot A+0\cdot A
         .\end{align*}
     \end{itemize}
     Thus the second distributive identity holds as well, and so distributive properties hold.
