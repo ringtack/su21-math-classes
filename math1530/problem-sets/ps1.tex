@@ -102,10 +102,21 @@
         \end{tabular}
       \end{table}
       Since the statement is true regardless of $P$ or $Q$, $\left( \neg Q \Rightarrow \neg P
-      \right) \Rightarrow \left( P\Rightarrow Q \right)$ is true. This also justifies Proof by
-      Contradiction: if $\neg P$ is false, then $P$ is necessarily true in order for
-      the above statement to be true as well (alternatively, from the Law of the Excluded Middle,
-      $\neg P$ being false necessarily implies that $P$ is true).
+      \right) \Rightarrow \left( P\Rightarrow Q \right)$ is true. This also serves to justify the
+      Proof by contradiction: \\
+
+      Let $S$ be a statement $P\Rightarrow Q$. We wish to show that the negation of S being false
+      implies that S is true, or equivalently, $\neg (\neg S) \Rightarrow S$. Using results from 1.2
+      (a, b, d), we get
+      \begin{align*}
+       \neg (\neg S) &=  \neg (\neg \left( P\Rightarrow Q \right)) \\
+                     &= \neg (\neg \left( \neg P\lor Q \right))  \\
+                                                &= \neg \left( P\land \neg Q \right)  \\
+                                                &= \neg P \lor \neg \left( \neg Q \right)  \\
+                                                &= \neg (\neg Q) \lor \neg P\\
+                                                &= \neg Q \Rightarrow \neg P
+    .\end{align*}
+    Thus $(\neg (\neg S) \implies S) = (\left( \neg Q\Rightarrow \neg P\right) \implies\left( P\Rightarrow Q \right)) $, as required.
   \end{itemize}
 \end{solution}
 
@@ -114,7 +125,7 @@
   \begin{enumerate}[label=(\alph*)]
     \item $S\cap \left( T \cup U \right) = \left( S\cap T \right) \cup \left( S\cap U \right)$
     \item $S\cup \left( T\cap U \right) = \left( S\cup T \right) \cap \left( S\cup U \right)$
-    \item Suppose $S, T\subset U$. Then \[
+    \item Suppose $S, T\subseteq U$. Then \[
         \left( S\cup T \right) ^{c} = S^{c}\cap T^{c} ~\text{and}~ \left( S\cap T \right) ^{c}
         =S^{c}\cup T^{c}
       .\] 
@@ -134,14 +145,14 @@
         = &\left( e\in S\land e\in T \right) \lor \left( e\in S\land e\in U \right)
       .\end{align*}
       Thus $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$, and so $S\cap \left( T\cup U 
-        \right) \subset \left( S\cap T \right) \cup \left( S\cap U \right) $.\\
+        \right) \subseteq \left( S\cap T \right) \cup \left( S\cap U \right) $.\\
       Conversely, let $e\in \left( S\cap T \right) \cup \left( S\cap U \right)$. Then
       \begin{align*}
         &\left( e\in S\land e\in T \right) \lor \left( e\in S\land e\in U \right) \\
         = &~e\in S\land \left(e\in T\lor e\in U\right)
       .\end{align*}
       Thus, $e\in S\cap \left( T\cup U \right)$, and so $\left( S\cap T
-      \right) \cup \left( S\cap U \right) \subset S\cap \left( T\cup U \right) $. \\
+      \right) \cup \left( S\cap U \right) \subseteq S\cap \left( T\cup U \right) $. \\
       Since both are subsets of each other, $S\cap \left( T\cup U \right) = \left( S\cap T
       \right)\cup \left( S\cap U \right) $.
     \end{proof}
@@ -154,14 +165,14 @@
         = &\left( e\in S\lor e\in T \right) \land \left( e\in S\lor e\in U \right)
       .\end{align*}
       Thus $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$, and so $S\cup \left( T\cap U
-        \right) \subset \left( S\cup T \right) \cap \left( S\cup U \right) $. \\
+        \right) \subseteq \left( S\cup T \right) \cap \left( S\cup U \right) $. \\
         Conversely, let $e\in \left( S\cup T \right) \cap \left( S\cup U \right)$. Then 
         \begin{align*}
           &\left( e\in S\lor e\in T \right) \land \left( e\in S\lor e\in U \right) \\
           =&~e\in S\lor \left( e\in T\land e\in U \right)
         .\end{align*}
       Thus, $e\in S\cup \left( T\cap U \right)$, and so $\left( S\cup T \right) \cap \left( S\cup U 
-      \right) \subset S\cup \left( T\cap U \right) $.\\
+      \right) \subseteq S\cup \left( T\cap U \right) $.\\
       Since both are subsets of each other, $s\cup \left( t\cap u \right) = \left( s\cup t \right)
       \cap \left( s\cup u \right).$
     \end{proof}
@@ -174,14 +185,14 @@
           = &~e\in U\land \left( e\not\in S\land  e\not\in T \right) \\
           = &\left( e\in U\land e\not\in S\right) \land \left( e\in U\land e\not\in T \right) 
         .\end{align*}
-        Thus, $e\in S^{c}\cap T^{c}$, and so $\left( S\cup T \right) ^{c}\subset S^{c}\cap T^{c}$.\\
+        Thus, $e\in S^{c}\cap T^{c}$, and so $\left( S\cup T \right) ^{c}\subseteq S^{c}\cap T^{c}$.\\
         Conversely, let $e\in S^{c}\cap T^{c}$. Then
         \begin{align*}
           &\left( e\in U\land e\not\in S \right) \land \left(  e\in U\land e\not\in T \right)\\
           =&~e\in U\land \left( e\not\in S\land e\not\in T \right) \\
           =&~e\in U\land \neg \left(  e\in S\lor e\in T\right) 
         .\end{align*}
-      Thus, $e\in \left( S\cup T \right) ^{c}$, and so $S^{c}\cap T^{c}\subset \left( S\cup T 
+      Thus, $e\in \left( S\cup T \right) ^{c}$, and so $S^{c}\cap T^{c}\subseteq \left( S\cup T 
       \right) ^{c}$.\\
       Since both subsets are equal, $\left( S\cup T \right) ^{c}=S^{c}\cap T^{c}$. \\ \\
       Now, let $e\in \left( S\cap T \right) ^{c}$. Then 
@@ -190,14 +201,14 @@
         =&~e\in U\land \left( e\not\in S\lor e\not\in T \right) \\
         =&\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right) 
       .\end{align*}
-      Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap T\right) ^{c} \subset S^{c}\cup T^{c}$.\\
+      Thus, $e\in S^{c}\cup T^{c}$, and so $\left( S\cap T\right) ^{c} \subseteq S^{c}\cup T^{c}$.\\
       Conversely, let $e\in S^{c}\cup T^{c}$. Then 
       \begin{align*}
         &\left( e\in U\land e\not\in S \right) \lor \left( e\in U\land e\not\in T \right)\\
         =&~e\in U \land \left( e\not\in S\lor e\not\in T \right) \\
         =&~e\in U\land \neg \left( e\in S\land e\in T \right)
       .\end{align*}
-      Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subset \left( S\cap 
+      Thus, $e\in \left( S\cap T \right) ^{c}$, and so $S^{c}\cup T^{c}\subseteq \left( S\cap 
       T \right) ^{c}$.\\
       Since both are subsets of each other, $\left( S\cap T \right) ^{c}=S^{c}\cup T^{c}$.
     \end{proof}
@@ -217,7 +228,7 @@
         =&\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) 
       .\end{align*}
       Thus, $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $, and so $\left( S\cup T \right)
-      \setminus \left( S\cap T \right) \subset \left( S\setminus T \right) \cup \left( T\setminus S \right) $.\\
+      \setminus \left( S\cap T \right) \subseteq \left( S\setminus T \right) \cup \left( T\setminus S \right) $.\\
       Conversely, let $e\in \left( S\setminus T \right) \cup \left( T\setminus S \right) $. Then
       \begin{align*}
         &\left( e\in T\land e\not\in S \right) \lor \left( e\in S\land e\not\in T \right) \\
@@ -232,7 +243,7 @@
       .\end{align*}
       Thus, we get the statement 
       $e\in \left( S\cup T \right) \setminus \left( S\cap T\right) $, and so $\left( S\setminus 
-      T \right) \cup \left( T\setminus S \right) \subset \left( S\cup T \right) \setminus \left(
+      T \right) \cup \left( T\setminus S \right) \subseteq \left( S\cup T \right) \setminus \left(
     S\cap T \right) $.\\
       Since both are subsets of each other, $\left( S\cup T \right) \setminus \left( S\cap T \right)
       = \left( S\setminus T \right) \cup \left( T\setminus S \right)$.
