@@ -184,7 +184,9 @@ fields.
 
 \section{Vector Spaces}
 Vector spaces serve as the fundamental abstract structure of linear algebra. All future topics will
-build on vector spaces.
+build on vector spaces. Roughly, a vector space $V$ is a set of \textbf{vectors} with an addition
+operation and scalar multiplication, where scalars are drawn from a field $\F$. We now formalize
+this definition.
 \begin{definition}[Vector Spaces]{}
   Given a field $\F$, A \textbf{vector space} over $\F$, denoted $V_\F$, is a set $V$, together with
   vector addition on $V$ \begin{align*}
@@ -210,6 +212,11 @@ build on vector spaces.
   We call elements of $\F$ \textbf{scalars}, and elements of $V$ \textbf{vectors}, or
   \textbf{points}.
 \end{definition}
+
+\begin{example}
+  We say $V$ is a vector space over $\F$. A vector space over $\R$ is called a \textbf{real vector
+  space}, and a vector space over $\C$ is called a \textbf{complex vector space}.
+\end{example}
 
 \begin{example}
   Let $\F$ be a field.
@@ -259,6 +266,118 @@ From this, we get that the set of functions $\R^{\{ 1,\ldots,n \}}=\R^{n}$, the 
   sum of two continuous functions is continuous; and $a\cdot f$ is continuous for any $a\in \R$, and
   $f$ continuous.
 \end{example}
+
+But what about fields over fields? Are these vector spaces?
+\begin{example}
+  Say $\F\subseteq \mathbb{K}$ ($\F$ is a subfield of $\mathbb{K}$). Then $\mathbb{K}$ is a vector
+  space over $\F$, with addition defined as in $\mathbb{K}$, and with scalar multiplication defined
+   \[
+     \lambda\cdot x=\lambda x, ~\text{where}~ \lambda\in \F, x\in \mathbb{K}
+   .\] Thus $\C$ is a real vector space (this is why we draw the complex plane like $\R^2$!).
+\end{example}
+
+\subsection{Properties of Vector Spaces}
+We now observe some fascinating properties of vector spaces. Let $V$ be a vector space over a field
+$\F$.
+\begin{proposition}[Unique Additive Identity]{}
+  $V$ has a unique additive identity.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $e,e'\in V$ are both additive identities. Then
+   \begin{align*}
+      e &= e + e' \\
+      &= e'
+  .\end{align*} Thus $e=e'$.
+\end{proof}
+
+\begin{proposition}[Unique Additive Inverse]{}
+  Every vector $v\in V$ has a unique additive inverse.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $v\in V$, and suppose $w,w'\in V$ are both additive inverses of $v$. Then
+  \begin{align*}
+    0 &= v+w \\
+    w' &= (w+v)+w' \\
+    w' &= w+(v+w') \\
+    w'&= w+0 \\
+    w' &= w
+  .\end{align*} Thus $w=w'$.
+\end{proof}
+
+Let us also define a notion of subtraction.
+\begin{proposition}[-v]{}
+  For any $v\in V$, \[
+    -v = (-1)\cdot v
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  Let $v,-v\in V$ where $-v$ is the inverse of $v$. Then  \[
+    v + (-1)\cdot v = 1v + (-1)\cdot v = (1+ -1)\cdot v = 0\cdot v=0
+  .\] Since every $v\in V$ has a unique additive inverse, $-v=(-1)\cdot v$.
+\end{proof}
+
+\section{Subspaces}
+Subspaces can greatly expand our examples of vector spaces.
+\begin{definition}[Subspaces]{}
+  A subset $U\subseteq V$ is a  \textbf{subspace} (or a \textbf{linear subspace}) of $V$ if
+  \begin{enumerate}
+    \item $\textbf{0} \in  U$.
+    \item For all $u,w\in U$, $u+w\in U$.
+    \item For all $u\in U$, $\lambda\in \F$, $ \lambda\cdot u\in U$.
+  \end{enumerate}
+  We will see that these three properties are enough for $U$ to satisfy the six properties of vector
+  spaces (so $U$ is a vector space as well!).
+\end{definition}
+
+
+\begin{example}
+  What are the subspaces of $\R^2$ and $\R^3$?
+\end{example}
+\begin{solution}
+  It turns out that there are only three valid types of subspaces of $ \R^2$:
+  \begin{enumerate}
+    \item The zero vector $\textbf{0}=(0,0)$.
+    \item All lines through the origin ($y=\alpha x$).
+    \item $\R^2$ itself.
+  \end{enumerate}
+  Similarly, there are only four valid types of subspaces of $\R^2$:
+  \begin{enumerate}
+    \item The zero vector $\textbf{0}=(0,0,0)$.
+    \item All lines through through the origin.
+    \item All planes through the origin.
+    \item $\R^3$ itself.
+  \end{enumerate}
+\end{solution}
+Let us now do a rough sketch of a proof that the list of subspaces of $\R^2$ is complete.
+\begin{proof}[Proof]
+  Let $W$ be a subspace of $ R^2$. If $W$ has no nonzero vectors, then $W=\{ \textbf{0} \}$. If
+  $W$ has a non-zero vector  $v \in V\setminus \{ \textbf{0} \}$, then $W$ must contain the line
+  through $v$ passing through  $ \textbf{0}$. \\
+  Moreover, if $W$ contains some $w\in V$ not on the line, we have the ability to "turn" the
+  coordinate plane, such that any $u\in V$ can be formed by $\alpha v + \beta w$.
+\end{proof}
+
+
+\section{Span}
+Suppose a friend imagines a subspace $W\subseteq \R^3$. You know that $(1,0,0),(0,1,0)\in W$. What
+else do you know must be in $W$? Well, first, $\textbf{0}=(0,0,0)\in W$ by definition. But moreover,
+anything in the form $\{ (a,b,0) \mid a,b\in \R \}$ (the xy-plane) must be in $W$, since any point
+on the plane can be made by $ \alpha \cdot a + \beta \cdot b$ (we will later see that $(1,0)$ and
+$(0,1)$ are \textbf{basis vectors} of $\R^2$).
+
+\begin{definition}[Linear Combination and Span]{}
+  A \textbf{linear combination}  of a list $ v_1,\ldots,v_n\in V$  is a vector of the form \[
+      \lambda_1v_1+\ldots+\lambda_nv_n, \lambda_i\in \F
+    .\]  The \textbf{span} (or \textbf{linear span}) of $ v_1,\ldots,v_n$, also denoted
+    $\text{span}(v_1,\ldots,v_n)$ is the set of all linear combinations of $ v_1,\ldots,v_n$.
+\end{definition}
+
+
+
+
+
+
+
 
 
 
