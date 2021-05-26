@@ -107,10 +107,10 @@ statement is true.
     \item For $n=5$:  $ a_1=2,a_2=4,a_3=8,a_4=12,a_5=24$
   \end{itemize}
   From this, we get a pattern: for an $a_{n-1},a_n$, we have  $a_n = 2a_{n-1}$. Moreover, when we
-  add a new block,  $a_{n-1}$ is updated, and $a_{n+1}=2a_n$. Formally, we define  \[
+  add a new number,  $a_{n-1}$ is updated, and $a_{n+1}=2a_n$. Formally, we define  \[
     P_n: ~\text{There exists different natural numbers}~a_1,\ldots, a_n,
-    ~\text{with}~a_n=2a_{n-1}~\text{such
-    that}~1=\frac{1}{a_1}+\frac{1}{a_2}+\ldots+\frac{1}{a_{n-1}}+\frac{1}{a_n}
+    ~\text{with}~a_n=2a_{n-1},~\text{such that}~
+    1=\frac{1}{a_1}+\frac{1}{a_2}+\ldots+\frac{1}{a_{n-1}}+\frac{1}{a_n}
   .\] 
   From above, we see that $P_3$ is true.\\
   Suppose $P_n$ is true. Then  \[
@@ -123,6 +123,7 @@ statement is true.
     1 &= \frac{1}{b_1}+\ldots+\frac{1}{b_{n-1}}+\frac{1}{b_n}+\frac{1}{b_{n+1}} \\
     1 &= \frac{1}{a_1}+\ldots+\frac{3}{2a_n}+\frac{1}{a_n}+\frac{1}{2a_n} \\
     1 &= \frac{1}{a_1}+\ldots+\frac{2}{a_n}+\frac{1}{a_n} \\
+    1 &= \frac{1}{a_1}+\ldots+\frac{2}{2a_{n-1}}+\frac{1}{a_n} \\
     1 &= \frac{1}{a_1}+\ldots+\frac{1}{a_{n-1}}+\frac{1}{a_n}
   .\end{align*}
   Hence $P_{n+1}$ is true whenever  $P_n$ is true, and thus by mathematical induction the statement
@@ -133,7 +134,7 @@ statement is true.
   (2.4) Show that $\sqrt[3]{5-\sqrt{3} } \not\in \Q$.
 \end{problem}
 \begin{solution}
-  Let $a^3=\sqrt[3]{5-\sqrt{3} }$. Then
+  Let $a=\sqrt[3]{5-\sqrt{3} }$. Then
   \begin{align*}
     a^3&= 5-\sqrt{3}  \\
     \sqrt{3} &= 5-a^3 \\
