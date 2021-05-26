@@ -60,7 +60,8 @@ statement is true.
    Now, assume $P_n$ is true. Then \[
     \left( 1-\frac{1}{\sqrt{2} } \right) \ldots\left( 1-\frac{1}{\sqrt{n} } \right) < \frac{2}{n^2} 
    .\] 
-   Let $a_n = 1-\frac{1}{\sqrt{n} } = \frac{n}{n+1+\sqrt{n+1} }$. We can rewrite $P_n$ using logarithms:  \[
+   Let $a_n = 1-\frac{1}{\sqrt{n} }$. Then $a_{n+1} = 1-\frac{1}{\sqrt{n+1} }=\frac{\sqrt{n+1}
+   -1}{\sqrt{n+1} }=\frac{n}{n+1+\sqrt{n+1} }$. We can rewrite $P_n$ using logarithms:  \[
      \log{\left(a_1\right)}+\ldots+\log{\left(a_n\right)} < \log{\left(2\right)}-2\log{\left(n\right)}
    .\] To prove $P_{n+1}$ from  $P_n$, we have 
     \begin{align*}
@@ -78,7 +79,7 @@ statement is true.
      n^3+n^2 &> n^2+2n+1\\
      n^3&>2n+1\\
      n^3-2n&>1
-   ,\end{align*} which is clearly true for all $n\ge 2$, and so $ n+1+\sqrt{n+1} &>
+   ,\end{align*} which is clearly true for all $n\ge 2$, and so $ n+1+\sqrt{n+1} >
    (n+1)^2=n^2+2n+1$. From this we get (after removing logs) \[
      \frac{2}{n+1+\sqrt{n+1} } < \frac{2}{(n+1)^2}
    ,\] completing the proof. \\
@@ -101,14 +102,16 @@ statement is true.
   \end{itemize}
   From this, we get a pattern: for an $a_{n-1},a_n$, we have  $a_n = 2a_{n-1}$. Moreover, when we
   add a new block,  $a_{n-1}$ is updated, and $a_{n+1}=2a_n$. Formally, we define  \[
-    P_n: ~\text{There exists different natural numbers}~a_1,\ldots, a_n, ~\text{with}~a_n=2a_{n-1}
+    P_n: ~\text{There exists different natural numbers}~a_1,\ldots, a_n,
+    ~\text{with}~a_n=2a_{n-1}~\text{such
+    that}~1=\frac{1}{a_1}+\frac{1}{a_2}+\ldots+\frac{1}{a_{n-1}}+\frac{1}{a_n}
   .\] 
   From above, we see that $P_3$ is true.\\
   Suppose $P_n$ is true. Then  \[
     1 = \frac{1}{a_1}  +\ldots+\frac{1}{a_{n-1}}+\frac{1}{a_n}
   .\] To prove $P_{n+1}$ from  $P_n$, we have  \[
   1 = \frac{1}{b_1} + \ldots+\frac{1}{b_{n-1}} + \frac{1}{b_n} + \frac{1}{b_{n+1}}
-.\] Choose $a_i=b_i$ for all  $1\le i\le n-2$ and $i=n$. Let  $b_{n-1}=\frac{2a_n}{3},
+.\] Choose $a_i=b_i$ for all  $1\le i < n-1$ and $i=n$. Let  $b_{n-1}=\frac{2a_n}{3},
   b_{n+1}=2a_n$. Then
   \begin{align*}
     1 &= \frac{1}{b_1}+\ldots+\frac{1}{b_{n-1}}+\frac{1}{b_n}+\frac{1}{b_{n+1}} \\
@@ -119,6 +122,63 @@ statement is true.
   Hence $P_{n+1}$ is true whenever  $P_n$ is true, and thus by mathematical induction the statement
   is true.
 \end{proof}
+
+\begin{problem}{\S 5}
+  (2.4) Show that $\sqrt[3]{5-\sqrt{3} } \not\in \Q$.
+\end{problem}
+\begin{solution}
+  Let $a^3=\sqrt[3]{5-\sqrt{3} }$. Then
+  \begin{align*}
+    a^3&= 5-\sqrt{3}  \\
+    \sqrt{3} &= 5-a^3 \\
+    3 &= 25-10a^3+a^{6} \\
+    0 &= a^{6}-10a^3+22
+  .\end{align*}
+  By the Rational Roots Theorem, we see that the only possible rational solutions are $\pm 1,\pm
+  2,\pm 11,\pm 22$. Simple inspection by plugging in each possible rational solution indicates that
+  none of them work, and so $\sqrt[3]{5-\sqrt{3} }$ is not rational.
+\end{solution}
+
+\begin{problem}{\S 6}
+  (2.7) Show that
+  \begin{enumerate}[label=(\alph*)]
+    \item $\sqrt{4+2\sqrt{3} } - \sqrt{3}$
+    \item $\sqrt{6+4\sqrt{2} } -\sqrt{2} $
+  \end{enumerate}
+  are actually rational.
+\end{problem}
+\begin{solution}
+  We observe that the insides of the large square roots are actually perfect squares.
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      \begin{align*}
+        \sqrt{4+2\sqrt{3}}  &= \sqrt{3+2\sqrt{3}\cdot 1+1}  \\
+                            &= \sqrt{\left( \sqrt{3}+1  \right)^2 }  \\
+                            &= \sqrt{3} +1
+      .\end{align*}
+      From this, we get $\sqrt{4+2\sqrt{3} } - \sqrt{3} =\sqrt{3} +1-\sqrt{3} =1\in \Q$.
+    \item
+      \begin{align*}
+        \sqrt[]{6+4\sqrt{2} } &= \sqrt{4+2\cdot 2\cdot \sqrt{2} +2}  \\
+                              &= \sqrt{\left( 2+\sqrt{2}  \right) ^2}  \\
+                              &= 2+\sqrt{2} 
+      .\end{align*}
+      From this, we get $\sqrt{6+4\sqrt{2} } -\sqrt{2} =2+\sqrt{2} -\sqrt{2} =2\in \Q$.
+  \end{enumerate}
+  Thus both are actually rational.
+\end{solution}
+
+\begin{problem}{\S 7}
+  Find all rational solutions of the equation $3x^3+x^2-8x+4=0$.
+  
+\end{problem}
+
+\begin{solution}
+  By the Rational Root Theorem, the only possible rational solutions are of the form $\pm 1,\pm
+  \frac{1}{3},\pm 2,\pm \frac{2}{3},\\\pm 4,~\text{and}~\pm \frac{4}{3}$. By plugging in each possible
+  value, we observe that  \textbf{$1,-2,\frac{2}{3}$}  satisfy the above equation, and thus are the
+  three rational roots of $3x^3+x^2-8x+4=0$.
+\end{solution}
 
 
 
