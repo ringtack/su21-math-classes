@@ -142,8 +142,6 @@
 \@ifundefined{@course}{\def\@course{MATH1010}}
 %\@ifundefined{@homework}{\def\@homework{i}}
 
-\lhead{Richard Tang}
-
 \rhead{\@course} 
 \chead{\textbf{Homework \@homework}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
