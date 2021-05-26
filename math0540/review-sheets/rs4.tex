@@ -1,0 +1,70 @@
+\documentclass{review-sheet}
+\homework{4}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Are the following subsets actually subspaces? If yes, just write yes. If no, show briefly how the
+  subset fails to be a subspace.
+  \begin{enumerate}
+    \item Let $V$ be any vector space. Is $\varnothing$ a subspace of $V$?
+    \item Let $V$ be any vector space. Is $V$ a subspace of $V$?
+    \item Is $W=\{\left( \alpha,i\alpha \right) \mid \alpha\in \C\} $ a subspace of $\C^2$?
+    \item Is $W=\{(x,y,z)\in \R^3\mid x=0\lor y=0\lor z=0\} $ a subspace of $\R^3$?
+    \item Let $V$ be a vector space over $\F$, and  let $v\in V$ be any vector in $V$. Is \[
+        W=\{av\mid a\in \F\} 
+      \] a subspace of $V$?
+    \item Given $V_\F$, and $v,w\in V$, is \[
+        W=\{av+bw\mid a,b\in \F\} 
+      \] a subspace of $V$?
+    \item Given $V_\F$, and let $U,W$ be subspaces of $V$. Is \[
+        X = \{u+w\mid u\in U, w\in W\} 
+      \]  a subspace of $V$?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}
+    \item No. $\textbf{0}\not\in \varnothing$.
+    \item Yes
+    \item Yes
+    \item No. Choose $(1,0,1),(0,1,0)\in W$. Then $(1,0,1)+(0,1,0)=(1,1,1)\not\in W$.
+    \item Yes
+    \item Yes (for 5 and 6, aren't these just another way of describing $V$?)
+    \item Yes
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Let $V$ be the real vector space of functions $f: \R \to \R$.
+  \begin{enumerate}
+    \item Let $W$ be the set of functions $f:\R\to \R$ that are non-decreasing (that is, $f(b)\ge
+      f(a)$ whenever $b\ge a$). Is $W$ a subspace of  $V$?
+    \item Let $W$ be the set of functions $f: \R \to \R$ that have bounded support (that is,
+      $\exists N\in \R_{\ge 0} ~\text{s.t.}~ \left| x \right| > N ~\text{implies}~f(x)=0$). Is $W$ a
+      subspace of $V$?
+    \item Let $W$ be the set of functions $f:\R\to \R$ such that the range of $f$ has exactly one
+      element. Is $W$ a subspace of $V$?
+    \item Let $W$ be the set of functions $f:\R\to \R$ such that the range of $f$ has exactly two
+      elements. Is $W$ a subspace of $V$?
+    \item Let $W$ be the set of functions $f:\R\to \R$ such that the range of $f$ has finitely many
+      elements. Is $W$ a subspace of $V$?
+  \end{enumerate}
+\end{problem}
+\clearpage
+\begin{solution}
+  \begin{enumerate}
+    \item No; consider $-1\cdot f$ for some $f\in W$ (say, $f(x)=x$). Then if $a\le b$, $-1\cdot f(b)\le
+      -1\cdot f(a)$, and so $-1\cdot f$ is decreasing and thus not in $W$.
+    \item Yes
+    \item Yes
+    \item No; given two functions $f: \R \to \{ a,b \}\subseteq \R$, $g:\R\to \{ c,d \}\subseteq
+      \R$, the range of $f+g$ has four possible values:  $\{ a+c,a+d,b+c,b+d \}$.
+    \item Yes
+  \end{enumerate}
+\end{solution}
+
+
+
+
+
+\end{document}
