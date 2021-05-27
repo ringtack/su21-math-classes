@@ -246,6 +246,110 @@ question now is: \textit{when does a polynomial of order $n$ have rational roots
   .\] 
 \end{remark}
 
+\begin{corollary}[]{}
+  Consider the polynomial equation \[
+    x^{n}+c_{n-1}x^{n-1}+\ldots+c_1x+c_0=0
+  ,\] with integer coefficients and $ c_0\neq 0$. Any rational solution of this equation must be an
+  integer that divides $c_0$.
+\end{corollary}
+This corollary allows us to determine whether a number is a rational number; if its polynomial has
+no rational roots, then the number cannot be rational.
+\begin{example}
+  $\sqrt[]{17} $ is not a rational number.
+\end{example}
+\begin{proof}[Proof]
+  The only possible rational solutions of $x^2-17=0$ are $\pm 1 ~\text{and}~\pm 17$, and none of
+  these numbers are solutions. Hence $\sqrt[]{17} $ is not a rational number.
+\end{proof}
+
+
+\section{Real Numbers}
+
+As nice as the rationals are, $\Q$ is inadequate to describe all systems. For instance, $x^2=2$
+clearly has a solution of $\sqrt[]{2} $, but this is impossible to describe using rationals. We get
+the intuition that $\Q$ has ``gaps''. We skip a rigorous development of $\Q$ based on $\Z$, but
+observe that $\Q$ satisfies the properties of a  \textbf{field} .
+
+\begin{definition}[Fields]{}
+  A \textbf{field} $\F$ is an algebraic system (a set along with operations on elements of the set) that
+  satisfies nine properties, for all $a,b,c\in \F$:
+  \begin{enumerate}
+    \item Additive associativity: $a+(b+c)=(a+b)+c$.
+    \item Additive commutativity: $a+b=b+a$.
+    \item Additive identity: $a+0=0+a=a$.
+    \item Additive inverse: For each  $a$, there is an element $-a$ such that  $a+(-a)=(-a)+a=0$. 
+    \item Multiplicative associativity: $a(bc)=(ab)c$.
+    \item Multiplicative commutativity: $ab=ba$.
+    \item Multiplicative identity:  $a\cdot 1=1\cdot a=a$.
+    \item Multiplicative inverse: For each  $a\neq 0$, there is an element $a^{-1}$ such that
+      $aa^{-1}=1$.
+    \item Distributive law: $a(b+c)=ab+ac$.
+  \end{enumerate}
+\end{definition}
+
+We can also define an order structure $\le $ for a field $\F$:
+\begin{definition}[Order]{}
+  A \textbf{ordered field} $\F$ satisfies five properties for all $a,b\in \F$:
+  \begin{enumerate}
+    \item Given $a,b$, either $a\le b$ or $b\le a$.
+    \item If $a\le b$ and $b\le a$, then $a=b$.
+    \item (Transitive Law) If $a\le b$ and $b\le c$, then $a\le c$.
+    \item If $a\le b$, then $a+c\le b+c$.
+    \item If $a\le b$ and $0\le c$, then $ac\le bc$.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Properties of Fields]{}
+  The following properties are consequences of the field axioms for  $a,b,c\in \F$:
+  \begin{enumerate}
+    \item If $a+c=b+c$, then  $a=b$.
+    \item  $a\cdot 0=0$ for all $a$.
+    \item  $(-a)b=-ab$ for all  $a,b$.
+    \item  $(-a)(-b)=ab$ for all  $a,b$.
+    \item  If $ac=bc$ and  $c\neq 0$, then $a=b$.
+    \item  If $ab=0$, then either  $a=0$ or  $b=0$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[Proof]
+  We provide a proof for some properties (the rest are left as an exercise for the reader).
+  \begin{enumerate}
+    \item $a+c=b+c$ implies  $a+c+(-c)=b+c+(-c)$, which becomes $a+0=b+0 \implies a=b$.
+    \item $a\cdot 0=a\cdot (0+0)=a\cdot 0+a\cdot 0$, which implies $0+a\cdot 0=a\cdot 0+a\cdot 0$.
+      By property 1, we get $0=0\cdot a$.
+    \item $(-a)b + ab = (a+(-a))b = 0\cdot b = 0$, which implies $(-a)b$ is the inverse of  $ab$,
+      and so  $(-a)b=-ab$. 
+    \item Exercise
+    \item Exercise
+    \item If $ab=0$, and WLOG $b\neq 0$, we have $0=0\cdot b^{-1}=(ab)\cdot b^{-1}=a(bb^{-1})=a\cdot
+      1=a$, which implies $a=0$.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Properties of Ordered Fields]{}
+  The following properties are consequences of the ordered field properties for $a,b,c\in \F$:
+  \begin{enumerate}
+    \item If $a\le b$, then $-b\le -a$.
+    \item If $a\le b$ and $c\le 0$, then $bc\le ac$.
+    \item If $0\le a$ and $0\le b$, then $0\le ab$.
+    \item $0\le a^2$ for all $a$.
+    \item $0<1$.
+    \item If $0<a$, then  $0<a^{-1}$.
+    \item If $0<a<b$, then $0<b^{-1}<a^{-1}$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item From property 4 of ordered fields, we choose $c=(-a) + (-b)$.
+  \end{enumerate}
+\end{proof}
+
+
+
+The algebraic system of interest in analysis will be the \textbf{real numbers}, or $\R$, which will
+include all rational numbers and irrational numbers; it has no ``gaps''. It turns out that $\R$ can
+be defined entirely in terms of $\Q$. [TODO]\\
+
+$\R$ satisfies the same ordered field axioms as $\Q$ (since $\R$ is also a field).
 
 
 

@@ -1,12 +1,12 @@
 \documentclass[math0540-lecture-notes.tex]{subfiles}
 \begin{document}
 
-\chapter{Set Theory}
+\chapter{Fundamentals of Linear Algebra}
 
-Sets serve as a fundamental construct in higher-level mathematics. We start with a brief
-introduction to set theory.
 
 \section{Sets}
+Sets serve as a fundamental construct in higher-level mathematics. We start with a brief
+introduction to set theory.
 \begin{definition}[Sets]{}
   A \textbf{set} is a collection of elements.
   \begin{enumerate}
@@ -369,8 +369,53 @@ $(0,1)$ are \textbf{basis vectors} of $\R^2$).
   A \textbf{linear combination}  of a list $ v_1,\ldots,v_n\in V$  is a vector of the form \[
       \lambda_1v_1+\ldots+\lambda_nv_n, \lambda_i\in \F
     .\]  The \textbf{span} (or \textbf{linear span}) of $ v_1,\ldots,v_n$, also denoted
-    $\text{span}(v_1,\ldots,v_n)$ is the set of all linear combinations of $ v_1,\ldots,v_n$.
+    $\text{span}(v_1,\ldots,v_n)$ is the set of all linear combinations of $ v_1,\ldots,v_n$: \[
+      ~\text{span}(v1,\ldots,v_n): \{ a_1v_1+\ldots+a_mv_m \mid a_i\in \F\}
+    .\] 
 \end{definition}
+
+\begin{proposition}[Span is Smallest Subspace]{}
+  The span of $v_1,\ldots,v_m$ is the smallest subspace of $V$ containing $ v_1,\ldots,v_m$.
+  Precisely:
+  \begin{enumerate}
+    \item $~\text{span}(v_1,\ldots,v_m)$ is a subspace of $V$.
+    \item Any subspace  $W$ of $V$ containing $v_1,\ldots,v_m$ also contains
+      $~\text{span}(v_1,\ldots,v_m)$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof]
+  Given $W\subseteq V$ is a subspace, and $ v_1,\ldots,v_m\in W$, we wish to show $W$ contains
+  $\Span(v_1,\ldots,v_m)=\{a_1v_1+\ldots+a_mv_m\mid a_i\in \F \} $. \\
+  Given $ a_1,\ldots,a_m\in \F$, we wish to show \[
+    a_1v_1+\ldots+a_mv_m\in W
+  .\] We know $ a_1v_1,\ldots,a_mv_m\in W$ since $W$ is closed under scalar multiplication.
+  Additionally, $ a_1v_1+\ldots+a_mv_m\in W$ since $W$ is closed under vector addition. Hence $W$ 
+  contains $\Span(v_1,\ldots,v_m)$.\\
+  Thus any subspace $W\subseteq V$ of $ v_1,\ldots,v_m$ also contains $\Span(v_1,\ldots,v_m)$.
+  Now, we wish to show  $\Span(v_1,\ldots,v_m)=\{a_1v_1+\ldots+a_mv_m\mid a_i\in \F\} $ is a
+  subspace.\\
+  $0\in \Span(v_1,\ldots,v_m)$ (choose $a_i=0$ for every coefficient).\\
+  Given $ a_1,\ldots,a_m\in \F,b_1,\ \ldots,b_m\in \F$, we have $ (a_1v_1+\ldots+a_mv_m) + (b_1v_1+\ldots+b_mv_m)\in \Span(v_1,\ldots,v_m)$, as $ a_1+b_1\in
+  \F$.\\
+  Thus $\Span(v_1,\ldots,v_m)$ is a subspace of $V$.
+\end{proof}
+
+\begin{definition}[Empty Span]{}
+  The span of no vectors is $\{ 0 \}$.
+\end{definition}
+
+\begin{definition}[Span Is Vector Space]{}
+  If $\Span(v_1,\ldots,v_m)=V$, then $ v_1,\ldots,v_m$ \textbf{span} $V$, and  $v_1,\ldots,v_m$ are
+  a \textbf{spanning set}.
+\end{definition}
+
+\begin{definition}[Finite Dimentional Vector Spaces]{}
+  If $V$ is spanned by a \textbf{finite} list of of vectors $v_1,\ldots,v_m$ then $V$ is
+  \textbf{finite-dimensional}.
+\end{definition}
+
+
 
 
 

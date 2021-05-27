@@ -1,0 +1,86 @@
+\documentclass[math0540-lecture-notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Linear Maps}
+
+\section{Linear Maps}
+\begin{definition}[Linear Maps]{}
+  Let $V,W$ be vector spaces over a field $\F$. A function \begin{align*}
+    T: V &\longrightarrow W \\
+    v &\longmapsto T(v) \in W
+  .\end{align*} is a \textbf{linear map}
+  if it satisfies, given $v_1,v_2\in V,\ \lambda\in \F$:
+  \begin{enumerate}
+    \item $T(v_1+v_2) = T(v_1)+T(v_2)\in W$.
+    \item $T(\lambda v)=\lambda T(v)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Linear Maps Preserve 0]{}
+  If $T:V\to W$ is a linear map, then $T(\textbf{0})=\textbf{0}$.
+\end{proposition}
+\begin{proof}[Proof]
+  We have
+  \begin{align*}
+    T(0) &= T(0+0) \\
+         &= T(0)+T(0)
+       .\end{align*} Adding the additive inverse of $T(0)$ to both sides, we have  \[
+       0 = T(0)
+       .\] 
+\end{proof}
+
+\begin{proposition}[Combination of Linearity Properties]{}
+  A function $T:V\to W$ is linear if and only if \[
+    T(\alpha v_1 + \beta v_2) = \alpha T(v_1) + \beta T(v_2)
+  \]  for all $ v_1,v_2\in V,\ \alpha,\beta\in \F$.
+\end{proposition}
+
+\begin{example}
+  Let $V,W$ be any vector spaces over $\F$.
+  \begin{enumerate}
+    \item The \textbf{zero map}  \begin{align*}
+        0: V &\longrightarrow W \\
+        v &\longmapsto 0(v) = 0 
+      \end{align*} is a linear map.
+
+    \item The \textbf{identity map} \begin{align*}
+        I: V &\longrightarrow V \\
+        v &\longmapsto I(v) = v
+      \end{align*} is a linear map. 
+
+    \item Any linear map \begin{align*}
+        T: \R &\longrightarrow \R \\
+        x &\longmapsto T(x) = ax
+      \end{align*} is a linear map.
+  \end{enumerate}
+\end{example}
+\begin{proposition}[Linear Maps in R]{}
+  Let $T:\R\to \R$ be a linear map. Then there is some $a\in \R$ such that $T(x)=ax$ for all  $x\in
+  \R$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $a=T(1)$. Then for any $x\in \R$, \[
+    T(x) = T(x\cdot 1) = x\cdot T(1) = ax
+  .\] 
+\end{proof}
+
+\begin{example}
+  Say $T:\R^2\to \R^2$ is a linear map such that $T(1,0)=(2,1)$ and  $T(0,1)=(1,-1)$. What else do
+  we know?
+   \begin{itemize}
+     \item $T(0,0)=(0,0)$
+     \item  $T(1,1)=T((1,0)+(0,1))=(2,1)+(1,-1)=(3,0)$
+     \item  $T(2,0)=(4,2)$
+  \end{itemize}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+\end{document}
