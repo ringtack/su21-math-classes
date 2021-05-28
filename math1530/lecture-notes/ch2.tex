@@ -11,13 +11,13 @@ on to a concrete definition.
 
 \begin{definition}[Permutations]{}
   Let $X$ be a set. A \textbf{permutation} of $X$ is a bijective function \[\pi: X \to X\] with the
-    property: $\forall x\in X, !\exists x'\in X$ such that $\pi(x')=x$. This allows us to define an
+    property: $\forall x\in X,\ !\exists x'\in X$ such that $\pi(x')=x$. This allows us to define an
     inverse $\pi^{-1}$ to be the permutation \[
     \pi^{-1}:X\to X
   \] with the rule that $\pi^{-1}(x)=x'$, where $x'\in X$ is the unique element such that
   $\pi(x')=x$. \\
   The \textbf{identity permutation} of $X$ is the identity map \[
-    e:X\to X, e(x)=x \forall x\in X
+    e:X\to X, e(x)=x,\ \forall x\in X
   .\] 
 \end{definition}
 In general, a \textit{permutation} of a set $X$ is a rule that ``mixes up'' the elements of $X$.
@@ -78,8 +78,9 @@ example of transformations; are they invertible? commutative?
 
 
 \section{(Abstract) Groups}
+We now formally define the notion of a \textbf{group}.
 \begin{definition}[Groups]{}
-  A \textbf{group} $\{X, \cdot \}$ consists of a set $X$, together with a rule 
+  A \textbf{group} $\{X, \cdot \}$ consists of a set $X$, together with a group rule/law
   \begin{align*}
     \cdot : G\times G &\to G\\
     (g_1,g_2) &\mapsto g_1\cdot g_2
@@ -114,7 +115,7 @@ Now, we observe some interesting properties that follow from the group axioms.
   \end{enumerate}
 \end{proposition}
 \begin{proof}[Proof of (b)]
-  Suppose $g\in G$and that both $h_1,h_2$ satisfy the inverse axiom. Then \[
+  Suppose $g\in G$ and that both $h_1,h_2$ satisfy the inverse axiom. Then \[
   g\cdot h_1=e=g\cdot h_2
   .\]  By the inverse axiom, we multiply on the left by an inverse of $g $:
   \begin{align*}
@@ -125,7 +126,7 @@ Now, we observe some interesting properties that follow from the group axioms.
 
 \begin{definition}[Order]{}
   \begin{itemize}
-    \item The \textbf{order}of a group $G$ is denoted  $\#G$ or  $\left| G \right| $ is the number of
+    \item The \textbf{order} of a group $G$ is denoted  $\#G$ or  $\left| G \right| $ is the number of
           elements in $G$ if finite, and $\infty$ if infinite.
     \item If $G$ is a group and $g\in G$, the smallest $n$ in which $g^{n}=e$ is called \textbf{the
       order of $g$}. If no $n$ exists, we say $g$ has infinite order.
@@ -136,14 +137,32 @@ Now, we observe some interesting properties that follow from the group axioms.
   Suppose $G$ is a finite group and suppose $g^{n}=e$. Then the order of $g$ divides $n$.
 \end{proposition}
 \begin{proof}[Proof]
-  Let $n$ be the order of $g\in G$. Then, by long division, we can write \[
- m=n\cdot g+r,~0\le r<m
-  .\]  Using this equality together with $g^{n}=e$ and $g^{m}=e$, we get \[
-  e=g^{n}=g^{m\cdot q+r}=\left( g^{m} \right) ^{q}\cdot g^{r} =e^{q}\cdot g^{r}=e\cdot g^{r}=g^{r}
-.\] We find that $g^{r}=e$; but $r<m$ and  $m$ is the order of $g$.
-
-[TODO]: Finish this exercise with a well-defined proof, not this bullshit
+  Let $m$ be the order of $g\in G$; then $m$ is the smallest positive integer such that $g^{m}=e$.
+  Dividing $n$ by $m$ yields \[
+    n = mq+r,\ q,r\in \Z, 0\le r<m
+  .\] In other words, dividing  $n$ by $m$ leaves a quotient $q$ and a remainder $r$.\\
+  Using this equality together with $g^{n}=g^{m}=e$, we have \[
+    e=g^{n}=g^{mq+r}=(g^{m})^{q}\cdot g^{r}=e^{q}\cdot g^{r}=g^{r}
+  .\] Hence $g^{r}=e$, and $r\in [0,m)$. But by definition, $m$ is the smallest integer such that
+  $g^{m}=e$. Therefore $r=0$, and $n=mq$, and so $m$, the order of $g$, divides $n$.
 \end{proof}
+
+\begin{proposition}[Order of Inverse]{}
+  Let $G$ be a finite group, and $g\in G$. Then $\left| g \right| =\left| g^{-1} \right| $.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $\left| g \right| =n$; then $g^{n}=e$. From this, we get \[
+    e = (g\cdot g^{-1})^{n}=g^{n}\cdot (g^{-1})^{n}=e\cdot (g^{-1})^{n}
+  ,\] and so $(g^{-1})^{n}=e$. \\
+  Now we show that $\left| g^{-1} \right| =n$. Suppose $\left| g^{-1} \right| =m$, and $m<n$.  Then
+  \[
+    e=g^{n}\cdot (g^{-1})^{m}=g^{n-m}
+  .\] But we know that  $\left| g \right| =n$, or equivalently, $n$ is the smallest positive integer
+  such that $g^{n}=e$; hence $g^{n-m}=e$ is a contradiction. Thus $m=n$, and so  $\left| g^{-1}
+  \right| =n$.
+\end{proof}
+
+
 
 \subsection{Examples of Groups}
 \begin{example}
@@ -163,8 +182,8 @@ Now, we observe some interesting properties that follow from the group axioms.
   Let the set of $n\times n$ matrices be $M_n$. Then  $M_n$ is an Abelian group under addition, but
   not multiplication (since not all matrices have inverses).\\
 
-  Let \[GL_n(\R)=\{M\in M_n\mid \det(M)\neq 0\}\], denote the \textbf{general linear group}. Then
-  $GL_n(\R)$ is a group using matrix multiplication (not Abelian though).
+  Let \[GL_n(\R)=\{M\in M_n\mid \det(M)\neq 0\}\] denote the \textbf{general linear group}. Then
+  $GL_n(\R)$ is a non-Abelian group under matrix multiplication.
 \end{example}
 
 
@@ -172,8 +191,14 @@ Now, we observe some interesting properties that follow from the group axioms.
 \subsection{Cyclic Groups}
 \begin{definition}[Cyclic Groups]{}
   A group $G$ is \textbf{cyclic} if there is a $g\in G$ such that \[
-    G=\{ \ldots,g^{-2},g^{-1} ,e,g,g^2,g^3,\ldots\}
-  .\] We call $g$ a \textbf{generator}.
+    G=\{ \ldots,g^{-2},g^{-1} ,e\ (\text{or}~g^{0}),g,g^2,g^3,\ldots\}
+  .\] We call $g$ a \textbf{generator}.\\
+  \indent In general, for $n\ge 1$, the \textbf{abstract cyclic group order} $n$ is the set \[
+    \mc{C}_n = \{ g_0,g_1,\ldots,g_{n-1} \}
+  \] together with the composition rule \[
+    g_i\cdot g_j = \left\{\begin{array}{lr} g_{i+j}, & i+j<n \\ g_{i+j-n}, & i+j\ge n\end{array}\right.
+  \] The identity element of $\mc{C}_n$ is $g_0$, and the inverse of $g_i$ is $g_{n-i}$ (except
+  $g_0$, whose inverse is $g_0$). Further, $\mc{C}_n$ is an Abelian group, as $g_{i+j}=g_{j+i}$.
 \end{definition}
 
 Some examples of cyclic groups are $\Z$ and $\Z / m\Z$; both have generators $1$. Another one is
@@ -192,12 +217,57 @@ the permutation group.
 
 \section{Group Homomorphisms}
 
+Suppose that $G,G'$ are groups, and suppose that $\phi$ is a function \[
+  \phi:G \longrightarrow G'
+\]  from elements of $G$ to elements of $G'$. Many functions exist, but we're interested in the ones
+that preserve the "structure", or \textit{group-i-ness}, of $G$ and $G'$. But what makes a group a
+group? Specifically, groups are \textbf{associative}, and have \textbf{identity and inverse
+elements}. Thus, a function $\phi$ must preserve these qualities. We call such structure-preserving
+functions \textbf{homomorphisms}.
+
 \begin{definition}[Homomorphisms]{}
-  Let $ G_1, G_2$ be groups. A \textbf{homomorphism} from $G_1$ to $G_2$ is a function $\phi:
-  G_1\to G_2$ satisfying: \[
-    \phi(g_1\cdot_{G_1}g_2)=\phi(g_1)\cdot_{G_2}\phi(g_2)
-  .\] In other words, the map $\phi$ preserves the group operations.
+  Let $ G_1, G_2$ be groups. A \textbf{homomorphism} from $G_1$ to $G_2$ is a function \[
+    \phi: G_1\to G_2\]
+    satisfying: \[
+    \phi(g_1\cdot g_2)=\phi(g_1)\cdot\phi(g_2)
+  .\] In other words, the map $\phi$ preserves the group operations. (Note that the composition law
+  is different on the left and right sides! The left is the composition law of $G_1$, while the
+  right is the composition law of $ G_2$.)
 \end{definition}
+
+It turns out this property is enough to force the identities and inverses to exist under a function.
+
+\begin{proposition}[]{}
+  Let $\phi:G\to G'$ be a homomorphism of groups.
+  \begin{enumerate}
+    \item Let $e\in G$ be the identity element of $G$. Then $\phi(e)\in G'$ is the identity element
+      of $G'$.
+    \item Let $g\in G$, and let $g^{-1}\in G$ be its inverse. Then $ \phi(g^{-1})\in G$ is the
+      inverse of $\phi(g)$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item Observe that $e=e\cdot e$, and that $\phi$ is a homomorphism (and so $\phi(e)=\phi(e\cdot
+      e)=\phi(e)\cdot \phi(e)$). Let $e'\in G'$ be the identity element of $G'$. Then
+      \begin{align*}
+        e' &= \phi(e)\cdot \phi(e)^{-1}\\
+           &= (\phi(e)\cdot \phi(e))\cdot \phi(e)^{-1} \\
+           &= \phi(e)\cdot (\phi(e)\cdot \phi(e)^{-1}) \\
+           &= \phi(e)\cdot e' \\
+           &= \phi(e)
+      .\end{align*}
+      Hence $e'=\phi(e)$.
+    \item We have 
+      \begin{align*}
+        \phi(g^{-1})\cdot \phi(g) &= \phi(g^{-1}\cdot \phi(g)) \\
+                                  &= \phi(e) \\
+                                  &= e'
+      .\end{align*}
+      The proof that $\phi(g)\cdot \phi(g^{-1})=e'$ is similar. Hence $\phi(g^{-1})$ is the inverse of $\phi(g)$.
+  \end{enumerate}
+\end{proof}
+
 
 \begin{example}
   Examples of homomorphisms:
@@ -223,20 +293,15 @@ the permutation group.
   Groups $  G_1,G_2$ are \textbf{isomorphic} if there exists a \textbf{bijective homomorphism} $f:
   G_1\to G_2$. In this case, $f$ is called an \textbf{isomorphism}.
 \end{definition}
+Interestingly, isomorphic groups are really the same group, but their elements are given different
+names.
 
-\begin{example}
-  Let $\mathcal{C}_n=\{ g_0,g_1,\ldots,g_{n-1} \}$ with operation $\cdot :\mathcal{C}_n\times
-  \mathcal{C}_n\to\mathcal{C}_n$ defined by \[
-    g_i \cdot g_j = \left\{ \begin{array}{rl} g_{i+j}, & i+j<n \\ g_{i+j-n}, & i+j\ge
-      n\end{array}\right.
-      \] then $\mathcal{C}_n$ is called the abstract cyclic group of order $n$.
-\end{example}
 
 We've now seen two examples of cyclic groups of order $n $: $\Z/n\Z$ and $\mathcal{C}_n$. Naturally,
 we wonder if these groups are actually different (from the perspective of group theory).
 Equivalently,  \textbf{are these two groups isomorphic}?
 \begin{example}
-  $ \Z / n\Z$ is isomorphic to $\mathcal{C}_n$ ($ \Z / n\Z\simeq \mathcal{C}_n$). Consider the map
+  $\Z / n\Z$ is isomorphic to $\mathcal{C}_n$ ($ \Z / n\Z\cong \mathcal{C}_n$). Consider the map
   \begin{align*}
     \phi: \Z / n\Z &\longrightarrow \mc{C}_n \\
     a &\longmapsto \phi(a) = g_a
@@ -256,6 +321,332 @@ isomorphism as above, except map $a\mapsto g_{a+1}$. This is also an isomorphism
 
   This implies that by knowing every symmetric group, one knows much about every other group.
 \end{example}
+
+\section{Subgroups, Cosets, and Lagrange's Theorem}
+In all mathematics, a three-step process exists for studying complicated objects. 
+\begin{enumerate}
+  \item Deconstruction: Break your object into smaller and simpler pieces.
+  \item Analysis: Analyze the smaller, simpler pieces.
+  \item Fit the pieces back together.
+\end{enumerate}
+
+For a group $G$, a natural way to form a smaller and simpler piece is by taking subsets 
+$H\subseteq G$ that are themselves groups.
+
+\begin{definition}[Subgroups]{}
+  Let $G$ be a group. A \textbf{subgroup of $G$} is a subset $H\subset G$ that is itself a group
+  under $G$'s group law. Explicitly, $H$ needs to satisfy
+  \begin{enumerate}
+    \item (Closure Under Composition) For every $h_1,h_2\in H$, $ h_1\cdot h2\in H$
+    \item The identity element $e$ is in $H$.
+    \item For every $h\in H$, its inverse $h^{-1}$ is in $H$.
+  \end{enumerate}
+  This is sometimes denoted $H < G$. \\
+
+  Note that since $H$ uses $G$'s composition law, associativity is automatically satisfied. If $H$ 
+  is finite, the \textbf{order}  of $H$ is the number of elements in $H$.
+\end{definition}
+
+\begin{proposition}[Easier Subgroup Checking]{}
+  Let $G$ be a group, and $H\subseteq G$ a subset. If 
+  \begin{itemize}
+    \item $H\neq \varnothing$ 
+    \item For every $h_1,h_2\in H$, the element $ h_1h_2^{-1}$ is in $H$
+  \end{itemize}
+  then $H$ is a subgroup of $G$.
+\end{proposition}
+\begin{proof}[Proof]
+  Clearly, $H\neq \varnothing$ (otherwise the identity would not be in $H$). \\
+  To show that $e\in H$, let $h_2=h_1$. Then \[
+    h_1\cdot h_2^{-1}=h_1\cdot h_1^{-1}=e\in H
+  .\] Thus the identity is in $H$.\\
+  To show that $\forall h\in H,\ h^{-1}\in H$, let $h_1=e$. Then \[
+    h_1\cdot h_2^{-1}=e\cdot h_2^{-1}=h_2^{-1}\in H
+  .\] Thus for any $h\in H$, its inverse $h^{-1}$ is in H.\\
+  To show closure, observe that for any $h\in H$, $h^{-1}\in H$ (from above), and that
+  $(h^{-1})^{-1}=h$. Let $h_2=h^{-1}$. Then \[
+    h_1\cdot h_2^{-1}=h_1\cdot (h^{-1})^{-1}=h_1\cdot h\in H
+  .\] Thus for any $h1,h\in H$, we have $ h_1\cdot h\in H$. Thus $H$ is closed.\\
+
+  Hence $H$ is a subgroup of $G$.
+\end{proof}
+
+\begin{example}
+  Every group $G$ has at least two subgroups, the \textbf{trivial subgroup} $\{ e \}$ consisting of
+  only the identity element, and the entire group $G$.
+\end{example}
+\begin{example}
+  Let $G$ be a group, and let $g\in G$ be an element of order $n$. The \textbf{cyclic subgroup of
+  $G$ generated by $g$}, denoted $\left< g \right>$, is the set \[
+    \left<g \right> = \{ \ldots,g^{-2},g^{-1},e,g^{1},g^2,g^3,\ldots \}
+  .\] 
+  It is isomorphic to the cyclic group $\mc{C}_n$.\\
+  
+  If $g$ has infinite order, then $\left< g\right>\cong \Z$ ($\left<g \right>$ is isomorphic to
+  $\Z$).
+\end{example}
+
+\begin{example}
+  More examples of subgroups:
+  \begin{itemize}
+    \item Let $d\in \Z$; then we can form a subgroup of $\Z$ using multiples of $d$, or $d\Z$.
+    \item The set of rotations in the dihedral group $\mc{D}_n$ is a subgroup of $\mc{D}_n$.
+  \end{itemize}
+\end{example}
+
+Every group homomorphism has an associated subgroup, the \textbf{kernel}, which can be a convenient
+check to see if the homomorphism is injective.
+\begin{definition}[Kernel]{}
+  Let $\phi:G\to G'$ be a group homomorphism. The \textbf{kernel of $\phi$}, denoted
+  $\ker\left(\phi\right)$, is the set of elements of $G$ that are sent to the identity element of
+  $G'$, \[
+    \ker\left(\phi\right)=\{g\in G\mid \phi(g)=e'\} 
+  .\] 
+\end{definition}
+
+\begin{example}
+  The kernel of the determinant homomorphism \[
+    \det:\GL_n(\R)\longrightarrow \R\setminus \{ 0 \}
+  .\] 
+   is \[
+    \ker(\det) = \{A\in \GL_n(\R) \mid \det(A)=1\} 
+  .\] 
+\end{example}
+
+We now observe two important properties of the kernel.
+\begin{proposition}[Kernel Properties]{}
+  Let $\phi: G \to G'$ be a group homomorphism.
+  \begin{enumerate}
+    \item $\ker(\phi)$ is a subgroup of $G$.
+    \item $\phi$ is injective if and only if $\ker(\phi)=\{ e \}$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  We know that $\phi(e)=e'$, so $e\in \ker(\phi)$. Next, let $ g_1,g2\in \ker(\phi)$. By the
+  homomorphism property, \[
+    \phi(g_1\cdot g_2) = \phi(g_1) \cdot  \phi(g_2) = e'\cdot e'\in G'
+  ,\] so $g_1,g_2\in \ker(\phi)$. Finally, for $g\in \ker(\phi)$, we know
+  $\phi(g^{-1})=\phi(g)^{-1}=e'^{-1}=e$, so $g^{-1}\in \ker(\phi)$ Thus, $\ker(\phi)$ is a subgroup
+  of $G$.\\
+
+  Now, we know again that $e\in \ker(\phi)$ (since $\phi(e)=e'$). If $\phi$ is injective, by
+  definition $\ker(\phi)=\{ e \}$ (at most one element $g\in G$ satisfies $\phi(g)=e'$).\\
+  Now, suppose $\ker(\phi)=\{ e \}$. Let $\phi(g_1)=\phi(g_2)$ for some $g_1,g_2\in G$. Observe that
+  $ g_2^{-1}\in G$, and $\phi(g_2^{-1})=\phi(g_2)^{-1}$. Then \[
+    \phi(g_1)=\phi(g_2) \implies \phi(g_1)\cdot \phi(g_2)^{-1}=\phi(g_2)\cdot \phi(g_2)^{-1}=e'
+  ,\] and so $\phi(g_1)\cdot \phi(g_2)^{-1}=\phi(g_1\cdot g_2^{-1})=e'$, which means $g_1\cdot
+  g_2^{-1}\in \ker(\phi)=\{ e \}$. Hence $ g_1\cdot g_2^{-1}=e\implies g_1=g_2$, and so $\phi$ is
+  injective.
+\end{proof}
+
+\subsection{Cosets}
+We can use a subgroup $H$ of a group $G$ to break $G$ into pieces, called \textbf{cosets of $H$}.
+\begin{definition}[Cosets]{}
+  Let $G$ be a group, and let $H < G$ be a subgroup. For each $g\in G$, the (left) \textbf{coset of
+  $H$ attached to $g$} is the set \[
+    gH = \{gh\mid h\in H\} 
+  .\] In other words, $gH$ is the resulting set we multiply $g$ by every element $h\in H$.\\
+
+  Note that $gH$ is \textbf{not} necessarily a subgroup of $H $; sometimes $e\not\in gH$.
+\end{definition}
+
+We now prove several properties of cosets that help explain their importance.
+\begin{proposition}[Properties of Cosets]{}
+  Let $G$ be a finite group, and let $H<G$.
+  \begin{enumerate}
+    \item Every element in $G$ is in some coset of $H$.
+    \item Every coset of $H$ has the same number of elements (namely, $\left| H \right| $).
+    \item Let $g_1,g_2\in G$. Then the cosets $g_1H$ and $ g_2H$ satisfy either \[
+      g_1H=g_2H ~\text{or}~g_1H\cap g_2H=\varnothing
+    .\] In other words, $g_1H$ and $g_2H$ are either equal or disjoint.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item Let $g\in G$. Since $e\in H$ for any subgroup $H<G$, the coset $gH$ contains $g\cdot e=g$.
+    \item Let $g\in G$. To prove that the cosets $gH$ and $H$ have the same number of elements, we
+      show the map \begin{align*}
+        F: H &\longrightarrow gH \\
+        h &\longmapsto F(h) = gh
+      \end{align*}
+      is a bijective map from $H$ to $gH$.\\
+      We first check that $F$ is injective. Suppose $h_1,h_2\in H$ satisfy $F(h_1)=F(h_2)$. Then
+      $gh_1=gh_2$, and multiplying by $g^{-1}$, we get $h_1=h_2$. Hence $F$ is injective.\\
+      For surjectivity, observe that every element of $gH$ looks like $gh$ for some $h\in H$, and
+      $F(h)=gh$, so every element of $gH$ is the image of some element of $H$. Hence $F$ is
+      surjective.\\
+      Thus $F$ is bijective, so $H$ and $gH$ have the same number of elements. Since this is true
+      for any $ginnG$, every coset of $H$ has the same number of elements.
+    \item If $g_1H\cap g_2H=\varnothing$, we are done, so assume the two cosets are not disjoint.
+      Then there are some elements $h_1,h_2\in H$ such that $g_1h_1=g_2h_2$. Since $h_1^{-1}\in H$,
+      we rewrite this as $ g_1=g_2h_2h_1^{-1}$. Now, take any element $a\in g_1H$. $a$ is of the
+      form $g_1h$ for some $h\in H$. Then \[
+        a = g_1h = g_2h_2h_1^{-1}h \in g_2H
+      ,\] as $H$ is a subgroup, so $h_2h_1^{-1}h\in H$. Hence $g_1H\subseteq g_2H$; and from above,
+      every coset has the same number of elements, so $ g_1H\subseteq g_2H \implies g_1H=g_2H$.
+  \end{enumerate}
+\end{proof}
+
+These properties lead to a fundamental divisibility property for the orders of subgroups.
+\begin{theorem}[Lagranges Theorem]{}
+  Let $G$ be a finite group, and let $H<G$. Then the order of $H$ divides the order of $G$; or,
+  $\left| G \right| = k \left| H \right|,\ k\in \Z $.
+\end{theorem}
+\begin{proof}[Proof]
+  We start by choosing $g_1,\ldots,g_k\in G$ so that $g_1H,\ldots,g_kH$ is a list of every different
+  coset of $H$. Since every element of $G$ is in some coset of $H$, we have that $G$ is equal to the
+  union of the cosets of $H$, namely \[
+    G = g_1H \cup \ldots \cup g_kH
+  .\] Additionally, we know that distinct cosets share no elements, so if $i\neq j$, then $g_iH\cap
+  g_jH=\varnothing$. Thus the union of cosets is a disjoint union, so the number of elements in $G$ 
+  is the sum of the number of elements in each coset: \[
+    \left| G \right| = \left| g_1H \right| +\ldots+\left| g_kH \right| 
+  .\] But we know that every coset of $H$ has the same number of elements, so $\left| g_iH \right|
+  =\left| H \right| $. Thus, we get \[
+  \left| G \right| = k\left| H \right| 
+  .\] Thus the order of $G$ is a multiple of the order of $H$.
+\end{proof}
+\begin{definition}[Index]{}
+  Let $G$ be a group, and $H<G$. The \textbf{index of $H$ in $G$}, denoted $(G : H)$, is the number
+  of distinct cosets of $H$. In Lagrange's Theorem, the index $(G : H) = k$; so \[
+    \left| G \right| = (G : H) \left| H \right| 
+  .\] 
+\end{definition}
+
+\begin{corollary}[Extension of Lagrange's Theorem to Finite Groups]{}
+  Let $G$ be a finite group, and let $g\in G$. Then the order of $g$ divides the order of $G$.
+\end{corollary}
+\begin{proof}[Proof]
+  The order of the subgroup $\left<g \right>$ generated by $G$ is equal to the order of the element
+  $g$, and Lagrange's Theorem tells us that the order of $\left<g \right>$ divides the order of $G$.
+\end{proof}
+
+We now give one application of Lagrange's Theorem, which marks the beginning of a long and ongoing
+mathematical journey that strives to classify finite groups according to their orders.
+\begin{proposition}[Prime-Ordered Groups]{}
+  Let $p$ be a prime, and let $G$ be a finite group of order $p$. Then $G$ is isomorphic to the
+  cyclic group $\mc{C}_p$.
+\end{proposition}
+\begin{proof}[Proof]
+  Since $p\ge 2$, we know that $G$ contains more than just the identity element, so we choose some
+  non-identity element $g\in G$. \\
+  \indent By Lagrange's Theorem, we know that the order of the subgroup
+  $\left<g \right>$ divides the order of $G$. But since $\left| G \right| = p$ is prime, the order of
+  $\left<g \right>$ is either $1$ or $p$; and since $\left< g\right>$ contains both $e$ and $g$ (and
+  so $\left<g \right> > 1$), we know $\left| \left<g \right> \right| =p=\left| G \right|$. Thus the
+  subgroup $\left<g \right>$ has the same number of elements as the full group, so they are equal:
+  $\left<g \right> = G$. \\
+  Now, we denote the cyclic group $\mc{C}_p=\{ g_0,g_1,\ldots,g_{p-1} \}$. We obtain an isomorphism
+  \begin{align*}
+    C_p &\longrightarrow G \\
+     g_i &\longmapsto g^{i}
+  .\end{align*} Thus $G$ is isomorphic to $\mc{C}_p$.
+\end{proof}
+
+\begin{remark}
+  The vast theory of finite groups has many fascinating (and frequently unexpected) results, with
+  easy to understand statements, yet surprisingly intricate proofs. Two such theorems are stated.
+\end{remark}
+
+\begin{theorem}[]{}
+  Let $p$ be a prime number, and let $G$ be a group of order $p^2$. Then $G$ is an Abelian group.
+\end{theorem}
+
+On the other hand, we know that there exist non-Abelian groups of order $p^3$. For instance,
+$\mc{D}_4$ and the quaternion group $\mc{Q}$ are non-Abelian groups of order $8=2^3$.
+
+The next result is a partial converse of  Lagrange's Theorem.
+\begin{theorem}[Sylow's Theorem]{}
+  Let $G$ be a finite group, let $p$ be a prime, and suppose $p^{n}$ divides $\left| G \right| $ for
+  some power $n\ge 1$. Then $G$ has a subgroup or order $p^{n}$.
+\end{theorem}
+
+One might hope, more generally, that if $d$ is any number that divides the order of $G$, then $G$
+has a subgroup of order $d$. Unfortunately, this is not true; however, we have not yet seen a
+counterexample. 
+
+Both theorems will be proved later.
+
+
+\section{Products of Groups}
+Subgroups provide a way to break complicated objects (groups) down into smaller, simpler pieces. We
+now look at a way in which two smaller groups can be used to build a larger group.
+
+\begin{definition}[Products of Groups]{}
+  Let $G_1,G_2$ be groups. The \textbf{product} of $G_1$ and $G_2$ is the group whose elements
+  consist of ordered pairs \[
+    G_1 \times G_2 = \{(a,b)\mid a\in G_1 ~\text{and}~b\in G_2\} 
+  ,\] and whose group operation is performed separately on each component. In other words, if the
+  group operation of $G_1\times G_2$ is $*$, the group operation of $G_1$ is $\cdot $, and the 
+  group operation of $ G_2$ is $\circ $, we have \[
+    (a_1,b_1) * (a_2,b_2) = (a_1\cdot a_2,b_1\circ b_2)
+  .\] It is clear that the identity element of $G_1\times G_2$ is $(e_1,e_2)$, and the inverse of an
+  element $(a,b)\in G$ is given by \[
+    (a^{-1},b^{-1}).
+  \] More generally, we can take any list of groups $ G_1,\ldots,G_n$ and form the product group \[
+  G_1 \times  \ldots \times G_n 
+  .\] 
+\end{definition}
+\begin{remark}
+  We observe that $G=G_1\times G_2$ has order $\left| G_1 \right| \cdot \left| G_2 \right| $.
+\end{remark}
+
+\begin{example}
+  For any non-zero numbers $m,n$, there is a homomorphism
+  \begin{align*}
+    \Z / mn\Z &\longrightarrow \left( \Z / m\Z \right) \times \left( \Z / n\Z \right)  \\
+    a\mod(mn) &\longmapsto \left( a\mod m,a\mod n \right) 
+  .\end{align*}
+  We claim that if $\gcd{\left(m,n\right)}=1$, then it is an isomorphism. To see this, suppose that
+  $a\mod{mn}$ is in the kernel. Then \[
+    a\equiv 0\mod{m} ~\text{and}~ a\equiv 0\mod{n}
+  .\] In other words, $a$ is divisible by both $m$ and $n$, and then the assumption that
+  $\gcd{(m,n)}=1$ implies that $a$ is divisible by $mn$. Thus $a\equiv 0\mod{mn}$, which proves that
+  the kernel of the homomorphism is $\{ 0 \}$ (and thus the homomorphism is injective). Further,
+  since the finite set $\Z / mn\Z$ has the same number of elements as $\Z / m\Z \times \Z / n\Z$
+  ($\Z / mn\Z$ has $mn$ elements, while $\Z / m\Z \times \Z / n\Z$ has $m \cdot n = mn$ elements),
+  so it is surjective, and thus the homomorphism is an isomorphism.
+\end{example}
+
+One interpretation of this example is that it tells us that if $\gcd{(m,n)}=1$, then the large group
+$\Z / mn\Z$ may be broken down into the product of two smaller groups $\Z / m\Z$ and $\Z / n\Z$.
+Repeated applications demonstrate that any finite cyclic group is isomorphic to the product of
+cyclic groups of prime power order. The following theorem extends this to all finite Abelian groups.
+\begin{theorem}[Structure Theorem for Finite Abelian Groups]{}
+  Let $G$ be a finite Abelian group. Then there are integers $ m_1,\ldots,m_r)$ so that \[
+    G \cong \left( \Z / m_1\Z \right) \times \left( \Z / m_2\Z \right) \times \ldots \times \left( \Z / m_r\Z \right) 
+  .\] 
+\end{theorem}
+
+
+\begin{example}
+  (\textbf{Projects and Inclusions}) Products of groups come with two natural \textbf{projection
+  homomorphisms}
+  \begin{align*}
+    p_1: G_1\times G_2\longrightarrow G_1, && p_2: G_1\times G_2\longrightarrow G_2,\\
+    (a,b)\longmapsto a, && (a,b)\longmapsto b
+  ,\end{align*} and two natural \textbf{inclusion homomorphisms}
+  \begin{align*}
+    \iota_1: G_1\longrightarrow G_1\times G_2 && \iota_2: G_2 \longrightarrow G_1\times G_2\\
+    a\longmapsto (a,e_2) && b\longmapsto(e_1,b)
+  .\end{align*}
+  The inclusion maps are clearly injective, but the projections have kernels \[
+    \ker(p_1) = \{ e_1 \}\times G_2 ~\text{and}~ \ker(p_2) = G_1 \times \{ e_2 \}
+  .\] 
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
