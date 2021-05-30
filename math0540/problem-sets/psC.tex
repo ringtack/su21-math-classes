@@ -1,0 +1,98 @@
+\documentclass{homework}
+\homework{3}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  Let $a\in \F$, and let $v\in V_\F$ be a non-zero vector. Prove that \[
+    av=\textbf{0} ~\text{only if}~ a=0
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Suppose $ a\neq 0$, yet $av=0$. Then
+  \begin{align*}
+    av &= \textbf{0} \\
+       &= av+(-av) \\
+       &= 0 + (-av) \\
+       &= -av
+  .\end{align*}
+  Hence $av=-av \implies av\cdot v^{-1}=-av\cdot v^{-1}\implies a=-a$. But $a=-a$ only when $a=0$, a
+  contradiction. Thus $av=0$ only when $a=0$.
+\end{solution}
+
+
+\begin{problem}{\S 2}
+  Let $v,w\in V$, and suppose $v\neq 0$. Prove that there exists at most one  $a\in \F$ such that \[
+    av = w
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Suppose there exists a $b\in \F,\ b\neq a$ such that $bv=w$. Then \[
+    av+bv = w + w = 2w = w + w = av + av
+  .\] Adding $-av$ to both sides, \[
+    bv = av \implies a = b
+  ,\] a contradiction. \\
+  Hence if $bv=w$ for some $b\in \F$, then $b=a$.
+\end{solution}
+
+\begin{problem}{\S 3}
+  \begin{enumerate}[label=(\alph*)]
+    \item (1.C.12) Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if
+      one of the subspaces is contained in the other.
+    \item (1.C.13, extra credit) Prove that the union of three subspaces of $V$ is a subspace of $V$ 
+      if and only if one of the subspaces contains the other two.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+  Let $U_1,U_2\in V$ be two subspaces of $V$.\\
+
+  Suppose that one of the subspaces is contained in the other; that is, suppose without loss of
+  generality that $ U_1\subseteq U_2$. Then $ U_1\cup U_2=U_2\subseteq V$ is a subspace of $V$ 
+  (since $ U_2$ is a subspace of $V$).\\
+
+  Now, suppose that $ U_1\cup U_2\subseteq V$ is a subspace of $V$. Let $ v_1,v_2\in U_1\cup U_2$.
+  Then \[
+    v_1\in U_1 ~\text{or}~v_1\in U_2,~\text{and}~v_2\in U_1~\text{or}~v_2\in U_2
+  .\] $ v_1,v_2\in U_1~\text{or}~v_1,v_2\in U_2$ tell us nothing new about the relationship between
+  $ U_1$ and $U_2$ (we already know, by definition of a subspace, that $0,\ \lambda v_1,\ \lambda
+  v_2,\ v_1+v_2\in U_i$ for some $\lambda\in \F$, $i\in \{ 1,2 \}$), so suppose without loss of
+  generality that $v_1\in U_1,v_2\in U_2$. We know (since $ U_1\cup U_2$ is a subspace of $V$) that
+  $v_1+v_2\in U_1\cup U_2$, so $ v_1+v_2\in U_1$ or $ v_1+v_2\in U_2$. If $ v_1+v_2\in U_1$, by
+  closure of addition in $ U_1$, $ v_2\in U_1$ as well, and so since for any arbitrary $v_2\in U_2,\
+  v_2\in U_1$, we have $ U_2\subseteq U_1$. Similarly, if $ v_1+v_2\in U_2$, by closure of addition, $v_1\in
+  U_2$ as well, and so $ U_1\subseteq U_2$. \\
+  Therefore, if $ U_1\cup U_2$ is a subspace of $V$, then one of the subspaces is contained in the
+  other.\\
+
+  Thus, the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces
+  is contained in the other.
+
+    \item W.I.P.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 4}
+  Solved in Review Sheet 5.
+\end{problem}
+
+\begin{problem}{\S 5}
+  Let $V,W$ be vector spaces over $\F$, and let $T:V\to W$ be a linear map. Suppose $V$ is
+  finite-dimensional and $T$ is surjective. Prove that $W$ is finite-dimensional.
+\end{problem}
+
+\begin{solution}
+  Since $T$ is surjective, we know that every $w\in W$ is mapped to by some $v\in V$. By the
+  definition of a function, every $v\in V$ is mapped to \textbf{one} element $T(v)\in W$. Hence
+  $T(V)$ (or the image of $V$ under $f$) has a maximum cardinality of $\left| V \right|
+  $ (equivalently, $\left| T(V) \right| \le \left| V \right| $, since not every $T(v)$ is
+  necessarily unique).  But since $T$ is surjective, we know that $T(V)=W$, and so $\left| V \right|
+  > \left| T(v) \right| = \left| W \right|$ and hence $\left| V \right| \ge \left| W \right| $; and
+  since $V$ is finite, $W$ is finite as well.
+\end{solution}
+
+
+\end{document}
