@@ -89,6 +89,7 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Imag}{Imag}
+\DeclareMathOperator{\range}{range}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\trace}{tr}

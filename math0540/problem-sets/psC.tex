@@ -70,8 +70,6 @@
 
   Thus, the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces
   is contained in the other.
-
-    \item W.I.P.
   \end{enumerate}
 \end{solution}
 
@@ -85,13 +83,30 @@
 \end{problem}
 
 \begin{solution}
-  Since $T$ is surjective, we know that every $w\in W$ is mapped to by some $v\in V$. By the
-  definition of a function, every $v\in V$ is mapped to \textbf{one} element $T(v)\in W$. Hence
-  $T(V)$ (or the image of $V$ under $f$) has a maximum cardinality of $\left| V \right|
-  $ (equivalently, $\left| T(V) \right| \le \left| V \right| $, since not every $T(v)$ is
-  necessarily unique).  But since $T$ is surjective, we know that $T(V)=W$, and so $\left| V \right|
-  > \left| T(v) \right| = \left| W \right|$ and hence $\left| V \right| \ge \left| W \right| $; and
-  since $V$ is finite, $W$ is finite as well.
+  We begin with a lemma.
+  \begin{lemma}[]{}
+    Let $V,W$ be vector spaces over a field $\F$. If $V$ is an $n$-dimensional vector space, and
+    $T:V\to W$ is a linear map, then $\dim(\range T) \le \dim V$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    If $\dim V=n$, then $V$ has a basis $B=\{ v_1,\ldots,v_n \}$ with $n$ linearly independent
+    vectors in $V$ that span $V$. Then, for any $v\in V$,\[
+      v=a_1v_1+\ldots+a_nv_n,\ ~\text{for}~a_i\in \F
+    .\] Applying $T$ to both sides, we have \[
+      T(v) = T(a_1v_1+\ldots+a_nv_n)= a_1T(v_1)+\ldots+a_nT(v_n)
+    ,\] and since $v$ was an arbitrary $v\in V$, $T(v_1),\ldots,T(v_n)$ span $\range T$. Hence
+    $\dim(\range T) \le n = \dim V$.\\\\
+    (Note that there is no guarantee that $T(v_1),\ldots,T(v_n)$ are linearly independent and thus 
+    form a basis for $\range T$; $\dim(\range T)$ could very much be less than $n$. For example,
+    take $T=\textbf{0}$ the zero map. Then $T(v_i)=\textbf{0}$ for any $v_i\in B$, and so
+    $\dim(\range T) < n$.)
+  \end{proof}
+  
+
+  From this lemma, we get that if $V$ is a finite-dimensional vector space (say, with $\dim V = n$),
+  and $T:V\to W$ a linear map, then $\dim(\range T) \le  \dim V$. Moreover, since $T$ is surjective,
+  by definition we have $\range T = W$. Thus $\dim W \le \dim V$, and so $W$ is finite-dimensional
+  as well.
 \end{solution}
 
 
