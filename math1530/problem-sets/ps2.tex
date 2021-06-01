@@ -53,10 +53,55 @@
 \end{solution}
 
 \begin{problem}{\S 2}
-  WIP
+  (2.6) Let $G$ be a group, and let $g,h\in G$, and suppose $g$ has order $n$, and $h$ has order $m$.
+  \begin{enumerate}[label=(\alph*)]
+    \item If $G$ is an Abelian group and $\gcd{(m,n)}=1$, prove that the order of $gh$ is $mn$.
+    \item Give an example showing (a) need not be true if  $\gcd{(m,n)}>1$.
+    \item Give an example of a non-Abelian group showing (a) need not be true even if
+      $\gcd{(m,n)}=1$.
+  \end{enumerate}
 \end{problem}
 \begin{solution}
-  WIP
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      We start with an observation, and a lemma.\\
+      \textbf{Observation}: For any $a,b\in G$, $a\cdot b=e$ only when $b=a^{-1}$ or $a=b=e$.
+      \begin{lemma}[Order of Inverse]{}
+        Let $G$ be a group, and let $g\in G$. Then $\left| g \right| =\left| g^{-1} \right| $.
+      \end{lemma}
+      \begin{proof}[Proof]
+        Let $\left| g \right| =n$; then $g^{n}=e$. From this, we get \[
+          e = \left( g\cdot g^{-1} \right)^{n}=g^{n}\cdot (g^{-1})^{n}=e\cdot (g^{-1})^{n}
+        ,\] and so $(g^{-1})^{n}=e$ ($g$ and $g^{-1}$ commute, even if $G$ is non-Abelian).
+
+        Now, we show that $\left| g^{-1} \right| =n$. Suppose $\left| g^{-1} \right| =m$ ,and $m<n$.
+        Then \[
+          e = g^{n}\cdot (g^{-1})^{m}=(g\cdot g^{-1})^{m}\cdot g^{n-m}=g^{n-m}
+        .\] But we know that $\left| g \right| =n$, or equivalently, $n$ is the smallest positive
+        integer such that $g^{n}=e$; hence $g^{n-m}=e$ is a contradiction. Thus $m=n$, and so $\left|
+        g^{-1} \right| =n$.
+      \end{proof}
+      
+      Now, let $G$ be an Abelian group, and let $g,h\in G$, with $\left| g \right| $ and $\left| h
+      \right| $ relatively prime, and let $\left| gh \right| =k$. By the lemma, we know that $h\neq
+      g^{-1}$ (otherwise, the orders of $g$ and $h$ would not be relatively prime); hence $k\neq 1$. By
+      the observation, $(gh)^{k}=g^{k}\cdot h^{k}=e$ only when $g^{k}=e,\ h^{k}=e$.
+
+      Thus, we know that $n$ divides $k$, and $m$ divides $k$ (Proposition 2.9). Thus $k$ is the
+      smallest positive integer such that $n|k$ and $m|k$; in other words, $k=\lcm{(m,n)}$. But by
+      definition, $\lcm{(m,n)}=\frac{mn}{\gcd{(m,n)}}$, and so $k=\frac{mn}{\gcd{(m,n)}}=mn$.
+    \item Consider the group $\Z / 3\Z$ with elements $\{ 0,1,2 \}$ under addition. Consider
+      elements $1$ and $2$ ; $\left| 1 \right| =\left| 2 \right|$; so $\gcd{(2,2)}=2$. But
+      $(1+2)^{1}=0=e$, so $\left| 1+2 \right| =1\neq 2\cdot 2$.
+    \item Consider the group $\D_3$, and consider elements $r_1$ and $ f_2$ ($r_1$ rotates all
+      vertices by $1$, and $f_2$ flips across the second vertex, i.e. $f(1)=3,\ f(2)=2,\ f(3)=1$.)
+      $\left| r_1 \right| =3,\  \left| f_2 \right|=2 $; so $\gcd{(2,3)}=1$. But $(r_1\circ
+      f_2)^2=e$: \[
+        (r_1\circ f_2)(1)=1,\ (r_1\circ f_2)(2)=3,\ (r_1\circ f_2)(3)=2
+      ;\]  so \[
+      (r_1\circ f_2)^2(1)=1,\ (r_1\circ f_2)^2(2)=2,\ (r_1\circ f_2)^2(3)=3
+      \] and thus $\left| r_1\circ f_2 \right| =2 \neq 2\cdot 3$.
+  \end{enumerate}
 \end{solution}
 
 
@@ -143,6 +188,150 @@
   flip ($f_k=r_1^k\circ f_0^1$). Hence, the entire group $ \D_n$ consists of only the unique rotations
   and flips, and so $\D_n$ has order $2n$.
 
+\end{solution}
+
+\begin{problem}{\S 4}
+  (2.14)
+  \begin{enumerate}[label=(\alph*)]
+    \item Let \[
+        \GL_2(\R) = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \mid a,b,c,d\in \R,ad-bc\neq
+        0\right\} 
+      ,\]  with composition law being matrix multiplication. Show that $\GL_2(\R)$ is a group.
+    \item Let \[
+        \SL_2(\R) = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \mid a,b,c,d\in \R,ad-bc=1\right\} 
+      ,\]  with composition law being matrix multiplication again. Show that $\SL_2(\R)$ is a group.
+    \item Fix an integer $n\ge 1$. Generalize (a) and (b) by proving that each of
+      \begin{itemize}
+        \item $\GL_n(\R)=\{$set of all $n$-by-$n$ matrices $A$ such that $\det(A)\neq 0\}$ 
+        \item $\SL_n(\R)=\{$set of all $n$-by-$n$ matrices $A$ such that $\det(A)=1\}$
+      \end{itemize}
+      is a group under matrix multiplication.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  For all parts, recall that $\det(AB)=\det(A)\det(B)$ for any $n$-by-$n$ matrices $A,B$; a useful
+  corollary is that $\det(A^{-1})=\frac{1}{\det(A)}$.
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      \begin{itemize}
+        \item Associativity: Let $A,B,C\in \GL_2(\R)$. We know from standard linear algebra that
+          matrix multiplication is associative; hence \[
+            A(BC)=(AB)C
+          .\] 
+        \item Identity: Choose $I=\begin{pmatrix} 1&0\\0&1 \end{pmatrix} $. Then for every $A\in
+          \GL_2(\R)$, we have $AI=IA=A$.
+        \item Inverse:  For every $A\in \GL_2(\R)$, choose $A^{-1}=\frac{1}{\det(A)}\begin{pmatrix}
+          d&-b\\-c&a\end{pmatrix}$. Then $AA^{-1}=A^{-1}A=I$. (We know $A^{-1}$ exists since
+          $\det(A)\neq 0$ by definition).
+      \end{itemize}
+      Thus $\GL_2(\R)$ is a group.
+    \item
+      \begin{itemize}
+        \item Associativity: again, we know from standard linear algebra that given any $n$-by-$n$ 
+          matrices $A,B,C$, we have \[
+            A(BC)=(AB)C
+          .\] 
+        \item Identity: we again choose $I=\begin{pmatrix} 1&0\\0&1 \end{pmatrix} $. Then for every
+          $A\in \SL_2(\R)$, we have $AI=IA=A$.
+        \item Inverse: For every $A\in \SL_2(\R)$, choose $A^{-1}=\begin{pmatrix} d&-b\\-c&a
+          \end{pmatrix} $ (since $\det(A)=1$, $A$ is invertible and $\frac{1}{\det(A)}=1$). Then
+          $AA^{-1}=A^{-1}A=I$.
+      \end{itemize}
+      Thus $SL_2(\R)$ is a group.
+
+    \item Fix an integer $n\ge 1$. Define $I_n=\begin{pmatrix} 1&0&\cdots&0\\0&1&\cdots&0\\
+      \vdots&\vdots&\ddots&\vdots\\0&0&\cdots&1 \end{pmatrix} $; that is, for any $a_{ij}$,
+      $a_{ij}=1$ if $i=j$, $0$ otherwise. The proofs that $\GL_n(\R)$ and $\SL_n(\R)$ are groups are
+      essentially identical:
+      \begin{itemize}
+        \item Associativity: from standard linear algebra, given any $n$-by-$n$ matrices $A,B,C$, we
+          have \[
+            A(BC)=(AB)C
+          .\] 
+        \item Identity: Choose $I_n$. Then for any $A\in \GL_n(\R)$ and $B\in \SL_n(\R)$, we have
+          $AI=IA=A$ and $BI=IB=B$ from standard linear algebra.
+        \item Inverse: For any $A\in \GL_n(\R)$ and $B\in \SL_n(\R)$, we know that $\det(A)\neq
+          0$, and $\det(B)=1\neq 0$. Thus their inverses exist (from standard linear algebra, a
+          matrix is invertible iff its determinant is non-zero), and we choose $A^{-1}\in
+          \GL_n(\R),\ B^{-1}\in \SL_n(\R)$. Then $A A^{-1}=A^{-1}A=I_n$, and $BB^{-1}=B^{-1}B=I_n$.
+      \end{itemize}
+      Thus both $\GL_n(\R)$ and $\SL_n(\R)$ are groups.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 5}
+  (2.15) Prove or disprove whether each of the following subsets of $\GL_2(\R)$ is a group (and
+  explain why).
+  \begin{enumerate}[label=(\alph*)]
+    \item $S = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \GL_2(\R)\mid ad-bc=2 \right\} $
+    \item $S = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \GL_2(\R)\mid ad-bc\in \{ -1,1 \}\right\} $
+    \item $S = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \GL_2(\R)\mid c=0\right\} $
+    \item $S = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \GL_2(\R)\mid d=0\right\} $
+    \item $S = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \GL_2(\R)\mid a=d=1,\ c=0\right\} $
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item This is not a group.
+      \begin{itemize}
+        \item Closure does not hold: for $A,B\in S$, we have $\det(AB)=\det(A)\det(B)=2\cdot 2=4$,
+          and so $AB\not\in S$.
+        \item $\det(I)=1\neq 2$, so $I\not\in S$.
+        \item Recall that $\det(A^{-1})=\frac{1}{\det(A)}$; thus given an $A\in S$,
+          $\det(A^{-1})=\frac{1}{2}$, so $A^{-1}\not\in S$.
+      \end{itemize}
+    \item This is a group.
+      \begin{itemize}
+        \item Let $A,B\in S$. Then $\det(A),\det(B)\in \{ -1,1 \}$. So, $\det(AB)=\det(A)\det(B)\in
+          \{ -1,1 \}$ (any combination of $1\cdot 1,\ 1\cdot -1, -1\cdot -1$ is in $\{ -1,1 \}$).
+          Thus $AB\in S$.
+        \item $det(I)=1\in \{ -1,1 \}$. Thus $I\in S$.
+        \item Let $A\in S$. Then $\det(A)\in \{ -1,1 \}$. Recall that
+          $\det(A^{-1})=\frac{1}{\det(A)}$; thus $\det(A^{-1})=\frac{1}{1~\text{or}~-1}\in \{ -1,1
+          \}$, and so $A^{-1}\in S$.
+      \end{itemize}
+    \item This is a group.
+      \begin{itemize}
+        \item Let $A,B\in S$, where $A=\begin{pmatrix} a_1&b_1\\0&d_1 \end{pmatrix},\
+          B=\begin{pmatrix} a_2&b_2\\0&d_2 \end{pmatrix}  $. Then \[
+          A\cdot B = \begin{pmatrix} a_1&b_1\\0&d_1 \end{pmatrix} \begin{pmatrix} a_2&b_2\\0&d_2
+          \end{pmatrix}=\begin{pmatrix} a_1a_2&a_1b_2+b_1d_2\\0&d_1d_2 \end{pmatrix}  \in S
+          .\] Thus $AB\in S$.
+        \item $I=\begin{pmatrix} 1&0\\0&1 \end{pmatrix} $ is clearly in $S$.
+        \item Let $A\in S$, where $A=\begin{pmatrix} a&b\\0&d \end{pmatrix} $. Choose
+          $A^{-1}=\frac{1}{ad}\begin{pmatrix} d&-b\\0&a \end{pmatrix} $. $A^{-1}$ is clearly the
+          inverse of $A$: \[
+          A\cdot A^{-1}=\frac{1}{ad}\begin{pmatrix} a&b\\0&d \end{pmatrix} \begin{pmatrix} d&-b\\0&a
+          \end{pmatrix} = \frac{1}{ad}\begin{pmatrix} ad&ab-ab\\0&ad \end{pmatrix} =I
+          ;\] Moreover, $A^{-1}\in S$, as $c=0$.
+      \end{itemize}
+    \item This is not a group.
+      \begin{itemize}
+        \item Closure does not hold: Let $A,B\in S$, where $A=\begin{pmatrix} a_1&b_1\\c_1&0
+            \end{pmatrix} ,\ B=\begin{pmatrix} a_2&b_2\\c_2&0 \end{pmatrix} $. Then \[
+              AB = \begin{pmatrix} a_1&b_1\\c_1&0\end{pmatrix}\begin{pmatrix} a_2&b_2\\c_2&0
+              \end{pmatrix}=\begin{pmatrix} a_1a_2+b_1c_2&a_1b_2\\a_2c_1+c_1c_2&b_2c_1 \end{pmatrix}
+              \not\in S
+            .\] 
+            \item $I=\begin{pmatrix} 1&0\\0&1 \end{pmatrix} \not\in S$, as $d\neq 0$.
+            \item Let $A\in S$, where $A=\begin{pmatrix} a&b\\c&0 \end{pmatrix} $.
+              $A^{-1}=\frac{1}{0-bc}\begin{pmatrix} 0&-b\\-c&a \end{pmatrix}$ is not in $S$, as
+              $d=a\neq 0$ necessarily.
+      \end{itemize}
+    \item This is a group.
+      \begin{itemize}
+        \item Let $A,B\in S$, where $A=\begin{pmatrix} 1&b_1\\0&1 \end{pmatrix},\ B=\begin{pmatrix}
+        1&b_2\\0&1 \end{pmatrix} $. Then \[
+          A\cdot B= \begin{pmatrix} 1&b_1\\0&1 \end{pmatrix}\begin{pmatrix} 1&b_2\\0&1 \end{pmatrix}
+          =\begin{pmatrix} 1&b_1+b_2\\0&1 \end{pmatrix} \in S  
+        .\] Thus $AB\in S$.
+        \item $I=\begin{pmatrix} 1&0\\0&1 \end{pmatrix} \in S$, as $a=d=1,\ c=0$.
+        \item For any  $A\in S$, where $A=\begin{pmatrix} 1&b\\0&1 \end{pmatrix} $, we have
+          $A^{-1}=\begin{pmatrix} 1&-b\\0&1 \end{pmatrix} $. Clearly $A\cdot A^{-1}=I$, and
+          $A^{-1}\in S$.
+      \end{itemize}
+  \end{enumerate}
 \end{solution}
 
 

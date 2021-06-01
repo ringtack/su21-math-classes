@@ -88,6 +88,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % math operators and optional shortcuts
 
+\DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
@@ -109,6 +110,9 @@
 \DeclareMathOperator{\arcsech}{arcsech}
 \DeclareMathOperator{\arccoth}{arccoth}
 \DeclareMathOperator{\sla}{\mathfrak{sl}}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
 
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
