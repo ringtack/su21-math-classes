@@ -10,15 +10,14 @@
 \end{problem}
 
 \begin{solution}
-  Suppose $ a\neq 0$, yet $av=0$. Then
+  Let $v\in V_\F$ be a non-zero vector, and let $a\in \F$ such that $av=\textbf{0}$. Suppose $ a\neq
+  \textbf{0}$. Then
   \begin{align*}
     av &= \textbf{0} \\
-       &= av+(-av) \\
-       &= 0 + (-av) \\
-       &= -av
-  .\end{align*}
-  Hence $av=-av \implies av\cdot v^{-1}=-av\cdot v^{-1}\implies a=-a$. But $a=-a$ only when $a=0$, a
-  contradiction. Thus $av=0$ only when $a=0$.
+    a^{-1}av&= a^{-1}\textbf{0} && [\text{since $a\in \F$ and $a\neq 0$, there exists $a^{-1}\in
+    \F$ such that $aa^{-1}=1$}] \\
+    v&= \textbf{0}
+  .\end{align*} But this is a contradiction, as we assume $v$ non-zero. Hence $a$ must be zero.
 \end{solution}
 
 
@@ -29,12 +28,17 @@
 \end{problem}
 
 \begin{solution}
-  Suppose there exists a $b\in \F,\ b\neq a$ such that $bv=w$. Then \[
-    av+bv = w + w = 2w = w + w = av + av
-  .\] Adding $-av$ to both sides, \[
-    bv = av \implies a = b
-  ,\] a contradiction. \\
-  Hence if $bv=w$ for some $b\in \F$, then $b=a$.
+  Let $v,w\in V_\F$, and let $a\in \F$ such that $av=w$. Suppose there exists a $b\in \F,\ b\neq a$
+  such that $bv=w$. Then
+  \begin{align*}
+    av = w &= bv \\
+    av &= bv \\
+    av - bv &= bv - bv \\
+    (a-b)v &= \textbf{0} && [\text{since $-bv=(-b)v$}]
+  .\end{align*}
+  From problem 1, we get that if $v$ is a non-zero vector, then $(a-b)v=0$ only when $a-b=0$. Hence
+  $a=b$; but we assume $b\neq a$, a contradiction. Thus if $\exists b\in \F$ such that $bv=w$, then
+  $b=a$.
 \end{solution}
 
 \begin{problem}{\S 3}
