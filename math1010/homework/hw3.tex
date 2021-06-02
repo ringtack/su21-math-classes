@@ -41,7 +41,10 @@
 \begin{solution}
   \begin{enumerate}[label=(\alph*)]
     \item We start with a lemma.
-      \begin{lemma}[$0\neq 1$]{}
+      \begin{lemma}[]{}
+        $0 \neq 1$.
+      \end{lemma}
+      \begin{proof}[Proof]
         Suppose $0=1$, and let $a\in \F$ be a non-zero element in an arbitrary field. Then
         \begin{align*}
           a &= a\cdot 1 && [~\text{M3}~] \\
@@ -49,7 +52,8 @@
             &= 0 && [~\text{Theorem 3.1.ii}~]
         ,\end{align*}
         a contradiction of $a$ non-zero. Hence $0\neq 1$.
-      \end{lemma}
+      \end{proof}
+      
       From Theorem 3.2.iv, we have  $0\le a^2$ for all $a$. Then $ 0\le 1$; and by the lemma, $0<1$.
       
     \item By Theorem 3.2.vi, if $0<a,\ 0<b$, then $0<a^{-1},\ 0<b^{-1}$; and by Theorem 3.2.iii, we
@@ -57,7 +61,7 @@
       \begin{align*}
         ac &< bc\\
         aa^{-1}b&<a^{-1}b^{-1}b\\
-        b^{-1}<a^{-1}
+        b^{-1}&<a^{-1}
       .\end{align*} Since both are greater than zero, we have $0<b^{-1}<a^{-1}$.
   \end{enumerate}
 \end{solution}
@@ -102,7 +106,7 @@
 
 \begin{solution}
   \begin{enumerate}[label=(\alph*)]
-    \item Any $t\in T$ bounds $S$ from above, and any $s \in S$ bounds $T$ from above.
+    \item Any $t\in T$ bounds $S$ from above, and any $s \in S$ bounds $T$ from below.
     \item For any $s \in S$, $s\le \sup{S}$, and for any $a\in \R$ that satisfies $s\le a$,
       $\sup{S}\le a$. But since any $t\in T$ satisfies $s\le t$, we have $\sup{S}\le t$.
 
@@ -142,12 +146,12 @@
     Suppose $\sqrt[]{2} =\frac{p}{q}$, where $p,q\in \Z $ and $\gcd{(p,q)}=1$. Then
     \begin{align*}
       2&=\frac{p^2}{q^2}\\
-      2q^2=p^2
+      2q^2&=p^2
     .\end{align*}
     Thus $p^2$ is even, and so $p$ is even, so let $p=2k$. Then
     \begin{align*}
       2q^2&= 4k^2 \\
-      q^2=2k^2
+      q^2&=2k^2
     .\end{align*}
     Thus $q^2$ is even, and so $q$ is even as well. Thus $\gcd{(p,q)}\ge 2$.
 
