@@ -1,0 +1,224 @@
+\documentclass{homework}
+\homework{3}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  (3.3) Prove, from Theorem 3.1, that for all $a,b,c \in \F$,
+  \begin{enumerate}[label=(\alph*)]
+    \item $(-a)(-b)=ab$ 
+    \item If $ac=bc$, and $c\neq 0$, then $a=b$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We have
+      \begin{align*}
+        -ab+(-a)(-b) &= (-a)b+(-a)(-b) && [~\text{Theorem 3.1.iii}~] \\
+                     &= (-a)(b+ -b) && [~\text{DL}~] \\
+                     &= (-a)0 \\
+                     &= 0 && [~\text{Theorem 3.1.ii}~]
+                   .\end{align*} Hence $(-a)(-b)$ is an inverse of $-ab$, and so $(-a)(-b)=ab$.
+    \item If $c\neq 0$, then by M4,  $c^{-1}\in \F$ exists. Then
+      \begin{align*}
+        ac&= bc \\
+        acc^{-1}&=bc c^{-1}\\
+        a\cdot 1&= b\cdot 1 \\
+        a&=b
+      ,\end{align*} as required.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  (3.4) Prove, from Theorem 3.2, that for all $a,b$ in an ordered field $\F$, 
+  \begin{enumerate}[label=(\alph*)]
+    \item $0 < 1$.
+    \item If $0<a<b$, then $0<b^{-1}<a^{-1}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We start with a lemma.
+      \begin{lemma}[$0\neq 1$]{}
+        Suppose $0=1$, and let $a\in \F$ be a non-zero element in an arbitrary field. Then
+        \begin{align*}
+          a &= a\cdot 1 && [~\text{M3}~] \\
+            &= a\cdot 0 &&[~\text{by assumption}~] \\
+            &= 0 && [~\text{Theorem 3.1.ii}~]
+        ,\end{align*}
+        a contradiction of $a$ non-zero. Hence $0\neq 1$.
+      \end{lemma}
+      From Theorem 3.2.iv, we have  $0\le a^2$ for all $a$. Then $ 0\le 1$; and by the lemma, $0<1$.
+      
+    \item By Theorem 3.2.vi, if $0<a,\ 0<b$, then $0<a^{-1},\ 0<b^{-1}$; and by Theorem 3.2.iii, we
+      have $0<a^{-1}b^{-1}$. Let $c=a^{-1}b^{-1}$. Then from O5, we have 
+      \begin{align*}
+        ac &< bc\\
+        aa^{-1}b&<a^{-1}b^{-1}b\\
+        b^{-1}<a^{-1}
+      .\end{align*} Since both are greater than zero, we have $0<b^{-1}<a^{-1}$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  (4.7) Let $S,T$ be bounded subsets of $\R$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $S\subseteq T$, then  $\inf T \le \inf S \le \sup S \le \sup T$.
+    \item Prove that $\sup(S\cup T)=\max\{ \sup S,\sup T \}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We know, by definition, that $\inf{S}\le \sup{S}$.
+
+      For any $s \in S$, we have $s \in T$; and by definition, we have $ \inf{T}\le s$. Thus
+      $\inf{T}$ is a lower bound for $S$, and so $\inf{T}\le \inf{S}$.
+
+      Similarly, by definition we have $s\le \sup{T}$. Thus $\sup{T}$ is an upper bound for $S$, and
+      so $\sup{S}\le \sup{T}$.
+
+    \item Suppose, without loss of generality, that $\sup{S}\ge \sup{T}$. We know that for any $a\in
+      S\cup T$ that $a\in S$ or $a\in T$. $a\in S$ implies that $a\le \sup{S}$ by definition, so let
+      $a\in T$. Then $a\le \sup{T}$; but $\sup{T}\le \sup{S}$ by our assumption. Thus $\sup{S}$ is
+      an upper bound for $S\cup T$. Additionally, since $\sup{S}$ is by definition the least upper
+      bound of $S$, and any $t\in T$ is bounded above by $\sup{T}\le \sup{S}$, any $a\in S\cup T$
+      has $\sup{S}$ as its least upper bound; and so $\sup{(S\cup T)}=\sup{S}=\max\{ \sup{S},\sup{T}
+      \}$. An analogous argument follows if $\sup{T}\ge \sup{S}$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 4}
+  (4.8) Let $S,T$ be non-empty subsets of $\R$, and for all $s \in S, t\in T$, $s\le t$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Observe that $S$ is bounded above, and $T$ is bounded below.
+    \item Prove that $\sup{S}\le \inf{T}$.
+    \item Give an example of such $S,T$ where $S\cap T$ is non-empty.
+    \item Give an example of such $S,T$ where $S\cap T=\varnothing$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Any $t\in T$ bounds $S$ from above, and any $s \in S$ bounds $T$ from above.
+    \item For any $s \in S$, $s\le \sup{S}$, and for any $a\in \R$ that satisfies $s\le a$,
+      $\sup{S}\le a$. But since any $t\in T$ satisfies $s\le t$, we have $\sup{S}\le t$.
+
+      Let $\textbf{m}$ be the set of all $m\in \R$ such that $m\le t$. By definition, for any $m\in
+      \textbf{m}$, $m\le \inf{T}$; and since $\sup{S}\in \textbf{m} $, we have $\sup{S}\le \inf{T}$.
+
+    \item Let $S=(-1,0],\ T=[0,1)$. Then  $\sup{S}=0\le 0=\inf{T}$, and $S\cap T=\{ 0 \}\neq
+      \varnothing$.
+    \item Let $S=(-1,0),\ T=(0,1)$. Then  $\sup{S}=0=\inf{T}$, and $S\cap T=\varnothing$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 5}
+  (4.12) Let $\I$ be the set of irrational numbers. Prove that if $a<b$, then there exists an $x\in
+  \I$ such that $a<x<b$.
+\end{problem}
+\begin{solution}
+  We start with two lemmas.
+  \begin{lemma}[]{}
+    If $a\in \I$ and $b\in \Q$, then $a+b\in \I$ (in other words, irrational + rational =
+    irrational).
+  \end{lemma}
+  \begin{proof}[Proof]
+    Let $a\in \I$, $b\in \Q$. Then $b=\frac{p}{q}$ for some $p,q\in \Z$. Let $a+b=c$, and suppose
+    $c$ is rational. Then $c=\frac{m}{n}$ for some $m,n\in \Z$. We have
+    \begin{align*}
+      a+b &= c \\
+      a+\frac{p}{q}&= \frac{m}{n} \\
+      a&= \frac{m}{n}-\frac{p}{q} \\
+      a&= \frac{mq-pn}{nq}
+    ;\end{align*} but $a$ is irrational, a contradiction. Hence $c=a+b$ is irrational.
+  \end{proof}
+  \begin{lemma}[]{}
+    $\sqrt[]{2} $ is irrational.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Suppose $\sqrt[]{2} =\frac{p}{q}$, where $p,q\in \Z $ and $\gcd{(p,q)}=1$. Then
+    \begin{align*}
+      2&=\frac{p^2}{q^2}\\
+      2q^2=p^2
+    .\end{align*}
+    Thus $p^2$ is even, and so $p$ is even, so let $p=2k$. Then
+    \begin{align*}
+      2q^2&= 4k^2 \\
+      q^2=2k^2
+    .\end{align*}
+    Thus $q^2$ is even, and so $q$ is even as well. Thus $\gcd{(p,q)}\ge 2$.
+
+    Bit $\gcd{(p,q)}=1$, a contradiction. Hence $\sqrt{2} $ is irrational.
+  \end{proof}
+  From these two lemmas, we get that for any $r\in \Q$, $r+\sqrt[]{2} \in \I$. Hence $\{r+\sqrt[]{2}
+  \mid r\in \Q\} \subseteq \I$.\\
+  Now, suppose $a,b\in \R$, with $a<b$. Then $a-\sqrt[]{2} <b-\sqrt[]{2} $ by O4. Since
+  $a-\sqrt[]{2} ,b-\sqrt[]{2} \in \R$, by the denseness of $ \Q$, there exists some $r\in \Q$ such
+  that \[
+    a-\sqrt[]{2} <r<b-\sqrt[]{2} 
+  .\] 
+  Adding $\sqrt[]{2} $ to each side, we get \[
+    a < r+\sqrt[]{2} <b
+  ,\]  and since $r+\sqrt[]{2} \in \{r+\sqrt[]{2} \mid r\in \Q\} \subseteq \I$, there exists some
+  $x\in \I$ such that $a<x<b$.
+  
+\end{solution}
+
+\begin{problem}{\S 6}
+  (4.14) Let $A,B$ be nonempty bounded subsets of $ \R$, and let $A+B$ be the set of all sums $a+b$ 
+  where $a\in A$, $b\in B$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $\sup{(A+B)}=\sup{A}+\sup{B}$.
+    \item Prove that $\inf{(A+B)}=\inf{A}+\inf{B}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      We have, by definition, $a+b\le \sup{(A+B)}$ for any $a\in A$, $b\in B$. Then
+      \begin{align*}
+        a+b-b&\le \sup{(A+B)}-b\\
+        a&\le \sup{(A+B)}-b
+      ,\end{align*} and so $\sup{(A+B)}-b$ is an upper bound for $A$ ; thus $\sup{A}\le \sup{(A+B)}-b$.
+      From this, we have
+      \begin{align*}
+        \sup{A}&\le \sup{(A+B)}-b\\
+        \sup{A}-\sup{A}+b&\le \sup{(A+B)}-b+b-supA\\
+        b&\le \sup{(A+B)}-\sup{A}
+      ,\end{align*} and so $\sup(A+B)-\sup{A}$ is an upper bound for $B$; thus $\sup{B}\le
+      \sup{(A+B)}-\sup{A}$.
+
+      Then $\sup{A}+\sup{B}\le \sup{(A+B)}$. But since \[
+        a+b\le \sup{A}+\sup{B}
+      ,\] we have that $\sup{A}+\sup{B}$ is an upper bound for $A+B$ as well; but since $\sup{(A+B)}$ is
+      the least upper bound, and $\sup{A}+\sup{B}\le \sup{(A+B)}$, we necessarily have equality:
+      $\sup{A}+\sup{B}=\sup{(A+B)}$.
+
+    \item We have, by definition, $\inf{(A+B)}\le a+b$ for any $a\in A$, $b\in B$. Then \[
+        \inf{(A+B)}-b\le a
+    ,\] and so $\inf{(A+B)}-b$ is a lower bound for  $A$; thus $\inf{(A+B)}-b\le \inf{A}$. From
+    this, we have
+    \begin{align*}
+      \inf{(A+B)}-b &\le \inf{A}\\
+      \inf{(A+B)}-\inf{A}&\le b
+    ,\end{align*}
+    and so $\inf{(A+B)}-\inf{A}$ is a lower bound for $B$; thus $\inf{(A+B)}-\inf{A}\le \inf{B}$.
+    Then $ \inf{(A+B)}\le \inf{A}+\inf{B}$. But since \[
+      \inf{A}+\inf{B}\le a+b
+    ,\] we have that $\inf{A}+\inf{B}$ is a lower bound for $A+B$ as well; but since $\inf{(A+B)}$
+    is the least lower bound, and $\inf{(A+B)}\le \inf{A}+\inf{B}$, we necessarily have equality:
+    $\inf{A}+\inf{B}=\inf{(A+B)}$.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+\end{document}
