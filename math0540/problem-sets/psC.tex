@@ -60,17 +60,27 @@
 
   Now, suppose that $ U_1\cup U_2\subseteq V$ is a subspace of $V$. Let $ v_1,v_2\in U_1\cup U_2$.
   Then \[
-    v_1\in U_1 ~\text{or}~v_1\in U_2,~\text{and}~v_2\in U_1~\text{or}~v_2\in U_2
+    v_1\in U_1,\ v_1\in U_2,~\text{or}~v_1\in U_1\cap U_2,~\text{and}~v_2\in U_1,\ v_2\in
+    U_2,~\text{or}~v_2\in U_1\cap U_2
   .\] $ v_1,v_2\in U_1~\text{or}~v_1,v_2\in U_2$ tell us nothing new about the relationship between
   $ U_1$ and $U_2$ (we already know, by definition of a subspace, that $0,\ \lambda v_1,\ \lambda
-  v_2,\ v_1+v_2\in U_i$ for some $\lambda\in \F$, $i\in \{ 1,2 \}$), so suppose without loss of
-  generality that $v_1\in U_1,v_2\in U_2$. We know (since $ U_1\cup U_2$ is a subspace of $V$) that
-  $v_1+v_2\in U_1\cup U_2$, so $ v_1+v_2\in U_1$ or $ v_1+v_2\in U_2$. If $ v_1+v_2\in U_1$, by
-  closure of addition in $ U_1$, $ v_2\in U_1$ as well, and so since for any arbitrary $v_2\in U_2,\
-  v_2\in U_1$, we have $ U_2\subseteq U_1$. Similarly, if $ v_1+v_2\in U_2$, by closure of addition, $v_1\in
-  U_2$ as well, and so $ U_1\subseteq U_2$. \\
-  Therefore, if $ U_1\cup U_2$ is a subspace of $V$, then one of the subspaces is contained in the
-  other.\\
+  v_2,\ v_1+v_2\in U_i$ for some $\lambda\in \F$, $i\in \{ 1,2 \}$; and if $v_i\in U_1\cap U_2$,
+  then $v_i$ is in each individual subspace as well), so suppose without loss of
+  generality that $v_1\in U_1,v_2\in U_2$ (if either are in the intersection of the two subspaces, then
+  they are also in each individual subspace). We know (since $ U_1\cup U_2$ is a subspace of $V$) that
+  $v_1+v_2\in U_1\cup U_2$, so $ v_1+v_2\in U_1$, $ v_1+v_2\in U_2$, or $ v_1+v_2\in U_1\cap U_2$.
+  
+  Suppose $ v_1+v_2\in U_1$. Then since  $v_1\in U_1$, we have $ v_1^{-1}\in U_1$, and by closure of
+  addition $ v_1^{-1}+v_1+v_2\in U_1$; thus $v_2\in U_1$, and so since for any arbitrary $ v_2\in
+  U_2,\ v_2\in U_1$, we have $ U_2\subseteq U_1$.
+
+  Similarly, suppose $v_1+v_2\in U_2$. Then $v_2^{-1}\in U_2$, and by closure of addition
+  $v_1+v_2+v_2^{-1}\in U_2$; thus $ v_1\in U_2$ as well, and so $U_1\subseteq U_2$.
+
+  The case of $ v_1+v_2\in U_1\cap U_2$ follows the same logic; since being in the intersection
+  implies being in each individual subspace, using the steps above, we have $ v_2\in U_1$, and $
+  v_1\in U_2$. Thus, we have $U_1\subseteq U_2$, and $ U_2\subseteq U_1$, and so the subspaces are
+  contained in each other (indeed, they are equivalent).
 
   Thus, the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces
   is contained in the other.
