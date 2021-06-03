@@ -1,86 +1,162 @@
 \documentclass[math0540-lecture-notes.tex]{subfiles}
+
 \begin{document}
 
-\chapter{Linear Maps}
+\chapter{Finite-Dimensional Vector Spaces}
 
-\section{Linear Maps}
-\begin{definition}[Linear Maps]{}
-  Let $V,W$ be vector spaces over a field $\F$. A function \begin{align*}
-    T: V &\longrightarrow W \\
-    v &\longmapsto T(v) \in W
-  .\end{align*} is a \textbf{linear map}
-  if it satisfies, given $v_1,v_2\in V,\ \lambda\in \F$:
-  \begin{enumerate}
-    \item $T(v_1+v_2) = T(v_1)+T(v_2)\in W$.
-    \item $T(\lambda v)=\lambda T(v)$.
-  \end{enumerate}
+\section{Span and Linear Independence}
+Suppose a friend imagines a subspace $W\subseteq \R^3$. You know that $(1,0,0),(0,1,0)\in W$. What
+else do you know must be in $W$? Well, first, $\textbf{0}=(0,0,0)\in W$ by definition. But moreover,
+anything in the form $\{ (a,b,0) \mid a,b\in \R \}$ (the xy-plane) must be in $W$, since any point
+on the plane can be made by $ \alpha \cdot a + \beta \cdot b$ (we will later see that $(1,0)$ and
+$(0,1)$ are \textbf{basis vectors} of $\R^2$).
+
+\begin{definition}[Linear Combination and Span]{}
+  A \textbf{linear combination} of a list of vectors $ v_1,\ldots,v_n\in V$ is a vector of the form \[
+      \lambda_1v_1+\ldots+\lambda_nv_n,~\text{where}~ \lambda_i\in \F
+    .\]  The \textbf{span} (or \textbf{linear span}) of $ v_1,\ldots,v_n$, is the set of all linear
+    combinations of $ v_1,\ldots,v_n$: \[
+      ~\text{span}(v_1,\ldots,v_n) = \{ a_1v_1+\ldots+a_mv_m \mid a_i\in \F\}
+    .\] 
+  The span of no vectors is $\{ 0 \}$.
 \end{definition}
 
-\begin{proposition}[Linear Maps Preserve 0]{}
-  If $T:V\to W$ is a linear map, then $T(\textbf{0})=\textbf{0}$.
+\begin{proposition}[Span is Smallest Subspace]{}
+  The span of $v_1,\ldots,v_m$ is the smallest subspace of $V$ containing $ v_1,\ldots,v_m$.
+  Precisely:
+  \begin{enumerate}
+    \item $~\text{span}(v_1,\ldots,v_m)$ is a subspace of $V$.
+    \item Any subspace $W$ of $V$ containing $v_1,\ldots,v_m$ also contains $\text{span}(v_1,\ldots,v_m)$.
+  \end{enumerate}
 \end{proposition}
+
 \begin{proof}[Proof]
-  We have
-  \begin{align*}
-    T(0) &= T(0+0) \\
-         &= T(0)+T(0)
-       .\end{align*} Adding the additive inverse of $T(0)$ to both sides, we have  \[
-       0 = T(0)
-       .\] 
+  Let $v_1,\ldots,v_m$ be a list of vectors in $V$.\\
+
+  $\Span(v_1,\ldots,v_m)$ is clearly a subspace of $V$: achieve $\textbf{0}\in
+  \Span(v_1,\ldots,v_m)$ by setting each $a_j=0$, and since $a_j+b_j,\lambda a_j\in \F$,
+  $\Span(v_1,\ldots,v_m)$  is closed under addition and scalar multiplication.\\
+
+  Now, we show that $\Span(v_1,\ldots,v_m)$ is the smallest subspace containing  $v_1,\ldots,v_m$.
+  Every vector $v_j$ is a linear combination of $  v_1,\ldots,v_m$ (take, for $i\neq j$, $a_i=0$);
+  thus $\Span(v_1,\ldots,v_m)$ contains each $v_j$. Additionally, every subspace $U$ of $V$ that
+  contains each $v_j\in U$ is closed under addition and scalar multiplication, so $U$ contains every
+  linear combination of $ v_1,\ldots,v_m$; thus $U$ contains $\Span(v_1,\ldots,v_m)$. So, since
+  $\Span(v_1,\ldots,v_m)$ contains every vector $v_j$, and any subspace $U$ of $V$ that contains
+  every vector $v_j$ also contains $\Span(v_1,\ldots,v_m)$, the span is the smallest subspace
+  containing every $v_j$.
 \end{proof}
 
-\begin{proposition}[Combination of Linearity Properties]{}
-  A function $T:V\to W$ is linear if and only if \[
-    T(\alpha v_1 + \beta v_2) = \alpha T(v_1) + \beta T(v_2)
-  \]  for all $ v_1,v_2\in V,\ \alpha,\beta\in \F$.
-\end{proposition}
+\begin{definition}[Spanning a Vector Space]{}
+  If $\Span(v_1,\ldots,v_m)=V$, then $ v_1,\ldots,v_m$ \textbf{spans} $V$, and $v_1,\ldots,v_m$ are
+  a \textbf{spanning set}.
+\end{definition}
+
+We now make one of the key definitions of linear algebra.
+
+\begin{definition}[Finite Dimensional Vector Spaces]{}
+  If $V$ is spanned by a \textbf{finite} list of vectors $v_1,\ldots,v_m$ then $V$ is
+  \textbf{finite-dimensional}.\\
+
+  If $V$ is not finite-dimensional, then $V$ is \textbf{infinite-dimensional}.
+\end{definition}
 
 \begin{example}
-  Let $V,W$ be any vector spaces over $\F$.
+  Let $\mc{P}(\F)$ be the set (indeed, vector space) of polynomials over a field $\F$. Show
+  $\mc{P}(\F)$ is infinite-dimensional.
+\end{example}
+\begin{solution}
+  Let $p\in \mc{P}(\F)$, and let $m$ denote the highest degree polynomial in $\mc{P}(\F)$. Then $p$ 
+  has at most degree $m $; thus a polynomial $p^{m+1}$ is not spanned by any list of vectors in
+  $\mc{P}(\F)$; thus $\mc{P}(\F)$ is finite-dimensional.
+\end{solution}
+
+\subsection{Linear Independence}
+
+As with sums/direct sums, we are interested if a vector has a unique linear combination; that is,
+given a list $v_1,\ldots,v_m\in V$, and $v\in \Span(v_1,\ldots,v_m)$, are there unique $a
+1,\ldots,a_m\in \F$ such that \[
+  v=a_1v_1+\ldots+a_mv_m
+?\] In other words, is there only one way to create a certain vector given a span? Suppose there's
+more than one way; then there exists $ b_1,\ldots,b_m\in \F$ such that \[
+  v=b_1v_1+\ldots+b_mv_m
+;\] then \[
+  0 = (a_1-b_1)v_1+\ldots+(a_mb_m)v_m
+.\] If the only way to do this is the obvious way, where $a_i-b_i=0$, then the representation is
+unique. We call this \textbf{linear independence}.
+
+\begin{definition}[Linear Independence]{}
+  A list of vectors $ v_1,\ldots,v_m\in V$ is \textbf{linearly independent} if the only choice of $
+  a_1,\ldots,a_m\in \F$ that makes $  a_1v_1+\ldots+a_mv_m$  equal $0 $ is $a_i=0$.\\
+
+  A list of vectors in $V$ is \textbf{linearly dependent} if it is not linearly independent. That
+  is, there exist non-zero $a_i \in \F$ such that \[
+    0 = \sum_{i=1}^{m} a_iv_i
+  .\]\\ 
+
+  An empty list of vectors $()$ is linearly independent.
+\end{definition}
+\begin{example}
   \begin{enumerate}
-    \item The \textbf{zero map}  \begin{align*}
-        0: V &\longrightarrow W \\
-        v &\longmapsto 0(v) = 0 
-      \end{align*} is a linear map.
-
-    \item The \textbf{identity map} \begin{align*}
-        I: V &\longrightarrow V \\
-        v &\longmapsto I(v) = v
-      \end{align*} is a linear map. 
-
-    \item Any linear map \begin{align*}
-        T: \R &\longrightarrow \R \\
-        x &\longmapsto T(x) = ax
-      \end{align*} is a linear map.
+    \item A list of one vector $v\in V$ is linearly independent if and only if $v$ is non-zero.
+    \item A list of two vectors $v1,v_2\in V$ is linearly independent if and only if one vector is
+      not a scalar combination of the other vector; that is, $ v_1\neq \lambda v_2$ for some $
+      \lambda\in \F$.
+    \item $(1,0,0),\ (0,1,0)\in \R^3$ is linearly independent.
+    \item $(1,-1,0), (-1,0,1), (0,1,-1)\in \R^3$ is linearly dependent. In particular,
+      $(1,-1,0)+(-1,0,1)+(0,1,-1)=\textbf{0}$. Alternatively, we can write $(-1,0,1)$ as a linear
+      combination of the other two: \[
+        (-1,0,1) = -1\cdot (1,-1,0) -(0,1,-1)
+      .\] 
   \end{enumerate}
 \end{example}
-\begin{proposition}[Linear Maps in R]{}
-  Let $T:\R\to \R$ be a linear map. Then there is some $a\in \R$ such that $T(x)=ax$ for all  $x\in
-  \R$.
-\end{proposition}
+
+Intuitively, a list of vectors is linearly independent if none of its vectors are a linear
+combination of the other vectors; each vector is "independent" of the other vectors. In other words,
+a vector is linearly independent if it is not in the span of the other vectors. This gives rise to
+an important lemma, and theorem.
+
+\begin{lemma}[Linear Dependence Lemma]{}
+  Suppose that $v_1,\ldots,v_m\in V$ is a linearly dependent list of vectors. Then there exists some
+  $j\in \{ 1,\ldots,m \}$ such that:
+  \begin{enumerate}
+    \item $v_j\in \Span(v_1,...,v_{j-1})$
+    \item If the $j^{th}$ term is removed from the list, the span of the remaining vectors
+      $v_1,\ldots,\hat{v_j}\footnote[1]{\text{here, hat means "with $v_j$ removed"}},\ldots,v_m$ equals $\Span(v_1,\ldots,v_m)$.
+  \end{enumerate}
+  In other words, removing the linearly dependent vector has no effect on the overall span of the
+  vectors.
+\end{lemma}
 \begin{proof}[Proof]
-  Let $a=T(1)$. Then for any $x\in \R$, \[
-    T(x) = T(x\cdot 1) = x\cdot T(1) = ax
-  .\] 
+  Because the list $v_1,\ldots,v_m$ is linearly dependent, there exist $a_1,\ldots,a_m\in \F$ not
+  all $0$ such that \[
+    a_1v_1+\ldots+a_mv_m=0
+  .\] Let $j$ be the \textit{largest element} of $\{ 1,\ldots,m \}$ such that $a_j\neq 0$. Then \[
+  v_j = -\frac{a_1}{a_j}v_1-\ldots-\frac{a_{j-1}}{a_j} \label{eq:lindep}
+  ;\] hence $v_j$ is in the span of $v_1,\ldots,v_{j-1}$.\\
+
+  Now, suppose $u\in \Span(v_1,\ldots,v_m)$. Then there exist $ b_1,\ldots,b_m\in \F$ such that \[
+    u = b_1v_1+\ldots+b_mv_m
+  .\] If we replace $v_j$ with \ref{eq:lindep}, the resulting list consists only of
+  $v_1,\ldots,\hat{v_j},\ldots,v_m$; thus we see that $u$ is in the span of the list.
+\end{proof}
+\begin{theorem}[Length of Linearly Independent List and Span]{}
+  In a finite-dimensional vector space, the length of every linearly independent list of vectors is
+  less than or equal to the length of every spanning list of vectors.
+\end{theorem}
+\begin{proof}[Proof]
+  Left as an exercise for the reader. Try starting with $u_1,\ldots,u_m\in V$ a list of linearly
+  independent vectors, and $v_1,\ldots,v_n\in V$ a spanning list of $V$, and show that $m\le n$. Use
+  the Linear Dependence Lemma to iteratively add $u_i$ and remove $w_j$; eventually, we are left
+  with a list of only $u_j$, 
 \end{proof}
 
-\begin{example}
-  Say $T:\R^2\to \R^2$ is a linear map such that $T(1,0)=(2,1)$ and  $T(0,1)=(1,-1)$. What else do
-  we know?
-   \begin{itemize}
-     \item $T(0,0)=(0,0)$
-     \item  $T(1,1)=T((1,0)+(0,1))=(2,1)+(1,-1)=(3,0)$
-     \item  $T(2,0)=(4,2)$
-  \end{itemize}
-\end{example}
+
+\section{Bases}
 
 
 
 
 
-
-
-
-
-
+  
 \end{document}

@@ -98,17 +98,18 @@ B$ for each $a\in A$. We write $f(a) =b$.
 \end{example}
 
 \begin{definition}[Functions]{}
-  Let $A, B$ be sets. A function $f: A \to B$ is a subset $G_f\subset A\times B$ such that $\forall
-  a\in A, !\exists b\in B~\text{s.t.}~\left( a,b \right) \in G_f$. We write $f(a)=b$ when  $\left(
+  Let $A, B$ be sets. A function $f: A \to B$ is a subset $G_f\subset A\times B$ such that for all
+  $a\in A$, there exists at most one $b\in B~\text{s.t.}~\left( a,b \right) \in G_f$. We write $f(a)=b$ when  $\left(
   a, b \right) \in G_f$.
 \end{definition}
 \begin{definition}[Codomain]{} 
   Given a function $ f: A \to B$, $A$ is the \textbf{domain} of $f$, and $B$ is the
   \textbf{codomain} or \textbf{target} of $f$. Let the \textbf{range} of $f$ be defined as \[
     \{b\in B\mid f(a) = b, a\in A\}
-  .\] The range is the subset of $B$.
+  .\]
 \end{definition}
-
+The range is the subset of $B$. Importantly, the number of elements in the range of $f$ cannot be
+larger than the number of elements in $A$, as each $f(a)$ maps to at most one $b\in B$.
 
 
 \begin{definition}[Bijectivity]{}
@@ -116,10 +117,10 @@ B$ for each $a\in A$. We write $f(a) =b$.
   \begin{enumerate}
     \item $f$ is \textbf{injective}, or an \textbf{injection}, if $ a_1,a_2\in A$ and $f(a_1)
       = f(a_2) $ implies $ a_1=a_2$.
-    \item $f$ is \textbf{surjective}, or a \textbf{surjection}, if $\forall b\in B, \exists a\in
-      A~\text{s.t.}~f(a)=b$. Equivalently, the range is the whole codomain.
+    \item $f$ is \textbf{surjective}, or a \textbf{surjection}, if for any $b\in B$, there exists an 
+      $a\in A$ such that $f(a)=b$. Equivalently, the range is the whole codomain.
     \item $f$ is \textbf{bijective}, or a \textbf{bijection}, if it is both injective and
-      surjective. Equivalently,  $\forall b\in B$, there is a unique $a\in A $ such that $f(a)=b$.
+      surjective. Equivalently, for every $b\in B$, there is a unique $a\in A $ such that $f(a)=b$.
   \end{enumerate}
 \end{definition}
 
@@ -129,16 +130,17 @@ Roughly speaking, a \textbf{field} is a set, together with operations addition a
 Vector spaces may be defined \textit{over} fields.
 \begin{definition}[Fields]{}
   A \textbf{field} is a set $\F$ containing elements named $0$ and $1$, together with binary
-  operations  $+$ and $\cdot $ satisfying:
+  operations $+$ and $\cdot $ satisfying, for all $a,b,c\in \F$:
   \begin{itemize}
-    \item \textbf{commutativity}: $a+b=b+a, a\cdot b=b\cdot a~\forall a,b\in \F$.
+    \item \textbf{commutativity}: $a+b=b+a, a\cdot b=b\cdot a$
     \item \textbf{associativity}: $a+(b+c)=(a+b)+c, a\cdot \left( b\cdot c \right) =\left( a\cdot b
-      \right) \cdot c, ~\forall a,b,c\in \F$.
-    \item \textbf{identities}: $0+a=a, 1\cdot a=a~\forall a\in \F$.
-    \item \textbf{additive inverse}: $\forall a\in \F, \exists b\in \F~\text{s.t.}~a+b=0$.
-    \item \textbf{multiplicative inverse}: $\forall a\in \F\setminus \{ 0 \}, \exists c\in
-      \F~\text{s.t.}~ac=1$.
-    \item \textbf{distributivity}: $a\cdot (b+c) = a\cdot b+a\cdot c~\forall a,b,c\in \F$.
+      \right) \cdot c$
+    \item \textbf{identities}: $0+a=a, 1\cdot a=a$
+    \item \textbf{additive inverse}: For any $a\in \F$, there exists a $b\in \F$ such that $a+b=0$.
+      We denote this $b=-a$
+    \item \textbf{multiplicative inverse}: For any $a\in \F$, $a\neq 0$, there exists a $b\in \F$
+      such that $ab=1$.
+    \item \textbf{distributivity}: $a\cdot (b+c) = a\cdot b+a\cdot c$.
   \end{itemize}
 \end{definition}
 \begin{example}
@@ -159,7 +161,7 @@ Vector spaces may be defined \textit{over} fields.
   \] and multiplication as \[
   (a+bi)(c+di) = (ac-bd)+(ad+bc)i
   .\] 
-  Showing $ \C$ is a set is left as an exercise for the reader.
+  Showing $ \C$ is a field is left as an exercise for the reader.
 \end{example}
 \begin{proposition}[$\C$ Multiplicative Inverse]{}
   For every $\alpha\in \C\setminus \{ 0 \}$, there exists $\beta\in \C$ with $\alpha\cdot \beta=1$.
@@ -199,7 +201,7 @@ this definition.
     \item (additive identity) There exists an element $0\in V$ such that $v+0=0+v=0$.
     \item (additive inverse) For all $v\in V$, there exists $w\in V$ such that $v+w=w+v=0$. We
       denote $w=-v$.
-    \item (commutativity) For all $v,w\in V$, $v+w=w+v$.
+    \item (additive commutativity) For all $v,w\in V$, $v+w=w+v$.
     \item (scalar multiplicative associativity) For all $ \alpha,\beta\in \F, v\in V$,
       $\alpha(\beta v)=(\alpha\beta)v$.
     \item (scalar multiplicative identity) There exists an element $1\in \F$ such that $1v=v$ for
@@ -238,6 +240,7 @@ this definition.
       .\] 
   \end{enumerate}
 \end{example}
+
 Perhaps counterintuitively, example 3 subsumes example 1! For example, let $S=\{1,2,\ldots,n\}$, and
 let $\R^{\{ 1,\ldots,n \}}$ be the set of all functions from $\{ 1,\ldots,n \}\to \R$. One such $f$
 may be \begin{align*}
@@ -269,8 +272,9 @@ From this, we get that the set of functions $\R^{\{ 1,\ldots,n \}}=\R^{n}$, the 
 
 But what about fields over fields? Are these vector spaces?
 \begin{example}
-  Say $\F\subseteq \mathbb{K}$ ($\F$ is a subfield of $\mathbb{K}$). Then $\mathbb{K}$ is a vector
-  space over $\F$, with addition defined as in $\mathbb{K}$, and with scalar multiplication defined
+  Let $\mathbb{K}$ be a field, and say $\F\subseteq \mathbb{K}$ ($\F$ is a subfield of
+  $\mathbb{K}$). Then $\mathbb{K}$ is a vector space over $\F$, with addition defined as in
+  $\mathbb{K}$, and with scalar multiplication defined
    \[
      \lambda\cdot x=\lambda x, ~\text{where}~ \lambda\in \F, x\in \mathbb{K}
    .\] Thus $\C$ is a real vector space (this is why we draw the complex plane like $\R^2$!).
@@ -304,7 +308,7 @@ $\F$.
   .\end{align*} Thus $w=w'$.
 \end{proof}
 
-Let us also define a notion of subtraction.
+Let us also define a notion of subtraction: we say $v-w=v+(-w)$.
 \begin{proposition}[-v]{}
   For any $v\in V$, \[
     -v = (-1)\cdot v
@@ -316,17 +320,47 @@ Let us also define a notion of subtraction.
   .\] Since every $v\in V$ has a unique additive inverse, $-v=(-1)\cdot v$.
 \end{proof}
 
+\begin{proposition}[0 Times a Vector]{}
+  For every $v\in V$, $0v=0$.
+\end{proposition}
+\begin{proof}[Proof]
+  For $v\in V$, we have \[
+    0v = (0+0)v = 0v + 0v
+  .\] Adding the additive inverse of $0v$ to both sides, we get $0v=0$.
+\end{proof}
+
+\begin{proposition}[Scalar Times \textbf{0}]{}
+  For every $a\in \F$, $a \textbf{0}=\textbf{0}$.
+\end{proposition}
+\begin{proof}[Proof]
+  For $a\in \F$, we have \[
+    a \textbf{0} = a(\textbf{0}+\textbf{0})=a \textbf{0}+ a \textbf{0}
+  .\] Adding the additive inverse to both sides yields $a \textbf{0}=\textbf{0}$.
+\end{proof}
+
+
+
+
 \section{Subspaces}
 Subspaces can greatly expand our examples of vector spaces.
 \begin{definition}[Subspaces]{}
-  A subset $U\subseteq V$ is a  \textbf{subspace} (or a \textbf{linear subspace}) of $V$ if
+  A subset $U\subseteq V$ is a \textbf{subspace} (or a \textbf{linear subspace}) of $V$ if $U$ is
+  also a vector space.
+
+  $U$ is a subspace of $V$ if and only if
   \begin{enumerate}
-    \item $\textbf{0} \in  U$.
+    \item $\textbf{0} \in U$.
     \item For all $u,w\in U$, $u+w\in U$.
     \item For all $u\in U$, $\lambda\in \F$, $ \lambda\cdot u\in U$.
   \end{enumerate}
-  We will see that these three properties are enough for $U$ to satisfy the six properties of vector
-  spaces (so $U$ is a vector space as well!).
+  That is, addition and scalar multiplication are \textbf{closed} in $U$, and the identity element
+  exists.
+
+  We see that these three properties are enough for $U$ to satisfy the six properties of vector
+  spaces: associativity, commutativity, and distributivity are automatically
+  satisfied, as they hold on the larger space $V$ (and so also hold on the subspace $U$); addition
+  and scalar multiplication make sense in $U$, and the additive identity exists; the third condition
+  guarantees the additive inverse ($-v=-1v$).
 \end{definition}
 
 
@@ -358,82 +392,81 @@ Let us now do a rough sketch of a proof that the list of subspaces of $\R^2$ is 
 \end{proof}
 
 
-\section{Span}
-Suppose a friend imagines a subspace $W\subseteq \R^3$. You know that $(1,0,0),(0,1,0)\in W$. What
-else do you know must be in $W$? Well, first, $\textbf{0}=(0,0,0)\in W$ by definition. But moreover,
-anything in the form $\{ (a,b,0) \mid a,b\in \R \}$ (the xy-plane) must be in $W$, since any point
-on the plane can be made by $ \alpha \cdot a + \beta \cdot b$ (we will later see that $(1,0)$ and
-$(0,1)$ are \textbf{basis vectors} of $\R^2$).
+\subsection{Sums of Subspaces}
 
-\begin{definition}[Linear Combination and Span]{}
-  A \textbf{linear combination}  of a list $ v_1,\ldots,v_n\in V$  is a vector of the form \[
-      \lambda_1v_1+\ldots+\lambda_nv_n, \lambda_i\in \F
-    .\]  The \textbf{span} (or \textbf{linear span}) of $ v_1,\ldots,v_n$, also denoted
-    $\text{span}(v_1,\ldots,v_n)$ is the set of all linear combinations of $ v_1,\ldots,v_n$: \[
-      ~\text{span}(v1,\ldots,v_n): \{ a_1v_1+\ldots+a_mv_m \mid a_i\in \F\}
-    .\] 
+With vector spaces, we are primarily only interested in subspaces, not arbitrary subsets. Thus, the
+notion of the sum of subspaces is useful.
+\begin{definition}[Sum of Subsets]{}
+  Suppose $ U_1,\ldots,U_m$ are subsets of $V$. The \textbf{sum} of $ U_1,\ldots,U_m$, denoted $
+  U_1+\ldots+U_m$, is the set of all possible sums of elements of $ U_1,\ldots,U_m$. Precisely, \[
+    U_1+\ldots+U_m = \{u_1+\ldots+u_m\mid u_1\in U_1, \ldots,u_m\in U_m \} 
+  .\] 
 \end{definition}
 
-\begin{proposition}[Span is Smallest Subspace]{}
-  The span of $v_1,\ldots,v_m$ is the smallest subspace of $V$ containing $ v_1,\ldots,v_m$.
-  Precisely:
-  \begin{enumerate}
-    \item $~\text{span}(v_1,\ldots,v_m)$ is a subspace of $V$.
-    \item Any subspace  $W$ of $V$ containing $v_1,\ldots,v_m$ also contains
-      $~\text{span}(v_1,\ldots,v_m)$.
-  \end{enumerate}
-\end{proposition}
+\begin{example}
+  Suppose $V=\R^3$. Let $ U_1=\{(x,0,0)\in \R^3\mid x\in \R\}$ be the subspace containing elements
+  with only $x$ components, and $ U_2=\{(0,y,0)\in \R^3\mid y\in \R\} $ be the subspace containing
+  elements with only $y$ components. Then \[
+    U_1+U_2=\{(x,y,0)\R^3\mid x,y\in \R\} 
+  ,\] or the $xy$-plane. 
+\end{example}
 
+Are these sums of subspaces actually subspaces themselves? Indeed, it is the smallest subspace
+containing all of the individual subspaces.
+
+\begin{proposition}[Sum of Subspaces]{}
+  Suppose $U_1,\ldots,U_m$ are subspaces of $V$. Then $U_1+\ldots+U_m$ is the smallest subspace of
+  $V$ containing $U_1,\ldots,U_m$.
+\end{proposition}
 \begin{proof}[Proof]
-  Given $W\subseteq V$ is a subspace, and $ v_1,\ldots,v_m\in W$, we wish to show $W$ contains
-  $\Span(v_1,\ldots,v_m)=\{a_1v_1+\ldots+a_mv_m\mid a_i\in \F \} $. \\
-  Given $ a_1,\ldots,a_m\in \F$, we wish to show \[
-    a_1v_1+\ldots+a_mv_m\in W
-  .\] We know $ a_1v_1,\ldots,a_mv_m\in W$ since $W$ is closed under scalar multiplication.
-  Additionally, $ a_1v_1+\ldots+a_mv_m\in W$ since $W$ is closed under vector addition. Hence $W$ 
-  contains $\Span(v_1,\ldots,v_m)$.\\
-  Thus any subspace $W\subseteq V$ of $ v_1,\ldots,v_m$ also contains $\Span(v_1,\ldots,v_m)$.
-  Now, we wish to show  $\Span(v_1,\ldots,v_m)=\{a_1v_1+\ldots+a_mv_m\mid a_i\in \F\} $ is a
-  subspace.\\
-  $0\in \Span(v_1,\ldots,v_m)$ (choose $a_i=0$ for every coefficient).\\
-  Given $ a_1,\ldots,a_m\in \F,b_1,\ \ldots,b_m\in \F$, we have $ (a_1v_1+\ldots+a_mv_m) + (b_1v_1+\ldots+b_mv_m)\in \Span(v_1,\ldots,v_m)$, as $ a_1+b_1\in
-  \F$.\\
-  Thus $\Span(v_1,\ldots,v_m)$ is a subspace of $V$.
+  Clearly, $0\in U_1+\ldots+U_m$ and addition and scalar multiplication in $U_1+\ldots+U_m$ is
+  closed. Thus  $U_1+\ldots+U_m$ is a subspace of  $V$.\\
+
+  To show that it is the smallest, observe first that $ U_1,\ldots,U_m$ are all contained in
+  $U_1+\ldots+U_m$ (for $U_j$, simply set $u_i=0$ for any $i\neq j$). Additionally, every subspace
+  of $V$ containing $  U_1,\ldots,U_m$ contains $U_1+\ldots+U_m$ as well, since subspaces must
+  contain all finite sums of their elements (in this case, $u_i\in U_i$). Thus, since
+  $U_1+\ldots+U_m$ contains every individual subspace, and any subspace containing  $U_1,\ldots,U_m$ 
+  also contains $U_1+\ldots+U_m$, we have that  $U_1+\ldots+U_m$ is the smallest subspace containing
+   $U_1,\ldots,U_m$.
 \end{proof}
 
-\begin{definition}[Empty Span]{}
-  The span of no vectors is $\{ 0 \}$.
+\subsection{Direct Sums}
+Suppose $ U_1,\ldots,U_m$ are subspaces of $V$. Every element of $U_1+\ldots+U_m$ can be written as
+ \[
+  u_1+\ldots+u_m
+,\]  where each $u_j$ is in $U_j$. Like the concept of injectivity, we are interested in the case
+when each vector in $U_1+\ldots+U_m$ can only be written in one way. We call these  \textbf{direct
+sums}.
+
+\begin{definition}[Direct Sum]{}
+  Suppose $U_1,\ldots,U_m$ are subspaces of $V$. The sum $U_1+\ldots+U_m$ is a \textbf{direct sum}
+  if each element of $U_1+\ldots+U_m$ can be written in only one way as a sum $u_1+\ldots+u_m$,
+  where $u_j\in U_j$. We denote this sum \[
+    U_1\oplus \ldots\oplus U_m
+  .\] 
 \end{definition}
 
-\begin{definition}[Span Is Vector Space]{}
-  If $\Span(v_1,\ldots,v_m)=V$, then $ v_1,\ldots,v_m$ \textbf{span} $V$, and  $v_1,\ldots,v_m$ are
-  a \textbf{spanning set}.
-\end{definition}
+Two theorems are useful in determining if a sum of subspaces is a direct sum. Their proofs are left
+as an exercise for the reader.
+\begin{theorem}[Condition for a Direct Sum]{}
+  Suppose $U_1,\ldots,U_m$ are subspaces of $V$. Then $U_1+\ldots+U_m$ is a direct sum if and only
+  if the only way to write \[
+    0 = u_1+\ldots+u_m
+  \] is by setting each $u_j=0$.
+\end{theorem}
+\begin{proof}[Proof]
+  One direction is easy. To show the other direction, assume there are multiple ways to write a
+  vector $v$, and perform arithmetic $0=v-v$ to arrive at $u_j=0$.
+\end{proof}
 
-\begin{definition}[Finite Dimentional Vector Spaces]{}
-  If $V$ is spanned by a \textbf{finite} list of of vectors $v_1,\ldots,v_m$ then $V$ is
-  \textbf{finite-dimensional}.
-\end{definition}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{theorem}[Direct Sum of Two Subspaces]{}
+  Suppose $U,W$ are subspaces of $V$. Then $U+W$ is a direct sum if and only if $U\cap W=\{ 0 \}$.
+\end{theorem}
+\begin{proof}[Proof]
+  If we know direct sum, then there is only one way to write $0=v+ -v$ ($v\in U\cap W$). For the
+  other direction, try writing $0=u+w$ for some $u\in U$, $w\in W$, and showing that $u=w=0$ 
+  necessarily.
+\end{proof}
 
 \end{document}
