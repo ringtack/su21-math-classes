@@ -228,7 +228,7 @@
             $e$) does not commute with any $\pi_i\in \prod$.
 
             Since for any $n\ge 3$, there exists some non-trivial $\pi_i\in \prod$, and some
-            non-trivial $\pi\not\in \prod$, the only element that commutes with every $pi\in
+            non-trivial $\pi\not\in \prod$, the only element that commutes with every $\pi\in
             \mc{S}_n$ is $e$; therefore $Z(\mc{S}_n)=\{ e \}$.
       \end{proof}
     \item For odd $n\ge 3$, $Z(\D_n)=\{ e \}$; for even $n\ge 3$, $Z(\D_n)=\{e,r_{\frac{n}{2}}\}$,
@@ -273,7 +273,152 @@
       
   \end{enumerate}
 
+  \hrule
+  \vspace{1ex}
   (2.34) We start with two lemmas:
+  \begin{lemma}[]{}
+    If a group $G$ only has trivial subgroups, then for any $g\in G$, $\left| g \right| =\left| G
+    \right| $.
+  \end{lemma}
+  \begin{proof}[Proof]
+    By Corollary 2.42, any $g\in G$ has order $m$, where $m|n$; thus there exists a $k\in \Z$ such
+    that $km=n$. Let $\left| g \right| =m$, $\left| G \right| =n$, and suppose $m<n$; then $k>1$.
+    But if $k\ge 2$, then $\left<g \right>$ would form a cyclic subgroup of of order $\frac{n}{k}<n$,
+    a contradiction of $G$ having only trivial subgroups. Hence $\left| g \right|=\left| G \right|$.
+  \end{proof}
+  \begin{lemma}[]{}
+    Every group $G$ with prime order is cyclic.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Let $\left| G \right| =n$. By Corollary 2.42, every $g\in G$ has order $m|n$; but since $n$ is
+    prime, either $m=1$ ($g=e$) or $m=n$. Then $\left<g \right>=\{ e,\ldots,g^{n-1} \}$, so $\left|
+    \left<g \right> \right| =n=\left| G \right| $. Thus $G=\left<g \right>$, so $G$ is a cyclic
+    group.
+  \end{proof}
+
+  Now, suppose $G$ only has trivial subgroups $\{ e \}$ and $G$. From the first lemma, we see that
+  every $g\in G$ has order $n$. Trivially, $G=\{ e \}$ is a valid group; so consider only $G\neq \{
+  e\}$.
+
+  Suppose $\left| G \right| $ is composite. Then for some $a,b\in \Z,\ a>1,\ b>1$, $n=ab$. Thus
+  $g^{n}=g^{ab}=e$. By closure of a group, if $g\in G$, then $g^{a}\in G$ as well. Then
+  $g^{n}=g^{ab}=(g^{a})^{b}=e$, so $g^{a}$ has order $b<n$; but that contradicts every $g\in G$
+  having order $n$. Thus $\left| G \right| $ is prime. By the second lemma, $G$ is cyclic.
+
+  Therefore, if $G$ only has trivial subgroups $\{ e \}$ and $G$, then $G$ is either $\{ e \}$, or a
+  cyclic group with prime order.
+\end{solution}
+
+\begin{problem}{\S 4}
+  (2.32) Let $G$ be a group, and let $g\in G$. The \textbf{centralizer} of $G$ is defined \[
+    Z_G(g) = \{ g'\in G \mid gg'=g'g \}
+  .\] 
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $Z_G(g)$ is a subgroup of $G$.
+    \item Compute $Z_G(g)$ for the following groups and elements:
+      \begin{enumerate}
+        \item $G=\D_4$, $g=\rho_1$ ($90^{\circ}$ rotation).
+        \item $G=\D_4$, $g=f$ a flip fixing two vertices of a square.
+        \item $G=\GL_2(\R)$, $g=\begin{pmatrix} a&0\\0&d \end{pmatrix} $.
+      \end{enumerate}
+    \item Prove that $Z_G(g) = G$ iff $g\in Z(G)$ (the center of $G$).
+    \item More generally, if $S\subseteq G$ is any subset, then \[
+      Z_G(S) = \{g\in G\mid sg=gs ~\text{for all $s \in S$}~\} 
+    .\] Prove that $Z_G(S)$ is a subgroup of $G$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $ g_1,g_2\in Z_G(g)$. Then
+      \begin{align*}
+        gg_1g_2=(g_1g)g_2=g_1(g_2g)=g_1g_2g 
+      .\end{align*} Hence $g_1g_2$ commutes with $g$, and so $g_1g_2\in Z_G(g)$.
+
+      By definition, the identity $e$ commutes with any $g\in G$; thus $e\in Z_G(g)$.
+
+      Let $g'\in Z_G(g)$. Then
+      \begin{align*}
+        gg'&= g'g \\
+        g'^{-1}gg'&= g'^{-1}g'g \\
+        g'^{-1}gg'g'^{-1}&= gg'^{-1} \\
+        g'^{-1}g&=gg'^{-1}
+      .\end{align*} Hence $g'^{-1}\in Z_G(g)$ as well, and so $Z_G(g)$ is a subgroup of $G$.
+    \item
+      \begin{enumerate}
+        \item $Z_{\D_4}(\rho_1)=\{ e, \rho_1,\rho_2,\rho_3 \}$
+        \item $Z_{\D_4}(f)=\{ e, \phi_1, \phi_3, \rho_2 \}$ 
+        \item 
+          \[
+            \begin{pmatrix} a&0\\0&d \end{pmatrix} \begin{pmatrix} a_1&b_1\\c_1&d_1 \end{pmatrix}
+            =\begin{pmatrix} aa_1&ab_1\\c_1d&dd_1 \end{pmatrix} 
+          .\] 
+          \[
+            \begin{pmatrix} a_1&b_1\\c_1&d_1 \end{pmatrix} \begin{pmatrix} a&0\\0&d \end{pmatrix}
+            =\begin{pmatrix} aa_1&b_1d\\ac_1&dd_1 \end{pmatrix} 
+          .\] 
+            Thus, if $a=d$, then $Z_{\GL_2(\R)}\begin{pmatrix} a&0\\0&d \end{pmatrix} =\GL_2(\R)$.
+            Otherwise, \[Z_{\GL_2(\R)}\begin{pmatrix} a&0\\0&d \end{pmatrix} =\left\{ \begin{pmatrix}
+          a_1&0\\0&d_1\end{pmatrix}\mid a_1\neq d\lor d_1\neq a  \right\}\]
+      \end{enumerate}
+    \item Suppose $Z_G(g)=G$. Then for any $g'\in G$, we have $gg'=g'g$. By definition, this means
+      that $g\in Z(G)$.
+    
+      Conversely, suppose $g\in Z(G)$. Then for any $g'\in G$, we have $gg'=g'g$; but this means
+      that every $g'\in G$ is also in $Z_G(g)$. Hence $Z_G(g)=G$.
+    \item Let $S\subseteq G$, and consider $g_1,g_2\in Z_G(S)$. We have
+      \[
+        sg_1g_2=g_1sg_2=g_1g_2s
+      ;\] hence $g_1g_2\in Z_G(S)$.
+
+      $e\in Z_G(S)$, as for any $s\in S\subseteq G$, we have $es=se$.
+
+      Let $g\in Z_G(S)$. We have
+      \begin{align*}
+        sg&= gs \\
+        sgg^{-1}&=gsg^{-1}\\
+        g^{-1}s&=g^{-1}gs\\
+        g^{-1}s&=sg^{-1}
+      .\end{align*} Hence $g^{-1}\in Z_G(S)$, and so $Z_G(S)$ is a subgroup of $G$.
+  \end{enumerate}
+\end{solution}
+
+
+\begin{problem}{\S 5}
+  Calculate the order of $(1,2)\in \Z / 3\Z \times \Z / 4\Z$, then complete (2.38)
+  Let $G$ be a group, and $A,B$ subgroups of $G$, and consider the map \[
+    \phi: A\times B\to G,\ \phi(a,b)=ab
+  .\] 
+  \begin{enumerate}[label=(\alph*)]
+    \item If $G$ is Abelian, prove that $ \phi$ is a homomorphism.
+    \item If $G$ is Abelian, prove that \[
+          \ker(\phi)=\{(c,c^{-1})\mid c\in A\cap B\} 
+      .\] 
+    \item Suppose that there are elements $a\in A,\ b\in B$ with $ab\neq ba$. Prove that $\phi$ is
+      \textbf{not} a homomorphism.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  The order of $(1,2)$ is $6$: $1\in \Z / 3\Z$ has order $3$, while $2\in \Z / 4\Z$ has order $2$;
+  from this, we can easily determine the order to be $6$.
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $a_1,a_2\in A,\ b_1,b_2\in B $. We have \[
+        \phi(a_1a_2,b_1b_2) =
+        (a_1a_2)(b_1b_2)=a_1(a_2b_1)b_2=a_1(b_1a_2)b_2=(a_1b_1)(a_2b_2)=\phi(a_1b_1)\phi(a_2b_2)
+      .\] Hence $\phi$ is a homomorphism.
+    \item Suppose $\phi(a,b)=ab=e$. This is only the case when $a$ and $b$ are inverses; in other
+      words, $a=b^{-1}$ and $b=a^{-1}$. We have $b\in B$; but if $b=a^{-1}$, since (by definition of a
+      subgroup) $a^{-1}\in A$, we have $b\in A$ has well. In other words, $b\in A\cap B$. Similarly,
+      since $a=b^{-1}$, and $b^{-1}\in B$, we have $a\in B$, and so $a\in A\cap B$.
+
+      Therefore $a,b\in A\cap B$, and $b=a^{-1}$, $a=b^{-1}$. In other words, if $\phi(a,b)=e$,
+      then $a=c,\ b=c^{-1},\ c\in A\cap B$. Hence $\ker(\phi)=\{ (c,c^{-1})\mid c\in A\cap B \}$.
+    \item Suppose there exists $a\in A,\ b\in B$ with $ab\neq ba$. Let $a_1\in A,\ b_1\in
+      B$. Then \[
+        \phi(a_1a,bb_1)=a_1abb_1\neq a_1bab_1=\phi(a_1,b)\phi(a,b_1)
+      .\] Hence $\phi$ is not a homomorphism.
+  \end{enumerate}
 \end{solution}
 
 
