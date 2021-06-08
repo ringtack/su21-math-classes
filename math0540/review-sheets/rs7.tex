@@ -1,0 +1,59 @@
+\documentclass{review-sheet}
+\homework{7}
+
+\begin{document}
+
+\begin{problem}{\S 2}
+  Consider the following list of vectors in $\R^3$. From left to right, remove each vector if it is
+  in the span of the vectors to the left of it. What list of vectors remains?
+  \[
+    (1,1,0),\ (-2,-2,0),\ (0,0,0),\ (0,0,4),\ (1,1,1),\ (4,0,0),\ (0,1,1),\ (4,-5,3),\ (7,2,2)
+  .\] 
+\end{problem}
+\begin{solution}
+  $(1,1,0)$ remains. $(-2,-2,0),\ (0,0,0)$ are removed. $(0,0,4)$ remains. $(1,1,1)$ is removed.
+  $(4,0,0)$ remains. $(0,1,1),\ (4,-5,3),\ (7,2,2)$ are removed. Thus, the final list is \[
+    (1,1,0),\ (0,0,4),\ (4,0,0)
+  .\] 
+\end{solution}
+
+\begin{problem}{\S 3}
+  Let $V$ be a finite-dimensional vector space over a field $\F$. Prove the following statements
+  briefly.
+  \begin{enumerate}[label=(\alph*)]
+    \item If $\dim{V}>0$, then $V$ has a non-zero vector.
+    \item If $\dim{V}=0,$ then $V=\{ 0 \}$.
+    \item If $U$ is a subspace of $V$, then $\dim{U}\le \dim{V}$.
+    \item If $T:V\to W$ is injective, then $\dim{V}=\dim{\range{T}}$. Then, conclude that if $W$ is
+      finite-dimensional, $\dim V \le \dim W$.
+    \item If $T:V\to W$ is surjective, then $\dim V \ge \dim W$.
+    \item If $T:V\to W$ is bijective, then $\dim V = \dim W$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item If $\dim V = n > 0$, then $V$ has a length-$n$ basis with non-zero vectors $
+      v_1,\ldots,v_n$ (if $v_i=0$, then the list would be linearly dependent and thus not a basis).
+      Thus there exists a non-zero $v\in \Span(v_1,\ldots,v_n)=V$.
+    \item If $\dim V = 0$, then $V$ only has basis $()$ (the empty basis). Since the span of the
+      empty basis is just $\{ 0 \}$, we have $V=\{ 0 \}$. 
+    \item If $U$ is a subspace of $V$, then the basis of $U$ is a linearly independent (not
+      necessarily spanning) list of vectors in $V$. Thus the basis of $V$ has at least as many
+      elements as the basis of $U$, and so $\dim U \le \dim V$.
+    \item If $T:V\to W$ is injective, then $T$ has a trivial kernel (that is, $\Null{T}=\{ 0 \}$,
+      and so $\dim\Null{T}=0$); by the rank-nullity theorem, we have $\dim V = \dim\Null{T} +
+      \dim\range{T}=0+\dim{\range{T}}=\dim\range{T}$, as required. Moreover, since $ \range T$ is a
+      subspace of $W$, by part (c), we have $\dim\range{T}=\dim{V}\le \dim{W}$.
+    \item If $T:V\to W$ is surjective, then $W=\range{T}$; by the rank-nullity theorem, we have
+        $\dim{V}=\dim\Null{T}+\dim\range{T}\ge \dim\range{T}=\dim{W}$, as required.
+      \item By part (c), $\dim V = \dim\range T$; and by surjectivity, $\range T = W$. Hence $\dim V
+        = \dim \range T = \dim W$, as required.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+
+\end{document}

@@ -90,6 +90,9 @@
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Imag}{Imag}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\trace}{tr}
 \DeclareMathOperator{\Spec}{Spec}
