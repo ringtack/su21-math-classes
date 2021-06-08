@@ -19,7 +19,7 @@
 
 \begin{solution}
   \begin{enumerate}[label=(\alph*)]
-    \item $\mc{C}_2=\{ e,g \}$, $ \mc{S}_2=\{ e,\pi \}$. Define a mapping $\phi:\mc{C}_2\to \S_2$,
+    \item $\mc{C}_2=\{ e,g \}$, $ \mc{S}_2=\{ e,\pi \}$. Define a mapping $\phi:\mc{C}_2\to \mc{S}_2$,
       where $\phi(e)=e,\ \phi(g)=\pi$. $\phi$ is clearly a bijective homomorphism; thus $\mc{C}_2$ 
       is isomorphic to $ \mc{S}_2$.
     \item Let $\phi_3:\D_3\to \mc{S}_3$ be the mapping that sends every $\sigma\in \D_3$ to the
@@ -218,9 +218,10 @@
         Consider the set of bijective permutations $\prod$, where for some $\pi_j\in \prod$, \[
           \pi_j(i)=\left\{ \begin{array}{lr} i&i=j\\k~(\text{for some}~k\neq i)&i\neq
           j\end{array}, i,j,k\in \{ 1,2,\ldots,n \}\right.
-            \] Let $\pi_i \in \prod$, $i\in \{ 1,\ldots,n \}$, and consider any permutation $\pi$
-            not in $\prod$ (except $e$). Suppose $\pi(i)=j$ for some $j\in \{ 1,\ldots,n \}$, and
-            let $k$ be some number in $\{ 1,\ldots,n \}$ such that $\pi_i(j)=k$. Then \[
+            \] Let $\pi_i \in \prod$, $i\in \{ 1,\ldots,n \}$, and consider any non-trivial
+            permutation $\pi$ not in $\prod$. Suppose $\pi(i)=j$ for some $j\in \{ 1,\ldots,n \}$,
+            $j\neq i$, and let $k$ be some number in $\{ 1,\ldots,n \}$ such that $\pi_i(j)=k$. Then
+            \[
               \pi_i\circ \pi(i) = \pi_i(j) = k
             ,\] while \[
               \pi\circ \pi_i(i) = \pi(i)=j
@@ -405,7 +406,7 @@
   \begin{enumerate}[label=(\alph*)]
     \item Let $a_1,a_2\in A,\ b_1,b_2\in B $. We have \[
         \phi(a_1a_2,b_1b_2) =
-        (a_1a_2)(b_1b_2)=a_1(a_2b_1)b_2=a_1(b_1a_2)b_2=(a_1b_1)(a_2b_2)=\phi(a_1b_1)\phi(a_2b_2)
+        (a_1a_2)(b_1b_2)=a_1(a_2b_1)b_2=a_1(b_1a_2)b_2=(a_1b_1)(a_2b_2)=\phi(a_1,b_1)\phi(a_2,b_2)
       .\] Hence $\phi$ is a homomorphism.
     \item Suppose $\phi(a,b)=ab=e$. This is only the case when $a$ and $b$ are inverses; in other
       words, $a=b^{-1}$ and $b=a^{-1}$. We have $b\in B$; but if $b=a^{-1}$, since (by definition of a
