@@ -135,7 +135,6 @@
 \newcommand{\R}{\mathds{R}}
 \newcommand{\Q}{\mathds{Q}}
 \newcommand{\C}{\mathds{C}}
-\newcommand{\cS}{\mathcal{S}}
 \newcommand{\D}{\mathcal{D}}
 
 
