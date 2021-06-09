@@ -1,0 +1,88 @@
+\documentclass{homework}
+\homework{4}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      Prove that if $\alpha$ is a cut, then \[
+        -\alpha := \{c-b\mid c\in \Q,c<0,b\in \Q\setminus \alpha\} 
+      \] is a cut.
+    \item Prove that for all cuts $ \alpha$, $ \alpha\ge 0^*$ if and only if $-\alpha\le 0^*$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Clearly, $-\alpha\neq \varnothing$. Choose any $c\in \Q$, $c<0$; since $\alpha$ is a cut,
+      there exists a $b\in \Q\setminus \alpha$, and so $ c-b\in \alpha\neq \varnothing$.
+      Additionally, $-\alpha\neq \Q$, as one can choose any $a\in \alpha$; $c-\alpha\not\in
+      -\alpha$. Thus property (i) holds.
+
+      Observe that $c\in 0^*$. Suppose $r\in -\alpha$; then $r=c_1-b_1$ for some $ c_1\in 0^*$, $
+      b_1\in \Q\setminus \alpha$. For any $s \in \Q$, if $s<r$, then either
+      \begin{itemize}
+        \item $s=c_2-b_1,\ c_2<c_1$. By property (ii) for $0^*$, for any $c\in 0^*$, if $c'\in \Q$ 
+          and $c'<c$, then $c'\in 0^*$. Hence $s=c_2-b_1\in -\alpha$, as required.
+        \item $s=c_1-b_2,\ b_2>b_1$. By property (ii), if $ b_1\in \Q\setminus \alpha$, and $
+          b_2>b_1$, then $ b_2\in \Q\setminus \alpha$ as well. Hence $s=c_1-b_2\in -\alpha$, as
+          required.
+      \end{itemize}
+      Thus property (ii) holds.
+
+      For any $r\in -\alpha$, where $r=c_1-b_1$, since $ c_1\in 0^*$, we can choose $ c_2\in 0^*$
+      such that $ c_2>c_1$ (by property (iii) of $0^*$), and so there exists an $s \in -\alpha$,
+      where $s=c_2-b_1>c_1-b_1=r$. Thus property (iii) holds.
+
+      Therefore all three properties hold, and so $-\alpha$ is a cut.
+
+    \item Suppose $a\ge 0^*$. Then $0^*\subset \alpha$. Let $r\in -\alpha$. Then $r=c-b$ for some
+      $c\in 0^*$, $b\in \Q\setminus \alpha$. Since $b\in \Q\setminus \alpha$, and $0\in \alpha$, we
+      have $0<b$ by property (ii) (and so $-b<0$); moreover, $c<0$ for any $c\in 0^*$. Thus, we have \[
+        r = c - b < 0 - b = -b < 0
+      ,\] and so $r<0$; hence $r\in -\alpha$ implies that $r\in 0^*$, and so $-\alpha\subset 0^*$.
+      Therefore $-\alpha\le 0^*$.\\
+
+      Now, suppose that $-\alpha\le 0^*$. Then $-\alpha\subset 0^*$; that is, for any $r\in
+      -\alpha$, where $r=c-b$ for some $c\in 0^*$, $b\in \Q\setminus \alpha$, we have $r=c-b<0$.
+
+      Since $b\in \Q\setminus \alpha$, any $b$ satisfies $a<b$ for any $a\in \alpha$. Moreover,
+      $r=c-b<0$ implies that $c<b$ for all $c\in 0^*$. In other words, $b\ge 0$; and by the
+      denseness of $Q^*$, there exists an $a\in \Q$ such that $a\le b$ and $0\le a$. Since $a<b$, we
+      have $a\in \alpha$; hence $0^*\subset \alpha$, and so $0^*\le \alpha$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Let $ \alpha$ be a cut, $\alpha>0^*$. Prove that \[
+    \alpha^{-1} := \{r\in \Q\mid r<0\} \cup \{r\in \Q\mid 0\le r<t~\text{for some $t\in \Q$ such that
+    $\frac{1}{t}\not\in \alpha$}~\} 
+  \] is a cut and $\alpha^{-1}>0^*$.
+\end{problem}
+\begin{solution}
+  Clearly, $ \alpha^{-1}\neq \varnothing$ (since $-1\in \alpha^{-1}$) and $ \alpha^{-1}\neq \Q$
+  (choose any $s>t$; $s\not\in \alpha^{-1}$). Thus property (i) holds.
+
+  Suppose $r\in \alpha^{-1}$, and let $s \in \Q$ such that $s<r$. If $s<0$, clearly $s \in
+  \alpha^{-1}$, so choose $s\ge 0$. Since $0^*<\alpha$, there exists an $a\in \alpha$ that satisfies
+  $a>0$; and by properties of ordered fields, we know $a^{-1}=\frac{1}{a}>0$. Hence if
+  $\frac{1}{t}\not\in \alpha$, then $\frac{1}{t}>a>0$ and so $t>0$. From this, we get $0\le s<r<t$,
+  and so $s \in \alpha^{-1}$. Thus property (ii) holds.
+
+  Suppose $r\in alpha^{-1}$, and choose $s=\frac{r+t}{2}$. Since $s=\frac{r+t}{2}<\frac{t+t}{2}=t$,
+  $s<t$; additionally, $s=\frac{r+t}{2}>\frac{r+r}{2}=r$, so $r<s$. From this, we get that $0\le
+  r<s<t$, and so $s \in \alpha^{-1}$. Hence for any $r\in\alpha^{-1}$, there exists an $s \in
+  \alpha^{-1}$ such that $r<s$.
+
+  Since $\alpha>0$, any $a\in \alpha$ satisfies $\alpha>0$; thus any $t\not\in \alpha$ satisfies
+  $t>\alpha>0$. Choose any $0\le s<t$; clearly $s\not\in 0^*$, so we have $0^*\neq alpha^{-1}$.
+  Since we also have $0^*\le  \alpha^{-1}$ (one can easily see $0^*=\{r\in \Q\mid r<0\}\subset
+  \alpha^{-1} $), we necessarily have $0^* < \alpha^{-1}$.
+\end{solution}
+
+
+
+
+
+\end{document}
