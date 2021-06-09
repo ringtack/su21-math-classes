@@ -1,0 +1,120 @@
+\documentclass[math1530-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Rings: Part I}
+
+Unlike groups, which were completely new, the concept of a \textbf{ring} is mildly familiar! Some
+examples of rings include:
+\begin{itemize}
+  \item $\Z,\ \Q,\ \R$, and $\C$ are rings ($\Q,\ \R$, and $\C$ are actually \textbf{fields}, a
+    special type of ring; such is a discussion for later)
+  \item The set of integers modulo $m$ is a ring
+\end{itemize}
+
+These examples all share something in common: they each have two operations, "addition" and
+"multiplication", and each operation individually satisfies some axioms, along with the \~great and
+powerful\~ distributive law.
+
+In general, a ring is a set with two operations satisfying a bunch of axioms that are modeled after
+the properties of addition and muliplication of integers. We will now formalize this.
+
+\section{Abstract Rings and Ring Homomorphisms}
+
+\begin{definition}[Rings]{}
+  A \textbf{ring} $R$ is a set with two operations, generally called \textbf{addition} and
+  \textbf{multiplication} and written
+  \begin{align*}
+    \underbrace{a+b}_{\text{addition}} &&\text{and}&& \underbrace{a\cdot b
+    ~\text{or}~ab}_{\text{multiplication}}
+  \end{align*}
+  satisfying the following axioms:
+  \begin{enumerate}
+    \item The set $R$ with addition law $+$ is an Abelian group, with identity $0$ (or $0_R$).
+    \item The set $R$ with multiplication law $\cdot $ is a \textbf{monoid} (associative, identity,
+      \textbf{but no inverse}), with identity $1$ (or $1_R$\footnote{to avoid the trivial ring, we
+      require $1_R\neq 0_R$; however, this is not strictly required}).
+    \item \textbf{Distributive Law}: For all $a,\ b,\ c\in R$, we have
+      \begin{align*}
+        a\cdot (b+c)=a\cdot b+a\cdot c && \text{and} && (b+c)\cdot a= b\cdot a+c\cdot a
+      .\end{align*}
+    \item If, in addition to these three properties, $a\cdot b=b\cdot a$ for all $a,\ b\in R$, then
+      $R$ is a \textbf{commutative} ring.
+  \end{enumerate}
+\end{definition}
+
+Experience with the integers seems to suggest that $0_R\cdot a=0_R$, and $(-a)\cdot (-b)=a\cdot b$;
+yet why are these true? $0_R$ is the definition of the identity element for \textit{addition}, so
+why should it say anything about \textit{multiplication}? Similarly, $-a$ relates to the definition
+of \textit{additive} inverse, but what does that tell us about its product with other elements in
+$R$? To show these intuitively obvious claims, we need the distributive law.
+
+\begin{proposition}[]{}
+  \begin{enumerate}
+    \item $0_R\cdot a=0_R$ for all $a\in R$.
+    \item $(-a)\cdot (-b)=a\cdot b$ for all $a,\ b\in R$. In particular, we have $(-1_R)\cdot a=-a$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item Note that $1_R=0_R+0_R$. Then
+      \begin{align*}
+        a &= 1_R\cdot a && [1_R~\text{is the muliplicative identity}~]\\
+          &= (1_R+0_R)\cdot a &&[~\text{from above}~]\\
+          &= 1_R\cdot a+0_R\cdot a && [~\text{from distributivity}~] \\
+          &= a+0_R\cdot a \\
+      .\end{align*}
+      Adding $-a$ to both sides, we get \[
+        0_R = 0_R + 0_R\cdot a
+      ,\] and so $0_R \cdot a=0_R$.
+
+    \item First, we show that $(-1_R)\cdot a=-a$:
+      \begin{align*}
+        a + (-1_R)\cdot a&= 1_R\cdot a+(-1_R)\cdot a \\
+                         &= (1_R+ -1_R)\cdot a \\
+                         &= 0_R\cdot a \\
+                         &= 0_R
+       .\end{align*}
+       Hence $(-1_R)\cdot a$ is the inverse of $a$, and so $-a=(-1_R)\cdot a$.
+
+       Now, observe that $-ab = (-a)b$ (this proof is left as an exercise for the reader). Then
+       \begin{align*}
+         (-a)\cdot (-b) + -ab &= (-a)\cdot (-b) + (-a)\cdot b \\
+                              &= (-a)\cdot (-b+b) \\
+                              &= (-a)\cdot 0_R \\
+                              &= 0_R
+      .\end{align*}
+      Thus $(-a)\cdot (-b)$ is the inverse of $-ab$, and so $(-a)\cdot (-b)=ab$.
+  \end{enumerate}
+\end{proof}
+
+Just like groups, we want to investigate maps \[
+  \phi:R\to R'
+\] from one ring to another that respect the \textit{ring-i-ness} of $R$ and $R'$. Since rings are
+characterized by their addition and multiplication properties, we get the following definition.
+
+\begin{definition}[Ring Homomorphisms]{}
+  Let $R,\ R'$ be rings. A \textbf{ring homomorphism} from $R$ to $R'$ is a function $\phi:R\to R'$ 
+  satisfying\footnote{we have the first axiom to disallow the boring and trivial zero map $\phi:R\to
+  R'$, $\phi(a)=0_{R'}$.}
+  \begin{enumerate}
+    \item $\phi(1_R)=1_{R'}$
+    \item $\phi(a+b) = \phi(a) + \phi(b)$ for all $a,b\in R$
+    \item $\phi(a\cdot b)=\phi(a)\cdot \phi(b)$ for all $a,b\in R$
+  \end{enumerate}
+
+  The \textbf{kernel} of $\phi$ is the set of elements that are sent to 0: \[
+    \ker(\phi)=\{ a\in R \mid \phi(a)=0_{R'} \}
+  .\] 
+
+  As with groups, $R$ and $R'$ are \textbf{isomorphic} if here is a bijective ring homomorphism
+  $\phi:R\to R'$, and we call such a map an \textbf{isomorphism}.
+\end{definition}
+
+
+
+
+
+
+
+
+\end{document}
