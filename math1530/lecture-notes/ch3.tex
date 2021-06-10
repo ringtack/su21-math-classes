@@ -16,7 +16,75 @@ These examples all share something in common: they each have two operations, "ad
 powerful\~ distributive law.
 
 In general, a ring is a set with two operations satisfying a bunch of axioms that are modeled after
-the properties of addition and muliplication of integers. We will now formalize this.
+the properties of addition and muliplication of integers. We will later formalize this; but first, a
+little number theory.
+
+\section{Review of Number Theory}
+
+\subsection{Equivalence Relations}
+
+We first introduce the notion of \textbf{equivalence relations}; while not strictly related to
+number theory, equivalence relations will be significant for modular arithmetic.
+
+\begin{definition}[Equivalence Relations]{}
+  An \textbf{equivalence relation} on a set $S$ is a relation ``$\sim $'' satisfying
+  \begin{enumerate}
+    \item \textbf{Reflexivity}: For $a\in S$, $a\sim a$
+    \item \textbf{Symmetry}: For $a,b\in S$, $a\sim b$ implies $b\sim a$ 
+    \item \textbf{Transitivity}: For $a,b,c\in S$, if $a\sim b$ and $b\sim c$, then $a\sim c$.
+  \end{enumerate}
+  $a\sim b$ means $a$ is ``related'' to $b$; $a\not\sim b$ means $a$ is ``not related'' to $b$.
+
+  Given an $a\in S$, the \textbf{equivalence class} of $a$ is \[
+    S_a = \{b\in S\mid b\sim a\} 
+  .\] Note that $S_a$ is never empty; it always contains $a$.
+\end{definition}
+
+Some examples of equivalence relations are equality ($=$) and congruence $\mod{m}$; on the other
+hand, order (e.g. $\le $) is \textbf{not} an equivalence relation (symmetry does not hold).
+
+We now look further into the congruence $\mod{m}$ equivalence relation.
+
+\begin{example}
+  Given $a \in \Z$, $b \equiv a\mod{m}$ iff \[
+    n | b-a \iff b - a = kn,\ k\in \Z \iff b = a + kn
+  .\] So $\Z_a$ actually forms a coset of $n\Z$:
+  \begin{align*}
+    \Z_a &= \{b\in \Z\mid b\equiv a\mod{m}\}  \\
+    &= \{a+kn\mid k\in \Z\}  \\
+    &= a+n\Z
+  .\end{align*}
+  That is, each equivalence class for congruence $\mod{m}$ is actually a coset of $m\Z$ in $\Z$: \[
+    \Z / m\Z = ~\text{set of cosets of $m\Z$ in $\Z$}~
+  .\] 
+\end{example}
+
+\begin{theorem}[]{}
+  Let $S$ be a set with an equivalence relation $\sim $. Then
+  \begin{enumerate}
+    \item If $a,b\in S$, then either \[
+        S_a \cap S_b = \varnothing ~\text{or}~ S_a = S_b
+      .\] 
+    \item Let $\{ C_i \}_{i\in I}$ be the disjoint equivalence classes of $S$. Then \[
+        S = \coprod_{i\in I}C_i
+      .\] In particular, if $S$ is finite, then \[
+        \left| S \right| = \left| C_1 \right|+ \ldots+\left| C_n \right|  
+      .\] 
+  \end{enumerate}
+\end{theorem}
+
+\subsection{Modular Arithmetic}
+
+We first observe an important characteristic of the $\gcd$:
+\begin{proposition}[]{}
+  Given integers $u,v$, there exists integers $x,y$ such that \[
+    ux+vy = \gcd{(u, v)}
+  .\] 
+\end{proposition}
+
+
+
+
 
 \section{Abstract Rings and Ring Homomorphisms}
 
