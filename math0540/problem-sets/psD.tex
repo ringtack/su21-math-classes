@@ -1,0 +1,130 @@
+\documentclass{homework}
+\homework{4}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Let $v_1,\ldots,v_n$ be a basis for $V$, and let $w_1,\ldots,w_n$ be another basis for $V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that for any $j\in \{ 1,\ldots,n \}$, there exists an $i\in \{ 1,\ldots,n \}$ such
+      that \[
+        v_1,\ldots,\hat{v}_i,\ldots,v_n,w_j
+      \] is a basis.
+    \item Prove that for any $i\in \{ 1,\ldots,n \}$, there exists a $j\in \{ 1,\ldots,n \}$ such
+      that \[
+        v_1,\ldots,\hat{v}_i, \ldots,v_n, w_j
+      \] is a basis.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $w_j$ be any basis vector in the basis $ w_1,\ldots,w_n$, and create the list \[
+      w_j, v_1,\ldots,v_n
+      .\] Since $v_1,\ldots,v_n$ spans $V$, so does $w_j,v_1,\ldots,v_n$; additionally, the list is
+      linearly dependent, since $w_j\in \Span(v_1,\ldots,v_n)$. Consider \[
+        a_jw_j+a_1v_1+\ldots+a_nv_n=0
+      ,\] and let $i$ be the largest value in $\{ j,1,\ldots,n \}$ such that $a_i\neq 0$.
+
+      We know that $i\neq j$, since otherwise the list would be linearly independent, a contradiction.
+      Thus $i\in \{ 1,\ldots,n \}$. By the Linear Dependence Lemma, $v_i\in
+      \Span(w_j,v_1,\ldots,v_{i-1}) $, and \[
+        \Span(w_j,v_1,\ldots,\hat{v}_i,\ldots,v_n) =\Span(w_j,v_1,\ldots,v_n)
+      .\] Since every spanning set with length $n=\dim{V}$ is a basis for
+      $V$, and $w_j, v_1,\ldots,\hat{v}_i,\ldots,v_n$ has length $n$, we have that \[
+          v_1,\ldots,\hat{v}_i,\ldots,v_n,w_j
+      \] is a basis, as required.
+
+    \item Let $v_i$ be any basis vector in the basis $v_1,\ldots,v_n$, and form the list \[
+      v_1,\ldots,\hat{v}_i, v_n, w_1,\ldots,w_n
+    .\] This list spans $V$ (since $ w_1,\ldots,w_n$ form a basis for $V$) and is linearly
+    dependent. We then proceed with an iterative step to remove elements from the list: in order
+    from $j=1$ to $(n-1)+n$, for $w_j\in {v_1,\ldots,\hat{v}_i,\ldots,v_n, w_1,\ldots,w_n}$, if
+    $w_j\in \Span(v_1,\ldots,\hat{v}_i,\ldots,v_n,\ldots,w_{j-1})$, then remove it from the list.
+    Since $ v_1,\ldots,\hat{v}_i,\ldots,v_n$ is linearly independent, none of the $v$'s are removed.
+    Now, we have two options with $w_j$ from $j=1$ to $n$:
+    \begin{enumerate}
+      \item If $w_j\in \Span(v_1,\ldots,\hat{v}_i,\ldots,v_n)$, then we delete $w_j$ from the list
+        and proceed to $w_{j+1}$ (the span is unchanged, by the Linear Dependence Lemma).
+      \item If $w_j\not\in \Span(v_1,\ldots,\hat{v}_i,\ldots,v_n)$, then the list
+        $v_1,\ldots,\hat{v}_i,\ldots,v_n, w_j$ is a linearly independent list of length $n$. Since
+        every linearly independent list with length $n=\dim V$ is a basis, any $w_k$ with $k>j$ is
+        in the span of $v_1,\ldots,\hat{v}_i,\ldots,v_n, w_j$, and so we can remove every $w_k$.
+    \end{enumerate}
+    Observe also that we cannot remove every $w_j$; at least (and at most, as shown above) one of
+    the $w_j$'s must not be in the span of $v_1,\ldots,\hat{v}_i,\ldots,v_n$. Otherwise,
+    the final list $v_1,\ldots,\hat{v}_i,\ldots,v_n$ does not span $V$, a contradiction to the
+    requirement of not changing the span. Hence, after removing any $v_i$, we are left with a basis
+    $v_1,\ldots,\hat{v}_i,\ldots,v_n,w_j$ for some $w_j\in \{ w_1,\ldots,w_n \}$, as required.
+  \end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}{\S 2}
+  Let $V,\ W$ be vector spaces. Suppose $v_1,\ldots,v_m$ are linearly independent in $V$ and suppose
+  $w_1,\ldots,w_m$ are any vectors in $W$. Prove that there exists a linear map $T:V\to W$ such that
+  \[
+    T(v_1)=w_1,\ldots,T(v_m)=w_m
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Let $v_1,\ldots,v_m$ be linearly independent in $V$, and extend the list to a basis
+  $v_1,\ldots,v_m,u_1,\ldots,u_n$. Define a linear map \begin{align*}
+    T(a_1v_1+\ldots+a_mv_m+b_1u_1+\ldots+b_nu_n) &= a_1w_1+\ldots+a_mw_m
+  .\end{align*}
+  (All of the $u_i$'s are sent to $0$). Because $v_1,\ldots,v_m,u_1,\ldots,u_n$ is a basis, $T$ is a
+  function, as each element of $V$ can be uniquely written in the form
+  $v=a_1v_1+\ldots+a_mv_m+b_1u_1+\ldots+b_nu_n$. By taking $a_i=1$ and the other $a$'s as zero, we
+  have that \[
+    T(v_i)=w_i
+  .\] Now, take any two vectors $u,v\in V$ and any two scalars $\lambda_1,\lambda_2\in \F$. We have
+  \begin{align*}
+    T(\lambda_1u+\lambda_2v)&=
+    T((\lambda_1a_1v_1+\ldots+\lambda_1a_mv_m+\lambda_1b_1u_1+\ldots+\lambda_1b_nu_n)+(\lambda_2c_1v_1+\ldots+\lambda_2c_mv_m+\lambda_2d_1u_1+\ldots+\lambda_2d_nu_n))\\
+          &=(\lambda_1a_1w_1+\ldots+\lambda_1a_mw_m) +(\lambda_2c_1w_1+\ldots+\lambda_2c_mw_m)\\
+          &=\lambda_1(a_1w_1+\ldots+a_mw_m) +\lambda_2(c_1w_1+\ldots+c_mw_m)\\
+          &= \lambda_1T(a_1v_1+\ldots+a_mv_m+b_1u_1+\ldots+b_nu_n)
+          +\lambda_2T(c_1v_1+\ldots+c_mv_m+d_1u_1+\ldots+d_nu_n)\\
+          &= \lambda_1T(u) + \lambda_2T(v)
+        .\end{align*} Thus $T$ preserves linearity and homogeneity, and so $T$ is a linear map (note
+        that $T$ is very much not injective! Going from the 2nd last step to the 3rd last step is
+        guaranteed, but the reverse is very much not guaranteed.)
+\end{solution}
+
+\begin{problem}{\S 3}
+  Let $V,W$ be vector spaces over $\F$, and suppose $V$ is finite-dimensional with $\dim V >0$. Let
+  $w\in W$ be any vector. Prove that there exists a linear map $T:V\to W$ such that \[
+    \range(T)=\Span(w)
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Let $n=\dim V$. Since $n>0$, there exists a length-$n$ basis $v_1,\ldots,v_n$ of $V$. Define a
+  linear map
+  \begin{align*}
+    T(a_1v_1+\ldots+a_nv_n)=a_1w&& [~\text{all of the $v_j$, $j>1$ are mapped to $0$}~]
+  \end{align*}
+  Since $v_1,\ldots,v_n$ is a basis of $V$, each $v\in V$ has a unique representation, and so $T$ is
+  a valid function. Moreover, we see that
+  \begin{align*}
+    \range(T) &= \{T(v)\mid v\in V, v=a_1v_1+\ldots+a_nv_n,\ a_1,...,a_n\in \F, v_1,\ldots,v_n\in V\}  \\
+              &= \{a_1w\mid a_1\in \F \} \\
+              &= \Span(w)
+  ,\end{align*} as required.
+  Now, take any two vectors $u,v\in V$ and any two scalars $\lambda_1,\lambda_2\in \F$. We have
+  \begin{align*}
+    T(\lambda_1u+\lambda_2v)&=
+    T(\lambda_1a_1v_1+\ldots+\lambda_na_nv_n+\lambda_2b_1v_1+\ldots+\lambda_2b_nv_n) \\
+                            &= \lambda_1a_1w+\lambda_2b_1w\\
+                            &=\lambda_1T(a_1v_1+\ldots+a_nv_n)+\lambda_2T(b_1v_1+\ldots+b_nv_n)\\
+                            &= \lambda_1T(u)+\lambda_2T(v)
+  .\end{align*}
+  Thus $T$ preserves linearity and homogeneity, and so $T$ is
+  a linear map (much like problem 2, $T$ is very much not injective).
+\end{solution}
+
+
+
+
+\end{document}

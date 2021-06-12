@@ -92,6 +92,7 @@
 \DeclareMathOperator{\range}{range}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\trace}{tr}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\Sym}{Sym}
