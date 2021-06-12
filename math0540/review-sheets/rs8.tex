@@ -1,0 +1,75 @@
+\documentclass{review-sheet}
+\homework{8}
+
+\begin{document}
+\begin{problem}{\S 1}
+  For each of the following linear maps $T: \R^2 \to \R^2$, write down the matrix of $T$ with
+  respect to the standard basis of $\R^2$ for both copies of $\R^2$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Dilation by a factor of $2$ with respect to the origin.
+    \item Reflection across the line $x=y$.
+    \item Projection to the line $x=y$.
+    \item The identity map.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item  $\begin{pmatrix} 2&0\\0&2 \end{pmatrix} $:  Under the matrix, any $(x,y)\in \R^2$ becomes
+      \[
+        \begin{pmatrix} 2&0\\0&2 \end{pmatrix} \begin{pmatrix} x\\y \end{pmatrix} =\begin{pmatrix}
+      2x+0y\\0x+2y \end{pmatrix} = 2\begin{pmatrix} x\\y \end{pmatrix} 
+      .\] 
+    \item $ \begin{pmatrix} 0&1\\1&0 \end{pmatrix} $: Under the matrix, any $(x,y)\in \R^2$ becomes
+      \[
+        \begin{pmatrix} 0&1\\1&0 \end{pmatrix} \begin{pmatrix} x\\y \end{pmatrix} =\begin{pmatrix}
+      y\\x \end{pmatrix} 
+      .\] 
+    \item $\begin{pmatrix} \frac{1}{2}&\frac{1}{2} \\\frac{1}{2}&\frac{1}{2}\end{pmatrix} $: Under
+      the matrix, any $(x,y)\in \R^2$ becomes \[
+        \begin{pmatrix} \frac{1}{2}&\frac{1}{2}\\\frac{1}{2}&\frac{1}{2} \end{pmatrix}
+        \begin{pmatrix} x\\y \end{pmatrix} =\begin{pmatrix}
+      \frac{1}{2}x+\frac{1}{2}y\\\frac{1}{2}x+\frac{1}{2}y \end{pmatrix} 
+      .\] 
+    \item $ \begin{pmatrix} 1&0\\0&1 \end{pmatrix} $. Trivially, this is the identity matrix.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Repeat for each of the linear maps, except under the basis $(1,0),(1,1)$ for both $\R^2$.
+\end{problem}
+\begin{solution}
+  [Note: the solutions to (b) and (c) operate under the assumption that $y=x$ remains the same; that
+  is, $y=x$ represents the line passing through the origin and (1,1) under the standard basis.
+  Otherwise, the answers would be identical to the ones provided in Problem 1, which seemed rather
+  uneducational.]
+  \begin{enumerate}[label=(\alph*)]
+    \item $\begin{pmatrix} 2&0\\0&2 \end{pmatrix} $: Under the matrix, any $(x,y)\in \R^2$ under
+      the new basis becomes \[
+        \begin{pmatrix} 2&0\\0&2 \end{pmatrix} \begin{pmatrix} x\\y \end{pmatrix} =\begin{pmatrix}
+        2x\\2y\end{pmatrix} =2\begin{pmatrix} x\\y \end{pmatrix} 
+      .\]
+      \item $\begin{pmatrix} -1&0\\1&1 \end{pmatrix} $: Under the matrix, any $(x,y)\in \R^2$ 
+        under the new basis becomes \[
+          \begin{pmatrix} -1&0\\1&1 \end{pmatrix} \begin{pmatrix} x\\y \end{pmatrix}
+          =\begin{pmatrix} -x\\x+y \end{pmatrix}
+        .\]
+        \item $\begin{pmatrix} 0&0\\\frac{1}{2}&1\end{pmatrix} $: Under the matrix, any
+          $(x,y)\in \R^2$ becomes \[
+            \begin{pmatrix} 0&0\\\frac{1}{2}&1\end{pmatrix}  \begin{pmatrix} x \\y
+          \end{pmatrix} = \begin{pmatrix} 0\\\frac{1}{2}x+y \end{pmatrix} 
+          .\]
+        \item The identity remains the same: $\begin{pmatrix} 1&0\\0&1 \end{pmatrix} $.
+  \end{enumerate}
+\end{solution}
+ 
+\clearpage
+Collaborators:
+\begin{itemize}
+  \item En-Hua Holtz
+  \item Richard Hu
+\end{itemize}
+
+
+
+\end{document}
