@@ -1,0 +1,337 @@
+\documentclass{homework}
+\homework{--- Capstone 1}
+
+\begin{document}
+
+We make a few notational changes to facilitate arithmetic:
+\begin{itemize}
+  \item In any $k$-cycle, we "zero-index" the elements; that is, $(a_1a_2\ldots a_k)$ becomes
+    $(a_0a_1\ldots a_{k-1})$.
+  \item In any $k$-cycle, addition (and subtraction), unless indicated otherwise, signify modular
+    arithmetic with respect to $k$ (e.g. $a\pm b$ becomes $a\pm b\mod{k}$).
+  \item Finally, for any cycle $ \sigma=(a_ia_j\ldots a_k)$, let $V_\sigma=\{ a_i,a_j,\ldots,a_k
+    \}$, and let $V_n=\{ 1,2,\ldots,n \}$.
+\end{itemize}
+
+\begin{problem}{\S 1}
+  \begin{enumerate}[label=(\alph*)]
+    \item Express the following as products of disjoint cycles:
+      \begin{align*}
+        \sigma=\begin{pmatrix} 1&2&3&4&5&6&7&8&9\\2&1&3&5&4&7&9&8&6 \end{pmatrix}
+                                &&\tau=\begin{pmatrix} 1&2&3&4&5&6&7&8&9\\3&5&1&2&4&9&8&7&6 \end{pmatrix} 
+      .\end{align*}
+    \item Prove that a $k$-cycle in $ \mc{S}_n$ has order $k$.
+    \item Prove that the inverse of $(a_0a_1\ldots a_{k-1})$ in $\mc{S}_n$ is
+      $(a_0a_{k-1}a_{k-2}\ldots a_2a_1)$
+    \item Prove that disjoint cycles commute.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $\sigma$ and $\tau$ in cycle notation become
+      \begin{align*}
+        \sigma &= \begin{pmatrix} 1&2&3&4&5&6&7&8&9\\2&1&3&5&4&7&9&8&6 \end{pmatrix}=(12)(45)(679)\\
+        \tau &= \begin{pmatrix} 1&2&3&4&5&6&7&8&9\\3&5&1&2&4&9&8&7&6 \end{pmatrix} =(13)(254)(69)(78)
+      .\end{align*}
+
+    \item Let $\sigma=(a_0a_1\ldots a_{k-1})$. By definition, every $a_i$ is unique; thus, for any
+      $a_i$, \[
+        \sigma^{j}(a_i)=a_{i+j}
+      ,\] and $a_{i+j}=a_i$ only when  $i+j\mod{k}\equiv i$. Clearly, $j=k$ is the smallest positive
+      integer which satisfies that; thus \[
+        \sigma^{k}(a_i)=a_{i+k}=a_i
+      ,\] and $a_i$ has ``order'' $k$ (that is, applying $\sigma$ $k$ times to $a_i$ yields $a_i$).
+      Since every element $a_i\in V_n$ has ``order'' $k$, $k$ is the smallest positive integer such
+      that $ \sigma^{k}=e$, and so $\sigma$ has order $k$.
+
+    \item Let $\sigma=(a_0a_1\ldots a_{k-1})$, where $\sigma(a_i)=a_{i+1}$ for any $a_i\in
+      V_\sigma$.
+
+      Define $\tau(a_i)=a_{i-1}$, where $V_\tau=V_\sigma$ (that is, $\sigma$ and $\tau$ operate on
+      the same subset of $V_n$). Then $\tau$ in cycle notation is \[
+        \tau = (a_0a_{k-1}a_{k-2}\ldots a_2a_1)
+      .\] For any $a_i\in V_\sigma$, we have
+      \begin{align*}
+        \sigma\circ \tau(a_i)&=\sigma(a_{i-1})=a_{i-1+1}=a_i\\
+        \tau\circ \sigma(a_i)&=\tau(a_{i+1})=a_{i+1-1}=a_i
+      .\end{align*}
+      Thus $\tau=(a_0a_{k-1}\ldots a_2a_1)=\sigma^{-1}$ is the inverse of $\sigma$.
+      
+    \item Let $\sigma=(a_0a_1\ldots a_{k-1})$ and $\tau=(b_0b_1\ldots b_{r-1})$ be disjoint cycles;
+      that is, $V_\sigma\subseteq V_n$, $V_\tau\subseteq V_n$, and $V_\sigma\cap
+      V_\tau=\varnothing$. Moreover, by definition of a cycle $\pi$, if $\alpha\not\in V_\pi$, then
+      $\pi(\alpha)=\alpha$.
+
+      Let $ \alpha\in V_n$. There are three possibilities:
+      \begin{itemize}
+        \item $\alpha$ is not in either $V_\sigma$ or $V_\tau$.\\
+          Trivially, $\sigma\circ \tau(\alpha)=\tau\circ \sigma(\alpha)=\alpha$, by definition of a cycle.
+        \item $\alpha$ is in $V_\sigma$, but not $V_\tau$.\\
+          If $\alpha\in V_\sigma$, then $\alpha=a_i$ for some $a_i\in V_\sigma$, and so
+          $\sigma(\alpha)=a_{i+1}$. But for any $a_i\in V_\sigma$, $a\not\in V_\tau$; thus
+          $\tau(a)=a$. Hence \[
+            \sigma\circ \tau(\alpha)=\sigma(\alpha)=a_{i+1}=\sigma(\alpha)=\tau\circ \sigma(\alpha)
+          ,\]  and so $\sigma\tau=\tau\sigma$ as required.
+        \item $\alpha$ is in $V_\tau$, but not $V_\sigma$.\\
+          A similar structure follows. $\alpha\in V_\tau$ implies $\alpha=b_i$ for some $b_i\in
+          V_\tau$, and so $\tau(\alpha)=b_{i+1}$. Additionally, $\sigma(b)=b$ for any $b\not\in
+          V_\sigma$, and so \[
+            \tau\circ \sigma(\alpha)=\tau(\alpha)=b_{i+1}=\tau(\alpha)=\sigma\circ \tau(\alpha)
+          .\] 
+      \end{itemize}
+      Since $V_\sigma\cap V_\tau=\varnothing$, $\alpha$ cannot be in both $V_\sigma$ and $V_\tau$.
+      Therefore, if $ \sigma$ and $\tau$ are disjoint cycles, then for any $ \alpha\in V_n$,
+      $\sigma\circ \tau(\alpha)=\tau\circ \sigma(\alpha)$, and so \[
+        \sigma\tau=\tau\sigma
+      .\] 
+  \end{enumerate}
+\end{solution}
+
+
+\begin{problem}{\S 2}
+  Prove that every permutation in $S_n$ can be written as a product of disjoint cycles.
+\end{problem}
+
+\begin{solution}
+  Let $\pi$ be any permutation in $S_n$. We make two observations:
+  \begin{itemize}
+    \item Since $V_n$ is finite and $\pi$ bijective, for any $\alpha\in V_n$, repeatedly applying
+      $\pi(\alpha)$ (e.g. $k$ times) will eventually yield $\alpha$. Moreover, $k\le n$, since
+      otherwise we would get more than $n$ distinct elements, a contradiction of $V_n$.
+    \item Any $\pi^{i}(\alpha)$ for $0\le i<k$ is unique; if we have
+      $\pi^{i}(\alpha)=\pi^{j}(\alpha)$, where $0\le i\le j<k$, we necessarily have $i=j$ (since
+      $\pi^{i-j}(\alpha)=\alpha$, so $i-j=0$).
+  \end{itemize}
+
+  Let $a\in V_n$, and let $\pi^{i}(a)=a_i$ with $\pi^{k}(a)=a$. Then $  a_0,a_1,\ldots,a_{k-1}$ form
+  a cycle  \[
+    \sigma_a=(a_0a_1\ldots a_{k-1})
+  ,\] since $a_k=a$ and all $a_i$ are unique (from the observations).
+
+  Choose $b\in V_n\setminus V_{\sigma_a}$; that is, any $b\in V_n$ not in the cycle $\sigma_a$.
+  Similarly, with $\pi^{i}(b)=b_i$ and $\pi^{r}(b)=b$, $  b_0,\ldots,b_{r-1}$ form a cycle \[
+    \sigma_b = (b_0b_1\ldots b_{r-1})
+  .\] Crucially, $V_{\sigma_a}\cap V_{\sigma_b}=\varnothing$ (i.e. they share no elements);
+  otherwise, if $b_i=a_j$ for some $i,j$, then any $b_i\in V_{\sigma_b}$ could be rewritten as
+  $\pi^{j+t}(a)$ for some $t\in \Z$, a contradiction of $b\not\in V_{\sigma_a}$.
+
+  Repeating this step until $V=V_{\sigma_a}\cap V_{\sigma_b}\cap \ldots\cap V_{\sigma_m}$, we see
+  that $\pi$ can be written as a product of disjoint cycles.
+\end{solution}
+
+\begin{problem}{\S 3}
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that the following formulae are true: \[
+        (a_0a_1\ldots
+          a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
+      .\] 
+    \item Prove that every permutation in $S_n$ can be written as a product of transpositions.
+    \item Express \[
+        \begin{pmatrix} 1&2&3&4&5&6&7&8&9\\3&5&1&2&4&6&8&9&7 \end{pmatrix}
+    \] as a product of transpositions.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $\sigma=(a_0\ldots a_{k-1})$, where $\sigma(a_i)=a_{i+1}$.
+
+      Let $\sigma^{(j)}=(a_0a_ja_{j+1}\ldots a_{k-1})$  for some $0<j<k$. Suppose $\tau_i$ is some
+      transposition where $ \tau_i=(a_0a_i)$. Then for $i=1$, $\sigma=\sigma^{(1)}$ can be rewritten
+      as \[
+        \sigma^{(1)}=(a_0a_2\ldots a_{k-1})(a_0a_1)=\sigma^{(2)}\tau_1
+      .\] One can quickly verify that this equality holds. Instead of directly mapping $ , a_1\mapsto
+      a_2$, we simply ``reroute'' it to $ a_0:\ a_1\mapsto a_0\mapsto a_2$; all other elements are
+      unaffected.
+
+      Similarly, $  \sigma^{(2)}$ can be rewritten as \[
+        \sigma^{(2)}=(a_0a_3,,, a_{k-1})(a_0a_2)=\sigma^{(3)}\tau_2
+      ,\] and so $\sigma^{(1)}=\sigma$ becomes \[
+        (a_0a_3... a_{k-1})(a_0a_2)(a_0a_1)
+      .\] Repeating this process until $\sigma^{(k-1)}$, we get \[
+        \sigma=(a_0a1\ldots a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)
+      .\]
+
+      Now, let $\sigma_{(m)}=(a_0a_1\ldots a_{m-1}a_{m})$ for $0<m<k$, and suppose $\tau_i$ now
+      represents the transposition $a_ia_{i+1}$. Then for $m=k-1$, $sigma=\sigma_{(k-1)}$ can be
+      rewritten as \[
+        \sigma_{(k-1)}=(a_0a_1\ldots a_{k-2})(a_{k-2}a_{k-1})=a_{(k-2)}\tau_{k-2}
+      .\] Like before, verifying equality is simple; all of $a_0,\ldots,a_{k-2}$ are unaffected, and
+      $a_{k-1}$ takes the scenic route of $a_{k-1}\mapsto a_{k-2}\mapsto a_0$, rather than simply
+      $a_{k-1}\mapsto a_0$.
+
+      Similarly, $\sigma_{k-2}$  can be rewritten as \[
+        \sigma_{(k-2)}=(a_0a_1\ldots a_{k-3})(a_{k-3}a_{k-2})=\sigma_{(k-3)}\tau_{k-3}
+      ,\] and so $\sigma_{(k-1)}=\sigma $ becomes \[
+      (a_0a_1\ldots a_{k-3})(a_{k-3}a_{k-2})(a_{k-2}a_{k-1})
+    .\] Repeating this process until $\sigma_{(1)}$, we get \[
+        \sigma = (a_0a1\ldots a_{k-1})=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
+      .\] Thus \[
+        (a_0a_1\ldots
+          a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
+      .\] 
+
+    \item From Problem $2$, we know that any permutation $\pi\in \mc{S}_n$ can be expressed as a
+      product of disjoint cycles $\sigma_1,\sigma_2,\ldots,\sigma_k$: \[
+        \pi = \sigma_1\sigma_2\ldots\sigma_k
+      .\] Moreover, Problem 3a showed that any cycle $\sigma$ can be expressed as a product of
+      transpositions $\tau_1,\tau_2,\ldots,\tau_m$: \[
+        \sigma=\tau_1\tau_2\ldots\tau_m
+      .\] Rewriting every disjoint cycle as a product of transpositions, (since composition is
+      associative, a product of product of transpositions becomes just a product of transpositions)
+      we get that any permutation $\pi\in \mc{S}_n$ can be written as a product of transpositions.
+
+    \item \[
+        \sigma= \begin{pmatrix} 1&2&3&4&5&6&7&8&9\\3&5&1&2&4&6&8&9&7
+        \end{pmatrix}=(13)(254)(789)=(13)(25)(54)(78)(89)
+    .\] 
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 4}
+  \begin{enumerate}[label=(\alph*)]
+    \item If $ \tau $ is a transposition in $ \mc{S}_n$, and $\sigma\in \mc{S}_n$, prove that
+      $\sigma\tau\sigma^{-1}$ is a transposition.
+    \item More generally, if $\tau$ is the $k$-cycle $(a_0a_1\ldots a_{k-1})$ and if $ \sigma\in
+      \mc{S}_n$, then $ \sigma\tau\sigma^{-1}=(\sigma(a_0)\sigma(a_1)\ldots\sigma(a_{k-1}))$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  Since $\sigma$ is a bijection, any element $\alpha\in V_n$ can be expressed as $\sigma(a)\in V_n$
+  for some distinct $a\in V_n$. Thus, choose any $\sigma(a_i)\in V_n$, where $a_i\in V_\tau$. Then
+  \[
+    \sigma\circ \tau\circ \sigma^{-1}(\sigma(a_i))=\sigma\circ \tau(a_i)=\sigma(a_{i+1})
+  ,\] and so any $\sigma(a_i)$ with $a_i\in V_\tau$ is mapped to $\sigma(a_{i+1})$ (for $i=k-1$,
+  recall modular arithmetic: $a_{i+1}=a_k=a_0$). Thus, $\sigma\tau\sigma^{-1}$ forms a cycle
+  $(\sigma(a_0)\sigma(a_1)\ldots\sigma(a_{k-1}))$.
+
+  To show equality (that is, $\sigma\tau\sigma^{-1}$ is comprised of no other cycles), consider
+  everything else; that is, any $\sigma(b)\in V_n$ where $b\not\in V_\tau$. Since $\tau(b)=b$, we
+  have \[
+    \sigma\circ \tau\circ \sigma^{-1}(\sigma(b))=\sigma\circ \tau(b)=\sigma(b)
+  .\] In other words, any $\sigma(b)\in V_n$ where $b\not\in V_\tau$ ``vanishes'' in cycle notation.
+
+  Therefore, if $\tau=(a_0a1\ldots a_{k-1})$ and $\sigma\in \mc{S}_n$, then
+  $\sigma\tau\sigma^{-1}=(\sigma(a_0)\sigma(a_1)\ldots\sigma(a_{k-1}))$ [which proves part b].
+
+  Setting $k=2$, we see that $\sigma\tau\sigma^{-1}=(\sigma(a_0)\sigma(a_1))$, and so $\tau$ 
+  transposition implies $\sigma\tau\sigma^{-1}$ transposition as well [which proves part a].
+\end{solution}
+
+\begin{problem}{\S 5}
+  \begin{enumerate}[label=(\alph*)]
+    \item If $G$ is a group with order $25$, prove that $G$ is cyclic or else every non-identity
+      element in $G$ has order $5$. Do you think this argument can generalize? If so, explain how;
+      if not, explain why you think so.
+    \item Let $a$ be an element with order $30$ in a group $G$; what is the index of $\left<a^{4}
+      \right>$ in the group $\left<a \right>$?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      Let $G$ be a group with order $25$. $G$ can clearly be cyclic: \[
+        G=\{ g^{1},g^2,\ldots,g^{24},g^{25}=e \}
+      ;\] so suppose $G$ is not cyclic.
+
+      Let $g\in G$ be a non-identity element. $g$ cannot have order $25$ (since otherwise $G$ would be
+      cyclic, a contradiction),  so suppose $\left| g \right| =k$ for some $1<k<25$. Then the cyclic
+      subgroup \[
+        \left<g \right> = \{ g^{1},g^2,\ldots,g^{k}=e \} < G
+      .\] has order $k$. By Lagrange's Theorem, any subgroup's order divides the order of $G$ ; but
+      since $25$ only has divisors $1,5,$ and $25$, and $1<k<25$, $k$ must necessarily be $5$. Thus if
+      $G$ is not cyclic, any non-identity element $g\in G$ has order $5$.
+      \hrule
+      A natural generalization would be:
+      \begin{center}
+        If  $G$ has order $a^2$, then $G$ is either cyclic or every non-identity element $g\in G$ has
+        order $a$.
+      \end{center}
+      However, this is clearly not true for something like $a=4$; $\D_8$, for instance, has
+      non-identity elements with order $2$ (e.g. flips).
+
+      Thus, a stricter generalization is necessary:
+      \begin{center}
+        If $p$ is a prime number, and a group $G$ has order $p^2$, then $G$ is either cyclic or
+        every non-identity element $g\in G$ has order $p$.
+      \end{center}
+      This seems to be true; replacing $5$ with $p$ and $25$ with $p^2$ in the above proof seems to
+      maintain sound logic without problem.
+
+    \item Since the order of $a$ is $30$, any $a^{k}=e$ must satisfy $k|30$ (by Corollary 2.42) or
+      $a=30n$ for some $n\in \Z$ (by Proposition 2.9). Since none of $4,8,\ldots,56$ satisfy these
+      conditions, the first multiple of $4$ that satisfies these conditions is $60$. Since
+      $\frac{60}{4}=15$, we have that $\left| \left<a^{4} \right> \right| =15 $. Since any
+      $a^{i}$ where $i>30$ can be rewritten as $a^{30}a^{i-30}=e\cdot a^{30+2+4j-30}=a^{4j+2}$, and
+      $a^{i}$ where $i<30$ produces $a^{4j}$, $\left<a^{4} \right>$ is actually isomorphic to
+      $\left<a^2 \right>$ (since $\left<a^{4} \right>$ contains all multiples of $2$ until $30$).
+      Since only $2$ distinct cosets can be formed from $\left<a^2 \right>$ ($e$ and $a$; any
+      $a^{2k+i}$ will end up forming the same coset), we have that \[
+        \left( \left<a \right>:\left<a^{4} \right> \right) =2
+      .\] 
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 6}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $ f: G \to H$ be a homomorphism of groups and let $a\in G$. Prove that if $a\in G$ 
+      has finite order, then $f(a)$ has finite order and $\left| f(a) \right| $ divides $\left| a
+      \right| $.
+    \item What condition(s) could you impose on $f$ that would allow you to replace ``divides'' by
+      ``is equal to'' above?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $G,\ H$ are groups and $f:G\to H$ is a homomorphism, and suppose an $a\in G$ has
+      finite order $k$. Then
+      \begin{align*}
+        f(a^{k})&=f(\underbrace{a\cdot \ldots\cdot a}_\text{$k$ times})\\
+        f(e)   &= \underbrace{f(a)\cdot \ldots\cdot f(a)}_\text{$k$ times} \\
+          e'   &= f^k(a)
+      .\end{align*}
+      By Proposition 2.9, $k$ divides the order of $f(a)$; in other words, $k=n\left| f(a) \right| $ 
+      for some $n\in \Z$. Hence $f(a)$ has finite order as well; and since $k$ is the order of $a$,
+      the order of $f(a)$ divides $a$.
+
+    \item The primary condition to impose on $f$ would be isomorphism:
+      \begin{center}
+        if $f:G\to H$ is an isomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has order $k$
+        as well.
+      \end{center}
+      \begin{proof}[Proof]
+        From above, we see that the order of $f(a)$ divides $k$. Let $n$ denote the order of $f(a)$,
+        and suppose $n<k$. Then
+        \begin{align*}
+          f(a^{n+1})&= f^{n+1}(a)\\
+                    &= f^{n}(a)\cdot f(a) \\
+                    &= e'\cdot f(a)
+        .\end{align*}
+        But this contradicts injectivity, since $f(a^{n+1})=f(a^{1})=f(a)$. Thus $n=k$, and so the
+        order of $f(a)$ equals the order of $a$.
+      \end{proof}
+      From this, though, it seems that we can be slightly looser with our requirements; since only
+      injectivity played a part, we need only require that \begin{center}
+        if $f:G\to H$ is an injective homomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has
+        order $k$ as well.
+      \end{center} The above proof also works for this statement.
+
+      However, surjective homomorphisms clearly do not necessarily preserve the order of an element;
+      consider the identity homomorphism \begin{align*}
+        f: G &\longrightarrow H \\
+        g &\longmapsto f(g) = e'
+      .\end{align*} Clearly, the order of any $f(g)\in H$ is $1$, while the order of any $g\in G$ is
+      not necessarily $1$.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+
+
+\end{document}
