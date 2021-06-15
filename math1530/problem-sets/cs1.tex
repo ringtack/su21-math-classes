@@ -69,10 +69,10 @@ We make a few notational changes to facilitate arithmetic:
           Trivially, $\sigma\circ \tau(\alpha)=\tau\circ \sigma(\alpha)=\alpha$, by definition of a cycle.
         \item $\alpha$ is in $V_\sigma$, but not $V_\tau$.\\
           If $\alpha\in V_\sigma$, then $\alpha=a_i$ for some $a_i\in V_\sigma$, and so
-          $\sigma(\alpha)=a_{i+1}$. But for any $a_i\in V_\sigma$, $a\not\in V_\tau$; thus
+          $\sigma(\alpha)=a_{i+1}$. But for any $a\in V_\sigma$, $a\not\in V_\tau$; thus
           $\tau(a)=a$. Hence \[
             \sigma\circ \tau(\alpha)=\sigma(\alpha)=a_{i+1}=\sigma(\alpha)=\tau\circ \sigma(\alpha)
-          ,\]  and so $\sigma\tau=\tau\sigma$ as required.
+          ,\]  and so $\sigma\tau=\tau\sigma$, as required.
         \item $\alpha$ is in $V_\tau$, but not $V_\sigma$.\\
           A similar structure follows. $\alpha\in V_\tau$ implies $\alpha=b_i$ for some $b_i\in
           V_\tau$, and so $\tau(\alpha)=b_{i+1}$. Additionally, $\sigma(b)=b$ for any $b\not\in
@@ -98,10 +98,11 @@ We make a few notational changes to facilitate arithmetic:
   \begin{itemize}
     \item Since $V_n$ is finite and $\pi$ bijective, for any $\alpha\in V_n$, repeatedly applying
       $\pi(\alpha)$ (e.g. $k$ times) will eventually yield $\alpha$. Moreover, $k\le n$, since
-      otherwise we would get more than $n$ distinct elements, a contradiction of $V_n$.
+      otherwise we would get more than $n$ distinct elements, a contradiction of $V_n$ having only
+      $n$ elements.
     \item Any $\pi^{i}(\alpha)$ for $0\le i<k$ is unique; if we have
       $\pi^{i}(\alpha)=\pi^{j}(\alpha)$, where $0\le i\le j<k$, we necessarily have $i=j$ (since
-      $\pi^{i-j}(\alpha)=\alpha$, so $i-j=0$).
+      $\alpha=\pi^{j-i}(\alpha)$, so $j-i=0$).
   \end{itemize}
 
   Let $a\in V_n$, and let $\pi^{i}(a)=a_i$ with $\pi^{k}(a)=a$. Then $  a_0,a_1,\ldots,a_{k-1}$ form
@@ -117,7 +118,7 @@ We make a few notational changes to facilitate arithmetic:
   $\pi^{j+t}(a)$ for some $t\in \Z$, a contradiction of $b\not\in V_{\sigma_a}$.
 
   Repeating this step until $V=V_{\sigma_a}\cap V_{\sigma_b}\cap \ldots\cap V_{\sigma_m}$, we see
-  that $\pi$ can be written as a product of disjoint cycles.
+  that $\pi$ can be written as a product of disjoint cycles $\sigma_a, \sigma_b, \ldots, \sigma_m$.
 \end{solution}
 
 \begin{problem}{\S 3}
@@ -141,7 +142,7 @@ We make a few notational changes to facilitate arithmetic:
       transposition where $ \tau_i=(a_0a_i)$. Then for $i=1$, $\sigma=\sigma^{(1)}$ can be rewritten
       as \[
         \sigma^{(1)}=(a_0a_2\ldots a_{k-1})(a_0a_1)=\sigma^{(2)}\tau_1
-      .\] One can quickly verify that this equality holds. Instead of directly mapping $ , a_1\mapsto
+      .\] One can quickly verify that this equality holds. Instead of directly mapping $a_1\mapsto
       a_2$, we simply ``reroute'' it to $ a_0:\ a_1\mapsto a_0\mapsto a_2$; all other elements are
       unaffected.
 
@@ -150,23 +151,23 @@ We make a few notational changes to facilitate arithmetic:
       ,\] and so $\sigma^{(1)}=\sigma$ becomes \[
         (a_0a_3... a_{k-1})(a_0a_2)(a_0a_1)
       .\] Repeating this process until $\sigma^{(k-1)}$, we get \[
-        \sigma=(a_0a1\ldots a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)
+        \sigma=(a_0a_1\ldots a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)
       .\]
 
       Now, let $\sigma_{(m)}=(a_0a_1\ldots a_{m-1}a_{m})$ for $0<m<k$, and suppose $\tau_i$ now
-      represents the transposition $a_ia_{i+1}$. Then for $m=k-1$, $sigma=\sigma_{(k-1)}$ can be
+      represents the transposition $a_ia_{i+1}$. Then for $m=k-1$, $\sigma=\sigma_{(k-1)}$ can be
       rewritten as \[
         \sigma_{(k-1)}=(a_0a_1\ldots a_{k-2})(a_{k-2}a_{k-1})=a_{(k-2)}\tau_{k-2}
       .\] Like before, verifying equality is simple; all of $a_0,\ldots,a_{k-2}$ are unaffected, and
       $a_{k-1}$ takes the scenic route of $a_{k-1}\mapsto a_{k-2}\mapsto a_0$, rather than simply
       $a_{k-1}\mapsto a_0$.
 
-      Similarly, $\sigma_{k-2}$  can be rewritten as \[
+      Similarly, $\sigma_{(k-2)}$  can be rewritten as \[
         \sigma_{(k-2)}=(a_0a_1\ldots a_{k-3})(a_{k-3}a_{k-2})=\sigma_{(k-3)}\tau_{k-3}
       ,\] and so $\sigma_{(k-1)}=\sigma $ becomes \[
       (a_0a_1\ldots a_{k-3})(a_{k-3}a_{k-2})(a_{k-2}a_{k-1})
     .\] Repeating this process until $\sigma_{(1)}$, we get \[
-        \sigma = (a_0a1\ldots a_{k-1})=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
+        \sigma = (a_0a_1\ldots a_{k-1})=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
       .\] Thus \[
         (a_0a_1\ldots
           a_{k-1})=(a_0a_{k-1})(a_0a_{k-2})\ldots(a_0a_2)(a_0a_1)=(a_0a_1)(a_1a_2)\ldots(a_{k-2}a_{k-1})
@@ -213,7 +214,7 @@ We make a few notational changes to facilitate arithmetic:
     \sigma\circ \tau\circ \sigma^{-1}(\sigma(b))=\sigma\circ \tau(b)=\sigma(b)
   .\] In other words, any $\sigma(b)\in V_n$ where $b\not\in V_\tau$ ``vanishes'' in cycle notation.
 
-  Therefore, if $\tau=(a_0a1\ldots a_{k-1})$ and $\sigma\in \mc{S}_n$, then
+  Therefore, if $\tau=(a_0a_1\ldots a_{k-1})$ and $\sigma\in \mc{S}_n$, then
   $\sigma\tau\sigma^{-1}=(\sigma(a_0)\sigma(a_1)\ldots\sigma(a_{k-1}))$ [which proves part b].
 
   Setting $k=2$, we see that $\sigma\tau\sigma^{-1}=(\sigma(a_0)\sigma(a_1))$, and so $\tau$ 
@@ -241,7 +242,7 @@ We make a few notational changes to facilitate arithmetic:
       cyclic, a contradiction),  so suppose $\left| g \right| =k$ for some $1<k<25$. Then the cyclic
       subgroup \[
         \left<g \right> = \{ g^{1},g^2,\ldots,g^{k}=e \} < G
-      .\] has order $k$. By Lagrange's Theorem, any subgroup's order divides the order of $G$ ; but
+      .\] has order $k$. By Lagrange's Theorem, any subgroup's order divides the order of $G$; but
       since $25$ only has divisors $1,5,$ and $25$, and $1<k<25$, $k$ must necessarily be $5$. Thus if
       $G$ is not cyclic, any non-identity element $g\in G$ has order $5$.
       \hrule
@@ -268,10 +269,12 @@ We make a few notational changes to facilitate arithmetic:
       $a^{i}$ where $i>30$ can be rewritten as $a^{30}a^{i-30}=e\cdot a^{30+2+4j-30}=a^{4j+2}$, and
       $a^{i}$ where $i<30$ produces $a^{4j}$, $\left<a^{4} \right>$ is actually isomorphic to
       $\left<a^2 \right>$ (since $\left<a^{4} \right>$ contains all multiples of $2$ until $30$).
-      Since only $2$ distinct cosets can be formed from $\left<a^2 \right>$ ($e$ and $a$; any
-      $a^{2k+i}$ will end up forming the same coset), we have that \[
-        \left( \left<a \right>:\left<a^{4} \right> \right) =2
-      .\] 
+      Since only $2$ distinct cosets can be formed from $\left<a^2 \right>$ ($e\left<a^2 \right>$
+      and $a\left<a^2 \right>$; any $a^{2k+i}\left<a^2 \right>$ will end up forming the same coset),
+      we have that \[
+        \left( \left<a \right>:\left<a^2 \right> \right)= \left( \left<a \right>:\left<a^{4} \right>
+        \right) =2
+      ,\] or equivalently, $\left<a^{4} \right>$ has index $2$ in the group $\left<a \right>$.
   \end{enumerate}
 \end{solution}
 
@@ -300,7 +303,7 @@ We make a few notational changes to facilitate arithmetic:
 
     \item The primary condition to impose on $f$ would be isomorphism:
       \begin{center}
-        if $f:G\to H$ is an isomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has order $k$
+        If $f:G\to H$ is an isomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has order $k$
         as well.
       \end{center}
       \begin{proof}[Proof]
@@ -316,7 +319,7 @@ We make a few notational changes to facilitate arithmetic:
       \end{proof}
       From this, though, it seems that we can be slightly looser with our requirements; since only
       injectivity played a part, we need only require that \begin{center}
-        if $f:G\to H$ is an injective homomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has
+        If $f:G\to H$ is an injective homomorphism and $a\in G$ has order $k$, then $f(a)\in H$ has
         order $k$ as well.
       \end{center} The above proof also works for this statement.
 
