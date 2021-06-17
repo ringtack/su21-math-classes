@@ -79,12 +79,36 @@ We first observe an important characteristic of the $\gcd$:
 \begin{proposition}[]{}
   Given integers $u,v$, there exists integers $x,y$ such that \[
     ux+vy = \gcd{(u, v)}
-  .\] 
+  .\] $x,y$ can be found using the \textbf{Euclidean algorithm}.
 \end{proposition}
 
+This result leads us to an important proposition that facilitates equivalence relations in $\Z /
+m\Z$:
+\begin{proposition}[]{}
+  $ax \equiv b\mod{m}$ is solvable if and only if \[
+    \gcd{(a,m)}|b
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  First, suppose $ax\equiv b\mod{m}$ is solvable. It follows that \[
+    m | ax-b
+  .\] So, we can find $k\in \Z$ such that $ax-b=km$ is $b=ax-km$. From this, we get that any integer
+  that divides both $a$ and $m$ must divide $b$; in particular, $\gcd{(a,m)}|b$.
 
+  Conversely, if $\gcd{(a,m)}|b$, then $b=c\gcd{(a,m)}$ for some $c\in \Z$. Using the Euclidean
+  algorithm to find $x,y$ with \[
+    ax+ym=\gcd{(a,m)}
+  ,\] and multiplying by $c$ to get \[
+    a(cx) + y(mc) = c\gcd{(a,m)}=b
+  ,\] we have $a(cx)\equiv b\mod{m}$, so the congruence is solvable.
+\end{proof}
 
-
+One natural followup is: \begin{center}
+  When does $ax\equiv 1\mod{m}$ have a solution?
+\end{center}
+From the proposition above, \textbf{only if $ \gcd{(a,m)}=1$}; that is, only if $a$ and $m$ are
+relatively prime. Rephrasing, if $a$ and $m$ are relatively prime, then $a$ has a unique
+multiplicative inverse in $\Z / m\Z$.
 
 \section{Abstract Rings and Ring Homomorphisms}
 
@@ -129,7 +153,7 @@ $R$? To show these intuitively obvious claims, we need the distributive law.
         a &= 1_R\cdot a && [1_R~\text{is the muliplicative identity}~]\\
           &= (1_R+0_R)\cdot a &&[~\text{from above}~]\\
           &= 1_R\cdot a+0_R\cdot a && [~\text{from distributivity}~] \\
-          &= a+0_R\cdot a \\
+          &= a+0_R\cdot a
       .\end{align*}
       Adding $-a$ to both sides, we get \[
         0_R = 0_R + 0_R\cdot a
@@ -177,6 +201,412 @@ characterized by their addition and multiplication properties, we get the follow
   As with groups, $R$ and $R'$ are \textbf{isomorphic} if here is a bijective ring homomorphism
   $\phi:R\to R'$, and we call such a map an \textbf{isomorphism}.
 \end{definition}
+
+\section{Interesting Examples of Rings}
+
+As described before, we have the four rings \[
+  \Z \subset \Q \subset \R \subset \C
+;\] we say that $\Z$ is a \textbf{subring} of $\Q$, and similarly for the others. Another example is
+the ring of integers modulo $m$, $ \Z / m\Z$.
+
+\begin{example}
+  (Integers Modulo $m~\Z / m\Z$) We construct a ring $\Z / m\Z$ with integers, and determining
+  equality if $a-b$ is a multiple of $m$. Formally, we define an equivalence relation on $\Z$ by the
+  rule \begin{center}
+    $a\equiv b$ if $a-b=km$ for some $k\in \Z$. We say $a$ is \textbf{congruent} to $b$ modulo $m$.
+  \end{center}
+  While $\Z / m\Z$ is not a subring of $\C$, there is a natural homomorphism \[
+    \phi: \Z \longrightarrow \Z / m\Z,\ \phi(a)=a\mod{m}
+  \] that assigns the integer $a$ to its equivalence class of all integers congruent to $a\mod{m}$.
+  This homomorphism $\phi$ is called the \textbf{reduction $\mod{m}$ homomorphism}. The kernel of
+  $\phi$ is the set of all multiples of $m$.
+\end{example}
+
+\begin{example}
+  Another subring of $\C$ is the \textbf{ring of Gaussian integers} $\Z[i]$, which consists of \[
+    \Z[i] = \{a+bi\mid a,b\in \Z\} 
+  .\] The quantity $i$ represents the imaginary number (e.g. $\sqrt[]{-1} =i$), and addition and
+  multiplication are defined following the usual rules of adding and multiplying complex numbers.
+
+  In general, we can define a ring \[
+    \F[z] = \{a+bz\mid a,b\in \F\} 
+  \] for an arbitrary field and any number $z$.
+\end{example}
+
+\begin{example}
+  Polynomials offer another method of creating bigger rings from already known rings. For any
+  commutative ring $R$, we use $R$ to build the \textbf{ring of polynomials over $R$}, \[
+    R[x] = \{ ~\text{polynomials $a_0+a_1x+\ldots+a_dx^{d}$ of all possible degrees with
+    coefficients $ a_0,a_1,\ldots,a_d\in R$}~ \}
+  .\] A common one we've seen before is $\R[x]$, but the rules of adding and multiplying polynomials
+  hold in any commutative ring. Indeed, the rule for multiplying polynomials is a result of the
+  distributive law!
+
+  Now, consider the polynomial \[
+    f(x) = a_0+a_1x+\ldots+a_dx^{d}\in R[x]
+  .\] Then for any element $c\in R$, we can \textbf{evaluate $f$ at $c$} simply by substituting $x$ 
+  with $c$: \[
+    f(c) = a_0+a_1c+\ldots+a_dc^{d}\in R
+  .\] When we first studied polynomials, we viewed them as functions, i.e. $f(x)$ defined a function
+  $f:R\to R$. While these polynomial functions are interesting, they are almost never ring
+  homomorphisms!
+
+  Thus, we take another approach: using a particular $c\in R$, we define a function from the ring of
+  polynomials $R[x]$ to the ring $R$: \[
+    E_c: R[x]\longrightarrow R,\ E_c(f) = f(c)
+  .\] We call $E_c$ the \textbf{evaluation at $c$ map}. If $R$ is commutative, then $E_c$ is a ring
+  homomorphism, and its kernel is the set of polynomials that have a factor of $x-c$ (since $
+  a_0+a_1(c-c)+\ldots+a_d(c-c)^{d}=0_R$).
+\end{example}
+
+\begin{example}
+  One famous non-commutative ring is the \textbf{ring of quaternions}, \[
+    \mathbb{H} = \{a+b\textbf{i}+c \textbf{j}+d\textbf{k} \mid a,b,c,d\in \R \} 
+  .\] \textbf{$i$, $j$}, and \textbf{$k$} are the different square roots of $-1$, and although they
+  commute with elements in $\R$, they don't commute with each other. To multiply two quaternions, we
+  first use the distributive law, and then apply multiplication as specified in the quaternion
+  group. Since $\mc{Q}$ is a non-commutative group, the ring of quaternions $\mathbb{H}$ is a
+  non-commutative ring.
+\end{example}
+
+The ring of quaternions played an important role in the development of math and physics because of
+the \textbf{cancellation law}: \begin{center}
+  if you know that $\alpha$ and $\beta$ are real (or complex) numbers satisfying $\alpha\beta=0$,
+  then either $ \alpha=0$ or $\beta=0$. It turns out that the same is true with quaternions!
+\end{center} 
+
+\begin{example}
+  (Matrix Rings) There are also rings with matrix elements. Let \[
+    M_2(\R)=\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \mid a,b,c,d\in \R\} 
+  \] denote the set of $2\times 2$ matrices with real entries. Matrices are added by their
+  corresponding elements, and multiplied using matrix multiplication. With these operations, $
+  M_2(\R)$ is a non-commutative ring. However, $ M_2(\R)$ does not satisfy the cancellation law: \[
+    \begin{pmatrix} 1&0\\0&1 \end{pmatrix} \begin{pmatrix} 0&0\\0&1 \end{pmatrix} =\begin{pmatrix}
+  0&0\\0&0 \end{pmatrix} 
+.\] More generally, the set of $n\times n$ matrices over a ring $R$, $M_n(R)$, forms a
+non-commutative ring.
+
+There are many interesting homomorphisms from rings to matrix rings. For example, \[
+  \C \hookrightarrow M_2(\R),\ x+yi\mapsto \begin{pmatrix} x&y\\-y&x \end{pmatrix}  
+\] is an injective ring homomorphism (proof left as an exercise).
+\end{example}
+
+\begin{example}
+  For every ring $R$, there is a unique homomorphism \[
+    \phi:\Z\longrightarrow R
+  .\] To understand why, note that by homomorphism requirements we must have $\phi(1)=1_R$, and we
+  must also have \[
+    \phi(n)=\phi(1+\ldots+1)=\phi(1)+\ldots+\phi(1)
+  .\] But we also need $\phi(0)=0_R$, and $\phi(-n)=-\phi(n)$, so there are really no other choices
+  for $\phi$. In other words, the requirements that \[
+    \phi(1)=1_R ~\text{and}~ \phi:\Z\longrightarrow R ~\text{is a homomorphism}~
+  \] means that there is only one possibility for $\phi$. One still needs to check that $ \phi$ is a
+  homo morph ism; such a proof is left as an exercise.
+\end{example}
+
+\section{Important Properties of Rings}
+
+Some rings, such as $\Q,\ \R,\ \C$ have the special property that every non-zero element has a
+multiplicative inverse. These rings are special, and we call them \textbf{fields.} 
+\begin{definition}[Fields]{}
+  A \textbf{field} is a commutative ring $R$ with the property that every non-zero element of $R$ 
+  has a multiplicative inverse. In other words, for every non-zero $a\in R$, there is a $b\in R$ 
+  satisfying $ab=1$.
+\end{definition}
+
+\begin{example}
+  In addition to $\Z,\ \R$, and $\C$, there are also \textbf{finite fields}. One important example
+  of a finite field is the ring $\Z / p\Z$, where $p$ is a prime. This follows from number theory:
+  if $p \not| a$, then $ \gcd{(p,a)}=1$, and so $ax\equiv 1\mod{p}$ is solvable, e.g. there is a
+  $b\in \Z / p\Z$ with $ab\equiv 1\mod{p}$. We denote this field $\F_{p}$.
+\end{example}
+
+Many other rings are not fields, such as $\Z$, $\Z[i]$, and $\R[x]$; however, they do have the nice
+property of cancellation:
+\begin{definition}[Cancellation Property]{}
+  Let $R$ be a commutative ring. $R$ has the \textbf{cancellation property} if for every $a,b,c\in
+  R$, \[
+    ab=ac ~\text{with}~ a\neq 0 \iff b=c
+  .\] 
+\end{definition}
+
+Rings that maintain the cancellation property are called \textbf{integral domains}:
+\begin{definition}[Zero Divisors and Integral Domains]{}
+  Let $R$ be a ring. An element $a\in R$ is a \textbf{zero divisor} if $a\neq 0$ and there is some
+  non-zero $b\in R$ such that $ab=0$. The ring $R$ is an \textbf{integral domain} if it has no zero
+  divisors. Equivalently, the ring $R$ is an integral domain if the only way to get $ab=0$ is if
+  either $a=0$ or $b=0$.
+\end{definition}
+
+In fact, every field is an integral domain, and a ring $R$ is an integral domain if and only if it
+has the cancellation property. Moreover, every integral domain is a subring of a field (the reader
+should verify all of these statements). We will see later that the smallest such field is called the
+\textbf{field of fractions over $R$}.
+
+
+\section{Unit Groups and Product Rings}
+
+In groups, we saw that many interesting subgroups and larger groups could be formed from a group.
+Similarly, we get the notion in rings that every ring contains an interesting group, and smaller
+rings can form larger rings.
+
+\subsection{Unit Groups}
+
+\begin{definition}[Unit Groups]{}
+  Let $R$ be a commutative ring\footnote{For a non-commutative ring $R$, $a\in R$ is a
+  \textbf{unit} if there are elements $b,c\in R$ such that $ab=ca=1$, i.e. the element $a$ needs
+both a left- and right-inverse.}. The \textbf{group of units of $R$} is the subset $R^*$ of $R$
+defined by \[
+  R^* = \{a\in R\mid ~\text{there exists some $b\in R$ satisfying}~ ab=1\} 
+,\] where group law is ring multiplication. Elements of $R^*$ are called \textbf{units}.
+\end{definition}
+
+\begin{proposition}[]{}
+  The set of units $R^*$ of $R$ is a group, with group law being ring multiplication.
+\end{proposition}
+\begin{proof}[Proof]
+  For each of the group axioms:
+  \begin{itemize}
+    \item Let $a_1,a_2\in R^*$, and let $b_1,b_2\in R^*$ be values such that $a_1b_1=1,\ a_2b_2=1$
+      (we can say $b_1,b_2\in R^*$, not just $R$, since commutativity ensures that if $a\in R^*$,
+      $b\in R^*$ as well). Then
+      \begin{align*}
+        1 &= a_1b_1a_2b_2 \\
+        &= a_1a_2b_1b_2
+      ,\end{align*} and since $b_1b_2\in R^*$ (multiplication is closed in monoids), we have $
+      a_1a_2\in R^*$.
+    \item $1\in R$ is the identity element.
+    \item By definition, units have inverses.
+    \item Multiplicative associativity is guaranteed by the ring axioms.
+  \end{itemize}
+  Hence $R^*$ is a group.
+\end{proof}
+
+\begin{example}
+  Some unit groups include
+  \begin{align*}
+    \Z^*=\{ \pm 1 \}, && \Z[i]^*=\{ \pm 1,\pm i \}, && \R[x]^*=\R^*
+  .\end{align*} Another interesting example is the ring $\Z[\sqrt[]{2} ]$, whose unit group has
+  infinitely many elements. The proofs of these assertions is left as an exercise for the reader.
+\end{example}
+
+\begin{example}
+  A ring $R$ is a field if and only if \[
+    R^* = \{a\in R\mid a\neq 0\} = R \setminus \{ 0 \}
+  ;\] in other words, every non-zero element has a multiplicative inverse.
+\end{example}
+
+We now explore the unit group of the ring $\Z / m\Z$.
+\begin{proposition}[]{}
+  Let $m\ge 1$ be an integer. Then \[
+    (\Z / m\Z)^* = \{a\mod{m}\mid \gcd{(a,m)}=1\} 
+  .\] In particular if $m$ is a prime number, then $\Z / p\Z$ is a field (often denoted $\F_p$).
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose that $\gcd{(a,m)}=1$. Then by the Euclidean algorithm, we can find $u,v\in \Z$ satisfying
+  $au+mv=1$. Hence \[
+    au = 1-mv \equiv 1 \mod{m}
+  .\] Thus $u$ is a multiplicative inverse for $a$ in the ring $\Z / m\Z$, so $a\mod{m}$ is in $(\Z
+  / m\Z)^*$.
+
+  In the other direction, suppose that $a\mod{m}\in (\Z / m\Z)^*$. Then for any $a\in \Z / m\Z$, we
+  can find some $b\mod{m}\in \Z / m\Z$ such that \[
+    (a\mod{m})(b\mod{m})=1\mod{m}
+  .\] In other words, $ab\equiv 1\mod{(m)}$, so $ab-1=cm$ for some $c$. But then $ab-cm=1$, and so
+  $\gcd{(a,m)}=1$, since any number dividing both $a,m$ divides $1$, which is only true for $1$.
+\end{proof}
+
+
+\subsection{Quotient Rings}
+
+Now, we inspect building larger rings from smaller rings. Why make things more complicated? It turns
+out that reversing this process, breaking up complicated rings into smaller, easier rings, can be
+useful; one such example is the Chinese Remainder Theorem.
+
+The building procedure is analogous to building products of groups, as well as constructing vector
+spaces (e.g. $\R^{n}$, making $n$-tuples from $\R$).
+
+\begin{definition}[Products of Rings]{}
+  Let $R_1,\ldots,R_n$ be rings. The \textbf{product of $R_1,\ldots,R_n$} is the ring \[
+    R_1\times \ldots\times R_n = \{(a_1,\ldots,a_n)\mid a_1\in R_1,\ldots,a_n\in R_n \} 
+  .\] In other words, the product $R_1\times \ldots\times R_n$ is the set of $n$-tuples, where the
+  first entry is chosen from $R_1$, second from $R_2$, etc. $R_1\times \ldots\times R_n$ becomes a
+  ring using coordinate-wise addition and multiplication:
+  \begin{align*}
+    (a_1,\ldots,a_n)+(b_1,\ldots,b_n) &= (a_1+b_1,\ldots,a_n+b_n)\\
+    (a_1,\ldots,a_n)\cdot (b_1,\ldots,b_n) &= (a_1\cdot b_1,\ldots,a_n\cdot b_n)
+  .\end{align*} Proving $ R_1\times \ldots\times R_n$ is a group is left as an exercise for the
+  reader.
+\end{definition}
+
+\begin{example}
+  The product ring $\Z/ 2\Z \times  \Z / 3\Z$ has $6$ elements, \[
+    (0,0),\ (1,0),\ (0,1),\ (0,2),\ (1,1),\ (1,2)
+  .\] For example, addition and multiplication look like \[
+    (1,1)+(1,2)=(0,0),\ (0,2)\cdot (1,2)=(0,1)
+  .\] It turns out that $\Z / 2\Z \times  \Z / 3\Z \cong \Z / 6\Z$.\\
+
+  However, $\Z / 2\Z\times \Z / 4\Z$ is \textbf{not} isomorphic to $\Z / 8\Z$. To see this, if \[
+    \phi: \Z / 8\Z \longrightarrow \Z / 2\Z \times  \Z / 4\Z
+  \] is a homomorphism, then by definition $\phi(1)=(1,1)$, so \[
+  \phi(4)=\phi(1+1+1+1) = \phi(1)+\phi(1)+\phi(1)+\phi(1) = (1,1) + (1,1)+(1,1)+(1,1)=(0,0)
+  .\] Hence $\ker(\phi)$ is non-trivial, so $\phi$ cannot be injective.
+\end{example}
+
+Now, we combine product rings and unit groups.
+\begin{proposition}[]{}
+  Let $R_1,\ldots,R_n$ be rings. Then the unit groups of the product is isomorphic to the product of
+  the unit groups: \[
+    \left( R_1\times \ldots\times R_n \right)^* \cong R_1^*\times \ldots\times R_n^*
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  If $(a_1,\ldots,a_n)\in \left( R_1\times \ldots\times R_n \right)^*$, then by definition there is
+  a $(b_1,\ldots,b_n)\in \left( R_1\times \ldots\times R_n \right)^{*}$ satisfying \[
+    (a_1,\ldots,a_n)\cdot (b_1,\ldots,b_n)=(1,\ldots,1)
+  .\] However, this means that $a_ib_i=1$, so $a_i \in R_i^*$. Hence $(a_1,\ldots,a_n)\in
+  R_1^{*}\times \ldots\times R_n^{*}$.
+
+  Now, suppose $(a_1,\ldots,a_n)\in R_1^{*}\times \ldots\times R_n^{*}$. Then for $a_i\in R_i^{*}$,
+  there exists some $b_i\in R_i^{*}$ such that $a_ib_i=1$. Then \[
+    (a_1,\ldots,a_n)\cdot (b_1,\ldots,b_n)=(1,\ldots,1)
+  .\] Hence $(a_1,\ldots,a_n)\in \left( R_1\times \ldots\times R_n \right)^*$.
+\end{proof}
+
+
+\section{Ideals and Quotient Rings}
+Recall that in the ring $\Z / m\Z$, we pretend that $a,b\in \Z$ are "identical" if $a-b=km$ for some
+$k\in \Z$. In other words, we get an equivalence relation \[
+  a\equiv b\mod{m} ~\text{if}~ ab=km (~\text{$a-b$ is a multiple of $m$}~)
+.\] We then defined $\Z / m\Z$ to be the set of equivalence classes.
+
+Now, we attempt to generalize this construction to arbitrary (commutative) rings. We first start by
+generalizing the concept ``being a multiple of $m$''. Why would we want this? 
+\begin{itemize}
+  \item First, it provides us with a new ring to explore; when is $\Z / m\Z$ a field? An integral
+    domain? Moreover, when exploring conjectures, $\Z /m\Z$ provides a testing ground.
+  \item Second, sometimes $\Z / m\Z$ is easier to work with than $\Z$. Consider the Diophantine
+    equation \[
+      x^{n}+y^{n}=z^{n}
+    .\] Solving this can be notoriously difficult (PepeLaugh). However, since $\Z / m\Z$ is finite,
+    we can use the natural ring map $\phi:\Z \longrightarrow \Z/m\Z$ for a variety of $m$'s to learn
+    about the problem.
+\end{itemize}
+
+\begin{definition}[Ideals]{}
+  Let $R$ be a commutative ring. An \textbf{ideal} of $R$ is a non-empty subset $I\subseteq R$ with
+  the following two properties:
+  \begin{itemize}
+    \item If $a \in I$ and $b\in I$, then $a+b\in I$.
+    \item If $a \in I$ and $r\in I$, then $ra\in I$.
+  \end{itemize}
+\end{definition}
+
+Some examples of ideals include $m\Z\subseteq \Z$ (for any $m\in \Z$), $\{ 0 \}\subseteq R$ for any
+ring $R$, and $R$ itself.
+
+One way to create an ideal of $R$ is to start with one element in $R$ and take all of its multiples.
+\begin{definition}[Principal Ideals]{}
+  Let $R$ be a commutative ring, and let $c\in R$. The \textbf{principal ideal generated by $c$},
+  denoted $cR$ or $(c)$, is the set of all multiples of $c$, \[
+    cR = (c) = \{rc\mid r\in R\} 
+  .\] Verifying that $cR$ is an ideal is straightforward, and left as an exercise. 
+\end{definition}
+
+The above examples still hold: $m\Z$, $ \{ 0 \}$, and $R$ are all principal ideals.
+
+In some rings (e.g. $\Z,\ \Z[i],\ \R[x]$), every ideal is a principal ideal, although this is not
+immediately obvious. Moreover, this is not true for rings like $\Z[i]$; there exist non-principal
+ideals.
+
+\begin{example}
+  Every ring has at least two ideals:
+  \begin{itemize}
+    \item the \textbf{zero ideal} \[
+      (0)=0R=\{ 0 \}
+    \] consisting of just the zero element, and the \textbf{unit ideal}\[
+      (1)=1R=R
+    \] consisting of the entire ring.
+  \end{itemize}
+  More generally, if $u\in R$ is a unit, then $uR = (u) = R$.
+\end{example}
+
+Just like products of rings, we can formulate a sense of building multiple ideals. A principal ideal
+is generated by a single element in R; for a finite list of elements $c_1,\ldots,c_n\in R$, the
+\textbf{ideal generated by $c_1,\ldots,c_n$} is \[
+  (c_1,\ldots,c_n)=c_1R+\ldots+c_nR=\{r_1c_1+\ldots+r_nc_n\mid r_1,\ldots,r_n\in R\} 
+.\] Verifying that this is an ideal is left as an exercise.
+
+\begin{remark}
+  (Proof Technique) Let $I$ be an ideal of $R$. If $1\in I$, then for every $r\in R$ we have $r\cdot
+  1=r\in I$, so $I=R$ is the unit ideal. Conversely, if you can construct an ideal $I$ and prove
+  $I=R$, we can often exploit this fact by using $1\in I$.
+\end{remark}
+
+Now, we can start crafting quotient rings $R/I$ by identifying pairs of $R$ if their difference is
+in $I$, just like we did when defining $\Z / m\Z$: \begin{center}
+  For an element $a\in R$, the set of $b\in R$ that are equivalent to $a$ consists of the set of $b$ 
+  such that $a-b\in I$, or equivalently, such that $b$ is in the set $a+I$.
+\end{center}
+This parallel to the ring of integers modulo $m$ prompts the following definitions.
+\begin{definition}[Cosets of Ideals]{}
+  Let $R$ be a commutative ring, and let $I$ be an ideal of $R$. Then for every element $a\in R$,
+  the \textbf{coset of $a$} is the set \[
+    a+I=\{a+c\mid c\in I\} 
+  .\] Note that $a$ is always an element of its coset, since $0\in I$. If $a,b\in R$ satisfy $b-a\in
+  I$, then people often write \[
+    b \equiv a\mod{I}
+  \] and say ``$b$ is congruent to $a$ modulo $I$.''
+
+  Given two cosets $a+I$ and $b+I$, we define their sum and product by the formulas
+  \begin{align*}
+    (a+I)+(b+I)=(a+b)+I, && (a+I)\cdot (b+I)=(a\cdot b)+I
+  ,\end{align*} and we denote the collection of distinct cosets by $R / I$.
+\end{definition}
+
+Like $\Z / m\Z$, we wish to turn $R / I$ into a ring; it turns out that the above definitions
+successfully define a commutative ring.
+
+\begin{proposition}[]{}
+  Let $R$ be a commutative ring, and let $I$ be an ideal of $R$.
+  \begin{enumerate}
+    \item Let $a+I,a'+I$ be two cosets. Then $a+I=a'+I$ if and only if $a'-a\in I$.
+    \item Addition and multiplication of cosets is well-defined, in that it doesn't matter which
+      element of the coset we use in the definition.
+    \item Addition and multiplication of cosets in $R / I$ turn $R / I$ into a commutative
+      ring.\footnote{To be precise, we must require that $I\neq R$, since if $I=R$, then $R/I$ only
+      has one element, and we don't allow rings to have $1=0$.}
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  We prove that multiplication is defined, and leave the rest as an exercise. Let $a,b,a',b'\in
+  R$ be elements whose cosets satisfy
+  \begin{align*}
+    a'+I=a+I ~\text{and}~b'+I=b+I
+  .\end{align*} The assumption that $a+I=a'+I$ means that there is some $c\in I$ such that $a'=a+c$,
+  and similarly the assumption that $b+I=b'+I$ means that there is some $d\in I$ such that $b'=b+d$
+  (since $a'\in a+I$ means that $a'$ is of the form $a+c$ for some $c\in I$). It follows that \[
+    a'b'=(a+c)(b+d)=ab+\underbrace{ad+cb+cd}_\text{This is in $I$, since $c,d\in I$.}
+  .\] Since $c,d\in I$, $ad+cb+cd$ is also in $I$, and so $a'b'-ab=ad+cb+cd \in I$; and from (1), we
+  see that $ab+I=a'b'+I$ are equal.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
