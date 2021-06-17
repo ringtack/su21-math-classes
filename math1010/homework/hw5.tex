@@ -1,0 +1,228 @@
+\documentclass{homework}
+\homework{5}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  (9.8) Give the following when they exist; otherwise, assert "NOT EXIST".
+  \begin{enumerate}[label=(\alph*)]
+    \item $\lim{n^3}$
+    \item $\lim{-n^3}$ 
+    \item $\lim{(-n)^{n}}$
+    \item $\lim{(1.01)^{n}}$
+    \item $\lim{n^{n}}$
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $+\infty$ 
+    \item $-\infty$
+    \item NOT EXIST
+    \item $+\infty$
+    \item $+\infty$
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  (9.12) Assume all $s_n\neq 0$ and that the limit $L=\lim{\left| \frac{s_{n+1}}{s_n} \right| }$
+  exists.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that if $L<1$, then $\lim{s_n}=0$.
+    \item Show that if $L>1$, then $\lim{\left| s_n \right| }=+\infty$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First, observe that $L$ is positive (since $\left| \frac{s_{n+1}}{s_n} \right| $ is
+      positive). Let $a\in \R$ such that $L<a<1$.
+
+      We know that
+      \begin{align*}
+        \left| \frac{s_{n+1}}{s_n} \right| &= \left| \frac{s_{n+1}}{s_n} -a+a\right| \\
+                                           &\le \left| \frac{s_{n+1}}{s_n}-a \right| +\left| a
+                                           \right| \\
+                                           &< \varepsilon+\left| a \right| \\
+                                           &= \varepsilon+a
+     ,\end{align*}
+     and so $\left| \frac{s_{n+1}}{s_n} \right| <\varepsilon+\left| a \right| $. Since $a>L>0$, we
+     have that $a-L>0$, so let $\varepsilon=a-L$. Then \[
+       \frac{\left| s_{n+1} \right| }{\left| s_n \right| } < a-L+L=a
+     ,\] and so \[
+     \left| s_{n+1} \right| < a\left| s_n \right| 
+     \] for $n>\N$.
+
+     Let $\left| s_N \right| $ be $s_n$ at $N$. Then \[
+       \left| s_n \right| =\left| s_{N+(n-N)} \right| =\left|
+       s_{N+\underbrace{1+\ldots+1}_\text{$n-N$ times}} \right|  < a\left|
+       s_{N+\underbrace{1+\ldots+1}_\text{$n-N-1$ times}} \right| <\ldots<a^{n-N}\left| s_N \right| 
+     ,\] so $\left| s_n \right| <a^{n-N}\left| s_N \right| $. Since $\left| a \right| <1$,
+     $\lim{\left| a^{n-N} \right| }=\lim{\left| a^{k} \right|}=0$, and so it necessarily follows
+     that $\lim{s_n}=0$ as well.
+
+
+   \item Let $t_n=\frac{1}{\left| s_n \right| }$; then $\left| \frac{t_{n+1}}{t_n} \right|=\left|
+     \frac{\frac{1}{\left| s_{n+1} \right| }}{\frac{1}{\left| s_n \right| }} \right| =\left|
+     \frac{s_n}{s_{n+1}} \right|$. By Lemma 9.5, since $L>1>0$ and $\left| \frac{s_{n+1}}{s_n}
+     \right| $ converges to $L$, we have that \[
+       \lim{\left| \frac{1}{\left| \frac{s_{n+1}}{s_n} \right|} \right| }=\lim{\left|
+       \frac{s_n}{s_{n+1}} \right| }=\frac{1}{L}
+     ,\] and so $\lim{\left| \frac{t_{n+1}}{t_n} \right| }=\frac{1}{L}$. Since $L>1$,
+     $\frac{1}{L}<1$; thus, by part (a), $\lim{\left| t_n \right| }=0$. Theorem 9.10 tells us that
+     if $\lim{\left| t_n \right| }=\lim{\left| \frac{1}{s_n} \right| }=0$, then $\lim{\left| s_n
+     \right| }=+\infty$, as required.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  (9.14) Let $p>0$. Show that \[
+    \lim\limits_{n \to \infty} \frac{a^{n}}{n^{p}}=\left\{\begin{array}{rcl}  
+        0 & \mbox{if} & \left| a \right| \le 1\\
+        +\infty & \mbox{if} & a > 1\\
+        \text{does not exist} & \mbox{if} & a<-1
+      \end{array}\right.
+    \] 
+\end{problem}
+
+\begin{solution}
+  For $\left| a \right| \le 1$, we have that $-\frac{1}{n^{p}}\le \frac{a^{n}}{n^{p}}\le
+  \frac{1}{n^{p}}$, and $\lim{\left| \frac{1}{n^{p}} \right| }=0$, so $0\le
+  \lim{\frac{a^{n}}{n^{p}}}\le 0$.
+
+  Let $s_n=\frac{a^n}{n^p}$. For $a>1$, \[
+    \frac{\frac{a^{n+1}}{(n+1)^{p}}}{\frac{a^n}{n^p}}=\frac{a^{n+1}}{a^{n}}\frac{n^{p}}{(n+1)^{p}}=a
+    \frac{n^{p}}{(n+1)^{p}}
+  .\] Since $\lim{\frac{n^p}{(n+1)^p}}=1$, and $a>1$, we have that $\lim{\frac{s_{n+1}}{s_n}}=a>1$.
+  By 9.12b, we have that $\lim{\left| s_n \right| }=\lim{s_n}=+\infty$ (since $s_n>0$ for all $n$).
+
+  For $a<1$, $s_n=\frac{a^n}{n^p}=\frac{(-1)^n\left| a \right| ^n}{n^p}$; clearly, $\lim{(-1)^n}$
+  does not exist, so $\lim{s_n}$ does not exist either.
+\end{solution}
+
+\begin{problem}{\S 4}
+  (10.1) Which of the following sequences are increasing? Decreasing? Bounded?
+  \begin{enumerate}[label=(\alph*)]
+    \item $\frac{1}{n}$ 
+    \item $\frac{(-1)^n}{n^2}$
+    \item $n^{5}$
+    \item $\sin{(\frac{n\pi}{7})}$ 
+    \item $(-2)^{n}$
+    \item $\frac{n}{3^{n}}$
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  Only (c) is increasing. (a) and (f) are decreasing. (a), (b), (d), (f) are bounded.
+\end{solution}
+
+\begin{problem}{\S 5}
+  (10.6)
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $(s_n)$ be a sequence such that  \[
+        \left| s_{n+1}-s_n \right| < 2^{-n}
+      \] for all $n\in \N$. Prove $(s_n)$ is a Cauchy sequence and hence a convergent sequence.
+    \item Is the result in (a) true if we only assume  $\left| s_{n+1}-s_n \right| <\frac{1}{n}$ for
+      all $n\in N$?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose without loss of generality that $m>n$. Then
+      \begin{align*}
+        \left| s_m-s_n \right| &=\left| s_m -s_{m-1}+s_{m-1}-s_{m-2}+\ldots+s_{n+1}-s_n\right| \\
+                               &\le \left| s_m-s{m-1} \right| +\left| s_{m-1}-s_{m-2} \right| \\
+                               &= \frac{1}{2^{m-1}}+\ldots+\frac{1}{2^{n}}
+      .\end{align*} Since $\sum_{i=n} \frac{1}{2^{i}}$, there is some $N$ such that for $n>N$ and 
+      $\varepsilon>0$, we have $\sum_{i=n} \frac{1}{2^{i}}<\varepsilon$. Thus, for $m,n>N$, we have
+      \[
+        \left| s_m-s_n \right| <\sum_{i=n} \frac{1}{2^{i}}<\varepsilon
+      ,\] and so $s_n$ is a Cauchy sequence. By Theorem 10.11, $s_n$ is a convergent sequence.
+
+    \item Unfortunately, no; for some $n\in \N$, $\sum_{n} \frac{1}{n}$ diverges, and so it's not
+      necessarily the case that $\left| s_m-s_n \right| <\varepsilon$, so convergence is not
+      guaranteed.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 6}
+  (10.10) Let $s_1=1$, and $s_{n+1}=\frac{1}{3}(s_n+1)$ for $n\ge 1$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Find $ s_2,\ s_3,\ s_4$.
+    \item Use induction to show $s_n>\frac{1}{2}$ for all $n$.
+    \item Show $(s_n)$ is a decreasing sequence.
+    \item Show $\lim{s_n}$ exists and find $\lim{s_n}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $s_2=\frac{2}{3},\ s_3=\frac{5}{9},\ s_4=\frac{14}{27}$.
+    \item For $s_2$, $s_2>\frac{1}{2}$, so the base case holds. Assume that $s_n>\frac{1}{2}$; then
+      \[
+        s_{n+1}=\frac{1}{3}(s_n+1)>\frac{1}{3}(\frac{1}{2+1})=\frac{\frac{3}{2}}{3}=\frac{1}{2}
+      ,\] and so $s_{n+1}>\frac{1}{2}$ as well.
+    \item \[
+        s_{n+1}-s_n=\frac{1}{3}(s_n+1)-s_n=\frac{1}{3}-\frac{2}{3}s_n<\frac{1}{3}-\frac{2}{3}\frac{1}{2}=0
+      .\] Hence $(s_n)$ is a decreasing sequence.
+    \item Since  $\frac{1}{2}<s_n\le 1$ for all $n$, $s_n$ is bounded and therefore convergent, and
+      so $\lim{s_n}$ exists. Hence
+      \begin{align*}
+        \lim{s_n}=s&= \lim{s_{n+1}} \\
+                   &= \frac{1}{3}(s+1)\\
+                   s &= \frac{s}{3}+\frac{1}{3} \\
+                   \frac{2}{3}s&=\frac{1}{3}\\
+                   s&=\frac{1}{2}
+      .\end{align*}
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 7}
+  (10.12) Let $t_1=1$ and $t_{n+1}=\left( 1-\frac{1}{(n+1)^2} \right)\cdot t_n $ for $n\ge 1$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show $\lim{t_n}$ exists.
+    \item What do you think $\lim{t_n}$ is?
+    \item Use induction to show $t_n=\frac{n+1}{2n}$.
+    \item Repeat part $b$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item  or all $n\in N$, $0<1-\frac{1}{(n+1)^2}<1$, hence $0<t_n\le 1$ and so $\lim{t_n}$ exists
+      (converges).
+    \item As $n$ becomes large, $1-\frac{1}{(n+1)^2}$ approaches $1$; moreover, $t_2=\frac{3}{4},\
+      t_3=\frac{2}{3},\ t_4=\frac{5}{8}$. Thus, it appears that $\lim{t_n}$ would approach somewhere
+      around $\frac{1}{2}$.
+    \item Clearly, $t_1=\frac{1+1}{2\cdot 1}=1$. Suppose $t_n=\frac{n+1}{2n}$. Then
+      \begin{align*}
+        t_{n+1}=\left( 1-\frac{1}{(n+1)^2} \right)\cdot \frac{n+1}{2n}
+          &= \frac{n+1}{2n}-\frac{1}{2n(n+1)} \\
+          &= \frac{(n+1)^2-1}{2n(n+1)}\\
+          &= \frac{n^2+2n+1-1}{2n^2+2n} \\
+          &= \frac{n(n+2)}{n(2n+2)} \\
+          &= \frac{(n+1)+1}{2(n+1)}
+      .\end{align*}
+      Hence if $t_n=\frac{n+1}{2n}$, then $t_{n+1}=\frac{(n+1)+1}{2(n+1)}$.
+    \item If $t_n=\frac{n+1}{2n}=\frac{1+\frac{1}{n}}{2}$, then $\lim{t_n}=\frac{1}{2}$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 8}
+  (11.6) Show that every subsequence of a subsequence of a given sequence is itself a subsequence of
+  the given sequence.
+\end{problem}
+\begin{solution}
+  Let $ t_1=s\circ \sigma_1$ be a subsequence of $s$, where $\sigma_1:\N\to \N$ is an increasing
+  function. If $t_2=t_1\circ \sigma_2$ is a subsequence of $ t_1$, then $t_2=t_1\circ
+  \sigma_2=s\circ (\sigma_1\circ \sigma_2)=s\circ \sigma'$ is a subsequence of $s$, since
+  $\sigma'=\sigma_1\circ \sigma_2$ is clearly an increasing function as well.
+\end{solution}
+
+
+
+
+
+
+\end{document}
