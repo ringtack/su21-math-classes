@@ -115,7 +115,8 @@ Intuitively, a list of vectors is linearly independent if none of its vectors ar
 combination of the other vectors; each vector is "independent" of the other vectors. In other words,
 a vector is linearly independent if it is not in the span of the other vectors. Its negation is also
 important, and is arguably more intuitive: a list of vectors is linearly dependent \textbf{iff} it
-is in the span of the other vectors. Formally, this gives rise to an important lemma, and theorem.
+is in the span of the other vectors (it is ``dependent'' on the other vectors). Formally, this gives
+rise to an important lemma, and theorem.
 
 \begin{lemma}[Linear Dependence Lemma]{}
   Suppose that $v_1,\ldots,v_m\in V$ is a linearly dependent list of vectors. Then there exists some
@@ -150,16 +151,269 @@ is in the span of the other vectors. Formally, this gives rise to an important l
   independent vectors, and $v_1,\ldots,v_n\in V$ a spanning list of $V$, and show that $m\le n$. Use
   the Linear Dependence Lemma to iteratively add $u_i$ and remove $w_j$; eventually, we are left
   with a list with all $u_i$, and optionally some $w_j$.
+
+  To see why we cannot have more $u$ than $w$, if that were the case, then $ u_1,\ldots,u_n$ would
+  span $V$, but $u_{n+1},\ldots,u_m$ would be linearly independent, a contradiction. Thus $m\le n$.
 \end{proof}
 
 Intuitively, every subspace of a finite-dimensional vector space is also finite-dimensional.
 \begin{proposition}[Finite-Dimensional Subspaces]{}
   Every subspace of a finite-dimensional vector space is finite-dimensional.
 \end{proposition}
-
+\begin{proof}[Proof]
+  Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. We construct a spanning list of $U$:
+  \begin{itemize}
+    \item If $U=\{ 0 \}$, then $U$ is finite-dimensional and we are done, so choose a non-zero
+      $v_1\in U$.
+    \item If $U=\Span(v_1,\ldots,v_{j-1})$, then $U$ is finite-dimensional and we are done;
+      otherwise, if $U\neq \Span(v_1,\ldots,v_{j-1})$, choose a vector $v_j\in U$ such that
+      $v_j\not\in \Span(v_1,\ldots,v_{j-1})$ (equivalently, $v_1,\ldots,v_j$ is linearly
+      independent).
+  \end{itemize}
+  After the process, we are left with a linearly independent spanning list of $U$. Since $U$ is a
+  subspace of $V$, this linearly independent list cannot be longer than the length of $V$'s basis
+  (aka spanning list), and so $U$ is finite-dimensional as well.
+\end{proof}
 
 
 \section{Bases}
+
+Spanning lists and linearly independent lists go hand in hand; now, we bring these concepts
+together.
+\begin{definition}[Basis]{}
+  A \textbf{basis} of $V$ is a list of vectors in $V$ that is both linearly independent and spans
+  $V$.
+\end{definition}
+
+\begin{example}
+  \begin{enumerate}
+    \item $ e_1,e_2,\ldots,e_n=\{ (1,0,\ldots,0), (0,1,\ldots,0), \ldots,(0,\ldots,1) \}$ is the
+      \textbf{standard basis} for $\F^{n}$.
+    \item $(1,2),\ (3,5)$ is another basis for $\R^{2}$; however, $(1,2),\ (3,5),\ (4,13)$ spans
+      $\R^2$ but is not linearly independent.
+    \item $1,x,\ldots,x^{m}$ is a basis of $\mc{P}_m(\R)$.
+  \end{enumerate}
+\end{example}
+
+Bases are incredibly useful in constructing unique vectors in a vector space. 
+\begin{proposition}[Criterion for Bases]{}
+  A list $v_1,\ldots,v_n\in V$ is a basis of $V$ if and only if every $v\in V$ can be written
+  \textit{uniquely} in the form \[
+    v = a_1v_1+\ldots+a_nv_n
+  ,\] where $a_1,\ldots,a_n\in \F$.
+\end{proposition}
+\begin{proof}[Proof]
+  First, suppose $v_1,\ldots,v_n$ is a basis of $V$. Let $v\in V$. Since $V=\Span(v_1,\ldots,v_n)$,
+  we have, for $a_i\in \F$ \[
+    v = a_1v_1+\ldots+a_nv_n
+  .\] Suppose, for $c_i\in \F$, that \[
+    v = c_1v_1+\ldots+c_nv_n
+  .\] This implies \[
+    (v-v) = 0 = \sum_{i=1}^{n} (a_i-c_i)v_i
+  .\] Since $ v_1,...,v_n$ is linearly independent, all $a_i-c_i=0$, and so $a_i=c_i$.
+
+  Now, suppose  $v\in V$ can be represented uniquely by $ a_1v_1+\ldots+a_nv_n$. Clearly,
+  $v_1,\ldots,v_n$ spans $V$; and given \[
+    0 = a_1v_1+\ldots+a_nv_n
+  ,\] since the representation is unique, we must have $a_i=0$ (since otherwise, if any $a_i\neq 0$,
+  then the representation wouldn't be unique); hence $v_1,\ldots,v_n$ is linearly independent as
+  well, and so is a basis of $V$.
+\end{proof}
+
+Spanning lists may not be bases of $V$ due to linear independence, while linearly independent lists
+may not be bases due to spanning. Thus, we look for ways to create bases from spanning/linearly
+independent lists.
+
+For spanning lists, we get the idea that we can discard ``useless'' vectors while maintaining span.
+\begin{proposition}[Spanning List contains a Basis]{}
+  Every spanning list in a vector space $V$ can be reduced to a basis of $V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $B=v_1,\ldots,v_n$ span $V$; we iteratively remove ``useless'' vectors until left with a basis.
+  \begin{itemize}
+    \item If $v_1=0$, delete $v_1$ from $B$; otherwise, leave $B$ unchanged.
+    \item If $v_j\in \Span(v_1,\ldots,v_{j-1})$, delete $v_j$ from $B$. Otherwise, leave $B$ 
+      unchanged.
+  \end{itemize}
+  After iterating $n$ times (through the entire list), we are left with a list $B$ that spans $V$ 
+  (since we only removed linearly dependent vectors in the span of the other vectors). Moreover, $B$ 
+  is linearly independent, since no vector $v_i\in B$ is in the span of the previous vectors. Hence
+  $B$ is a basis of $V$.
+\end{proof}
+
+An easy corollary follows:
+\begin{corollary}[Basis of Finite-Dimensional Vector Space]{}
+  Every finite-dimensional vector space has a basis.
+\end{corollary}
+\begin{proof}[Proof]
+  By definition, a finite-dimensional vector space has a spanning list; using the previous result,
+  we reduce this list $B$ to a basis.
+\end{proof}
+
+Now, we work with linearly independent lists; we can add ``uncovered'' vectors until such a list
+spans $V$ while maintaining linear independence.
+\begin{proposition}[Linearly Independent List Extends to a Basis]{}
+  Every linearly independent list of vectors in a finite-dimensional vector space $V$ can be
+  extended to a basis of $V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $u_1,\ldots,u_m\in V$ be a linearly independent list, and let $ w_1,\ldots,w_n\in V$ be a
+  basis for $V$. Thus the list \[
+    u_1,\ldots,u_m,w_1,\ldots,w_n
+  \] spans $V$. Using the procedure before, we reduce this list to a basis of $V$; this basis has
+  all of the $u$'s, since $u_1,\ldots,u_m$ is linearly independent, and some of the $w$'s.
+\end{proof}
+
+For example, suppose we have $(2,3,4),(9,6,8)\in \R^3$. Using $e_1,e_2,e_3\in \R^3$ as the standard
+basis, the procedure results in a basis $(2,3,4),(9,6,8),(0,1,0)$.\\
+
+We finish with some subspaces of $V$; intuitively, two subspaces can be combined to form $V$.
+\begin{proposition}[Every Subspace of $V$ is part of a Direct Sum Equal to $V$]{}
+  Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Then there is a subspace $W$ of
+  $V$ such that $V=U\oplus W$.
+\end{proposition}
+\begin{proof}[Proof]
+  Because $V$ is finite-dimensional, so is $U$; so let $ u_1,\ldots,u_m$ be a basis of $U$. Since
+  $u_1,\ldots,u_m\in V$ is linearly independent, extend the list to a basis
+  $u_1,\ldots,u_m,w_1,\ldots,w_n$ of $V$, and let $W=\Span(w_1,\ldots,w_n)$. To prove $V=U\oplus W$,
+  we need to show \[
+    V = U+W ~\text{and}~ U\cap W=\{ 0 \}
+  .\] 
+  For any $v\in V$, since $  u_1,\ldots,u_m,w_1,\ldots,w_n$ is a basis for $v$, we have $a_i,b_i\in
+  \F$ such that \[
+    v = \sum_{i=1}^{m} a_iu_i + \sum_{j=1}^{n} b_jw_j
+  .\] Since $\sum_{i=1}^{m} a_iu_i\in U,\ \sum_{j=1}^{n} b_jw_j\in W$, we have $v=u+w,\ u\in U,\
+  w\in W$. Thus $v\in U+W$, and so $V=U+W$.
+
+  Now, suppose $v\in U\cap W$. Then we have, for $a_i,b_i\in \F$, \[
+    v = \sum_{i=1}^{m} a_iu_i = \sum_{j=1}^{n} b_jw_j
+  ,\] and so \[
+    \sum_{i=1}^{m} a_iu_i - \sum_{j=1}^{n} b_jw_j=0
+  .\] Since $ u_1,\ldots,u_m,w_1,\ldots,w_n$ is a basis and so linearly independent, every
+  $a_i,b_j=0$, and so  $v=0(u_1+\ldots+u_m)=0(w_1+\ldots+w_n)=0$. Hence $U\cap W=\{ 0 \}$, and so \[
+    V = U\oplus W
+  .\]
+\end{proof}
+
+\section{Dimension}
+
+With a space such as $\R^2$ or $\R^3$, we get the notion of two or three dimensions. For each, we
+see that their bases are that length (e.g. $(1,0),(0,1)$ is length two, $(1,0,0),(0,1,0),(0,0,1)$ is
+length three); hence, it seems that dimension is dependent on length of basis. However, in a
+finite-dimensional vector space, this would only make sense if every basis had the same length.
+Fortunately, this is the case:
+\begin{proposition}[Basis Length does not Depend on Basis]{}
+  Any two bases of a finite-dimensional vector space have the same length.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $B_1,B_2$ be bases of a finite-dimensional vector space $V$. Then $B_1$ is linearly
+  independent, and $B_2$ spans $V$. Hence the length of $B_1$ is less than or equal to the length of
+  $B_2$. Swapping roles (e.g. $B_1$ spans $V$, $B_2$ linearly independent), we see that the length
+  of $B_1$ is greater than or equal to the length of $B_2$. Hence their lengths are equal.
+\end{proof}
+
+Now, we can formally define dimension:
+\begin{definition}[Dimension]{}
+  The \textbf{dimension} of a finite-dimensional vector space $V$, denoted $\dim{V}$, is the length
+  of any basis $B$ of $V$.
+\end{definition}
+
+For example, $\mc{P}_m{\F}$ has dimension $m+1$, because the basis $1,x,\ldots,x^{m}\in
+\mc{P}_m(\F)$ has length $m+1$.
+
+As expected, the dimension of a subspace is less than or equal to the dimension of the vector space.
+\begin{proposition}[Dimension of a Subspace]{}
+  Let $V$ be a finite-dimensional vector space, and let $U$ be a subspace of $V$. Then any basis
+  $u_1,\ldots,u_m\in U$ is a linearly independent list in $V$, and any basis $v1,\ldots,v_n\in V$ is
+  a spanning list of $V$, so $m\le n$, or $\dim{U}\le \dim{V}$.
+\end{proposition}
+
+Bases require two properties: linearly independent and spanning. It turns out that given any two out
+of three properties from length, linearly independent, and spanning, we can deduce whether a list is
+a basis. Clearly, if a list is linearly independent and spanning, it has the right length (e.g. $
+\dim V$), but the other two conditions (right length + lin. ind., or right length + spanning) may
+not be as obvious.
+
+\begin{proposition}[Linearly Independent List of Right Length is a Basis]{}
+  Given a finite-dimensional vector space $V$, every linearly independent list of vectors in $V$ 
+  with length $\dim V$ is a basis for $V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $n=\dim V$ and $v_1,\ldots,v_n\in V$ be a linearly independent list in $V$, and suppose
+  $v_1,\ldots,v_n$ does not span $V$. Then there exists some vector $v\in V$ such that $v\not\in
+  \Span(v_1,\ldots,v_n)$, so $v_1,\ldots,v_n,v$ is linearly independent. However, the length of 
+  every linearly independent list in $V$ is less than or equal to the length of any spanning set of
+  $V$; and since $n+1 > n$ ($V$ has a basis a.k.a. spanning list of length $n$), this is a
+  contradiction. Thus $v_1,\ldots,v_n$ spans $V$, and therefore is a basis.\\
+
+  See Axler for an alternative proof; their logic makes more mental leaps.
+\end{proof}
+
+\begin{proposition}[Spanning List of Right Length is a Basis]{}
+  Suppose $V$ is finite-dimensional. Then every spanning list of vectors in $V$ with length $\dim V$ 
+  is a basis of $V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $ v_1,\ldots,v_n$ span $V$, and suppose $v_1,\ldots,v_n$ is linearly dependent. Then there
+  exists $v_j\in \Span(v_1,\ldots,v_{j-1})$, so $v_1,\ldots,\hat{v}_j,\ldots,v_n$ spans $V$.
+  However, again the length of every linearly independent list is less than or equal to the length
+  of any spanning list of $V$; and since $n-1<n$ ($V$ has a basis a.k.a. linearly independent list
+  of length $n$), this is a contradiction. Thus $ v_1,\ldots,v_n$ is linearly independent, and
+  therefore is a basis.
+\end{proof}
+
+Finally, we find the dimension of the sum of two subspaces of $V$. Intuitively, we keep all basis
+vectors of $U_1,U_2$, while discarding any ``duplicates'' (imagine a Venn Diagram!).
+
+\begin{proposition}[Dimension of a Sum]{}
+  If $U_1,\ U_2$ are subspaces of a finite-dimensional vector space, then \[
+    \dim(U_1+U_2)=\dim U_1 + \dim U_2 - \dim{U_1\cap U_2}
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  Let $ u_1,\ldots,u_m$ be a basis for $U_1\cap U_2$; thus $\dim{U_1\cap U_2} =m$. Because
+  $u_1,\ldots,u_m$ is a basis, it is linearly independent in both $U_1$ and $U_2$; thus extend the
+  list to a basis of $U_1$, $ u_1,\ldots,u_m,v_1,\ldots,v_j$, and a basis of $U_2$,
+  $u_1,\ldots,u_m,w_1,\ldots,w_k$. Thus $ \dim U_1=m+j$, and $\dim U_2=m+k$.
+
+  We now show that \[
+    u_1,\ldots,u_m,v_1,\ldots,v_j,w_1,\ldots,w_k
+  \] is a basis for $U_1+U_2$; this will show that $\dim(U_1+U_2)=m+j+k=\dim U_1+\dim
+  U_2-\dim{U_1\cap U_2}$.
+
+  Clearly $\Span(u_1,\ldots,u_m,v_1,\ldots,v_j,w_1,\ldots,w_k)$ contains $ U_1$ and $ U_2$ (since
+  any vector in either $ U_1$ or $U_2$ could be made with a combination), and hence equals
+  $U_1+U_2$. To show linear independence, suppose \[
+    a_1u_1+\ldots+a_mu_m+b_1v_1+\ldots+b_jv_j+c_1w_1+\ldots+c_kw_k=0
+  .\] Rewriting, we get \[
+    c_1w_1+\ldots+c_kw_k=-a_1u_1-\ldots-a_mu_m-b_1v_1-\ldots-b_jv_j
+  ,\] and so $ c_iw_i\in U_1$. Since all $w_i$ are in $U_2$, this implies $c_1w_1+\ldots+c_kw_k\in
+  U_1\cap U_2$. Since $  u_1,...,u_m$ is a basis for $U_1\cap U_2$, we can rewrite as \[
+    c_1w_1+\ldots+c_kw_k=d_1u_1+\ldots+d_mu_m
+  .\] However, $u_1,\ldots,u_m,w_1,\ldots,w_k$ is linearly independent, so all $c_i,d_i=0$. Thus we
+  get, from the original equation, \[
+    a_1u_1+\ldots+a_mu_m+b_1v_1+\ldots+b_jv_j=0
+  .\] Since this list is a basis, all $a_i,b_i=0$. Thus all $a,b,c=0$, and so the list is linearly
+  independent.
+
+  Thus $ u_1,\ldots,u_m,v_1,\ldots,v_j,w_1,\ldots,w_k$ is a basis for $U_1+U_2$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
