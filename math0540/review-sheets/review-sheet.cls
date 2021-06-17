@@ -122,6 +122,7 @@
 
 % better looking font for mathbb
 \let\mathbb\mathds
+\let\mc\mathcal
 
 \newcommand{\Z}{\mathds{Z}}
 \newcommand{\N}{\mathds{N}}
