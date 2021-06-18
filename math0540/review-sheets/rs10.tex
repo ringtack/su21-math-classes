@@ -1,0 +1,97 @@
+\documentclass{review-sheet}
+\homework{10}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Compute the following matrix products, or explain why they're undefined:
+  \begin{enumerate}[label=(\alph*)]
+    \item \[
+        \begin{pmatrix} 2&5\\3&7\\11&13 \end{pmatrix} \begin{pmatrix} 1&-2\\-1&0 \end{pmatrix} 
+      .\] 
+    \item \[
+        \begin{pmatrix} 1&-2\\-1&0 \end{pmatrix} \begin{pmatrix} 2&5\\3&7\\11&13 \end{pmatrix}
+      .\] 
+    \item \[
+        \begin{pmatrix} 1+i\\0\\i \end{pmatrix} \begin{pmatrix} -i&0&i \end{pmatrix} 
+      .\] 
+    \item \[
+    \begin{pmatrix} -i&0&i \end{pmatrix} \begin{pmatrix} 1+i\\0\\i \end{pmatrix} 
+    .\] 
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item \[
+        \begin{pmatrix} -3&-4\\-4&-6\\-2&-22 \end{pmatrix} 
+      .\] 
+    \item Not defined; the matrices are not compatible (given $2\times 2$ and $3\times 2$, $2\neq
+      3$)
+    \item \[
+        \begin{pmatrix} -1-i&0&-1+i\\0&0&0\\1&0&-1 \end{pmatrix} 
+      .\] 
+    \item \[
+        \begin{pmatrix} -1-i-0-1 \end{pmatrix} =(-2-i)
+      .\] 
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Let $T_\theta:\R^2\to \R^2$ be the linear transformation given by counterclockwise rotation by
+  angle $\theta$ about the origin.
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $A=\mc{M}(T_\theta)$ w.r.t. the standard basis of $\R^2$. Compute $A$.
+    \item Compute $A^2$ and $A^3$, then deduce formulas for $
+      \cos{(2\theta)},\sin{(2\theta)},\cos{(3\theta)},\sin{(3\theta)}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item For $(1,0)$, a CC rotation by $ \theta$ sends to $(\cos{\theta},\sin{\theta})$.\\
+      For $(0,1)$, a CC rotation by $ \theta$ sends to $(-\sin{\theta},\cos{\theta})$.\\
+      Thus, \[
+        A = \begin{pmatrix} \cos{\theta}&-\sin{\theta}\\ \sin{\theta}&\cos{\theta} \end{pmatrix}
+      .\]
+    \item \[
+        A^2 = \begin{pmatrix} \cos{\theta}&-\sin{\theta}\\ \sin{\theta}&\cos{\theta} \end{pmatrix}
+        \begin{pmatrix} \cos{\theta}&-\sin{\theta}\\ \sin{\theta}&\cos{\theta} \end{pmatrix}
+        =\begin{pmatrix} \cos^2{\theta}-\sin^2{\theta}
+        &-2\sin{\theta}\cos{\theta}\\2\sin{\theta}\cos{\theta}&\cos^2{\theta}-\sin^2{\theta}\end{pmatrix} 
+      ,\] and \[
+        A^3=\begin{pmatrix} \cos^2{\theta}-\sin^2{\theta}
+        &-2\sin{\theta}\cos{\theta}\\2\sin{\theta}\cos{\theta}&\cos^2{\theta}-\sin^2{\theta}\end{pmatrix}
+        \begin{pmatrix}  \end{pmatrix} \begin{pmatrix} \cos{\theta}&-\sin{\theta}\\
+        \sin{\theta}&\cos{\theta} \end{pmatrix}=\begin{pmatrix}
+        \cos^3{\theta}-3\sin^2{\theta}\cos{\theta}&\sin^3{\theta}-3\sin{\theta}\cos^2{\theta}\\
+      3\sin{\theta}\cos^2{\theta}-\sin^3{\theta}&
+    \cos^3{\theta}-3\sin^2{\theta}\cos{\theta}&\end{pmatrix} 
+      .\] 
+      Thus,
+       \begin{align*}
+         \sin{(2\theta)}=2\sin{\theta}\cos{\theta},&&
+         \cos{(2\theta)}=\cos^2{\theta}-\sin^2{\theta}\\
+         \sin{(3\theta)}=3\sin{\theta}\cos^2{\theta}-\sin^3{\theta}, &&
+         \cos{(3\theta)}=\cos^3{\theta}-3\sin^2{\theta}\cos{\theta}
+      .\end{align*}
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  Suppose $T\in \mc{L}(V,V)$, is a linear operator on $V$. Does $T^2-T=0$ imply that $T=0$ or $T=1$?
+  Either prove the original statement, or provide a counter example.
+\end{problem}
+
+\begin{solution}
+  Consider the map $T\in \mc{L}(V,V)$ given by \[
+    \mc{M}(T)=\begin{pmatrix} 1&0\\0&0 \end{pmatrix} 
+  .\] Then \[
+  T^2=\begin{pmatrix} 1&0\\0&0 \end{pmatrix} =T
+  ,\] and so $T^2-T=0$, yet $T\neq 0$ and $T\neq 1$. Thus the original statement is false.
+\end{solution}
+
+
+
+
+
+\end{document}
