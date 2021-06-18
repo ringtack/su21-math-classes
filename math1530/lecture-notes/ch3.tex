@@ -417,7 +417,7 @@ We now explore the unit group of the ring $\Z / m\Z$.
 \end{proof}
 
 
-\subsection{Quotient Rings}
+\subsection{Product Rings}
 
 Now, we inspect building larger rings from smaller rings. Why make things more complicated? It turns
 out that reversing this process, breaking up complicated rings into smaller, easier rings, can be
@@ -498,7 +498,7 @@ generalizing the concept ``being a multiple of $m$''. Why would we want this?
   the following two properties:
   \begin{itemize}
     \item If $a \in I$ and $b\in I$, then $a+b\in I$.
-    \item If $a \in I$ and $r\in I$, then $ra\in I$.
+    \item If $a \in I$ and $r\in R$, then $ra\in I$.
   \end{itemize}
 \end{definition}
 
@@ -579,16 +579,28 @@ successfully define a commutative ring.
   \end{enumerate}
 \end{proposition}
 \begin{proof}[Proof]
-  We prove that multiplication is defined, and leave the rest as an exercise. Let $a,b,a',b'\in
-  R$ be elements whose cosets satisfy
-  \begin{align*}
-    a'+I=a+I ~\text{and}~b'+I=b+I
-  .\end{align*} The assumption that $a+I=a'+I$ means that there is some $c\in I$ such that $a'=a+c$,
-  and similarly the assumption that $b+I=b'+I$ means that there is some $d\in I$ such that $b'=b+d$
-  (since $a'\in a+I$ means that $a'$ is of the form $a+c$ for some $c\in I$). It follows that \[
-    a'b'=(a+c)(b+d)=ab+\underbrace{ad+cb+cd}_\text{This is in $I$, since $c,d\in I$.}
-  .\] Since $c,d\in I$, $ad+cb+cd$ is also in $I$, and so $a'b'-ab=ad+cb+cd \in I$; and from (1), we
-  see that $ab+I=a'b'+I$ are equal.
+  \begin{enumerate}
+    \item Suppose $a+I=a'+I$. Then $a'=a+c$ for some $c\in I$. But then $a'-a=c\in I$, and so
+      $a'-a\in I$.
+
+      Now, suppose $a'-a\in I$. Then $a'-a=c\in I$ for some $c\in I$. Let $a+b$ be any element in
+      $I$; then $a+b=a+r(a'-a)=ra'-(r-1)a$ for some $r\in R$.
+    \item For addition: let $a,b,a',b'\in R$ be elements that satisfy $a\equiv a'\mod{I},\ b\equiv
+      b'\mod{I}$; that is, $a'-a\in I,\ b'-b\in I$. By (1), $a+I=a'+I,\ b+I=b'+I$. Then \[
+        a'=a+s,\ b'=b+t
+      \] for some $s,t\in I$. But then $a'+b'=a+s+b+t=(a+b)+(s+t)$; and since $s+t\in I$, we have
+      $a'+b'\equiv a+b\mod{I}$. Alternatively, $(a'+b')-(a+b)\in I$, so by (1) $(a+b)+I=(a'+b')+I$.
+
+      For multiplication: let $a,b,a',b'\in R$ be elements whose cosets satisfy
+      \begin{align*}
+        a'+I=a+I ~\text{and}~b'+I=b+I
+      .\end{align*} The assumption that $a+I=a'+I$ means that there is some $c\in I$ such that $a'=a+c$,
+      and similarly the assumption that $b+I=b'+I$ means that there is some $d\in I$ such that $b'=b+d$
+      (since $a'\in a+I$ means that $a'$ is of the form $a+c$ for some $c\in I$). It follows that \[
+        a'b'=(a+c)(b+d)=ab+\underbrace{ad+cb+cd}_\text{This is in $I$, since $c,d\in I$.}
+      .\] Since $c,d\in I$, $ad+cb+cd$ is also in $I$, and so $a'b'-ab=ad+cb+cd \in I$; and from (1), we
+      see that $ab+I=a'b'+I$ are equal.
+  \end{enumerate}
 \end{proof}
 
 
