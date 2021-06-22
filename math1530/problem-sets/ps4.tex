@@ -185,24 +185,25 @@
           $a=0$. Hence $0$ and $1$ are the only idempotent elements.
       \end{itemize}
 
-    \item Suppose $p\in \Z$ is a prime number, and $k\ge 1$. Consider $\Z / p^k\Z$. For any $a\in \Z
-      / p^k \Z$, if $a=p^r$ for some $1\le r<k$, then $a^n=(p^r)^n=p^{\alpha k}$ for some
-      $n,\alpha\in \Z$ (since for any $r\cdot n$, we can find $ \alpha,\ k$ such that $rn=\alpha
-      k$); thus any $p^r$ is nilpotent.
+    \item Suppose $p\in \Z$ is a prime number, and $k\ge 1$. Consider $\Z / pk\Z$. For any multiple
+      of $p$ in $\Z / p^k\Z$ (e.g. $ap \in \Z / p^k\Z$ for some $a < p^{k-1}$), we have that
+      $(ap)^k=a^kp^k\equiv 0\mod{p^k}$; thus any multiple of $p$ in $\Z / p^k\Z$ is nilpotent.
+      Additionally, $0$ is trivially nilpotent; thus we have $p^{k-1}$ nilpotent elements, at least.
 
       Now, we make an observation: given $a,p\in \Z$ and $p$ prime, if $p^k$ divides $a$, then $p$ 
       divides $a$. Equivalently, if $a\equiv 0\mod{p^k}$, then $a\equiv 0\mod{p}$ (since $p^k$
       divides $a$, any $p,p^2,p^3,\ldots,p^{k-1}$ divides $a$). Taking its contrapositive, if $p$
       does not divide $a$, then $p^k$ does not divide $a$.
 
-      For any $a\in \Z / p^k\Z$, $a\neq p^r$, $0\le r<k$ (so $a\neq 1,p,p^2,\ldots,p^{k-1}$);
-      $a^{p-1}\equiv 1\mod{p}$ by Fermat's Little Theorem. Clearly, $a^s\not\equiv 0\mod{p}$ for any
-      $0\le s < p$ (since otherwise we would get $a^{p-1}\equiv a^{s+i}\equiv 0\mod{p}$ for some
-      $i\in \Z$); and after $a^{p-1}$, for some $q,r\in \Z$, $0\le r<p-1$, any $a^i\equiv
-      a^{q(p-1)+r}\equiv a^r\not\equiv 0\mod{p}$ for any $i\in \N$ (since $0\le r<p-1$, and any
-      $a^r\not\equiv 0\mod{p}$ for $0\le 1<p$ from before). Thus $a^m\not\equiv 0\mod{p}$ for any
-      $m\ge 1$, and so $a^m\not\equiv 0\mod{p^k}$. Thus $a\in \Z / p^k \Z$ is nilpotent only if
-      $a=p^r$ for some $1\le r<k$, and so $\Z / p^k\Z$ has $k-1$ nilpotent elements.
+      For any $a\in \Z / p^k\Z$ where $a$ is not a multiple of $p$, we have that $a=np+b\equiv
+      b\mod{p}$ for some $b,n\in \Z_{\ge 0},\ 0\le b<p$; then $b^{p-1}\equiv 1\mod{p}$ by Fermat's Little
+      Theorem. Clearly, $b^s\not\equiv 0\mod{p}$ for any $0\le s<p$ (since otherwise we would get
+      $b^{p-1}\equiv b^{s+i}\equiv 0\mod{p}$ for some $i\in \Z$); and for any $i\in \Z,\ i\ge
+      p-1$, for some $q,r\in \Z,\ 0\le r<p-1$, any $b^i=b^{q(p-1)+r}\equiv b^r\not\equiv 0\mod{p}$ 
+      (since any $a^r\not\equiv 0\mod{p}$ for $0\le s<p$ from before). Thus $a^m\not\equiv
+      0\mod{p}$ for any $m\ge 1$, and so $a^m\not\equiv 0\mod{p^k}$. Thus $a\in \Z / p^k\Z$ is
+      nilpotent only if $a$ is a multiple of $p$ in $\Z / p^k\Z$, and so $\Z / p^k\Z$ has
+      $p^{k-1}$ nilpotent elements.
 
     \item Suppose $a\in R$ is unipotent; then for some $n\in N$, $(a-1)^n=0$. By the Binomial
       Theorem, we have \[
