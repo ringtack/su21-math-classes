@@ -135,6 +135,7 @@
 \newcommand{\R}{\mathds{R}}
 \newcommand{\Q}{\mathds{Q}}
 \newcommand{\C}{\mathds{C}}
+\newcommand{\HH}{\mathds{H}}
 \newcommand{\D}{\mathcal{D}}
 
 
