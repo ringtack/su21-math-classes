@@ -1,0 +1,164 @@
+\documentclass{homework}
+\homework{E}
+
+\begin{document}
+\begin{problem}{\S 1}
+  (Axler 3.B.30) Suppose $\varphi_1$ and $\varphi_2$ are linear maps from $V$ to $\F$ that have the same
+  null space. Show that there exists a constant $c\in \F$ such that $\varphi_1=c\varphi_2$.
+\end{problem}
+\begin{solution}  
+We start with a lemma (which is actually Axler 3.B.29, but proved to be very helpful):
+\begin{lemma}[]{}
+  Let $\varphi\in \mc{L}(V,\F)$, and $u\in V$ not in $\Null\varphi$. Then \[
+    V = \Null\varphi \oplus \{au\mid a\in \F\} 
+  .\] 
+\end{lemma}
+\begin{proof}[Proof]
+  Suppose $au\in \Null\varphi$. Then \[
+    0=\varphi(au)=a\varphi(u)
+  .\] Since $u\not\in \Null\varphi$, $\varphi(u)\neq 0$, so $a=0$; hence $\Null\varphi\cap \{au\mid
+  a\in \F\} =\{ 0 \}$, and by Proposition 1.45, $ \Null\varphi \oplus \{au\mid a\in \F\}$ is a
+  direct sum.
+
+  Now, for any $v\in V$, suppose $\varphi(v)=k,\ \varphi(u)=r$ for some $k,r\in \F$. Observe that
+  \begin{align*}
+    \varphi(v-\frac{k}{r}u)=\varphi(v)-\frac{k}{r}\varphi(u)=k-\frac{k}{r}\cdot r=0
+  ,\end{align*} so $v-\frac{k}{r}u\in \Null\varphi$. Since $\frac{k}{r}\in \F$, $\frac{k}{r}u\in
+  \{au\mid a\in \F\}$, and so any $v\in V$ can be written as \[
+    v = (v-\frac{k}{r}u)+\frac{k}{r}u
+  .\] Hence $V=\Null\varphi\oplus \{au\mid a\in \F\} $, as required.
+\end{proof}
+
+If $\Null\varphi_1=\Null\varphi_2=V$, then any $c\in \F$ works, so assume $ \Null\varphi\neq V$.
+
+By the Lemma, any $v\in V$ can be represented as \[
+  v=w+au,\ w\in \Null\varphi,\ u\not\in \Null\varphi,\ a\in \F
+.\] Suppose $v\in V$, $v\not\in \Null\varphi$ (since $0=c0$ is unenlightening), and let
+$\varphi_1(v)=k,\ \varphi_2(v)=r$. Then \[
+  c\varphi_1(v)=c\varphi_1(w+au)=c(\varphi_1(w)+a\varphi_1(u))=cak
+.\] Setting $c=\frac{r}{k}\in \F$, we get 
+\begin{align*}
+  \frac{r}{k}\varphi_1(v)=\frac{r}{k}ak=ar=0+a\varphi_2(u)&= \varphi_2(w)+\varphi_2(au) \\
+                                                          &= \varphi_2(w+au)\\
+                                                          &= \varphi_2(v)
+.\end{align*}
+Hence $c\varphi_1(v)=\varphi_2(v)$ for some $c\in \F$, as required.
+\end{solution}
+
+
+\begin{problem}{\S 2}
+  A square matrix $A\in \F^{m,n}$ is called \textit{upper triangular} if $A_{j,k}=0$ whenever $j>k$.
+  Let $A,C$ be $n\times n$ upper triangular matrices.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $AC$ is upper triangular.
+    \item Also, prove that $(AC)_{j,j}=A_{j,j}C_{j,j}$ for each $j=1,\ldots,n$.
+  \end{enumerate}
+\end{problem}
+
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $A,C\in \F^{m,n}$ be upper triangular matrices. Then for any $(AC)_{j,k}$ where $j>k$, we
+      have \[
+        (AC)_{j,k}=\sum_{i=1}^{n} A_{j,i}C_{i,k}=\sum_{i=1}^{j-1} A_{j,i}C_{i,k}+\sum_{i=j}^{n}
+        A_{j,i}C_{i,k}
+      .\] But for every $1\le i<j$, $A_{j,i}=0$, and for any $j\le i<n$, $j>k$, so $C_{i,k}=0$.
+      Hence $(AC_{j,k})=0+0=0$, and so $AC$ is necessarily upper triangular as well.
+
+    \item For any $(AC)_{j,j}$, we have \[
+        (AC)_{j,j}=\left(\sum_{i=1}^{j-1} A_{j,i}C_{i,j}\right)+A_{j,j}C_{j,j}+\left( \sum_{i=j+1}^{n}
+        A_{j,i}C_{i,j} \right) 
+      .\] For any $1\le i<j$, $A_{j,i}=0$ (since $j>i$); and for any $j<i<n$, $C_{i,j}=0$ (since
+      $i>j$). Hence $(AC)_{i,j}$ becomes \[
+        (AC)_{i,j}=0 +A_{j,j}C_{j,j}+0=A_{j,j}C_{j,j}
+      ,\] as required.
+  \end{enumerate}
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  Players $1,2,3,4,5,6$ are seated around a circle, in that order. One of them is holding a hot
+  potato. At each time $t=1,2,\ldots$ seconds from the beginning of the game, whoever is holding the
+  potato passes it either to the person to their immediate right or to the person to their immediate
+  left, with equal probability.
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $A\in \R^{6,6}$ be the matrix in which $(A)_{j,k}$ is the probability that, supposing
+      player $j$ has the potato at time $0$, player $k$ has the potato at time $1$. Write down $A$.
+    \item Give an argument that $(A^2)_{j,k}$ is the probability that, supposing player $j$ has the
+      potato at time $0$, player $k$ has the potato at time $2$.
+    \item Guess the matrices $A^{10},\ A^{11}$. Once you have the best possible guess, compute the
+      matrices and give an interpretation.
+    \item Formulate a conjecture about locations of zero entries in $A^{n}$ for all integers $n>1$.
+      Prove your conjecture by using the definition of matrix product, or by analyzing the rules of
+      the game.
+  \end{enumerate}
+\end{problem}
+
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Since every player passes it following a second, at time $t=1$, $A_{j,j}=0$. So \[
+        A = \begin{pmatrix} 0&\frac{1}{2}&0&0&0&\frac{1}{2} \\ \frac{1}{2}&0&\frac{1}{2}&0&0&0 \\
+        0&\frac{1}{2}&0&\frac{1}{2}&0&0 \\ 0&0&\frac{1}{2}&0&\frac{1}{2}&0 \\
+      0&0&0&\frac{1}{2}&0&\frac{1}{2} \\ \frac{1}{2}&0&0&0&\frac{1}{2}&0 \end{pmatrix} 
+    .\] 
+
+    \item For each $(A^2)_{j,k}$, we have \[
+      (A^2)_{j,k}=\sum_{i=1}^{6} A_{j,i}A_{i,k}=A_{j,1}A_{1,k}+A_{j,2}+A_{2,k}+\ldots+A_{j,6}A_{6,k}
+      .\] For every multiple $A_{j,i}A_{i,k}$, it represents the probability of both:
+      \begin{itemize}
+        \item Given person $j$ started with the hot potato, person $i$ had the hot potato at time $1$.
+          In other words, the probability that $j$ passed the hot potato to $i$.
+        \item Given person $i$ \textbf{has} the hot potato, person $k$ received the hot potato.  
+      \end{itemize}
+      Note the important difference in wording for the second probability: instead of interpreting
+      $A_{i,k}$ as person $i$ starting with the hot potato and then giving it to $k$ after one second,
+      we can instead think of it as, \textbf{given that person $i$ had the hot potato at time $n$, what is
+      the probability that person $k$ had the hot potato at time $n+1$?} 
+      
+      Thus, the sum $(A^2)_{j,k}$ is just the sum of all the probabilities of, with person $j$
+      starting with the hot potato, person $j$ passing it to person $i$, and then person $i$ passing
+      it to person $k$. In other words, $(A^2)_{j,k}$ represents the probability that, supposing $j$ 
+      started with the potato, $k$ would have the potato after $2$ passes (or $2$ seconds).
+
+    \item \[
+        A^{10}=\frac{1}{1024}\begin{pmatrix} 342&0&341&0&341&0 \\ 0&342&0&341&0&341 \\
+        341&0&342&0&341&0 \\ 0&341&0&342&0&341 \\ 341&0&341&0&342&0 \\ 0&341&0&341&0&342 \end{pmatrix} 
+    .\] 
+    \[
+      A^{11}=\frac{1}{2048}\begin{pmatrix} 0&683&0&682&0&683 \\ 683&0&683&0&682&0 \\ 0&683&0&683&0&682 \\
+      682&0&683&0&683&0 \\ 0&682&0&683&0&683 \\ 683&0&682&0&683&0\end{pmatrix} 
+    .\] 
+
+    From part (b), it makes sense to interpret $(A^{10})_{j,k}$ as the probability that, given
+    person $j$ started with the hot potato, person $k$ has the hot potato at time $10$ seconds;
+    similarly, $(A^{11})_{j,k}$ is the probability that, given person $j$ started with the hot
+    potato, person $k$ has the hot potato at time $11$ seconds.
+
+    \item Inspecting $n=2,3,\ldots,10,11$, we see that when $n$ is even, any $(A)_{j,k}$ where $j,k$ 
+      are either both even or both odd are non-zero, while any $(A)_{j,k}$ where $j,k$ are of
+      different parities are zero; and when $n$ is odd, the opposite is true. Thus, it seems that
+      any $A^{n}$ with $n$ even has zero entries whenever $j,k$ have opposite parities, while any
+      $A^n$ with $n$ odd has zero entries whenever $j,k$ have identical parities.
+
+      From the rules, if any player $j$ has the hot potato at any time $n$, at time $n+1$, the
+      player $j$ must pass it to either $j+1$ or $j-1$ (with modular arithmetic at the edges). Thus,
+      the receiving player $k$ must have an opposite parity from $j$. Hence, if $n$ is even (e.g.
+      the hot potato has been passed an even number of times), then the receiving player $k$ 
+      \textbf{must} have the same parity as $j$, since the hot potato has swapped parities $n$ times
+      (and since $n$ is even, the parity of $k$ is the same as the parity of $j$). Similarly, if
+      $n$ is odd, then the receiving player $k$ \textbf{must} have a different parity from $j$,
+      since the hot potato has swapped parities an odd number of times (so even $\to$ odd, odd $\to$
+      even). Therefore, we see that if $n$ is even, then any $(A)_{j,k}$ with differing parities of
+      $j,k$ is not possible (and therefore $0$), while if $n$ is odd, then any $(A)_{j,k}$ with
+      identical parities of $j,k$ is not possible (and therefore $0$).
+  \end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+\end{document}

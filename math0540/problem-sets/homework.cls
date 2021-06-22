@@ -90,6 +90,7 @@
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Imag}{Imag}
 \DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\Null}{null}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\Span}{span}
@@ -121,6 +122,7 @@
 
 % better looking font for mathbb
 \let\mathbb\mathds
+\let\mc\mathcal
 
 \newcommand{\Z}{\mathds{Z}}
 \newcommand{\N}{\mathds{N}}
