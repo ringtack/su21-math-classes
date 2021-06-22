@@ -1,0 +1,83 @@
+\documentclass{homework}
+\homework{Week 4: Revisions}
+
+\begin{document}
+\begin{problem}{\S 4b}
+  (I'm only including part b, since it was noted that parts a, c, and d had correct proofs) 
+
+  Let $G$ be a group, and let the centralizer of $g\in G$ be denoted  \[
+    Z_G(g) = \{g'\in G\mid gg'=g'g \} 
+  .\] 
+  Compute the centralizer $Z_G(g)$ for the following elements and groups:
+  \begin{itemize}
+    \item $G=\D_4$ and $g$ is rotation by $90^{\circ}$.
+    \item $G=\D_4$ and $g$ is a flip fixing two vertices of a square.
+    \item $G=\GL_2(\R)$ and $g=\begin{pmatrix} a&0\\0&d \end{pmatrix} $.
+  \end{itemize}
+\end{problem}
+
+\begin{solution}
+  Using the Dihedral group $\D_n$ and rotations as defined before (where $r_i(j)=j+i \mod{n}$,
+  $f_i(j)=n-j+i \mod{n}$; compared to the book, $r_k=\rho_{k},\ f_k=\phi_{k+1}$), and noting that
+  a rotation by $90^{\circ}$ is the same as $r_i$, we see that for any $r_k,\ k\in \{ 0,1,\ldots,n-1
+  \}=V_n$, \[
+    r_k\circ r_i(j)=r_k(j+i)=j+i+k=j+k+i=r_i(j+k)=r_i\circ r_k(j)
+  ;\] equivalently, $r_1$ commutes with any other rotation (for $\D_4$, this means $\{
+  \rho_0=e,\rho_1,\rho_2,\rho_3 \}$). Moreover, for any flip $f_k$, $k\in V_n$, we have
+  \begin{align*}
+    f_k\circ r_1(j)=f_k(j+1)=n-j-1+k && r_1\circ f_k(j)=r_1(n-j+k)=n-j+1+k
+  .\end{align*}
+  Clearly, these are not equivalent, so any flip $f_k$ does not commute with $ r_1$. Thus,
+  $Z_{\D_4}(\rho_1)=\{ e,\rho_1,\rho_2,\rho_3 \}$.
+
+  Now, consider flips that fix two vertices of a square; for this, we see that these flips are
+  $f_0$ and $f_2$. Trivially, the identity commutes. Consider any rotation $f_i$, $i\in V_4$. Then
+  \begin{align*}
+    f_i\circ f_0(j)=f_i(n-j)=n-n+j+i=j+i && f_0\circ f_i(j)=f_0(n-j+i)=n-n+j-i=j-i\\
+    f_i\circ f_2(j)=f_i(n-j+2)=n-n+j-2+i= j+i-2 && f_2\circ f_i(j)=f_2(n-j+i)=n-n+j-i+2
+  .\end{align*}
+  For $ f_0$, $j+i\equiv j-i\mod{4}$ only when $i=0,2$; thus only $f_{0,2}$ commutes with $ f_0$.
+  The same is the case with $f_2$ (since $j+i-2\equiv j-i+2\mod{4}$). Thus, out of the flips, only
+  $f_{0,2}$ commute with flips that fix two vertices.
+
+  Finally, consider any rotation $r_k$, $k\in V_4$. Then
+  \begin{align*}
+    r_k\circ f_0(j)=r_k(n-j)=n-j+k && f_0\circ r_k(j)=f_0(j+k)=n-j-k \\
+    r_k\circ f_2(j)=r_k(n-j+2)=n-j+k+2 && f_2\circ r_k(j)=f_2(j+k)=n-j-k+2
+  .\end{align*}
+  In both situations, $r_k\circ f_{0,2}\equiv f_{0,2}\circ r_k$ only if $k\equiv -k\mod{4}$;
+  clearly, $k=2$ is the only valid solution, so $r_2=\rho_2$ is the only valid rotation. Thus
+  $Z_{\D_4}(\phi_{1,3})=\{ e,\phi_1,\phi_3,\rho_2 \}$.
+
+
+
+  Finally, consider elements $\alpha,\beta\in \GL_2(\R)$ where $a=\begin{pmatrix} a&0\\0&d
+    \end{pmatrix} $ and $b=\begin{pmatrix} e&f\\g&h \end{pmatrix} $. Then
+  \[
+    \alpha\beta=\begin{pmatrix} a&0\\0&d \end{pmatrix} \begin{pmatrix} e&f\\g&h \end{pmatrix}
+    =\begin{pmatrix} ae & af \\ dg & dh \end{pmatrix} 
+  ,\] and \[
+  \beta\alpha=\begin{pmatrix} e&f\\g&h \end{pmatrix} \begin{pmatrix} a&0\\0&d \end{pmatrix}
+  =\begin{pmatrix} ae&df\\ ag & dh \end{pmatrix} 
+.\] In other words, the two commute when $af=df$ and $ag=dg$; equivalently, whenever $a=d$ (or
+  $f=g=0$, but that's included in $\GL_2(\R)$). Thus, if $a=d$, then $Z_{\GL_2(\R)}\begin{pmatrix}
+    a&0\\0&d \end{pmatrix} =\GL_2(\R)$. If $a\neq d$, then $af=df$ and $ag=dg$ implies $f=g=0$.
+    Thus, if $a\neq d$, then $Z_{\GL_2(\R)}\begin{pmatrix} a&0\\0&d
+      \end{pmatrix}=\left\{\begin{pmatrix} e&0\\0&h \end{pmatrix} \mid e,h\in \R\setminus \{ 0
+      \}\right\}$ (we exclude $0$ since otherwise the matrix would not be invertible, and thus would
+      not be in $\GL_2(\R)$).
+\end{solution}
+
+\vspace{2mm}
+\hrule
+\vspace{2mm}
+
+The main thing I was lacking in my original part b was no explanation; I had stated the centralizer
+of the specified group element given a group, but I didn't provide justification for why the
+centralizer was what it was. Thus, in this revision I sought to provide clear explanations behind
+how I got my results.
+
+
+
+
+\end{document}
