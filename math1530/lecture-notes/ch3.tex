@@ -583,7 +583,11 @@ successfully define a commutative ring.
     \item Suppose $a+I=a'+I$. Then $a'=a+c$ for some $c\in I$. But then $a'-a=c\in I$, and so
       $a'-a\in I$.
 
-      Now, suppose $a'-a\in I$. Then $a'-a=c\in I$ for some $c\in I$. Let $a+b$ be any element in
+      Now, suppose $a'-a\in I$. By ideal properties, for any $c\in I$, we can find $c-(a'-a)=b\in
+      I$, so $(a'-a)+b=c\in I$. Let $\alpha\in a+I$; then $ \alpha=a+c$ for some $c\in I$. From
+      above, we choose $c=(a'-a)+b$, and so $ \alpha=a+c=a+b+(a'-a)=a'+\underbrace{b}_\text{$b\in I$}\in a'+I$
+
+      Let $a+b$ be any element in
       $I$; then $a+b=a+r(a'-a)=ra'-(r-1)a$ for some $r\in R$.
     \item For addition: let $a,b,a',b'\in R$ be elements that satisfy $a\equiv a'\mod{I},\ b\equiv
       b'\mod{I}$; that is, $a'-a\in I,\ b'-b\in I$. By (1), $a+I=a'+I,\ b+I=b'+I$. Then \[
