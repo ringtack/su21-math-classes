@@ -291,7 +291,7 @@ There are many interesting homomorphisms from rings to matrix rings. For example
 \] is an injective ring homomorphism (proof left as an exercise).
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex21}
   For every ring $R$, there is a unique homomorphism \[
     \phi:\Z\longrightarrow R
   .\] To understand why, note that by homomorphism requirements we must have $\phi(1)=1_R$, and we
@@ -397,7 +397,7 @@ defined by \[
 \end{example}
 
 We now explore the unit group of the ring $\Z / m\Z$.
-\begin{proposition}[]{}
+\begin{proposition}[]{prop352}
   Let $m\ge 1$ be an integer. Then \[
     (\Z / m\Z)^* = \{a\mod{m}\mid \gcd{(a,m)}=1\} 
   .\] In particular if $m$ is a prime number, then $\Z / p\Z$ is a field (often denoted $\F_p$).
@@ -477,7 +477,7 @@ Now, we combine product rings and unit groups.
 \section{Ideals and Quotient Rings}
 Recall that in the ring $\Z / m\Z$, we pretend that $a,b\in \Z$ are "identical" if $a-b=km$ for some
 $k\in \Z$. In other words, we get an equivalence relation \[
-  a\equiv b\mod{m} ~\text{if}~ ab=km (~\text{$a-b$ is a multiple of $m$}~)
+  a\equiv b\mod{m} ~\text{if}~ ab=km~(\text{$a-b$ is a multiple of $m$})
 .\] We then defined $\Z / m\Z$ to be the set of equivalence classes.
 
 Now, we attempt to generalize this construction to arbitrary (commutative) rings. We first start by
@@ -515,9 +515,9 @@ One way to create an ideal of $R$ is to start with one element in $R$ and take a
 
 The above examples still hold: $m\Z$, $ \{ 0 \}$, and $R$ are all principal ideals.
 
-In some rings (e.g. $\Z,\ \Z[i],\ \R[x]$), every ideal is a principal ideal, although this is not
-immediately obvious. Moreover, this is not true for rings like $\Z[i]$; there exist non-principal
-ideals.
+In some rings (e.g. $\Z,\ \Z[i],\ \R[x]$), every ideal is a principal ideal (such rings are called
+\textbf{principal ideal domains}), although this is not immediately obvious. Moreover, this is not
+true for rings like $\Z[i]$; there exist non-principal ideals.
 
 \begin{example}
   Every ring has at least two ideals:
@@ -583,12 +583,11 @@ successfully define a commutative ring.
     \item Suppose $a+I=a'+I$. Then $a'=a+c$ for some $c\in I$. But then $a'-a=c\in I$, and so
       $a'-a\in I$.
 
-      Now, suppose $a'-a\in I$. By ideal properties, for any $c\in I$, we can find $c-(a'-a)=b\in
-      I$, so $(a'-a)+b=c\in I$. Let $\alpha\in a+I$; then $ \alpha=a+c$ for some $c\in I$. From
-      above, we choose $c=(a'-a)+b$, and so $ \alpha=a+c=a+b+(a'-a)=a'+\underbrace{b}_\text{$b\in I$}\in a'+I$
+      Now, suppose $a'-a\in I$. Then $a'-a=c\in I$ for some $c\in I$, so $a'=a+c,\ a=a'-c$. Thus any
+      $\alpha\in a'+I$ can be written as $a'+b=a+(b+c)\in a+I$, and any $\beta\in a+I$ can be
+      written as $\beta=a+b=a'+(b-c)\in a'+I$. Hence $a+I\subseteq a'+I,\ a'+I\subseteq a+I$, so
+      $a+I=a'+I$.
 
-      Let $a+b$ be any element in
-      $I$; then $a+b=a+r(a'-a)=ra'-(r-1)a$ for some $r\in R$.
     \item For addition: let $a,b,a',b'\in R$ be elements that satisfy $a\equiv a'\mod{I},\ b\equiv
       b'\mod{I}$; that is, $a'-a\in I,\ b'-b\in I$. By (1), $a+I=a'+I,\ b+I=b'+I$. Then \[
         a'=a+s,\ b'=b+t
@@ -608,26 +607,267 @@ successfully define a commutative ring.
 \end{proof}
 
 
+\begin{remark}
+  One way to view the quotient ring $R / I$ is to divide a ``pie'' of $R$ into its individual
+  ``slices'', where each slice represents an element of $R / I$ (for instance, $\Z / 3\Z$ is divided
+  into three slices: $3\Z,\ 1+3\Z,~\text{and}~2+3\Z$). Alternatively, one can view $a$ and $b$ as
+  ``indistinguishable'' if $a-b\in I$. As we think of $1\sim 4$ in $\Z / 3\Z$, we can abstractly
+  partition $\Z / 3\Z$ into colors; red might symbolize $3\Z$, green for $1+3\Z$, and blue for
+  $2+3\Z$. Thus, $1,4,7$ would all be red, ``the same element''. 
+\end{remark}
+
+Ideals and homomorphisms are closely related. Review the following proposition carefully; it will be
+used constantly.
+
+\begin{proposition}[]{}
+  \begin{enumerate}
+    \item Let $R$ be a commutative ring. Then the map \[
+        \pi: R\longrightarrow R/I,\ a\longmapsto a+I
+      \] that sends an element to its coset is a surjective ring homomorphism with kernel $I$.
+    \item Let $\phi: R\to R'$ be a ring homomorphism.
+      \begin{itemize}
+        \item The kernel of $\phi$ is an ideal of $R$ (recall that the kernel is $\ker(\phi)=\{a\in
+          R\mid \phi(a)=0_{R'}\}$).
+        \item The homomorphism is injective if and only if $\ker(\phi)=(0)$.
+        \item Let $I_\phi=\ker(\phi)$. There is a well-defined injective ring homomorphism \[
+            \overline{\phi}: R / I_\phi \longrightarrow R,\ \overline{\phi}(a+I_\phi)=\phi(a)
+        .\] Moreover, if $\phi$ is surjective, then $\overline{\phi}$ is an isomorphism.
+      \end{itemize}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof]
+  To prove homomorphism:
+  \begin{itemize}
+    \item $\pi(0_R)=0+I=I=0_{R / I}$.
+    \item $\pi(a+b)=(a+b)+I=(a+I)+(b+I)=\pi(a)+\pi(b)$, by definition of addition of cosets of
+      ideals.
+    \item $\pi(a\cdot b)=(a\cdot b)+I=(a+I)\cdot (b+I)=\pi(a)\cdot \pi(b)$, by definition of
+      multiplication of cosets of ideals.
+  \end{itemize}
+  Hence $\pi:R\to R / I$ is a ring homomorphism. Next, recall that $\ker(\pi)=\{a \in R\mid
+  \pi(a)=0_{R/I}\}.$ But $0_{R / I}=0+I$, so we need $\pi(a)=I=0+I$. For any $a+I,\ a+I=0+I$ iff
+  $a-0=a\in I$; thus $\ker(\pi)=I$. Surjectivity is trivial: for any $a+I\in R / I$, $a\in R$, so
+  $\phi(a)=a+I$. \\
+
+  Now, let $\phi:R\to R'$ be a ring homomorphism. The kernel of $\phi$ is the set $\{a\in R\mid
+  \phi(a)=0_{R'}\} $. For any $a,\ b\in \ker(\phi)$, we have $\phi(a+b)=\phi(a)+\phi(b)=0+0$, and so
+  $a+b\in \ker(\phi)$. Next, let $c\in R$. For any $c\cdot a$, we have $\phi(c\cdot a)=\phi(c)\cdot
+  \phi(a)=\phi(c)\cdot 0=0$, and so $c\cdot a\in \ker(\phi)$. Thus $\ker(\phi)$ forms an ideal of
+  $R$.
+
+  To prove injectivity iff $\ker(\phi)=(0)$:
+  \begin{itemize}
+    \item Suppose $\phi$ is injective. Then for any $a\in \ker(\phi)$, $\phi(a)=0=\phi(0)$, so
+      $a=0$.
+    \item Conversely, suppose $\ker(\phi)=(0)$. Suppose $\phi(a)=\phi(a')$. Then
+      $\phi(a)-\phi(a')=\phi(a-a')$, so $a-a'\in \ker(\phi)$; but $\ker(\phi)=(0)$, so $a-a'=0
+      \implies a=a'$. Hence $\phi$ is injective.
+  \end{itemize}
+
+  We finally prove well-definedness of $\overline{\phi}$. Suppose that $a+I_\phi=a'+I_\phi$ are two
+  ways of writing a coset. We need to show $ \overline{\phi}(a)=\overline{\phi}(a')$. The assumption
+  of $a+I_\phi=a'+I_\phi$ allows us to write  $a'=a+b$ for some $b\in I_\phi$. Thus \[
+  \overline{\phi}(a'+I)=\phi(a')=\phi(a+b)=\phi(a)+\phi(b)=\phi(a)+0=\phi(a),\] and so
+  $\overline{\phi}$ is well-defined. $\overline{\phi}$ being a ring homomorphism follows directly
+  from $\phi$ being a ring homomorphism. To show injectivity, \[
+    \overline{\phi}(a+I_\phi)=\overline{\phi}(b+I) \iff \phi(a)=\phi(b) \iff \phi(a-b)=0 \iff a-b\in
+    I_\phi \iff a+I_\phi = b+I_\phi
+  ,\] as desired (the second last step is accomplished because $ \phi(a-b)=0$ implies $a-b\in
+  \ker(\phi)=I_\phi$).
+
+  Finally, if $\phi$ is surjective, then so is $\overline{\phi}$: $\phi$ surjective implies any
+  $a'\in R'$ can be written as $\phi(a)$; but then any $\phi(a)$ can be written as
+  $\overline{\phi}(a+I_\phi)$; thus $\phi(a)=\overline{\phi}(\pi(a))=\overline{\phi}(a+I_\phi)$, and
+  so $\overline{\phi}$ is surjective. We don't have to worry about $\pi$ ``eating up'' any $a\in R$:
+  if $a\equiv b\mod{I_\phi}$, then $a=b+c$ for some $c\in I_\phi$, so \[
+    \phi(a)=\phi(b+c)=\phi(b)+\phi(c)=\phi(b)+0=\phi(b)
+  ,\] and so $\phi(a)=\phi(b)$. Hence any $\pi(a)=\pi(b)$ won't affect the surjectivity of
+  $\overline{\phi}$.
+
+  Therefore $\overline{\phi}$ is an isomorphism.
+\end{proof}
+
+\begin{definition}[Characteristics of Rings]{}
+  Let $R$ be a ring, and let \[
+    \phi:\Z\longrightarrow R
+  \] be the unique homomorphism determined by $\phi(1)=1_R$ (see Example \ref{ex21}). The kernel of
+  $\phi$ is an ideal of $\Z$, and recall that every ideal of $\Z$ is principal (therefore every
+  ideal $I$ of $\Z$ is of the form $m\Z$); there is thus a unique integer $m\ge 0$ such that  \[
+    \ker(\phi)=m\Z
+  .\] That integer $m$ is called the \textbf{characteristic of the ring $R$}. 
+\end{definition}
+
+Another way to describe $m$ is that $m$ is the smallest integer such that \[
+\phi(m)=\underbrace{1_R+\ldots+1_R}_\text{$m$ terms}=0_R
+;\] or, if no such $m$ exists, then $m=0$ (the characteristic of $R$ is $0$).
+
+\begin{example}
+  The ring $\Z / m\Z$ has characteristic $m$, while the rings $\Z,\Q,\R,\C$ all have characteristic
+  $0$. It follows from Proposition 3.31 that if a ring has characteristic $m$, then there is an
+  injective ring homomorphism  \[
+    \Z / m\Z \hookrightarrow R
+  \] (this follows since characteristic $m$ implies $\ker(\phi)=m\Z$ for some $\phi: \Z\to R$, and
+  every map $\Z / I_\phi=\Z/m\Z\to R$ is injective).
+\end{example}
+
+Note that when $m=0$, we aren't ``dividing by $0$.'' In general, the quotient of a ring $R$ by the
+zero ideal $(0)$ is just $R:\ R / (0) = R$, since $R / (0)$ means we identify elements $a,b\in R$ as
+congruent if $a-b=0$; or, $a=b$. Thus $R$ has infinitely many cosets $a+(0)$, and so $R / (0) =
+R$.\\
+
+Now, we move on to the \~Freshman's Dream\~. Many freshmen hope for $(a+b)^n=a^n+b^n$. Clearly, this
+isn't true in $\R$; but is there a ring in which this is true? It turns out that yes, any ring with
+prime characteristic possesses that possibility!
+
+\begin{theorem}[Freshman's Dream]{}
+  Let $p$ be a prime, and let $R$ be a commutative ring with characteristic $p$. Then the map \[
+    f: R\longrightarrow R,\ f(a)=a^p
+  \] is a ring homomorphism, called the \textbf{Frobenius homomorphism of $R$}. In particular, for
+  all $a,b\in R$ and $n\ge 0$, we have \[
+    (a+b)^{p^n}=a^{p^n}+b^{p^n}
+  .\] 
+\end{theorem}
+\begin{proof}[Proof]
+  Clearly $f(1)=1$, and preserving multiplication is clear: \[
+    f(ab)=(ab)^p=(a^p)(b^p)=f(a)f(b)
+  .\] For addition, we use the Binomial Theorem:
+  \begin{align*}
+    f(a+b)&= (a+b)^p \\
+          &= \sum_{k=0}^{p} \binom{p}{k} a^{p-k}b^k \\
+          &= a^p + b^p + \sum_{k=1}^{p-1} \binom{p}{k}a^{p-k}b^{k}
+        .\end{align*}
+  For any $1\le k\le p-1$, $\binom{p}{k}$ is a multiple of $p$: \[
+    \binom{p}{k}= \frac{p!}{k!(p-k)!}=\frac{(p-k+1)\ldots(p-1)(p)}{k!}
+  .\] Moreover, since $p$ is prime and $1\le k\le p-1$, none of $k!$ will cancel with $p$ (see
+  Proposition 1.47 in the book). Since we're working in a ring with characteristic $p$, that means
+  all the $\binom{p}{k}$ will be $0$. Hence the entire sum disappears, and we are left with \[
+    f(a+b)=a^n+b^n=f(a)+f(b)
+  .\] Thus $f$ is a ring homomorphism.
+
+  To prove the freshman's dream, we use induction: the case $n=1$ is already proven, so suppose
+  $n=k$ is true. Then \[
+    (a+b)^{p^{k+1}}=((a+b)^{p^k})^p=(a^{p^k}+b^{p^k})^p = (a^{p^k})^p +
+    (b^{p^k})^p=a^{p^{k+1}}+b^{p^{k+1}}
+  .\] Thus the freshman dream holds for any $(a+b)^{p^n}$.
+\end{proof}
 
 
+\section{Prime Ideals and Maximal Ideals}
+
+Primes hold great significance in number theory. Recall that an integer $p$ is prime if and only if
+its only (positive) divisors are $1$ and $p$. Moreover, if $p$ divides any $ab$, then either
+$p$ divides $a$ or $p$ divides $b$. We can rephrase this divisibility property for any arbitrary
+ideal: if a product $ab$ is in the ideal $p\Z$, then either $a\in p\Z$ or $b\in p\Z$. Additionally,
+we note that integral domains and fields are of particular interest; thus, we wish to find for which
+ideals $I$ is the quotient ring $R / I$ an integral domain, and for which is it a field.
 
 
+\begin{definition}[Prime Ideals]{}
+  Let $R$ be a commutative ring. An ideal $I$ of $R$ is a \textbf{prime ideal} if $I\neq R$ and if,
+  whenever $ab\in I$, then either $a\in I$ or $b\in I$.
+\end{definition}
 
+The contrapositive is also important: if $I$ is a prime ideal, and both $a\not\in I$ and $b\not\in
+I$, then we have $ab\not\in I$.
 
+\begin{example}
+  Let $m\neq 0$. The ideal $m\Z$ is a prime ideal if and only if $\left| m \right| $ is a prime
+  number.
+\end{example}
+\begin{example}
+  Let $F$ be a field. For every $a,b \in F$ with $a\neq 0$, the principal ideal $(a+bx)F[x]$ is a
+  prime ideal. For every $a,b,c\in F$ with $a\neq 0$ and $b^2-ac\neq d^2$ for any $d\in F$ 
+  ($b^2-ac$ is not the square of any element), the principal ideal $(a^2+bx+c)F[x]$ is a prime
+  ideal.
+\end{example}
 
+The largest possible ideal of $R$ that is not $R$ itself is also of interest.
+\begin{definition}[Maximal Ideals]{}
+  Let $R$ be a commutative ring. An ideal $I$ is a \textbf{maximal ideal} if $I\neq R$ and there is
+  no ideal ``larger'' than $I$, or ``contained'' between $I$ and $R$; that is, for any ideal $J$, if
+  $I\subseteq J\subseteq R$, then either $J=I$ or $J=R$.
+\end{definition}
 
+\begin{example}
+  Let $p\in \Z$ be a prime number. Then the ideal $p\Z$ is both a prime ideal \textbf{and} a maximal
+  ideal. This follows by combining Proposition \ref{prop352} (3.17 in the textbook), which says that
+  $\Z / p\Z$ is a field, and the following Theorem \ref{thm373} (3.40 in the textbook), which says
+  that in general, $R / I$ is a field if and only if $I$ is a maximal ideal.
+\end{example}
+\begin{example}
+  In the ring $\Z[x]$ of polynomials with integer coefficients, the principal ideals $2\Z[x]$ and
+  $x\Z[x]$ are prime ideals, but not maximal ideals, since they are properly contained in the ideal
+  \[
+    \{2a(x)+xb(x)\mid a(x),\ b(x)\in \Z[x]\} 
+  \] generated by $2$ and $x$, and one can check that this ideal is not all of $\Z[x]$. Indeed, it
+  is a non-principal maximal ideal.
+\end{example}
 
+Just as prime numbers in $\Z$ form the basic building blocks for all numbers (recall that any
+integer can be represented uniquely as a product of prime numbers), the prime and maximal ideals of
+$R$ are, in some sense, the basic building blocks underlying the algebraic (and geometric) structure
+of $R$.\\
 
+On the other hand, integral domains and fields are two particularly nice examples of rings. Thus,
+the next theorem is both interesting and important.
+\begin{theorem}[]{thm373}
+  Let $R$ be a commutative ring, and let $I$ be an ideal with $I\neq R$.
+  \begin{enumerate}
+    \item $I$ is a prime ideal if and only if the quotient ring $R / I$ is an integral domain.
+    \item $I$ is a maximal ideal if and only if the quotient ring $R / I$ is a field.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[Proof]
+  We first deal with the first statement:
+  \begin{itemize}
+    \item Suppose $I$ is a prime ideal. Let $a+I$ and $b+I$ be elements of $R / I$. If
+      $(a+I)(b+I)=0+I=I$, then either $a+I=I$ or $b+I=I$. Thus at least one of $a+I$ and $b+I$ is
+      equal to $0+I$, and so $R / I$ is an integral domain (since for any $a,b\in R / I$, if $a\cdot
+      b=(a+I)(b+I)=0_{R / I}=0+I$, then one of $a+I,\ b+I$ is $0_{R / I}$).
+    \item Conversely, suppose $R / I$ is an integral domain. Then for any $a+I,\ b+I\in R / I$, if
+      $(a+I)(b+I)=0+I=I$, then either $a+I=I$ or $b+I=I$. This implies either $a\in I$ or $b\in I$ 
+      (since $a+I=0+I$ implies $a-0=a\in I$).
+  \end{itemize}
+  Now, we move on to the second:
+  \begin{itemize}
+    \item Suppose $I$ is a maximal ideal. Let $a+I$ be a non-zero element of $R / I$ (e.g. $a+I\neq
+      I$). To exploit the fact that $I$ is a maximal ideal, construct an ideal $J$ where \[
+        J = \{ar+b\mid r\in R,\ b\in I\} 
+      \] ($J$ being an ideal is left as an exercise). Taking elements of $J$ with $r=0$ shows that
+      $I\subset J$, while taking $r=1,\ b=0$ shows that $a\in J$.  Since $a\not\in I$, $J$ is
+      strictly larger than $I$; and since $I$ is a maximal ideal and $I\subsetneq J \subseteq R$, we
+      have that $J=R$. In particular, $1\in J$. Thus there exists some $c\in R,\ b\in I$ such that
+      $1=ac+b$. In terms of $R / I$, and using the fact that $b\in I$ implies $b+I=I$, we have \[
+        1+I=(ac+b)+I=(ac+0)+I=ac+I=(a+I)(c+I)
+      .\] Hence $a+I$ has a multiplicative inverse in $R / I$, and by definition $R$ is commutative,
+      so $R / I$ is a field.
+    \item Conversely, suppose $R / I$ is a field. Let $J$ be an ideal such that $I\subseteq
+      J\subseteq R$. If $J=I$, we are done, so suppose $J\neq I$. Then for some $a\in J$, we have
+      $a\not\in I$. Then the coset $a+I\neq I=0+I$, so $a+I$ is a non-zero element of $R / I$. Since
+      $R / I$ is a field, $a+I$ has a multiplicative inverse $c+I$ for some $c\in R$; that is, \[
+        1 + I = (a+I)\cdot (c+I)=ac+I
+      ,\] so there is an element $b\in I$ such that $1=ac+b$. But $J$ is an ideal, so $a\in J$
+      implies $ac\in J$. Additionally, since $b\in I\subset J$, we have $ac+b=1\in J$. But since
+      $1\in J$, any $r\in R$ is in $J$: $r\cdot 1=r\in J$. Hence $J=R$, and so $I$ is a maximal
+      ideal.
+  \end{itemize}
+\end{proof}
 
-
-
-
-
-
-
-
-
-
+This theorem leads to a very slick corollary:
+\begin{corollary}[]{}
+  Every maximal ideal is a prime ideal.
+\end{corollary}
+\begin{proof}[Proof]
+  If an ideal $I$ is a maximal ideal, then $R / I$ is a field. But $R / I$ is a field implies that
+  $R / I$ is an integral domain, and thus $I$ is a prime ideal as well.
+\end{proof}
+Note that the converse does not always hold; Example 31 (3.39 in the textbook) illustrates prime
+non-maximal ideals.
+\begin{remark}
+  It would be nice to say that any ring has at least one maximal ideal. It turns out that this is
+  yet another statement equivalent to the Axiom of Choice!
+\end{remark}
 
 
 
