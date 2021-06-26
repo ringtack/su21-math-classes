@@ -522,6 +522,131 @@ is, $3\times 2$ and $2\times 4$ would work, but $3\times 1$ and $3\times 2$ woul
 This proof is the result of tedious computation; see Axler p.74.
 
 
+\section{Invertibility and Isomorphic Vector Spaces}
+
+\subsection{Invertible Linear Maps}
+
+We start by looking at invertible linear maps, and inverses in the context of linear maps.
+
+\begin{definition}[Invertible, Inverse]{}
+  A linear map $T\in \mc{L}(V,W)$ is called \textbf{invertible} if there exists a linear map $S\in
+  \mc{L}(W,V)$ such that $ST=I_V$, and $TS=I_W$. $S\in \mc{L}(W,V)$ is called the \textbf{inverse}
+  of $T$.
+\end{definition}
+
+\begin{proposition}[Inverse is Unique]{}
+  an invertible linear map is unique.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $T\in \mc{L}(V,W)$ is invertible, and $S_1,S_2$ are inverses of $T$. Then \[
+    S_1=S_1I=S_1(TS_2)=(S_1T)S_2=IS_2=S_2
+  .\] 
+\end{proof}
+
+Thus, we can denote the inverse of a map $T\in \mc{L}(V,W)$ uniquely by $T^{-1}\in \mc{L}(W,V)$. It
+turns out that invertibility is equivalent to bijectivity:
+\begin{proposition}[]{}
+  A linear map is invertible if and only if it is bijective.
+\end{proposition}
+\begin{proof}[Proof]
+  We first sketch a proof, then proceed formally.
+
+  In order to be an inverse of $T \in \mc{L}(V,W)$, an inverse $T ^{-1}\in \mc{L}(W,V)$ must
+  ``undo'' $T$, and vice versa; that is, for any $v\in V$, $T^{-1}T(v)=v$, and for any $w\in W$,
+  $TT^{-1}(w)=w$. Thus, it is clear that
+  \begin{itemize}
+    \item $T$ must be injective: if it is not, then at least two elements in $V$ map to the same
+      element in $w$, so how is a $T^{-1}$ supposed to ``undo'' this operation?
+    \item $T$ must be surjective: if it is not, then some element in $w\in W$ is not mapped to by
+      $T$; that is, no such $v\in V$ exists such that $T(v)=w$. Then how is $T$ supposed to ``undo''
+      $w$, if it never maps to $w$?
+  \end{itemize}
+
+  Now, we proceed formally. Suppose $T$ is invertible; that is, some $T^{-1}\in \mc{L}(W,V)$ has the
+  property $TT^{-1}=T^{-1}T=I$. Suppose $T(u)=T(v)$ for some $u,v\in V$. Then \[
+    u=T^{-1}T(u)=T^{-1}T(v)=v
+  ,\] and so $T$ is injective. Now, let $w$ be any element in $W$. Then $w=T(T^{-1}(w))$, and so
+  $w\in \range{T}$. Thus $\range{T}=W$, and so $T$ is surjective, and thus a bijection.\\
+
+  Conversely, suppose $T\in \mc{L}(V,W)$ is a bijection. Then for every $w\in W$, there exists a
+  unique $v\in V$ such that $T(v)=w$. Define $S\in \mc{L}(W,V)$ as the function that sends every
+  $w$ back to its original $v$; that is, since $w=T(v)$, we have $S(w)=S(T(v))=v$. Clearly, $T\circ
+  S$ is the identity map $I_W$. To show that $S\circ T=I_V$, consider any $v\in V$. Then \[
+    T(S\circ T(v))=(T\circ S)T(v)=I_WT(v)=T(v)
+  .\] Then $T(S\circ T(v))=T(v)$; but since $T$ is an injection, we have $S\circ T(v)=v$, and so
+  $S\circ T=I_V$. Thus $S=T^{-1}$.
+
+  It remains to prove that $S$ is a linear map. In order to satisfy linear map properties, we need
+  to show that \[
+    S(a_1w_1+a_2w_2)=a_1S(w_1)+a_2S(w_2)
+  .\] Since $T$ is injective, we really only need to show that \[
+    T(S(a_1w_1+a_2w_2))=T(a_1S(w_1)+a_2S(w_2))
+  .\] Indeed, we have
+  \begin{align*}
+    T(S(a_1w_1+a_2w_2))&= a_1w_1+a_2w_2 \\
+                       &= a_1T(S(w_1))+a_2T(S(w_2)) \\
+                       &= T(a_1S(w_1))+T(a_2S(w_2)) \\
+                       &= T(a_1S(w1)+a_2S(w_2))
+  .\end{align*} Hence $S$ is a linear map.
+\end{proof}
+
+\subsection{Isomorphic Vector Spaces}
+
+From this, we get the sense that if an invertible linear map exists between two vector spaces, then
+they are essentially the same; they differ only in the names of their elements.
+
+\begin{definition}[Isomorphic, Isomorphism]{}
+  An \textbf{isomorphism} is an invertible linear map. Two vector spaces $V,W$ are
+  \textbf{isomorphic} if there is an isomorphism between the two; we write $V\cong W$.
+\end{definition}
+
+Isomorphic vector spaces are really the same name; one can picture any element $v\in V$ as being
+``relabeled'' as $T(v)\in W$. Thus, a natural proposition follows.
+\begin{theorem}[Dimension of Isomorphic Vector Spaces]{}
+  Let $V,W$ be finite-dimensional vector spaces. Then $V\cong W$ if and only if $\dim V = \dim W$.
+\end{theorem}
+\begin{proof}[Proof]
+  First, suppose $V\cong W$. Then there exists an isomorphism $T\in \mc{L}(V,W)$; moreover, $T$ is
+  bijective. Thus $ \Null{T}=0$, and $\range T = W$, and so $\dim\Null T = 0,\ \dim \range T
+  =\dim W$. Then \[
+    \dim V = \dim\Null T + \dim\range T
+  \] becomes $\dim V = \dim W$, as required.
+
+  Conversely, suppose $\dim V = \dim W$. Let $v_1,\ldots,v_n$ be a basis for $V$, and let $
+   w_1,\ldots,w_n$ be a basis for $W$. Let $T\in \mc{L}(V,W)$ be defined as \[
+     T(c_1v_1+\ldots+c_nv_n)=c_1w_1+\ldots+c_nw_n
+   .\] Then $T$ is a well-defined, unique linear map, since $v_1,\ldots,v_n$ is a basis. $T$ is
+   surjective, since $w_1,\ldots,w_n$ spans $W$; moreover, $ \Null T=\{ 0 \}$, since
+   $w_1,\ldots,w_n$ is linearly independent, so $ c_1w_1+\ldots+c_nw_n=0$ iff $c_i=0$
+   (alternatively, one can use the rank-nullity theorem and the fact that $\dim\range T = \dim W =
+   \dim V$, so $\dim\Null T$ is necessarily $0$). Thus $T$ is injective, and so $T$ is an
+   isomorphism. Hence $V\cong W$, as required.
+\end{proof}
+
+From this, we get that any finite-dimensional vector space $V$ with dimension $n$ is actually
+isomorphic to $\F^{n}$! But then, why don't we only study the vector spaces $\F^{n}$, if they're
+really the same as any other vector space with dimension $n$? Studying vector spaces abstractly is
+extremely useful; for example, the polynomial space of dimension 15 is quite useful in physics.
+
+Our discussion about dimensions and isomorphism lead us to the following proposition:
+\begin{proposition}[]{}
+  Suppose $V,W$ are finite-dimensional vector spaces with $ \dim V = \dim W$, and let $T\in
+  \mc{L}(V,W)$ be a linear map. The following are equivalent:
+  \begin{enumerate}
+    \item $T$ is invertible/bijective.
+    \item $T$ is injective.
+    \item $T$ is surjective.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof]
+  Let $n=\dim V = \dim W$. Then $n=\dim V=\dim\Null T + \dim\range T$. So $\dim\Null T=0 \iff
+  \dim\range T=n\iff \dim\Null T=0 ~\text{AND}~\dim\range T=n$. In other words, $T$ is injective iff
+  $T$ is surjective iff $T$ is bijective.
+\end{proof}
+
+
+
 
 
 
