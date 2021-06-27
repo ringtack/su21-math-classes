@@ -1,0 +1,396 @@
+\documentclass[math1530-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Vector Spaces: Part 1}
+
+\section{Introduction to Vector Spaces}
+
+We studied vectors on a real plane (e.g. 2D or 3D space) in the guise of arrows; for instance,
+$(1,2)$ denotes an arrow with tail at the origin and head at the coordinate $(1,2)$. Additionally,
+we could add vectors ``tip-to-tail, '' by concatenating one vector's tail to another's head; and we
+could multiply them by a scalar (e.g. $-2(1,2)$ becomes $(-2,-4)$). These operations are represented
+as follows:
+\begin{itemize}
+  \item $(a_1,b_1)+(a_2,b_2)=(a_1+a_2,b_1+b_2)$
+  \item $c(a,b)=(ca,cb)$
+\end{itemize}
+
+Seem familiar? Abstractly, vectors are two types of operations: \textit{scalar multiplication} and
+\textit{vector addition}; and we can combine them using the all-powerful distributive law: \[
+  c(\vec{v}_1+\vec{v}_2)=c\vec{v}_1+c\vec{v}_2
+.\] 
+Now, we formalize this concept into a \textbf{vector space}.
+
+\section{Vector Spaces and Linear Transformations}
+The numbers we used before ($(1,2)$) are real numbers; but that's not necessary. Generally, we can
+use any sort of ``numbers'' that allow us to add, subtract, multiply, and divide. As discussed
+before, these numbers live in \textbf{fields}.
+\begin{definition}[Fields]{}
+  A \textbf{field $F$} is a commutative ring with the property that every non-zero $a\in F$ has a
+  multiplicative inverse. In other words, for every $a\in F$ with $a\neq 0$, there is a $b\in F$
+  such that $ab=1$; or, $F^*=F\setminus \{0\}$.
+\end{definition}
+
+Familiar fields include $\Q,\ \R$, and $\C$; additionally, for every prime $p$, there is a field $\Z
+/ p\Z$ (see Proposition 3.17).\\
+
+For vector spaces, we fix an underlying field $F$, and use it as a basic building block for vector
+spaces. Subsequently, we will use vector spaces to deeply study fields and field extensions.
+
+\begin{definition}[Vector Spaces]{}
+  Let $F$ be a field. A \textbf{vector space with a field F}, denoted $V_F$, or alternatively a
+  \textbf{$F$-vector space}, is an Abelian group $V$ (with group law ``vector addition''), together
+  with a rule for multiplying a vector $\vec{v}\in V$ by a scalar $c\in F$ to obtain a new vector
+  $c\vec{v}\in V$. Vector addition and scalar multiplication are required to satisfy these axioms
+  (in addition to the Abelian group axioms under addition and multiplication):
+  \begin{enumerate}
+    \item \textbf{Identity Law}: $1\vec{v}=\vec{v}$ for all $\vec{v}\in V$.
+    \item \textbf{Distributive Law 1}: $c(\vec{v}_1+\vec{v}_2)=c\vec{v}_1+c\vec{v}_2$ for all $c\in
+      F$, $\vec{v}_1,\ \vec{v}_2\in V$.
+    \item \textbf{Distributive Law 2}: $(c_1+c_2)\vec{v}=c_1\vec{v}+c_2\vec{v}$ for all $c_1,c_2\in
+      F$, $\vec{v}\in V$.
+    \item \textbf{Associative Law}: $(c_1c_2)\vec{v}=c_1(c_2\vec{v})$ for all $c_1,c_2\in F$,
+      $\vec{v}\in V$.
+  \end{enumerate}
+  The zero element of $V$ is the \textbf{zero vector}, denoted $\textbf{0}$. It is \textbf{not}
+  $0\in F$, the zero element of $F$.
+\end{definition}
+
+Just as with the axiomatic definition of groups and rings, some basic facts about vector spaces can
+be proven directly from their definitions.
+\begin{proposition}[]{}
+  Let $V_F$ be a vector space.
+  \begin{itemize}
+    \item $0v=\textbf{0}$ for all $v\in V$.
+    \item $(-1)v=-v$ for all $v\in V$.
+    \item Every vector $v\in V$ has a unique inverse $-v$.
+  \end{itemize}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{itemize}
+    \item $0v=(0+0)v=0v+0v$; adding $-0v$ to both sides yields $\textbf{0}=0v$.
+    \item $v+(-1)v=1v+(-1)v=(1+-1)v=0v=\textbf{0}$. Hence $(-1)v=-v$.
+    \item Suppose $v_1,v_2\in V$ are two inverses of $v\in V$. Then \[
+        v_1=v_1+\textbf{0}=v_1+(v+v_2)=(v_1+v)+v_2=\textbf{0}+v_2=v_2
+    .\] Hence $v_1=v_2$.
+  \end{itemize}
+\end{proof}
+
+Vector spaces are characterized by vector addition and scalar multiplication, so we are interested
+in maps that preserve these properties:
+\begin{definition}[Linear Transformations]{}
+  Let $F$ be a field, and let $V,W$ be $F$-vector spaces. A \textbf{linear transformation} $L$ from
+  $V$ to $W$ is a function \[
+    L:V\longrightarrow W
+  \] satisfying \[
+    L(c_1\vec{v}_1+c_2\vec{v}_2)=c_1L(\vec{v}_1)+c_2L(\vec{v}_2)
+  \] for all $c_1,c_2\in F$, $\vec{v}_1,\vec{v}_2\in V$. To specify a field, we call $L$ an
+  \textbf{$F$-linear transformation}.
+\end{definition}
+
+\begin{remark}
+  An alternative, and perhaps better, name for a linear transformation would be a \textbf{vector
+  space homomorphism}, given its similarities to group homomorphisms and ring homomorphisms.
+  However, due to historical reasons linear transformations has stuck.
+\end{remark}
+
+
+\section{Interesting Examples of Vector Spaces}
+
+We've already seen vectors in $\R^2$ and $\R^3$ (our world!... maybe?). More generally, we can form
+a vector space using a set of $n$-tuples with coordinates in any field.
+\begin{example}
+  Let $F$ be a field, with $n\ge 1$ an integer. Then $F^n$ is the $F$-vector space whose vectors are
+  $n$-tuples of elements of $F$, \[
+    F^n=\{(a_1,a_2,\ldots,a_n)\mid a_i\in F\} 
+  .\] Vector addition and scalar multiplication are done coordinate-wise. Among examples of $F^n$
+  vector spaces include $\R^n,\ \C^n$, and $\F_p^n$. Notice that $\F_p^n$ is finite; it has exactly
+  $p^n$ different vectors.
+\end{example}
+
+\begin{example}
+  The maps
+  \begin{align*}
+    L(a_1,a_2)&=(3a_1-5a_2,2a_1+3a_2)\\
+    L'(a_1,a_2,a_3)&=(3a_1-5a_2+2a_3,2a_1+3a_2-7a_3)
+  \end{align*} are examples of linear transformations (as one should verify!).
+\end{example}
+
+\begin{example}
+  The set of polynomials $F[x]$ over a field $F$ is a vector space, with polynomial addition and
+  scalar multiplication the usual way. For any $a\in F$, the \textbf{evaluation map} \[
+    E_a: F[x]\longrightarrow F,\ E_a(f(x))=f(a)
+  ,\] is a linear transformation. More generally, for any list of values $a_1,\ldots,a_n\in F$, we
+  can define a linear transformation \[
+    E_a: F[x] \longrightarrow F^n,\ E_a(f(x))=\left( f(a_1),\ldots,f(a_n) \right) 
+  .\] One should verify that this is a linear transformation.
+\end{example}
+
+\begin{example}
+  Linear algebra can be connected with calculus! Let
+  \begin{align*}
+    V &= \{\text{functions}~f:\R\to R \} \\
+    V^{\text{cont}}=\{ \text{continuous functions}~ f:\R\to \R \}\\
+    V^{\text{diff}}=\{ \text{differentiable functions}~ f:\R\to \R \}
+  .\end{align*} These are $\R$-vector spaces, with function addition and scalar multiplication as
+  usual: \[
+    (f+g)(x)=f(x)+g(x),\ (cf)(x)=cf(x)
+  .\] Differentiation is a linear transformation \[
+  D: V^{\text{diff}}\longrightarrow V,\ D(f(x))=\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}
+  .\] Similarly, for any $a\in \R$, integration is a linear transformation \[
+    I_a:V^{\text{cont}}\longrightarrow V^{\text{diff}},\ I_a(f(x))=\int_a^x f(t)dt
+  .\] The Fundamental Theorem of Calculus can (almost; notice domain discrepancy) then be summarized
+  by the two formulas \[
+    I_a\circ D(f(x))=f(x)-f(a) ~\text{and}~ D\circ I_a(f(x))=f(x)
+  .\] 
+\end{example}
+
+\section{Bases and Dimension}
+Conveniently, every vector in $\R^2$ can be uniquely expressed using the two vectors $e_1=(1,0),\
+e_2=(0,1)$. More precisely, any vector $(a,b)\in \R^2$ can be written as \[
+  (a,b)=ae_1+be_2
+,\] and the coefficients $a,b$ uniquely identify the vector $v$. A similar construction works for
+$\R^n$ (and indeed $F^n$). We now axiomatize this notion to any vector space.
+
+\begin{definition}[Bases]{}
+  Let $V_F$ be a vector space. A \textbf{finite\footnote{not every basis need be finite!} basis for
+  $V$} is a finite set of vectors $\mc{B}=\{ v_1,\ldots,v_n \}\subseteq V$ with the following
+  property: 
+  \begin{center}
+    Every vector $\vec{v}\in V$ can be \textbf{uniquely} written in the form \[
+      \vec{v}=a_1v_1+\ldots+a_nv_n
+    \] for $a_1,\ldots,a_n\in F$.
+  \end{center}
+  An expression of the form $a_1v_1+\ldots+a_nv_n$ is called a \textbf{linear combination} of
+  $v_1,\ldots,v_n$.
+\end{definition}
+\begin{example}
+  Let $F$ be a field. The \textbf{standard basis for $F^n$} is the collection of vectors $\{
+  e_1,\ldots,e_n \}$ where \[
+    e_k=(0,\ \ldots,\ 1,\ \ldots,\ 0)
+  \] the $k$-th coordinate is $1$, and all others $0$. The vector $\vec{v}=(a_1,\ldots,a_n)\in F^n$
+  can be written uniquely by the sum \[
+    \vec{v}=a_1e_1+\ldots+a_ne_n
+  .\] The coefficients $a_1,\ldots,a_n$ are the \textbf{coordinates of $\vec{v}$ for the standard
+  basis of $F^n$}.
+\end{example}
+
+The uniqueness property is important. For instance, while every vector in $\R^2$ can be expressed by
+some linear combination of $(1,0),(0,1)$, and $(1,1)$, the representation is not unique. How can we
+tell if a given set of vectors is a basis? Two important concepts must thus be defined, that can be
+used to readily check for basis properties.
+\begin{definition}[Span and Linear Independence]{}
+  Let $V_F$ be a vector space, and let $\mc{A}=\{ \vec{v}_1,\ldots,\vec{v}_n \}$ be a set of vectors
+  in $V$.
+  \begin{itemize}
+    \item The set $\mc{A}$ \textbf{spans} $V$ if every vector in $V$ is a linear combination of
+      vectors in $\mc{A}$; that is, for any vector $\vec{v}\in V$, there exist scalars
+      $a_1,\ldots,a_n$ such that \[
+        \vec{v}=a_1v_1+\ldots+a_nv_n
+      .\] In general, we denote the \textbf{span of $\mc{A}$} by \[
+         \Span(\mc{A})= \{a_1v_1+\ldots+a_nv_n\mid a_1,\ldots,a_n\in F\} 
+      .\] If $\mc{A}$ spans $V$, we say $\Span(\mc{A})=V$.
+    \item The set $\mc{A}$ is \textbf{linearly independent} if the only scalars $a_1,\ldots,a_n\in
+      F$ that satisfy \[
+        a_1v_1+\ldots+a_nv_n=\textbf{0}
+      \] are $a_1=\ldots=a_n=0$. A set is \textbf{linearly dependent} if it is not linearly
+      independent.
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}[Basis Conditions]{}
+  Let $V_F$ be a vector space, and let $\mc{A}=\{ v_1,\ldots,v_n \}$ be a set of vectors in $V$.
+  Then $\mc{A}$ is a basis for $V$ if and only if $\mc{A}$ spans $V$ and is linearly independent.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $\mc{A}$ is a basis. By definition, $\mc{A}$ spans $V$, and since \[
+    a_1v_1+\ldots+a_nv_n=0v_1+\ldots+0v_n=\textbf{0}
+  ,\] uniqueness of coefficients necessarily forces $a_1=\ldots=a_n=0$. Hence $\mc{A}$ is linearly
+  independent.
+
+  Conversely, suppose $\mc{A}$ spans $V$ and is linearly independent. $\mc{A}$ spanning $V$ means
+  every vector $v\in V$ can be expressed by a linear combination of vectors in $\mc{A}$, so it
+  remains to show uniqueness. Suppose $a_1v_1+\ldots+a_nv_n=b_1v_1+\ldots+b_nv_n=\textbf{0}$. Then
+  linear independence tells us that each $a_i-b_i$ in \[
+    \textbf{0}=v-v=(a_1-b_1)v_1+\ldots+(a_n-b_n)v_n
+  \] is $0$; that is, $a_i-b-i=0$, so $a_i=b_i$. Hence uniqueness is satisfied, and so $\mc{A}$ is a
+  basis for $V$.
+\end{proof}
+
+
+A basis for a vector space provides the building block for the entire space, so we would like to
+know if a basis exists. The following theorem lets us find a basis within a spanning set.
+\begin{theorem}[Goldilock's Theorem]{}
+  Let $V_F$ be a vector space, let $\mc{S}$ be a finite set of vectors in $V$, and let
+  $\mc{L}\subseteq \mc{S}$ be a linearly independent subset of $\mc{S}$ ($\mc{L}$ can be the empty
+  set.) Then there is a basis $\mc{B}$ for $V$ satisfying \[
+    \mc{L}\subseteq \mc{B}\subseteq \mc{S}
+  .\]
+\end{theorem}
+Rephrasing, every spanning set of $V$ contains a basis of $V$, and every linearly independent set in
+$V$ can be extended to a basis. We call it Goldilocks Theorem, since although $\mc{S}$ may span
+$V$, it could be too big, and although $\mc{L}$ may be linearly independent, it could be too small.
+Thus, Goldilocks builds a basis $\mc{B}$ that's ``just right'', i.e. simultaneously ``big enough''
+to span $V$ and ``small enough'' to be linearly independent.
+
+\begin{proof}[Proof]
+  We look at the collections of subsets in $\mc{S}$ that contain $\mc{L}$ and are linearly
+  independent: \[
+    \{\mc{A}\mid \mc{L}\subseteq \mc{A}\subseteq \mc{S}, ~\text{$\mc{A}$ is linearly independent}~\} 
+  .\] This collection is non-empty, since it always has $\mc{L}$. Choose $\mc{B}=$ the subset
+  $\mc{A}$ with the largest number of elements. $\mc{B}$ has the following properties:
+  \begin{itemize}
+    \item $\mc{B}$ is a linearly independent subset of $\mc{S}$ that contains $\mc{L}$.
+    \item There are no linearly independent subsets of $\mc{S}$ that contain $\mc{L}$ and have more
+      elements than $\mc{B}$.
+  \end{itemize}
+  We claim $\mc{B}$ is a basis. By construction, $\mc{B}$ is linearly independent, so it remains to
+  show spanning.
+  \begin{itemize}
+    \item First, we show $\mc{S}\subset \Span(\mc{B})$. Take an arbitrary element $v\in \mc{S}$. If $v\in
+      \mc{B}$, then $v$ is certainly in the span of $\mc{B}$. Otherwise, $\mc{B}\cup \{ v \}$ is
+      strictly larger than $\mc{B}$, so by the second property $\mc{B}\cup \{ v \}$ cannot be
+      linearly independent. Thus, with $\mc{B}=\{ v_1,\ldots,v_n \}$, there exists non-zero
+      $a_1,\ldots,a_m,b\in F$ such that \[
+        a_1v_1+\ldots+a_mv_m+bv=0
+      .\] $b\neq 0$, since $v_1,\ldots,v_m$ is linearly independent; so \[
+        v=-\frac{a_1}{b}v_1-\ldots-\frac{a_m}{b}v_m\in \Span(\mc{B})
+      .\] Hence $\mc{S}\subset \Span(\mc{B})$.
+    \item Next, we show that $\Span(\mc{S})\subseteq \Span(\mc{B})$. This follows from the more
+      general fact that if $\mc{A}_1,\ \mc{A}_2$ are any two finite subsets of $V$, then \[
+        \mc{A}_1 \subset \Span(\mc{A}_2) \implies \Span(\mc{A}_1)\subseteq \Span(\mc{A}_2)
+      .\] This is true because if any vector $v\in \mc{A}_1$ is in the span of $\mc{A}_2$, then we
+      can rewrite any linear combination $v=a_1v_1+\ldots+a_mv_m$ of vectors in $\mc{A}_1$ in terms
+      of vectors of $\mc{A}_2$ (since each individual $v_i$ is in $\Span(\mc{A}_2)$); hence
+      $\Span(\mc{A}_1)\subseteq \Span(\mc{A}_2)$.
+
+      This thus shows that $\Span(\mc{S})\subseteq \Span(\mc{B})$; but $\Span(\mc{S})=V$, so
+      $\mc{B}$ spans $V$. Since we've shown that $\mc{B}$ spans $V$ and is linearly independent (by
+      construction), we have, by Proposition 4.4.1, that $\mc{B}$ is a basis for $V$.
+  \end{itemize}
+\end{proof}
+
+
+\begin{remark}
+  Does every vector space admit a basis? We must first understand what it means for an infinite set
+  $\mc{B}$ to be a basis. We say such a set is a basis if every vector $v\in V$ can be written
+  uniquely as a linear combination of some finite subset of $\mc{B}$. We require a finite subset,
+  since in general there's no way to compute infinite sums. With this definition, the assertion that
+  every vector space has a basis is another statement equivalent to the Axiom of Choice.
+\end{remark}
+
+We now move on to dimension, and a result of great importance in applying vector spaces to other
+areas of mathematics.
+
+\begin{definition}[Dimension]{}
+  Let $V$ be a vector space with a finite basis. The \textbf{dimension of $V$}, denoted $\dim(V)$,
+  is the number of vectors in a basis of $V$. A vector space without a finite basis is called
+  \textbf{infinite-dimensional}.
+\end{definition}
+
+\begin{example}
+  The dimension of $F^n$ is $n$; the standard basis has $n$ elements.
+
+  For any $n\ge 0$, the set of polynomials \[
+    \{f(x)\in F[x]\mid \deg(f)\le n\} 
+  \] is an $F$-vector space with dimension $n+1$. The set $\{ 1,x,\ldots,x^n \}$ is a basis.
+\end{example}
+
+We start with a lemma that builds up to an important result:
+\begin{lemma}[Swap Lemma]{}
+  Let $V_F$ be a vector space, let $\mc{S}$ be a spanning set of $V$, and let $\mc{L}$ be a linearly
+  independent set of vectors in $V$. Then given any vector $v\in \mc{L}\setminus \mc{S}$, we can
+  find a vector $w\in \mc{S}\setminus \mc{L}$ such that \[
+    \left( \mc{S}\setminus \{ w \} \right) \cup \{ v \}
+  \] is still a spanning set.
+
+  In other words, we can swap a vector in $\mc{L}$ but not in $\mc{S}$ with a vector in $\mc{S}$ but
+  not in $\mc{L}$, while preserving the spanning set property.
+\end{lemma}
+
+\begin{proof}[Proof]
+  We use a vector $v\in \mc{L}\setminus \mc{S}$ to build two sets of vectors: \[
+    \left( \mc{L}\cap \mc{S} \right)\cup \{ v \} \subset \mc{S}\cup \{ v \}
+  .\] The left set is linearly independent, since it is a subset of $\mc{L}$; the right set is
+  clearly still a spanning set. Thus, by Goldilocks Theorem, there exists a basis $\mc{B}$ in
+  between \[
+    \left( \mc{L}\cap \mc{S} \right)\cup \{ v \} \subseteq \mc{B} \subseteq  \mc{S}\cup \{ v \}
+  .\] Further, since $\mc{S}$ is a spanning set, and $v\not\in \mc{S}$, the larger set $\mc{S}\cup
+  \{ v \}$ cannot be linearly independent (since $v$ can be written as a linear combination of
+  vectors in $\mc{S}$). Hence $\mc{B}$ is not equal to $\mc{S}\cup \{ v \}$, so there exists some
+  $w\in \mc{S}\cup \{ v \}$ such that $w\not\in \mc{B}$. In particular, $w\neq v$, since $v\in
+  \mc{B}$, $w\not\in \mc{B}$. It follows that \[
+    \mc{B}\subseteq \left( \mc{S}\setminus \{ w \} \right) \cup \{ v \}
+  ,\] since $w\not\in \mc{B}$ and $\mc{B}\subseteq \mc{S}$ implies $\mc{B}\subseteq \mc{S}\setminus
+  \{ w \}$ also. In other words, the set $\left( \mc{S}\setminus \{ w \} \right) \cup \{ v \}$
+  contains a basis, so it certainly is a spanning set.
+\end{proof}
+
+We can then use the swap lemma to show that no linearly independent set is larger than a spanning
+set.
+\begin{lemma}[]{}
+  Let $V_F$ be a vector space, let $\mc{S}\subset V$ be a finite spanning set of $V$, and let
+  $\mc{L}\subset V$ be a linearly independent set. Then \[
+    \left| \mc{L} \right| \le \left| \mc{S} \right| 
+  .\] 
+\end{lemma}
+\begin{proof}[Proof]
+  If $\mc{L}\subseteq \mc{S}$, this is clearly true. Otherwise, we can find a vector $v\in
+  \mc{L}\setminus \mc{S}$, a vector in $\mc{L}$ but not $\mc{S}$. The Swap Lemma says we can find a
+  $w\in \mc{S}\setminus \mc{L}$, a vector in $\mc{S}$ but not $\mc{L}$, so that $\left(
+  \mc{S}\setminus \{ w \} \right) \cup \{ v \}$ is still a spanning set. Let \[
+    \mc{S}' = \left( \mc{S}\setminus \{ w \} \right) \cup \{ v \}
+  ;\] note that $\left| \mc{S}' \right| =\left| \mc{S} \right| $. Also, note that $\mc{S}'$ and
+  $\mc{L}$ now share an extra vector in common; or, \[
+    \left| \left( \mc{S}'\cap \mc{L} \right)  \right| \ge 1+\left| \left( \mc{S}\cap \mc{L} \right)  \right|  
+  .\] If $\mc{L}\subseteq \mc{S}'$, we are done; otherwise, we repeat the swapping process, swapping
+  an element in $\mc{L}$ but not in $\mc{S}'$ into $\mc{S}'$, and removing an element from
+  $\mc{S}'$. With each repetition, the number of shared elements between $\mc{L}$ and $\mc{S}''$
+  increase, until eventually $\mc{L}\subseteq \mc{\widetilde{S}}$ and $\left| \mc{\widetilde{S}}
+  \right| =\left| \mc{S} \right| $. Moreover, we can't repeat the process forever, since there are
+  only finitely many elements in $\mc{L}$ that can be swapped (otherwise, we would have a spanning
+  set $\widetilde{\mc{S}}$ that spans $V$ and contains only elements of $\mc{L}$; yet we would have
+  another $v\in \mc{L}$ to swap. This would imply that $\widetilde{\mc{S}}\cup \{ v \}$ is linearly
+  independent; but that's not possible, since $\widetilde{\mc{S}}$ already spans $V$ using only
+  elements in $\mc{L}$).
+
+  Thus $\left| \mc{L} \right| \le \left| \mc{S} \right| $.
+\end{proof}
+
+Now, we arrive at a fundamental theorem regarding dimension of bases:
+\begin{theorem}[Invariance of Dimension]{}
+  Let $V$ be a vector space with a finite basis. Then every basis for $V$ has the same number of
+  elements.
+\end{theorem}
+\begin{proof}[Proof]
+  We note that $V$ has at least one finite basis, $\mc{B}$. Let $\mc{B}'$ be any other basis. Since
+  they are bases, we know that $\mc{B}$ spans and $\mc{B}'$ is linearly independent; thus \[
+    \left| \mc{B}' \right| \le \left| \mc{B} \right| 
+  .\] Moreover, we also know that $\mc{B}$ is linearly independent and $\mc{B}'$ spans; thus \[
+  \left| \mc{B} \right| \le \left| \mc{B}' \right| 
+.\] Hence $\left| \mc{B} \right| =\left| \mc{B}' \right| $.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
