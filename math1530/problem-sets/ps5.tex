@@ -49,7 +49,7 @@
       Consider $\phi: \Z\to \Z / 2\Z \times  \Z / 3\Z$. Then \[
         \phi(0)=(0,0),\ \phi(1)=(1,1),\ \phi(2)=(0,2),\ \phi(3)=(1,0),\ \phi(4)=(0,1),\ \phi(5)=(1,2)
       ,\] so $\phi$ is surjective. Now consider $\phi: \Z \to \Z / 2\Z \times \Z/4\Z$. Clearly,
-      $\phi(n)\neq (1,2)$ for any $n\in \Z$; similary with $(1,0)$ (since no number is both odd and
+      $\phi(n)\neq (1,2)$ for any $n\in \Z$; similarly with $(1,0)$ (since no number is both odd and
       even); thus $\phi$ is not surjective.
   \end{enumerate}
 \end{solution}
@@ -111,14 +111,14 @@
       ,\] and so $I+J$ is an ideal.
 
     \item Let $\alpha,\beta\in IJ$, where $\alpha=\sum_{i=1}^{n} a_ib_i,\ \beta=\sum_{j=1}^{m}
-      a_j'b_j'$. Then $\alpha+\beta=\sum_{i=1}^{n} a_ib_i+\sum_{j=1}^{m}a_j'b_j'=\sum_{i=1}^{n+m}
-      a_ib_i\in IJ$, since each individual summand $a_ib_i$ has $a_i\in I,\ b_i\in J$ (pardon my
+      a_j'b_j'$. Then \[\alpha+\beta=\sum_{i=1}^{n} a_ib_i+\sum_{j=1}^{m}a_j'b_j'=\sum_{i=1}^{n+m}
+      a_ib_i\in IJ,\] since each individual summand $a_ib_i$ has $a_i\in I,\ b_i\in J$ (pardon my
       slight abuse of notation). Moreover, for any $r\in R$, $ra\in I$; thus $r\alpha=r
       \sum_{i=1}^{n} a_ib_i=\sum_{i=1}^{n} (ra_i)b_i\in IJ$. Thus $IJ$ is an ideal of $R$.
     \item First, consider $2\in I,\ 3\in J$. Then $6\in \{ab\mid a\in I,b\in J\}$. Similarly, $x\in
       I,\ x\in J$, so $x^2\in \{ab\mid a\in I,b\in J\}$. But clearly $x^2+6$ has no integer (or, for
       that matter, real) roots, and so no such $a(x)\in \Z[x],\ b(x)\in \Z[x]$ satisfies
-      $a(x)b(x)=x^2+6$; thus $xsr+6\not\in \{ab\mid a\in I,b\in J\} $, and so $\{ab\mid a\in I,b\in
+      $a(x)b(x)=x^2+6$; thus $x^2+6\not\in \{ab\mid a\in I,b\in J\} $, and so $\{ab\mid a\in I,b\in
       J\} $ is not an ideal.
     \item Suppose without loss of generality that $I$ is a principal ideal. Then for some $c\in R$,
       $I=cR$, and so any $a_\in I$ can be rewritten as $a=cr$ for some $r\in R$. Consider $\{ab\mid
@@ -246,7 +246,7 @@
     \item Let $I=(ax+b)F[x]$, and let $a(x)\in F[x]$. If $a(x)\not\in I$, then $a(x)$ is not a
       multiple of $ax+b$; that is, \[
         a(x)=q(x)(ax+b)+r(x)
-      ,\] where $q(x),\ r(x)\in F[x]$, and $0\le $ the degree of $r(x)$ < the degree of $ax+b$ by
+      ,\] where $q(x),\ r(x)\in F[x]$, and $0\le $ the degree of $r(x) < $ the degree of $ax+b$ by
       the Division Algorithm. But the degree of $ax+b=1$, so $r(x)$ has degree $0$. In other words,
       all cosets of $I$ in $F[x] / I$ are of the form $\{b_0+I\mid b_0\in F \} $. $b_0\neq 0$, since
       otherwise $b_0+I=I$, a contradiction of not being a multiple; but since $b_0\in F$, and $F$ is
@@ -260,7 +260,7 @@
 
       We then make one observation:
       \begin{itemize}
-        \item If, for some $p(x)$ divides $x^2-c$ for some $p(x)\in F[x]$, then either $p(x)=k$ or
+        \item If $p(x)$ divides $x^2-c$ for some $p(x)\in F[x]$, then either $p(x)=k$ or
           $p(x)=k(x^2-c)$ for some $k\in F$. Clearly, these two work: \[
             \frac{x^2-c}{k}=\frac{1}{k}(x^2-c)\in F[x], ~\text{and}~
             \frac{x^2-c}{k(x^2-c)}=\frac{1}{k}\in F[x]
@@ -288,7 +288,7 @@
       0\mod{(x^2-c)}$, so \[
         \frac{1}{k}u(x)a(x)+\frac{1}{k}v(x)(x^2-c)\equiv \frac{1}{k}u(x)a(x)\equiv 1 \mod{(x^2-c)}
       .\] Clearly, $\frac{1}{k}u(x)\in F[x]$, and so $(a(x)+I)(\frac{1}{k}u(x)+I)=1+I$; hence for
-      any $a(x)+I\in F[x] / I$, we have $a^{-1}+I\in F[x] / I$. Thus any non-zero coset $a(x)+I\in
+      any $a(x)+I\in F[x] / I$, we have $a^{-1}(x)+I\in F[x] / I$. Thus any non-zero coset $a(x)+I\in
       F[x] / I$ has an inverse, and so $F[x] / I$ is a field. By Theorem 3.40, $I=(x^2-c)F[x]$ is a
       maximal ideal.
   \end{enumerate}
