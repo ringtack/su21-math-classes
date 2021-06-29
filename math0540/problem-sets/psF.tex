@@ -1,0 +1,64 @@
+\documentclass{homework}
+\homework{F}
+
+\begin{document}
+
+\begin{problem}{\S 3}
+  Suppose $T:V\to W$ is an injective linear map between finite-dimensional vector spaces. Prove that
+  there exists a linear map $S:W\to V$ such that $ST=I_V$.
+\end{problem}
+
+
+\begin{solution}
+  Let $T\in \mc{L}(V,W)$ be an injective linear map. Then every $v\in V$ maps to a unique $w\in W$;
+  that is, if $T(v_1)=T(v_2)$, then $v_1=v_2$. Define a linear map \[
+    S: W\longrightarrow V,\ S(w)=\text{the unique $v$ such that $T(v)=w$; or, $\textbf{0}$ if no
+    such $v$ exists}
+  .\] In other words, if $w=T(v)$ for some $v\in V$, then $S(w)=v$; and if $w'\neq T(v')$ for any
+  $v'\in V$, then $S(w')=\textbf{0}$. Then for any $v\in V$ we have $S(T(v))=v=I_V(v)$.
+  (However, clearly under this construction $TS\neq I_W$, since if $w\neq T(v)$ for any $v\in V$,
+  then $T(S(w))=\textbf{0}\neq I_W(w)$).
+\end{solution}
+
+\begin{problem}{\S 4}
+  Prove that given distinct $a_0,\ldots,a_d$ and any real numbers $b_0,\ldots,b_d$, there exists a
+  unique $f\in \mc{P}_d(\R)$ such that \[
+    f(a_0)=b_0,\ldots,f(a_d)=b_d
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Let \[
+    T:\mc{P}_d(\R)\to \R^{d+1},\ T(f)=(f(a_0),\ldots,f(a_d))
+  ,\] and recall the definition of function addition and scalar multiplication: \[
+    (f+g)(x)=f(x)+g(x),\ (cf)(x)=c(f(x))
+  .\] Clearly, $T$ is a linear transformation. For $f,g\in \mc{P}_d(\R),\ c_1,c_2\in \R$, we have
+  \begin{align*}
+    T(c_1f+c_2g)&=((c_1f+c_2g)(a_0),\ldots,(c_1f+c_2g)(a_d))\\
+                &=((c_1f)(a_0)+(c_2g)(a_0),\ldots,(c_1f)(a_d)+(c_2g)(a_d))\\
+                &=(c_1f(a_0),\ldots,c_1f(a_d))+(c_2g(a_0),\ldots,c_2g(a_d))\\
+                &=c_1(f(a_0),\ldots,f(a_d))+c_2(g(a_0),\ldots,g(a_d))\\
+                &=c_1T(f)+c_2T(g)
+  .\end{align*}
+  Now, we consider the kernel of $T$.  In order for a function $f\in \mc{P}_d(\R)$ to have
+  $T(f)=(0,\ldots,0)$, since all of $a_i\in \R$ are unique, $f$ must have each $a_i$ as a root (i.e.
+  $(x-a_i)a(x)=0$, where $a(x)\in P_{d-1}(\R)$). However, recall that a polynomial
+  $a_0+\ldots+a_dx^d\in \mc{P}_d(\R)$ can have at max $d$ distinct roots; thus, no polynomial in
+  $\mc{P}_d(\R)$ can have more than $d$ roots. Since we have $d+1$ unique $a_i$'s, it necessarily
+  follows that no non-zero function $f(x)\in \mc{P}_d(\R)$ will satisfy $f(x)=0$. Thus $\ker(T)=\{ 0
+  \}$.
+
+  Next, observe that the dimensions of $\mc{P}_d(\R)$ and $\R^{d+1}$ have the same dimension, and
+  recall that a trivial kernel implies an injective linear transformation (and so $T$ is injective).
+  But we know that if two vector spaces have equal dimensions, and a map between the two is
+  injective, then the map is also bijective.
+
+  Hence $T$ is an isomorphism; and so for any $(b_0,\ldots,b_d)\in \R^{d+1}$, we can find a $f\in
+  \mc{P}_d(\R)$ such that $T(f)=(f(a_0),\ldots,f(a_d))=(b_o,\ldots,b_d)$. Thus
+  $f(a_0)=b_0,\ldots,f(a_d)=b_d$, as required.
+\end{solution}
+
+
+
+
+\end{document}
