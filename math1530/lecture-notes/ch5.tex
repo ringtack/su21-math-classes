@@ -1,0 +1,544 @@
+\documentclass[math1530-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Fields: Part I}
+
+\section{Introduction to Fields}
+
+Recall that in Chapter 3, we introduced fields as commutative rings with an additional property:
+every non-zero element had a multiplicative inverse. We extended this in Chapter 4 by building
+vector spaces with fields.
+
+\begin{definition}[Fields]{}
+  A \textbf{field} is a commutative ring $F$ with the property that for every $a\in F$ with $a\neq
+  0$, there is a $b\in F$ such that $ab=1$.
+\end{definition}
+
+Now, we begin studying fields in their own right. First, we look at how fields fit into each other,
+how to construct new fields from old fields, and describe all fields with finitely many elements.
+Finite fields are not just a mathematical curiosity; they play important roles in pure and applied
+mathematics, as well as engineering; some applications include signal processing, error correcting
+codes, and cryptography.
+
+\begin{remark}
+  Field theory was originally developed to aid the study of polynomials, such as finding the roots
+  of a certain polynomial. Interestingly, field theory and finite group theory both originated from
+  the study of polynomials! For more history, Google \textit{Cardano's Formula}.
+\end{remark}
+
+\section{Abstract Fields and Homomorphisms}
+
+Recall the definition of a unit group:
+\begin{definition}[Unit Groups]{}
+  Let $R$ be a commutative ring. The \textbf{unit group} of $R$ is the group \[
+    R^* = \{a\in R\mid ~\text{there is some $b\in R$ such that}~ab=1\} 
+  ,\] where the group law is ring multiplication.
+\end{definition}
+
+Thus, a succinct way to characterize a field is that it is a commutative ring $F$ satisfying \[
+  F^* = \{a\in F\mid a\neq 0\} = F \setminus \{ 0 \}
+.\] As for maps between fields, we obviously want them to preserve field properties. In particular,
+since fields are rings, we want our maps to \textit{at least} be ring homomorphisms. It turns out
+that it's enough to ensure that multiplicative inverses go to multiplicative inverses; moreover,
+somewhat surprisingly, maps between fields are always injective! Note that this statement is
+generally not true for rings; the ring homomorphism $\phi:\Z\to \Z / m\Z$ is very non-injective.
+
+\begin{proposition}[]{}
+  Let $F,K$ be fields, and let $\phi:F\to K$ be a ring homomorphism.
+  \begin{itemize}
+    \item The map $\phi$ is injective.
+    \item Let $a\in F^*$. Then $\phi(a^{-1})=\phi(a)^{-1}$.
+  \end{itemize}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{itemize}
+    \item From Theorem 3.31(b)ii, we need to show that $\ker(\phi)$ is the zero ideal, so suppose
+      there is a non-zero element $a\in \ker(\phi)$. $a\neq 0$ in a field $F$ implies that $ab=1_F$
+      for some $b\in F$; thus \[
+        1_K = \phi(1_F) = \phi(ab)=\phi(a)\phi(b)=0\cdot \phi(b)=0_K
+      ,\] a contradiction (since ring axioms require $1\neq 0$). Thus $\ker(\phi)$ is the zero
+      ideal, and so $\phi$ is injective.
+
+    \item By definition of multiplicative inverse, and since $\phi$ is a homomorphism, we have \[
+        1_K=\phi(1_F)=\phi(a\cdot a^{-1})=\phi(a)\cdot \phi(a^{-1})
+      .\] Hence $\phi(a^{-1})$ is a multiplicative inverse for $\phi(a)$; i.e.
+      $\phi(a^{-1})=\phi(a)^{-1}$.
+
+      Alternatively, from (a) we know the map $\phi:F^*\to K^*$ is well-defined (by injectivity,
+      since if $\phi(a)=\phi(a')$, then $a=a'$), and by the homomorphism property, it is a group
+      homomorphism from $F^*$ to $K^*$. Thus, the fact that $\phi$ sends multiplicative inverses to
+      multiplicative inverses is a result of Proposition 2.20 (which states that for group
+      homomorphisms, $\phi(a^{-1})$ is the inverse of $\phi(a)$).
+  \end{itemize}
+\end{proof}
+
+
+\section{Interesting Examples of Fields}
+
+\begin{example}
+  Three fields are already familiar: $\Q, \R$, and $\C$. Moreover, they fit into each other: \[
+    \Q \subset \R \subset \C
+  .\] 
+\end{example}
+\begin{example}
+  The following subset of $\C$ is a field: \[
+    \Q(i)=\{a+bi\mid a,b\in \Q\} 
+  .\] The multiplicative inverse of a non-zero element $a+bi$ is obtained by ``rationalizing the
+  denominator:'' \[
+    \frac{1}{a+bi}=\frac{1}{a+bi}\cdot
+    \frac{a-bi}{a-bi}=\frac{a-bi}{a^2+b^2}=\frac{a}{a^2+b^2}-\frac{bi}{a^2+b^2}
+  .\] In similar fashion, we can use $\sqrt{2}$ to describe a subfield of $\R$: \[
+  \Q(\sqrt{2}) = \{a+b\sqrt{2}\mid a,b\in \Q\} 
+  ,\] with a multiplicative inverse obtained again by rationalizing the denominator: \[
+    \frac{1}{a+b\sqrt{2}}=\frac{1}{a+b\sqrt{2}}\cdot
+    \frac{a-b\sqrt{2}}{a-b\sqrt{2}}=\frac{a-b\sqrt{2}}{a^2-2b^2}
+    =\frac{a}{a^2-2b^2}-\frac{b}{a^2-2b^2}\sqrt{2}
+  .\] This is well-defined, since $\sqrt{2}$ is not a rational number, so $a^2-2b^2\neq 0$ for any
+  $a,b\in \Q$ as long as they are non-zero as well.
+
+  What about the set \[
+     \{a+b\sqrt{2}+c\sqrt{3}\mid a,b,c\in \Q \} 
+  ?\] This is not even a ring, since one can see $\sqrt{2}\cdot \sqrt{3}=\sqrt{6}$, which is not in
+  the set. The larger set \[
+    \Q(\sqrt{2},\sqrt{3})=\{a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}\mid a,b,c,d\in \Q \} 
+  \] is a field. It's easy to see ring properties, but proving that non-zero elements have an
+  inverse is not quite so easy. We'll see tools to help with this later.
+\end{example}
+
+\begin{example}
+  In general, the ring $\Z / m\Z$ need not be a field. For example, $\Z / 6\Z$ is not a field, since
+  $2$ does not have a multiplicative inverse. However, we've seen before that any ring $\Z / p\Z$,
+  where $p$ is a prime, is a field; we denote this $\F_p$. $\F_p$ is an example of a \textbf{finite
+  field}; it turns out that there are other finite fields. Indeed, for every prime power $p^k$,
+  there is exactly one (up to isomorphism) finite field containing $p^k$ elements. 
+\end{example}
+
+\begin{example}
+  A \textbf{skew field}, also called a \textbf{division ring}, is a ring in which every non-zero
+  element has an inverse, but is no longer required to be commutative. Wedderburn's Theorem states
+  that every finite skew field must be commutative (e.g. is a field), but there are also many
+  interesting non-commutative infinite fields. One such example is $\HH$, the ring of quaternions.
+\end{example}
+
+\section{Subfields and Extension Fields}
+
+\begin{definition}[Subfields]{}
+  Let $K$ be a field. A \textbf{subfield of $K$} is a subset $F$ of $K$ that is itself a field using
+  the addition and multiplication operations of $K$.
+\end{definition}
+
+\begin{definition}[Extension Fields]{}
+  Let $F$ be a field. An \textbf{extension field of $\F$} is a field $K$ such that $F$ is a subfield
+  of $K$. We write $K / F$ to indicate that $K$ is an extension field of $F$.\footnote{Note that $K
+  / F$ is just a piece of convenient notation. It doesn't mean that we're taking the quotient of $K$
+by $F$, despite its similarities to a quotient ring $R / I$.}
+\end{definition}
+
+\begin{example}
+  The field $\Q$ is a subfield of $\R$, and thus $\R$ is an extension field of $\Q$; similarly with
+  $\Q,\R$ and $\C$.
+
+  The fields $\Q(i)$ and $\Q(\sqrt{2})$ are extension fields of $\Q$. The former is a subfield of
+  $\C$ but not $\R$, while the latter is a subfield of $\R$. Neither are subfields of each other.
+\end{example}
+
+The notation $\Q(i),\ \Q(\sqrt{2})$ is a special case of the following general construction.
+\begin{proposition}{}
+  Let $L / F$ be an extension of fields, and let $\alpha_1,\ldots,\alpha_n\in L$. Then there is a
+  unique field $K$ with the following properties:
+  \begin{enumerate}
+    \item $F \subseteq K \subseteq L$.
+    \item $\alpha_1,\ldots,\alpha_n\in K$.
+    \item If $K'$ is a field satisfying $F\subseteq K'\subseteq L$ and $\alpha_1,\ldots,\alpha_n\in
+      K'$, then $K\subseteq K'$.
+  \end{enumerate}
+  The field $K$ is denoted $F(\alpha_1,\ldots,\alpha_n)$ and is called the \textbf{extension field
+  of $F$ generated by $a_1,\ldots,a_n$}. Intuitively, it is the smallest subfield of $L$ that
+  contains both $F$ and $\alpha_1,\ldots,\alpha_n$.
+\end{proposition}
+\begin{proof}[Proof]
+  Let $S$ be the set consisting of all subfields of $L$ that contain $F$ and
+  $\alpha_1,\ldots,\alpha_n$. The set is not empty, since $L\in S$. Let $K$ be the intersection of
+  all of the fields in $S$. Then $K$ is a field, since
+  \begin{align*}
+    \alpha,\beta\in K &\iff \alpha,\beta\in K' ~\text{for every}~K'\in S,\\
+                      &\implies \alpha\pm \beta,\alpha\beta,\alpha^{-1}\in K'~\text{for every}~K'\in
+                      S,\ ~\text{since $K'$ is a field}~,\\
+                      &\implies\alpha\pm \beta,\alpha\beta,\alpha^{-1}\in K.
+  .\end{align*}
+  Clearly, $K$ contains $F$ and $\alpha_i$, since it is the intersection of fields that contain
+  both; and if $K'\subseteq L$ contains both, then $K'\in S$, so $K'$ is one of the fields whose
+  intersection forms $K$. Hence $K\subseteq K'$.
+\end{proof}
+
+
+Let $K / F$ be an extension of fields. Observe that we can add elements of $K$, and multiply elements
+in $K$ by elements in $F$; thus, the field $K$ becomes an $F$-vector space. Essentially, we discard
+most of the multiplication operation in $K$, and restrict it solely to multiplication by elements in
+$F$. This allows us to use tools from linear algebra to study field extensions.
+
+\begin{definition}[Degree of Field Extensions]{}
+  Let $K / F$ be an extension of fields. The \textbf{degree of $K$ over $F$}, denoted $\left[ K : F
+  \right] $, is the dimension of $K$ viewed as an $F$-vector space, \[
+    \left[ K : F \right] = \dim_F(K)
+  .\] If $\left[ K : F \right] $ is finite, we say $K / F$ is a \textbf{finite extension};
+  otherwise, we say $K / F$ is an \textbf{infinite extension}.
+\end{definition}
+
+\begin{example}
+  The fields $\Q(i),\ \Q(\sqrt{2})$ have degree $2$ over $\Q$:
+  \begin{itemize}
+    \item $\left[ \Q(i) : \Q \right] =2$, since $\{ 1,i \}$ is a $\Q$-basis for $\Q(i)$.
+    \item $\left[ \Q(\sqrt{2}) : \Q \right] =2$, since $\{ 1,\sqrt{2} \}$ is a $\Q$-basis for
+      $\Q(\sqrt{2})$.
+  \end{itemize}
+
+  Similarly, we have $\left[ \C : \R \right] =2$, since $\{ 1,i \}$ is an $\R$-basis for $\C$. On
+  the other hand, $\left[ \R : \Q \right] = \infty$:
+  \begin{proof}[Proof]
+    Suppose that $\{ a_1,\ldots,a_n \}\subset \R$ is a finite $\Q$-basis for $\R$. Then \[
+      \R = \{ c_1a_1+\ldots+c_na_n\in \Q \}
+    .\] But the set on the right is countable (since its cardinality is the same as the cardinality
+    of the set of $n$-tuples of rational numbers), while $\R$ is uncountable.
+  \end{proof}
+  
+\end{example}
+
+The next theorem is similar to the index multiplication rule, which counted cosets in a chain of
+groups.
+\begin{theorem}{}
+  Let $L / K / F$ be an extension of fields (that is, $L$ is a field extension of $K$, while $K$ is
+  a field extension of $F$). Then \[
+    \left[ L : F \right] = \left[ L : K \right] \cdot \left[ K : F \right] 
+  ,\] in the sense that one of the following is true:
+  \begin{itemize}
+    \item All of the degrees $\left[ L : F \right], \left[L : K\right], \left[K : F\right]$ are
+      finite, and the above equation is true.
+    \item $\left[L : F\right]=\infty$, and either $\left[L : K\right]=\infty$ or $\left[K :
+      F\right]=\infty$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}[Proof]
+  We start with the case $L / K$ and $K / F$ are finite extensions. This means that we can choose
+  bases 
+  \begin{itemize}
+    \item $\mc{A}=\{ a_1,\ldots,a_m \}$, a basis for $K$ as an $F$-vector space
+    \item $\mc{B}=\{ b_1,\ldots,b_n \}$, a basis for $L$ as a $K$-vector space
+  \end{itemize}
+
+  We claim that the $mn$ products in the set \[
+    \mc{C} = \{a_ib_j\mid 1\le i\le m,\ 1\le j\le n\} 
+  \] are distinct and that they form a basis for $L$ as an $F$-vector space. Assuming this, it's
+  easy to prove the equation: \[
+    \left[L : F\right]=\dim_F(L)=\left| \mc{C} \right| =mn=\left| \mc{A} \right| \left| \mc{B}
+    \right| =\dim_F(K)\cdot \dim_K(L)=\left[K : F\right]\cdot \left[L : K\right]
+  .\] We first prove that this is a linearly independent set. Suppose we have an $F$-linear
+  combination of the elements of $\mc{C}$ that sum to $0$: \[
+    \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij}a_ib_j=0,\ c_{ij}\in F
+  .\] We wish to show that every $c_{ij}$ is zero. We switch the order of the sums (due to
+  commutativity) to get \[
+    \sum_{j=1}^{n} \left( \sum_{i=1}^{m} c_{ij}a_i \right) b_j=0
+  .\] The inner sum is in $K$, since $c_{ij}\in F$, $a_i\in K$. This gives a linear combination of
+  $b_j$ with coefficients in $K$; but $b_i\in \mc{B}$ is a basis for $L$ as a $K$-vector space, so
+  it is $K$-linearly independent. That is, every $c_{ij}a_i=0$, so we have \[
+    \sum_{i=1}^{m} c_{ij}a_i
+  .\] But we also know that $a_i\in \mc{A}$ is a basis for $K$ as an $F$-vector space, and each
+  $c_{ij}$ is in $F$, so $F$-linear independence of $a_1,\ldots,a_m$ implies that every $c_{ij}\in
+  F$ is $0$, and so $\mc{C}$ is a linearly independent set.
+
+  Spanning is left as an exercise to the reader.
+\end{proof}
+
+\section{Polynomial Rings}
+
+We will now briefly discuss some properties of polynomials with coefficients inside a field $F$.
+\begin{definition}[Degree of $f$]{}
+  Let $F$ be a field, and let $f(x)\in F[x]$ be a non-zero polynomial, where \[
+    f(x) = a_0+a_1x+\ldots+a_dx^d, a_d\neq 0
+  ;\] in other words, $d$ is the highest power with a non-zero coefficient. The \textbf{degree of
+  $f$} is \[
+    \deg(f)=d
+  .\] By convention, we set $\deg(0)=-\infty$; further, if $a_d=1$, then we say that $f$ is a
+  \textbf{monic polynomial}.
+\end{definition}
+
+One can easily check that for any two polynomials $f_1,f_2\in F[x]$, we have \[
+  \deg(f_1f_2)=\deg(f_1)+\deg(f_2)
+.\] 
+
+A useful property of polynomials is the following algorithm, which allows one to extend division
+into the ring of polynomials. It is analogous to the Division Algorithm for integers.
+\begin{proposition}[Division-with-Remainder for Polynomials]{}
+  Let $F$ be a field, and let $f(x),g(x)\in F[x]$ be a polynomial with $g(x)\neq 0$. Then there are
+  unique polynomials $q(x),r(x)\in F[x]$ satisfying \[
+    f(x)=g(x)q(x)+r(x) ~\text{with}~\deg(r) < \deg(g)
+  .\] 
+\end{proposition}
+
+\begin{proof}[Proof]
+  We prove existence by following the long-division with remainder algorithm for polynomials, and
+  we use induction to generalize for any degree. So, if we assume that the degree of the polynomial
+  $g(x)$ is fixed, say with \[
+    d = \deg(g)\ge 1
+  ,\] our goal is to verify the statement $P_n$: \begin{center}
+  If $f(x)\in F[x]$ is a polynomial with $\deg(f)=n$, then there are unique polynomials
+  $q(x),r(x)\in F[x]$ satisfying \[
+    f(x)=g(x)q(x)+r(x) ~\text{and}~ \deg(r) < \deg(g).\]
+  \end{center}
+
+  We first prove that $P_0,\ldots,P_{d-1}$ are true. Let $f(x)\in F[x]$ with $\deg(f) < d$. Then
+  we can take $q(x)=0,\ r(x)=f(x)$, since \[
+    f(x)=0\cdot g(x)+f(x)
+  \] is clearly true, and $\deg(f)<d=\deg(g)$ by definition.
+  
+  Now, let $n\ge d$, and assume $P_0,\ldots, P_{n-1}$ are true. Let $f(x)\in F[x]$ be a polynomial
+  with $\deg(f)=n$; that is, we have \[
+    f(x)=ax^n+\ldots ~\text{and}~ g(x)=bx^d+\ldots,\ a,b\in F,\ a,b\neq 0
+  .\] Then, if we multiply $g(x)$ by $\frac{a}{b}x^{n-d}$, we get a new polynomial \[
+    h(x)=f(x)-\frac{a}{b}x^{n-d}g(x)
+  .\] Then $\deg(h)<n$, since we canceled out the $ax^n$ term in $f(x)$. Then, we can use the
+  inductive hypothesis to find $q(x),r(x)\in F[x]$ such that \[
+    h(x)=g(x)q(x)+r(x),\ \deg(r)<\deg(g)
+  .\] But then
+  \begin{align*}
+    f(x) &= h(x)+\frac{a}{b}x^{n-d}g(x)\\
+         &=g(x)q(x)+r(x)+\frac{a}{b}x^{n-d}g(x)\\
+         &=g(x)(q(x)+\frac{a}{b}a^{n-d})+r(x)
+       .\end{align*}
+   We have thus written $f(x)$ in the desired form: \[
+     f(x)=g(x)\cdot \left( \text{polynomial} \right) +\left( \text{polynomial whose degree is
+     strictly smaller than the degree of $g(x)$} \right) 
+   .\] (since $q(x)+\frac{a}{b}a^{n-d}\in F[x]$). Uniqueness is left as an exercise.
+\end{proof}
+
+Now, we move on to ideals of polynomial rings. Recall that an ideal is \textbf{principal} if it
+consists of multiples of a single element of $R$; that is, for $c\in R$, \[
+  I = \{cr\mid r\in R\} 
+.\] This ideal is called the \textbf{principal ideal generated by $c$}, and is often denoted $cR$ or
+$(c)$. Principal ideals are quite easy to work with, which makes the following theorem quite
+interesting and important.
+
+\begin{theorem}[]{}
+  Let $F$ be a field, and let $I\subseteq F[x]$ be an ideal in the ring $F[x]$. Then $I$ is a
+  principal ideal.
+\end{theorem}
+\begin{proof}[Proof]
+  If $I$ is the zero ideal ($I=\left( 0 \right) $), then $I$ is clearly a principal ideal, so assume
+  $I\neq (0)$; that is, $I$ contains at least one non-zero polynomial. Let $g(x)\in I$ be the non-zero
+  polynomial with the lowest degree. We claim $I=(g)$.
+
+  Take an arbitrary $f\in I$. From the Division Algorithm for polynomials, we know that \[
+    f(x)=g(x)q(x)+r(x)
+  \] for some $q(x),r(x)\in F[x]$, $\deg(r)<\deg(g)$. Thus \[
+    r(x)=f(x)-g(x)q(x)\in I
+  ,\] since $f(x),g(x)q(x)\in I$. But $g(x)$ has the smallest possible degree of any non-zero
+  polynomial in $I$, while we also have $\deg(r)<\deg(g)$. Thus $r(x)=0$ necessarily, and so \[
+    f(x)=g(x)q(x)\in (g)=g(x)F[x]
+  .\] Thus $I\subseteq (g)$; and the fact that $g\in I$ forces $(g)\subseteq I$ by ideal properties.
+  Hence $I=(g)$ is a principal ideal.
+\end{proof}
+
+\section{Building Extension Fields}
+
+Now, we start building fields using roots of polynomials. However, we sometimes don't know where
+these roots might live. So instead, we take a field $F$ and a polynomial $f(x)\in F[x]$, and use
+them to construct a field extension $K / F$ that ``magically'' contains a root of $f(x)$. A
+prototype for this construction is the abstract construction of the field of complex numbers from
+the real numbers and the polynomial $x^2+1$ (recall how we can find a map $\phi:\R[x] /
+(x^2+1)\R[x]\to \C, \phi(f(x))=f(i)$, by taking the evaluation homomorphism $E_i$).
+
+\begin{definition}[Irreducibility]{}
+  Let $F$ be a field. A non-constant polynomial $f(x)\in F[x]$ is \textbf{reducible} (over $F$) if
+  there exist non-constant polynomials $g(x),h(x)\in F[x]$ such that $f(x)=g(x)h(x)$ ($f$ factors
+  into them). An \textbf{irreducible polynomial} is a non-constant polynomial that is not reducible,
+  i.e., a polynomial with no non-trivial factorizations in $F[x]$; that is, the only factorizations
+  are constant polynomials and multiples of itself (we will later generalize this to arbitrary
+  rings).
+\end{definition}
+
+\begin{example}
+  The polynomials $x^2-1$ and $x^2-x-2$ are reducible in $\Q[x]$: \[
+    x^2-1=(x+1)(x-1) ~\text{and}~ x^2-x-2=(x-1)(x-2)
+  .\] The polynomials $x^2+1$ and $x^2-2$ are irreducible in $\Q[x]$ (although the second one is
+  equivalent to saying $\sqrt{2}$ is not rational). On the other hand, in the ring $\Q(i)[x]$,
+  $x^2+1$ is reducible, since it can factor as \[
+    x^2+1=(x+i)(x-i)
+  .\] Reducibility depends on both the polynomial and the underlying field. 
+\end{example}
+
+\begin{example}
+  If we take finite fields as coefficients, then there are only finitely many polynomials of any
+  given degree. For instance, only four quadratic polynomials exist in $\F_2[x]$: \[
+    x^2=x\cdot x,\ x^2+1=(x+1)^2,\ x^2+x=x(x+1),\ x^2+x+1
+  .\] Only the last one is irreducible. Similarly, there are eight cubic polynomials in $\F_3[x]$;
+  only $x^3+x+1$ and $x^3+x^2+1$ are irreducible.
+\end{example}
+
+\begin{remark}
+  Every polynomial of degree $1$ is irreducible, and it's not hard to show that if $f(x)$ has degree
+  $2$ or $3$, then it is irreducible if and only if it has no roots. However, this doesn't
+  necessarily hold for higher degrees; for instance, given two irreducible polynomials of degree
+  $2$, $g(x),\ h(x)$, then $g(x)h(x)$ is a reducible polynomial of degree $4$, yet it has no roots
+  in $F$.
+\end{remark}
+
+\begin{theorem}{}
+  Let $F$ be a field, and let $f(x)\in F[x]$. The following are equivalent:
+  \begin{enumerate}
+    \item The polynomial $f(x)$ is irreducible.
+    \item The principal ideal $f(x)F[x]$, generated by $f(x)$, is a maximal ideal.
+    \item The quotient ring $F[x] / f(x)F[x]$ is a field.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof]
+  The equivalence of the second and third statements is a result of Theorem 3.40 ($I$ is a maximal
+  ideal if and only if $R / I$ is a field).
+
+  We start by proving $f(x)$ irreducible implies $f(x)F[x]$ is a maximal ideal. Suppose $I$ is an
+  ideal satisfying \[
+    f(x)F[x] \subseteq I\subseteq F[x]
+  .\] We wish to show $I=F[x]$ or $I=f(x)F[x]$.
+
+  From the Theorem above, we know that every ideal in $F[x]$ is principal, so we can find some
+  $g(x)\in I$ such that $g(x)F[x]=I$. The inclusion of fields thus becomes \[
+    f(x)F[x] \subseteq g(x)F[x] \subseteq F[x]
+  .\] In particular, since $f(x)$ is in the principal ideal generated by $g(x)$, we have \[
+    f(x)=g(x)h(x),\ h(x)\in F[x]
+  .\] Now, we use the irreducibility of $f(x)$. Since $f(x)$ is irreducible, one of $g(x),\ h(x)$ is
+  a non-zero constant polynomial. This gives two cases:
+  \begin{itemize}
+    \item $g(x)\in F^*$, which tells us $I=g(x)F[x]=F[x]$ (since $g(x)\in F^*$ and $g$ constant
+      implies that its inverse is also in $F[x]$, so we can take $g(x)g^{-1}(x)=1\in I$. $1\in I$
+      then forces $I=F[x]$.)
+    \item $h(x)\in F^*$, which tells us $f(x)F[x]=g(x)h(x)F[x]=g(x)F[x]=I$ (since $h(x)\in F^*$
+      means we can find an inverse to cancel it out with.)
+  \end{itemize}
+  Thus $f(x)F[x]$ is a maximal ideal.
+
+  We then show the reverse: suppose $f(x)F[x]$ is a maximal ideal. Suppose $f(x)$ factors into
+  $g(x)$ and $h(x)$ for some $g(x),h(x)\in F[x]$. We wish to show that either $g(x)$ or $h(x)$ is a
+  constant polynomial. Consider the ideals \[
+    f(x)F[x] \subseteq g(x)F[x] \subseteq F[x]
+  .\] $f(x)F[x]$ maximal means that either $f(x)F[x]=g(x)F[x]$ or $g(x)F[x]=F[x]$, so we consider
+  both cases.
+  \begin{itemize}
+    \item Suppose $f(x)F[x]=g(x)F[x]$. Since $f(x)=g(x)h(x)$, we can replace $f(x)F[x]$ with
+      $g(x)h(x)F[x]$. Then we have
+      \begin{align*}
+        g(x)\in f(x)F[x]=g(x)h(x)F[x] &\implies g(x)=g(x)h(x)s(x),\ s(x)\in F[x]\\
+                                      &\implies h(x)s(x)=1 &&[~\text{by properties of fields:
+                                      $g\cdot f=g$ iff $f=1$}~]
+      .\end{align*}
+      Thus $h(x)$ (and $s(x)$) must necessarily be a constant polynomial.
+
+    \item Suppose $g(x)F[x]=F[x]$. Then $1\in g(x)F[x]$, so $g(x)t(x)=1$ for some $t(x)\in F[x]$,
+      and so $g(x)$ must be a constant polynomial.
+  \end{itemize}
+  In both cases, either $g(x)$ or $h(x)$ is a constant polynomial; hence the only way to factor
+  $f(x)=g(x)h(x)$ is for one of them to be constant. Thus $f(x)$ is definitionally irreducible.
+\end{proof}
+
+Now, given a field $F$ and a polynomial $f(x)\in F[x]$, we wish to use this theorem to construct an
+extension field of $F$ that contains a root of $f$. Later, we'll see a more general result; but even
+this one is spectacular: it says that if you're given any irreducible polynomial $f(x)\in F[x]$, if
+you're willing to make the field $F$ slightly larger, then you can find a root of $f(x)$.
+
+\begin{theorem}{}
+  Let $F$ be a field, let $f(x)\in F[x]$ be an irreducible polynomial, let $I_f=f(x)F[x]$ be the
+  principal (maximal) ideal generated by $f(x)$, and let $K_f=F[x] / I_f$ be the quotient ring.
+  \begin{enumerate}
+    \item The ring $K_f$ is a field.
+    \item The polynomial $f(x)$ has a root in the field $K_f$.
+    \item The field $K_f$ is a finite extension of the field $F$. Its degree is given by \[
+        \left[K_f : F\right]=\deg(f)
+    .\] 
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item The above theorem tells us that $I_f$ is a maximal ideal of the ring $F[x]$, and Theorem
+      3.40b (maximal ideal iff quotient ring is field) tells us that $K_f=F[x] / I_f$ is a field.
+    \item (It almost seems like cheating!) We claim that \[
+      \beta=x+I_f\in K_f
+    \] is a root of $f(x)$. To see this, write $f(x)$ as \[
+      f(x)=b_0+b_1x+\ldots+b-dx^d
+    .\] Then
+      \begin{align*}
+        f(\beta)&= b_0+b_1\beta+\ldots+b_d\beta^d \\
+              &= b_0(1+I_f)+b_1(x+I_f)+\ldots+b_d(x+I_f)^d \\
+              &= (b_0+I_f)+(b_1x+I_f)+\ldots+(b_dx^d+I_f) && [~\text{convince yourself why this is
+              true, given the properties of ideals and the fact that $F\subseteq F[x]$}~]\\
+              &= b_0+b_1x+\ldots+b_dx^d+I_f && [~\text{by coset addition}~]
+      .\end{align*}
+      Thus $f(\beta)=0+I_f$, and so $f(\beta)$ is the zero element of the field $K_f$.
+    \item Let $d=\deg(f)$, and let \[
+        \beta=x+I_f=~\text{the coset of $x$ in the quotient ring $F[x] / I_f$}~
+      .\] We claim that the set \[
+        \mc{B}=\{ 1,\beta,\ldots,\beta^{d-1} \}
+      \] forms an $F$-basis for $K_f$.
+
+      We first show that $\mc{B}$ spans. Let $g(x)+I_f$ be an arbitrary element of $K_f$. We divide
+      the polynomial $g(x)$ by $f(x)$ to get a quotient and remainder: \[
+        g(x)=f(x)q(x)+r(x),\ q(x),r(x)\in F[x],\ \deg(r)<\deg(f)=d
+      .\] Since $f(x)\in I_f$, the cosets $g(x)+I_f$ and $r(x)+I_f$ are the same. On the other hand,
+      if we write $r(x)$ as \[
+        r(x)=a_0+a_1x+\ldots+a_{d-1}x^{d-1} ~\text{with}~ a_0,\ldots,a_{d-1}\in F
+      ,\] then we can compute
+      \begin{align*}
+        g(x)+I_f &= r(x)+I_f \\
+                 &= (a_0+a_1x+\ldots+a_{d-1}x^{d-1})+I_f\\
+                 &= a_0(1+I_f)+a_1(x+I_f)+\ldots+a_2(x+I_f)^2+\ldots+a_{d-1}(x+I_f)^{d-1} \\
+                 &= a_0\beta+\ldots+a_{d-1}\beta^{d-1}
+      .\end{align*}
+      Thus, any element of $K_f=F[x] / I_f$ can be written as an $F$-linear combination of the
+      elements in $\mc{B}$, and so $\mc{B}$ spans $K_f$.
+
+      Next, we show that $\mc{B}$ is linearly independent. Suppose we have \[
+        c_0+c_1\beta_1+\ldots+c_{d-1}\beta^{d-1}=0,\ c_i\in F
+      .\] We wish to show that every $c_i$ vanishes. Using $\beta=x+I_f$, we have
+      \begin{align*}
+        0+I_f&= c_0+c_1\beta+\ldots+c_{d-1}\beta^{d-1} \\
+             &= c_0(1+I_f)+c_1(x+I_f)+\ldots+c_{d-1}(x+I_f)^{d-1}\\
+             &= (c_0+I_f)+(c_1x+I_f)+\ldots+(c_{d-1}x^{d-1}+I_f)\\
+          I_f&= (c_0+c_1x+\ldots+c_{d-1}x^{d-1})+I_f
+      .\end{align*}
+      This tells us that the polynomial $c_0+c_1x+\ldots+c_{d-1}x^{d-1}$ is in the principal ideal
+      $I_f$ generated by $f(x)$, so for some $g(x)\in F[x]$ we have \[
+        c_0+c1x+\ldots+c_{d-1}x^{d-1}=f(x)g(x)
+      .\] If $g(x)\neq 0$, we can take the degrees of both sides to obtain a contradiction: \[
+      d-1 \ge \deg(c_0+\ldots+c_{d-1}x^{d-1})=\deg(f(x)g(x))=\deg(f(x))+\deg(g(x))=d+\deg(g(x))=d
+    .\] Hence $g(x)=0$, and so the above equation becomes the following equality \[
+      c_0+\ldots+c_{d-1}x^{d-1}=0
+    \] that is true in $F[x]$. Therefore $c_0=c_1=\ldots=c_{d-1}=0$, which proves linear
+    independence. Thus $\mc{B}$ is a basis for $K_f / F$, and so \[
+      \left[K_f : F\right]=\left| \mc{B} \right| =d=\deg(f)
+    .\] 
+  \end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
