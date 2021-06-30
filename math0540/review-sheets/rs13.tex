@@ -1,0 +1,82 @@
+\documentclass{review-sheet}
+\homework{13}
+
+\begin{document}
+
+For each of the linear operators $T$ in questions 1-7:
+\begin{enumerate}[label=(\alph*)]
+  \item I claim that $p(T)=0$ for some non-zero polynomial $p(z)\in \mc{P}_2(\R)$ of degree at most
+    $2$. Find such a polynomial $p(z)$.
+  \item Factor $p(z)$ into linear factors over $\R$ \textit{if possible}.
+  \item If $p(z)$ does factor into linear factors $p(z)=c(z-\lambda_1)(z-\lambda_2)$ for
+    $c,\lambda_1,\lambda_2\in \R$, then we argued in class that one of $\lambda_1,\lambda_2$ must be
+    an eigenvalue of $T$. Identify which one(s) of $\lambda_1,\lambda_2$ are in fact eigenvalues of
+    $T$, in accordance with your answers in Review Sheet 12.
+\end{enumerate}
+\begin{problem}{\S 1}
+  $T:R^2\to R^2$ reflection across the line $y=x$.
+\end{problem}
+\begin{solution}
+  Let $p(z)=z^2-1$. Then $p(T)=T^2-I=0$. We can factor $p(z)=(z+1)(z-1)$, where both
+  $\lambda_1=1,\lambda_2=-1$ are eigenvalues of $T$.
+\end{solution}
+
+\begin{problem}{\S 2}
+  $T:R^2\to R^2$ a $180^{\circ}$ rotation about the origin.
+\end{problem}
+
+\begin{solution}
+  Let $p(z)=z+1$. Then $p(T)=T+I=0$. $p(z)$ trivially factors into $z+1$, where $\lambda_1=-1$ is
+  an eigenvalue of $T$.
+\end{solution}
+
+\begin{problem}{\S 3}
+  $T:\R^2\to \R^2$ a $60^{\circ}$ counter-clockwise rotation about the origin.
+\end{problem}
+
+\begin{solution}
+  Let $p(z)=z^2-z+1$. Then $p(T)=T^2-T+I=0$ (since flipping a vector rotated $60^{\circ}$ gives a
+  vector rotated $-120^{\circ}$, which will then cancel out the vector rotated $120^{\circ}$).
+  $p(x)$ has no real roots, which aligns with our answer that $T$ has no eigenvalues.
+\end{solution}
+
+\begin{problem}{\S 4}
+  $T:\R^2\to \R^2$ given by $T(x,y)=(x+y,x+y)$.
+\end{problem}
+
+\begin{solution}
+  Let $p(z)=z^2-2z$. Then $p(T)=T^2-2T=0$. $p(z)$ factors into $(x-0)(x-2)$, where $\lambda_1=0,\
+  \lambda_2=2$ are both eigenvalues of $T$.
+\end{solution}
+
+\begin{problem}{\S 5}
+  $T:\R^2\to \R^2$ given by $T(x,y)=(x,x)$.
+\end{problem}
+\begin{solution}
+  Let $p(z)=z^2-z$. Then $p(T)=T^2-T=0$. $p(z)$ factors into $(z-0)(z-1)$, where $\lambda_1=0,\
+  \lambda_2=1$ are eigenvalues of $T$.
+\end{solution}
+
+\begin{problem}{\S 6}
+  $T:\R^3\to \R^3$ projection to $xy$-plane; $T(x,y,z)=(x,y,0)$.
+\end{problem}
+\begin{solution}
+  Let $p(z)=z^2-z$. Then $p(T)=T^2-T=0$. $p(z)$ factors into $(z-0)(z-1)$, where $\lambda_1=0,\
+  \lambda_2=1$ are eigenvalues of $T$.
+\end{solution}
+
+\begin{problem}{\S 7}
+  $T:\R^3\to \R^3$ rotation by $180^{\circ}$ about the $x$-axis.
+\end{problem}
+
+\begin{solution}
+  Let $p(z)=z^2-1$. Then $p(T)=T^2-I=0$. $p(z)$ factors into $(z-1)(z+1)$, where $\lambda_1=1,\
+  \lambda_2=-1$ are eigenvalues of $T$.
+\end{solution}
+
+
+
+
+
+
+\end{document}
