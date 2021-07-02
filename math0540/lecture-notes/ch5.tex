@@ -1,0 +1,582 @@
+\documentclass[math0540-lecture-notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Eigenvalues, Eigenvectors, and Invariant Subspaces}
+
+In chapter 3, we studied linear maps from one vector space to another. We now turn our attention to
+maps from finite-dimensional vector spaces to themselves.
+
+\section{Invariant Subspaces}
+
+We start by developing tools to help us understand the structure of operators. Recall that an
+\textbf{operator} is a linear map from a vector space to itself, and we denote the set of operators
+on $V$ by $\mc{L}(V)$; in other words, $\mc{L}(V)=\mc{L}(V,V)$.
+
+To better understand what an operator looks like, suppose $T\in \mc{L}(V)$. If we have a direct sum
+decomposition \[
+  V = U_1\oplus \ldots\oplus U_m
+,\] where each $U_j$ is a proper subspace of $V$, then to understand the behavior of $T$, we need
+only understand its behavior on each individual subspace, $T|_{U_j}$. Dealing with each individual
+subspace is generally easier, since it's a smaller vector space.
+
+However, we have a problem: $T|_{U_j}$ might not map $U_j$ into itself; in other words, $T|_{U_j}$
+may not be an operator on $U_j$. Thus, we must only consider decompositions of $V$ where $T$ maps
+each $U_j$ into itself.
+
+\begin{definition}[Invariatn Subspaces]{}
+  Suppose $T\in \mc{L}(V)$. A subspace $U$ of $V$ is called \textbf{invariant} under $T$ if $u\in U$
+  implies $T(u)\in U$. That is, $T$ maps $U$ into itself; or, $T|_{U}$ is an operator on $U$.
+\end{definition}
+
+Some examples of operators include $\{ 0 \},\ V, \Null{T}$, and $\range{T}$. 
+
+Do operators $T\in \mc{L}(V)$ have any invariant subspaces other than $\{ 0 \}$ and $V$? Later, we
+will see that this is true \textbf{if} $V$ is finite-dimensional and $\dim V >1$ (for $\F=\C$) or
+$\dim V > 2$ (for $\F=\R$). Although the null space and range are invariant under $T$, they don't
+necessarily tell us anything new about the existence of non-trivial invariant subspaces; we can very
+well have $\Null T=\{ 0 \}$ and $\range{T}=V$ (i.e. $T$ is invertible).
+
+\subsection{Eigenvalues and Eigenvectors}
+
+We'll return later to invariant subspaces. We now turn to the simplest possible nontrivial invariant
+subspaces -- those with dimension $1$.
+
+Take any $v\in V$ with $v\neq 0$ and let $U$ equal the set of all scalar multiples of $v$: \[
+  U = \{\lambda v\mid \lambda\in \F\} =\Span(v)
+.\] 
+
+Then $U$ is a $1$-dimensional subspace of $V$ (and every $1$-dimensional subspace of $V$ is of this
+form). If $U$ is invariant under an operator $T\in \mc{L}(V)$, then $T(v)\in U$, and hence there is
+a scalar $\lambda\in \F$ such that \[
+  T(v)=\lambda v
+.\] Conversely, if $T(v)=\lambda v$ for some $\lambda\in \F$, then $\Span{(v)}$ is a $1$-dimensional
+subspace of $V$ invariant under $T$.
+
+Whenever we find such $\lambda$ that have this property for an operator $T\in \mc{L}(V)$, we call
+them \textbf{eigenvalues} (``eigen'' comes from the German word for ``same'', since they preserve
+the linear map structure).
+
+\begin{definition}[Eigenvalues, Eigenvectors]{}
+  Suppose $T\in \mc{L}(V)$. A number $\lambda\in \F$ is called an \textbf{eigenvalue} of $T$ if
+  there exists a non-zero $v\in V$ such that $T(v)=\lambda v$. Such a vector is called an
+  \textbf{eigenvector} of $T$ corresponding to eigenvalue $\lambda$.
+
+  In other words, a vector $v\in V$ is an \textbf{eigenvector} with \textbf{eigenvalue} $\lambda$ if
+  $v\neq 0$ and $Tv=\lambda v$.
+\end{definition}
+
+Intuitively, a vector has a corresponding eigenvalue if applying $T$ on the vector will only result
+in a ``stretch'' (in some direction) of the vector. We require that $v\neq 0$ because every scalar
+$\lambda\in \F$ satisfies $T(0)=\lambda\cdot 0$.
+
+\begin{example}
+  Let $T:\R^2\to \R^2$ be given by $T(x,y)=(2x,y)$. Does $T$ have any eigenvalues? If so, what
+  eigenvalues?
+
+  \textbf{Yes}: there are two possible eigenvalues:
+  \begin{itemize}
+    \item $\lambda=2$: for any eigenvector $(a,0)$, we have $T(a,0)=(2a,0)=2(a,0)$.
+    \item $\lambda=1$: for any eigenvector $(0,b)$, we have $T(0,b)=(0,b)=1(0,b)$.
+  \end{itemize}
+
+  Intuitively, $T$ ``stretches'' a vector by $2$ in the $x$-dimension. Thus, any vector \textit{on}
+  the $x$-axis will get doubled, and any vector \textbf{on} the $y$-axis will remain the same.
+  However, any vector not on the axes will be distorted, not stretched.
+\end{example}
+
+\begin{proposition}[Equivalent Conditions to be an Eigenvalue]{}
+  Suppose $V$ is finite-dimensional, $T\in \mc{L}(V)$, and $\lambda\in F$. Then the following are
+  equivalent:
+  \begin{enumerate}
+    \item $\lambda$ is an eigenvalue of $T$
+    \item $T-\lambda I$ is \textbf{not} injective
+    \item $T-\lambda I$ is \textbf{not} surjective
+    \item $T-\lambda I$ is \textbf{not} invertible.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  Conditions $1$ and $2$ are equivalent because the equation $T(v)=\lambda v$ is equivalent to the
+  equation $(T-\lambda I)v=0$; in other words, $T-\lambda I$ sends both $0$ and $v$ to zero. Hence
+  $T-\lambda I$ is not injective (since it has a non-trivial kernel).
+
+  Conditions 2, 3, and 4 are equivalent by a previous theorem (stating that if dimensions are the
+  same, injective iff surjective iff bijective/invertible).
+\end{proof}
+
+Because $T(v)=\lambda v$ if and only if $(T-\lambda I)v=0$, a vector $v\in V$ with $v\neq 0$ is an
+eigenvector of $T$ corresponding to $\lambda$ if and only if $v\in \Null{(T-\lambda I)}$.
+
+We see that, in the previous example, when trying to draw the eigenvectors, there isn't only one
+eigenvector associated with an eigenvalue; it's instead a space of eigenvectors that all fit into
+one form. We formalize this notion into an \textbf{eigenspace}.
+
+\begin{definition}[Eigenspace]{}
+  Let $T\in \mc{L}(V)$, and let $\lambda\in \F$ be an eigenvalue of $T$. The \textbf{eigenspace} of
+  $T$ corresponding to $\lambda$, denoted $E(\lambda,T)$, is \[
+    E(\lambda,T)=\{v\in V\mid T(v)=\lambda v\} 
+  .\] Thus $E(\lambda,T)$ is the set of eigenvectors corresponding to $\lambda$, together with $0$.
+  This is a subspace of $V$: indeed, $E(\lambda,T)=\{v\in V\mid (T-\lambda
+  I)(v)=0\}=\Null{(T-\lambda I)}$; and null spaces are always subspaces.
+\end{definition}
+
+Now, we show that eigenvectors corresponding to distinct eigenvalues are linearly independent.
+\begin{proposition}[Linearly Independent Eigenvectors]{}
+  Let $T\in \mc{L}(V)$. Suppose $\lambda_1,\ldots,\lambda_m$ are distinct eigenvalues of $T$ and
+  $v_1,\ldots,v_m$ are corresponding eigenvectors. Then $v_1,\ldots,v_m$ are linearly independent.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $v_1,\ldots,v_m$ are linearly dependent. Let $v_j$ be the smallest $j$ such that \[
+    v_j\in \Span{(v_1,\ldots,v_{j-1})}
+  \] ($v_j$ exists by the Linear Dependence Lemma). Then \[
+    v_j=a_1v_1+\ldots+a_{j-1}v_{j-1}\label{1}
+  ;\] applying $T$ to both sides yields \[
+    \lambda_jv_j=a_1\lambda_1v_1+\ldots+a_{j-1}\lambda_{j-1}v_{j-1}
+  .\] If we multiply $\lambda_j$ to the first equation, then subtract from this equation, we get \[
+    0=a_1(\lambda_j-\lambda_1)v_1+\ldots+a_{j-1}(\lambda_j-\lambda_{j-1})v_{j-1}
+  .\] However, $v_1,\ldots,v_j$ are linearly independent (by construction); thus all the
+  coefficients are $0$; that is, $a_i(\lambda_j-\lambda_i)=0$. Since $\lambda_j$ is different from
+  all $\lambda_{i\neq j}$, $a_i$ must be $0$. However, using this in the top equation implies that
+  \[
+    v_j=0v_1+\ldots+0v_{j-1}=0
+  ,\] a contradiction (since all eigenvectors must be non-zero). Hence $v_1,\ldots,v_j$ is linearly
+  independent.
+\end{proof}
+
+Using this, we can identify the max number of possible eigenvalues.
+\begin{corollary}[Number of Eigenvalues]{}
+  Suppose $V$ is finite-dimensional. Then each operator $T\in \mc{L}(V)$ has at most $\dim{V}$
+  distinct eigenvalues.
+\end{corollary}
+\begin{proof}[Proof]
+  Let $T\in \mc{L}(V)$. Suppose $\lambda_1,\ldots,\lambda_m$ are distinct eigenvalues of $T$, with
+  corresponding eigenvectors $v_1,\ldots,v_m$. Then the theorem above implies that the list
+  $v_1,\ldots,v_m$ is linearly independent; thus $m\le \dim{V}$ (since length of any linearly
+  independent list $\le $ length of any spanning list), as required.
+\end{proof}
+
+
+\section{Eigenvectors and Upper-Triangular Matrices}
+\subsection{Polynomials Applied to Operators}
+
+One main reason that a richer theory exists for operators, which map a vector space to itself, is
+that operators can be raised to powers. We start by defining this notion, and the key concept of
+applying a polynomial to an operator.
+
+If $T\in \mc{L}(V)$, then $TT$ makes sense and is also in $\mc{L}(V)$. Usually, we write $T^2$
+instead of $TT$.
+
+\begin{definition}[$T^m$]{}
+  Suppose $T\in \mc{L}(V)$ and $m$ is a positive integer.
+  \begin{itemize}
+    \item $T^m$ is defined by \[
+      T^m=\underbrace{T\cdots T}_\text{$m$ times}
+    .\] 
+  \item $T^0=I_V$, the identity operator on $V$.
+  \item If $T$ is invertible with $T^{-1}$ inverse, then $T^{-m}$ is defined by \[
+      T^{-m}=(T^{-1})^{m}
+  .\] 
+  \end{itemize}
+\end{definition}
+
+One can easily verify that if $T$ is an operator, then \[
+  T^mT^n=T^{m+n} ~\text{and}~ (T^m)^n=T^{mn}
+.\] 
+
+\begin{definition}[$p(T)$]{}
+  Suppose $T\in \mc{L}(V)$ and $p\in \mc{P}(\F)$ is a polynomial given by \[
+    p(z)=a_0+a_1z+\ldots+a_mz^m
+  \] for $z\in \F$. Then $p(T)$ is the operator defined by \[
+    p(T)=a_0I+a_1T+\ldots+a_mT^m
+  .\]
+\end{definition}
+
+This is a new use of the polynomial symbol $p$, since we're applying it to operators, not just
+variables in $\F$.
+
+\begin{example}
+  Consider $D:\mc{P}(\R)\to \mc{P}(\R)$, the differentiation linear operator. What is $p(D)$?
+
+  We have $p(T)=I+T^2$; thus, for a function $f\in \mc{P}(\R)$, we have
+  $p(T)(f)=(I+T^2)(f)=I(f)+T^2(f)=f+f''$.
+\end{example}
+
+
+If we fix an operator $T\in \mc{L}(V)$, then the function from $\mc{P}(\F)$ to $\mc{L}(V)$ given by
+$p\mapsto p(T)$ is linear (as you should verify).
+
+\begin{definition}[Product of Polynomials]{}
+  If $p,q\in \mc{P}(\F)$, then $pq\in \mc{P}(\F)$ is the polynomial defined by \[
+    (pq)(z)=p(z)q(z)
+  \] for $z\in \F$.
+\end{definition}
+Any two polynomials of an operator commute:
+\begin{proposition}[Multiplicative properties]{}
+  Suppose $p,q\in \mc{P}(\F)$ and $T\in \mc{L}(V)$. Then
+  \begin{enumerate}
+    \item $(pq)(T)=p(T)q(T)$;
+    \item $p(T)q(T)=q(T)p(T)$.
+  \end{enumerate}
+\end{proposition}
+
+The proof is left as an exercise for the reader; both follow basically directly from properties of
+polynomials (one simply replaces $z$ with $T$).
+
+\subsection{Existence of Eigenvalues}
+Now, we come to one of the central results about operators on complex vector spaces.
+\begin{theorem}[Operators on Complex Vector Spaces Have an Eigenvalue]{}
+  Every operator on a finite-dimensional, non-zero, complex vector space has an eigenvalue.
+\end{theorem}
+\begin{proof}[Proof]
+  Suppose $V$ is a complex vector space with dimension $n>0$, and $T\in \mc{L}(V)$. Choose a
+  non-zero $v\in V$. Then \[
+    v,T(v),\ldots,T^n(v)
+  \] is not linearly independent, because $V$ has dimension $n$ and we have $n+1$ vectors. Thus
+  there exist complex numbers $a_0,\ldots,a_n$, not all $0$, such that \[
+    0=a_0v+a_1T(v)+\ldots+a_nT^n(v)
+  .\] Note that $a_1,\ldots,a_n$ cannot all be $0$, since otherwise it would imply $a_0v=0$, or
+  $a_0=0$, a contradiction of linear dependence (Basically, at least two--definitely more since
+  otherwise a vector is a scalar multiple of another--of $a_i$ must be non-zero).
+
+  Make the $a_i$ the coefficients of a polynomial, which by the Fundamental Theorem of Algebra
+  (every non-constant polynomial has a unique complex factorization) has a factorization \[
+    a_0+a_1z+\ldots+a_nz^n=c(z-\lambda_1)\cdots(z-\lambda_m)
+  ,\] where $c$ is a non-zero complex number, each $\lambda_j\in \C$, and the equation holds for all
+  $z\in \C$ (here $m$ is not necessarily equal to $n$, because $a_n$ may equal $0$).
+
+  We then have
+  \begin{align*}
+    0&= a_0v+a_1T(v)+\ldots+a_nT^n(v) \\
+     &= (a_0I+a_1T+\ldots+a_nT^n)v \\
+     &= c(T-\lambda_1I)\cdots(T-\lambda_mI)v=p(T)(v)
+  .\end{align*} Thus $T-\lambda_jI$ is not injective for at least one $j$, since at least one of the
+  $T-\lambda_jI$'s must be $0$ (both $c,\ v$ are non-zero). In other words, $T$ has an eigenvalue
+  (recall that $T-\lambda_jI=0$ implies $T(v)=\lambda_j v$, so $\lambda_j$ is an eigenvalue).
+\end{proof}
+
+
+\subsection{Upper Triangular Matrices}
+When we looked at matrices of maps from one vector space to another, the matrix depended on the
+choice of basis of each of the two vector spaces. With operators, however, since it's a map from a
+vector space to itself, we only need one basis.
+\begin{definition}[Matrix of an operator, $\mc{M}(T)$]{}
+  Suppose $T\in \mc{L}(V)$ and $v_1,\ldots,v_n$ is a basis of $V$. The \textbf{matrix of $T$} with
+  respect to this basis is the $n\times n$ matrix \[
+    \mc{M}(T)=\begin{pmatrix} A_{1,1}&\cdots&A_{1,n}\\ \vdots& &\vdots \\ A_{n,1}&\cdots&A_{n,n} \end{pmatrix} 
+  ,\] whose entries $A_{j,k}$ is defined by \[
+    T(v_k)=A_{1,k}v_1+\ldots+A_{n,k}v_n
+  .\] In other words, each column in the basis represents the result of applying the operator on
+  that basis element.
+\end{definition}
+Note that matrices of operators are square arrays, rather than the more general rectangular arrays.
+This means that squaring matrices is possible, since their dimensions always agree! (When no basis
+is specified, assume the standard basis.)
+
+A central goal of linear algebra is to show that given an operator $T\in \mc{L}(V)$, there exists a
+basis of $V$ with respect to which $T$ has a reasonably simple matrix. This allows for much easier
+computations, since sparse matrices result are much easier to operate with.
+
+To make this more precise, we might try to choose a basis for $V$ such that $\mc{M}(T)$ has many
+$0$'s. If $V$ is a finite-dimensional complex vector space, since an eigenvalue/eigenvector pair
+exists, we can already form a matrix with $0$'s everywhere along the first column, except the first
+entry. We can let $v$ an eigenvector be a part of the basis, since any non-zero vector can be
+extended to a basis.
+
+Soon, we will see that we can choose a basis of $V$ such that the matrix $\mc{M}(T)$ has even more
+$0$'s.
+
+\begin{definition}[Diagonal of a Matrix]{}
+  The \textbf{diagonal} of a square matrix consists of the entries along the diagonal.
+\end{definition}
+
+\begin{definition}[Upper-Triangular Matrix]{}
+  A matrix is \textbf{upper-triangular} if all the entries below the diagonal equal $0$.
+\end{definition}
+Typically, we represent an upper-triangular matrix in the form \[
+  \begin{pmatrix} \lambda_1& &*\\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix} 
+.\]  The $0$ in the matrix above indicates that all entries below the diagonal are $0$.
+
+\subsection{TODO: Finish Upper Triangular Matrices}
+
+Important Propositions/Theorems:
+\begin{proposition}[Conditions for Upper-Triangular Matrices]{}
+  Suppose $T\in \mc{L}(V)$ and $v_1,\ldots,v_n$ is a basis for $V$. Then the following are
+  equivalent:
+  \begin{enumerate}
+    \item The matrix of $T$ with respect to $v_1,\ldots.,v_n$ is upper triangular.
+    \item $T(v_j)\in \Span{(v_1,\ldots,v_j)}$ for each $j=1,\ldots,n$.
+    \item $\Span{(v_1,\ldots,v_j)}$ is invariant under $T$ for each $j=1,\ldots,n$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Over $\C$, Every Operator has an Upper-Triangular Matrix]{}
+  Suppose $V$ is a finite-dimensional complex vector space and $T\in \mc{L}(V)$. Then $T$ has an
+  upper triangular matrix with respect to some basis of $V$.
+\end{theorem}
+
+\begin{proposition}[Determination of Invertibility from Upper-Triangular Matrix]{}
+  Suppose $T\in \mc{L}(V)$ has an upper-triangular matrix with respect to some basis of $V$. Then
+  $T$ is invertible if and only if all the entries on the diagonal of that upper triangular matrix
+  are non-zero.
+\end{proposition}
+
+\begin{proposition}[Determination of Eigenvalues from Upper-Triangular Matrix]{}
+  Suppose $T\in \mc{L}(V)$ has an upper-triangular matrix with respect to some basis of $V$. Then
+  the eigenvalues of $T$ are precisely the entries on the diagonal of that upper-triangular matrix.
+\end{proposition}
+
+
+
+
+\section{Eigenspaces and Diagonal Matrices}
+\begin{definition}[Diagonal Matrix]{}
+  A \textbf{diagonal matrix} is a square matrix that is $0$ everywhere except possibly along the
+  diagonal.
+\end{definition}
+
+Obviously, every diagonal matrix is upper-triangular; in general, a diagonal matrix has many more
+$0$s than an upper-triangular matrix.
+
+If an operator has a diagonal matrix with respect to some basis, then the entries along the diagonal
+are precisely the eigenvalues of the operator. We can then formulate a basis out of solely
+eigenvectors.
+\begin{definition}[Eigenspace]{}
+  Suppose $T\in \mc{L}(V)$ and $\lambda\in \F$. The \textbf{eigenspace} of $T$ corresponding to
+  $\lambda$, denoted $E(\lambda,T)$, is defined by \[
+    E(\lambda,T)=\Null{(T-\lambda I)}
+  .\] In other words, $E(\lambda, T)$ is the set of all eigenvectors of $T$ corresponding to
+  $\lambda$, along with the $\textbf{0}$ vector.
+\end{definition}
+
+For $T\in \mc{L}(V)$ and $\lambda\in \F$, the eigenspace $E(\lambda, T)$ is a subspace of $V$, since
+the null space of any linear map $T\in \mc{L}(V)$ is a subspace of $V$; and definitions imply that
+$\lambda$ is an eigenvalue if and only if $E(\lambda, T)\neq \{ 0 \}$. Moreover, if $\lambda$ is an
+eigenvalue of an operator $T\in \mc{L}(V)$, then $T|_{E(\lambda,T)}$ is just multiplication by
+$\lambda$!
+
+
+\begin{proposition}[Sum of Eigenspaces is Direct Sum]{}
+  Suppose $V$ is finite-dimensional and $T\in \mc{L}(V)$. Suppose also that
+  $\lambda_1,\ldots,\lambda_m$ are distinct eigenvalues of $T$. Then \[
+    E(\lambda_1,T)+\ldots+E(\lambda_m,T)
+  \] is a direct sum. Furthermore, \[
+    \dim{E(\lambda_1,T)}+\ldots+\dim{E(\lambda_m,T)}\le \dim{V}
+  .\]
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $u_1+\ldots+u_m=0$, where $u_j\in E(\lambda_j, T)$. Since eigenvectors corresponding to
+  distinct eigenvalues are linearly independent, this implies that every $u_j=0$. Thus
+  $E(\lambda_1,T)+\ldots+E(\lambda_m,T)$ is a direct sum, as desired.
+
+  Direct sums is left as an exercise; it should follow quickly from a previous exercise on direct
+  sums and dimensions.  
+\end{proof}
+
+\begin{definition}[Diagonalizable]{}
+  An operator $T\in \mc{L}(V)$ is called \textbf{diagonalizable} if the operator has a diagonal
+  matrix with respect to some basis of $V$.
+\end{definition}
+\begin{proposition}[Conditions Equivalent to Diagonalizability]{}
+  Suppose $V$ is finite-dimensional and $T\in \mc{L}(V)$. Let $\lambda_1,\ldots,\lambda_m$ denote
+  the distinct eigenvalues of $T$. Then the following are equivalent:
+  \begin{itemize}
+    \item $T$ is diagonalizable
+    \item $V$ has a basis consisting of eigenvectors of $T$
+    \item There exist $1$-dimensional subspaces $U_1,\ldots,U_n$ of $V$, each invariant under $T$,
+      such that \[
+        V=U_1\oplus\ldots\oplus U_n
+      .\] 
+    \item $V=E(\lambda_1,T)\oplus\ldots\oplus E(\lambda_m,T)$.
+  \end{itemize}
+\end{proposition}
+\begin{proof}[Proof]
+  An operator $T\in \mc{L}(V)$ has a diagonal matrix \[
+    \begin{pmatrix} \lambda_1& &0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix} 
+  \] with respect to a basis $v_1,\ldots,v_n\in V$ if and only if $T(v_j)=\lambda_jv_j$ for each
+  $v_j$. Thus (1) and (2) are equivalent.
+
+  We skip the proof for (3) (I'm lazy).
+
+  Suppose $V$ has a basis consisting of eigenvectors of $T$. Then every vector in $V$ is a linear
+  combination of eigenvectors of $T$, which implies that \[
+    V=E(\lambda_1,T)+\ldots+E(\lambda_m,T)
+  .\] (This is true since each $E(\lambda_j,T)$ represents all scalar multiples of the eigenvector
+  $v$; recall that this eigenspace is the result of scaling a vector along a line). Thus (4) holds.
+\end{proof}
+
+Unfortunately, not every operator is diagonalizable, even under complex vector spaces.
+\begin{example}
+  Show that the opeartor $T\in \mc{L}(\C^2)$ defined by \[
+    T(w,z)=(z,0)
+  \] is not diagonalizable.
+  \begin{solution}
+    One can verify that $0$ is the only eigenvalue of $T$, and further, that $E(0,T)=\{(w,0)\in
+    \C^2\mid w\in \C\} $; we see this since the only instance when this is true is when
+    $T(w,0)=(0,0)$ (any other $T(w,z)=(z,0)$ will alter its orientation).
+
+    Thus one can easily see that since $V$ has dimension $2$, it cannot have a basis consisting of
+    only eigenvectors of $T$. Checking that a diagonal matrix doesn't exist is easy; with the above
+    proposition, one need only check that one of the conditions fails.
+  \end{solution}
+\end{example}
+
+The next result lets you determine the diagonalizability of an operator given its eigenvalues.
+\begin{theorem}[Enough Eigenvalues implies Diagonalizability]{}
+  If $T\in \mc{L}(V)$ has $\dim{V}$ distinct eigenvalues, then $T$ is diagonalizable.
+\end{theorem}
+\begin{proof}[Proof]
+  Suppose $T\in \mc{L}(V)$ has $\dim{V}$ distinct eigenvalues $\lambda_1,\ldots,\lambda_{\dim{V}}$.
+  Let $v_j\in V$ be an eigenvector corresponding to each distinct eigenvalue $\lambda_j$. Since
+  eigenvectors corresponding to distinct eigenvalues are linearly independent, the list \[
+    v_1,\ldots,v_{\dim{V}}
+  \] is linearly independent. Since every linearly independent list of $\dim{V}$ vectors in $V$
+  forms a basis for $V$, we know that $v_1,\ldots,v_{\dim{V}}$ forms a basis of $V$. Thus $T$ has a
+  basis of eigenvectors, and therefore is diagonalizable.
+\end{proof}
+
+\section{Determinants}
+
+We first explore the motivation behind determinants. A first introduction of determinants is a
+naive, computation-focused approach. Given a matrix \[
+  A = \begin{pmatrix} a&b\\c&d \end{pmatrix} 
+,\] we define $\det{(A)}=ad-bc$. After that, state-school linear algebra courses usually stop there,
+and proceed without providing any external motivation or intuition behind the determinant.
+
+Determinants are quite important in linear algebra, understanding its motivation and intuition is
+paramount.
+
+Let $T:\R^{n}\to \R^{n}$. Geometrically, we can think of this linear map as ``morphing/stretching''
+a unit cube into a parallelopiped, or other shape; we can picture $e_1\mapsto T(e_1),\ e_2\mapsto
+T(e_2),\ldots$. \textbf{The crucial notion of the determinant} of $T$ is that it should measure the
+\textit{oriented/signed} \textbf{``volume of scaling'' of the image of the unit cube} under $T$.
+Orientation is important; a negative determinant would signify a change in orientation.
+
+Recall: the vectors $T(e_1),\ldots,T(e_n)$ written with respect to the standard basis are the
+\textbf{columns of $\mc{M}(T)$}. So, we want a way to associate a number, the \textbf{determinant},
+to any $n\times n$ matrix $A$; equivalently, to any $n$ vectors $v_1,\ldots,v_n\in \F^n$.
+
+\textbf{WISH LIST}. Let $\F$ be a field. We wish for a function \[
+  D: \underbrace{\F^{n}\times \ldots\times \F^{n}}_\text{$n$ times}\longrightarrow \F, ~\text{or}~
+  D:\F^{n,n}\longrightarrow \F
+\] that associates to a list of vectors in $\F^n$ with a number. Moreover, we want:
+\begin{enumerate}
+  \item $D$ is \textbf{multilinear}, i.e. for each $k=1,\ldots,n$, we have \[
+        D(v_1,\ldots,av_k+a'v_k',\ldots,v_n)=aD(v_1,\ldots,v_k,\ldots,v_n)+a'D(v_1,\ldots,v_k',\ldots,v_n)
+    .\] In other words, $D$ is linear with respect to each $k$. For example, given a three
+    dimensional object, if we fix width and length, we want linearity to hold when we stretch
+    height. Moreover, each scalar for a dimension would affect the overall scaling; for example,
+    increasing width by 2, height by 3, and length by 4 would result in $2\cdot 3\cdot 4=24$ times
+    the volume.
+  \item $D$ is \textbf{alternating}, i.e. \[
+      D(v_1,\ldots,v_j,\ldots,v_k,\ldots,v_n)=0 ~\text{if}~ v_j=v_k ~\text{for}~ j\neq k
+    .\] In other words, the determinant of a matrix should be $0$ if two columns (or rows) are equal.
+    For example, suppose we have a three-dimensional object, with width and length vectors. If the
+    height vector is in the span of the other two vectors, then the shape would have no volume (since
+    it never leaves the 2D plane).
+  \item $D$ is normalized, i.e. if we take the determinant of the unit cube, we should get 1 (which
+    aligns with our intuition): \[
+    D(e_1,...,e_n)=1
+  .\] (We want this to prevent the zero map.)
+\end{enumerate}
+
+\begin{remark}
+  \textbf{CAUTION}: $D:\F^{n,n}\to \F$ is \textbf{NOT} going to be a linear map. Consider $T$ a
+  linear map that morphs a unit square into a parallelopiped. If we take $2T$, then the linear map
+  will double each side of the parallelopiped (which is \textbf{FOUR} times larger than the
+  original!). In general, we have $\det{(\lambda T)}=\lambda^n\det{T}$ (where $n$ is the number of
+  dimensions).
+\end{remark}
+
+\begin{proposition}{}
+  Suppose $D:\F^n\times \ldots\times \F^n\to \F$ is a map that satisfies (1) and (2) above. Then \[
+    D(v_1,\ldots,v_j,\ldots,v_k,\ldots,v_n)=-D(v_1,\ldots,v_k,\ldots,v_j,\ldots,v_n) ~\text{with}~
+    j\neq k
+  .\] In general, this should hold for multilinear, alternating maps.
+\end{proposition}
+\begin{proof}[Proof]
+  Consider $0=D(v_1,\ldots,v_j+v_k,\ldots,v_j+v_k,\ldots,v_n)$ (which we get by (2)). Then
+  \begin{align*}
+    0&=D(v_1,\ldots,v_j+v_k,\ldots,v_j+v_k,\ldots,v_n)\\
+     &= D(v_1,\ldots,v_j,\ldots,v_j,\ldots,v_n)+D(v_1,\ldots,v_j,\ldots,v_k,\ldots,v_n) \\
+     &+D(v_1,\ldots,v_k,\ldots,v_j,\ldots,v_n)+D(v_1,\ldots,v_k,\ldots,v_k,\ldots,v_n)
+  .\end{align*}
+  By the second property, the first and last terms become $0$. Hence \[
+    D(v_1,\ldots,v_j,\ldots,v_k,\ldots,v_n)=-D(v_1,\ldots,v_k,\ldots,v_j,\ldots,v_n)
+  .\] 
+\end{proof}
+
+\begin{theorem}[Determinant]{}
+  There exists a unique multilinear, alternating, normalized function \[
+    D:\F^n\times \ldots\times \F^n \longrightarrow \F
+  .\] We call this function the \textbf{determinant}.
+\end{theorem}
+
+We postpone the proof of the existence and uniqueness of the determinant for later, and assume it's
+true. Especially beyond $3\times 3$ matrices, the formula for the determinant becomes super messy;
+moreover, it is one of those topics in mathematics where it's more important to use it based on its
+properties, rather than knowing its definition/proof.
+
+\begin{proposition}[Determinant of Linearly Dependent Lists]{}
+  Let $A\in \F^{n,n}$ be a square matrix. If the columns $v_1,\ldots,v_n\in \F^n$ are linearly
+  dependent, then $\det{A}=D(v_1,\ldots,v_n)=0$.
+\end{proposition}
+\begin{proof}[Proof]
+  Say $v_k=a_1v_1+\ldots+a_{k-1}v_{k-1}+a_{k+1}v_{k+1}+\ldots+a_nv_n$, where $a_i\in \F$. Calculate
+  \begin{align*}
+    D(v_1,\ldots,v_n)&=
+    D(v_1,\ldots,a_1v_1+\ldots+a_{k-1}v_{k-1}+a_{k+1}v_{k+1}+\ldots+a_nv_n,\ldots,v_n) \\
+                     &=
+ a_1D(v_1,\ldots,v_1,\ldots,v_n)+a_2D(v_1,\ldots,v_2,\ldots,v_n)+a_nD(v_1,\ldots,v_n,\ldots,v_n)
+  \end{align*}
+  by multilinearity of $D$. But all of these determinants share a value in common, so by the
+  alternating property, we get \[
+    D(v_1,\ldots,v_n)=0+\ldots+0=0
+  .\] 
+\end{proof}
+We'll show later that the converse is true as well; that is, if $\det{A}=0$, then the columns are
+dependent.
+
+Other useful cases of the determinant:
+\begin{itemize}
+  \item Given a diagonal matrix, the determinant of the diagonal matrix is simply the multiple of
+    each value: \[
+      \det{\begin{pmatrix} \lambda_1 & & 0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix}
+      }=\lambda_1\cdot \ldots\cdot \lambda_n
+    .\]
+  \item What about upper triangular matrices? Consider the matrix \[
+      \begin{vmatrix} 1&0&5\\0&1&7\\0&0&1 \end{vmatrix} =\begin{vmatrix} 1&0&5-5\\0&1&7-0\\0&0&1-0 \end{vmatrix} 
+    ,\] since $D(v_1,\ldots,v_n)=D(v_1,\ldots,v_k+a_1v_1,\ldots,v_n)$ (since by breaking up the
+    right hand side using multilinearity, we get
+    $D(v_1,\ldots,v_k,\ldots,v_n)+a_1D(v_1,\ldots,v_1,\ldots,v_n)$). In other words, \textbf{adding
+    columns/rows to different columns/rows does not affect the determinant}.
+
+    In general, the determinant of an upper triangular matrix is \textbf{$\lambda_1\cdot \ldots\cdot
+    \lambda_n$} (just the values on the diagonal); it follows that $\lambda_i=0$ implies that
+    $\det{A}=0$. Indeed, if $\lambda_i=0$, then the first $i$ columns $v_1,\ldots,v_{i}$ of $A$ lie
+    in the $\Span{(e_1,...,e_{i-1})}$. So the columns of $A$ are dependent.
+
+    If all $\lambda_i\neq 0$, then we can subtract the first column (which only has a non-zero entry
+    in the first row) from the rest of the rows, ``clearing'' the first row; recall that this
+    doesn't affect the overall value of the determinant. We repeat for all the other rows, and
+    eventually get a diagonal matrix, which results in $\lambda_1\cdot \ldots\cdot \lambda_n$.
+    Geometrically, we get the notion that even if we ``shear'' a unit cube; that is, we shift it in
+    a certain direction, the overall volume of the shape \textbf{does not change}.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+\end{document}

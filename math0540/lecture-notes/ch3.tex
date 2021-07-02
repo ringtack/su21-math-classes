@@ -367,7 +367,7 @@ exist.
 
 
 \section{Matrices}
-We know now that if $v1,\ldots,v_n$ is a basis of $V$ and $T:V\to W$ is a linear map, then
+We know now that if $v_1,\ldots,v_n$ is a basis of $V$ and $T:V\to W$ is a linear map, then
 $T(v_1),\ldots,T(v_n)$ determine the values of $T$ on any vector $v\in V$. Matrices allow us to
 efficiently encode the values of $T(v_i)$ in terms of a basis of $W$.
 
@@ -434,8 +434,21 @@ $m\times n$ matrices over $ \F$.
   $A+B=(a_{i,j}+b_{i,j})$. Scalar multiplication is similarly defined: for $A=(a_{i,j}), \lambda A =
   (\lambda a_{i,j})$.
 \end{definition}
-With these operations, one can easily check that $\F^{m,n}$ is a vector space. Now, we connect
-$\mc{L}(V,W)$ to $\F^{m,n}$; intuitively, these two structures should agree.
+With these operations, one can easily check that $\F^{m,n}$ is a vector space. We then look at the
+dimension of $\F^{m,n}$.
+
+\begin{proposition}[$\dim{\F^{m,n}}=mn$]{}
+  Suppose $m,n$ are positive integers. With addition and scalar multiplication defined as above,
+  $\F^{m,n}$ is a vector space with dimension $mn$.
+\end{proposition}
+\begin{proof}[Proof]
+  Note that the additive identity is the $m\times n$ matrix whose entries all equal $0$.
+  Additionally, it is easy to see that the list of $m\times n$ matrices that have $0$ in all entries
+  except for a $1$ in one entry is a basis of $\F^{m,n}$. Since there are $mn$ such matrices, the
+  dimension of $\F^{m,n}$ is $mn$.
+\end{proof}
+
+Now, we connect $\mc{L}(V,W)$ to $\F^{m,n}$; intuitively, these two structures should agree.
 \begin{proposition}[]{} 
   Given vector spaces $V,W$ over $ \F$ with bases $v_1,\ldots,v_n$ and $w_1,\ldots,w_m$, for any
   $S,T\in \mc{L}(V,W)$, $\lambda\in \F$, we have
@@ -535,7 +548,7 @@ We start by looking at invertible linear maps, and inverses in the context of li
 \end{definition}
 
 \begin{proposition}[Inverse is Unique]{}
-  an invertible linear map is unique.
+  An invertible linear map is unique.
 \end{proposition}
 \begin{proof}[Proof]
   Suppose $T\in \mc{L}(V,W)$ is invertible, and $S_1,S_2$ are inverses of $T$. Then \[
@@ -570,7 +583,7 @@ turns out that invertibility is equivalent to bijectivity:
 
   Conversely, suppose $T\in \mc{L}(V,W)$ is a bijection. Then for every $w\in W$, there exists a
   unique $v\in V$ such that $T(v)=w$. Define $S\in \mc{L}(W,V)$ as the function that sends every
-  $w$ back to its original $v$; that is, since $w=T(v)$, we have $S(w)=S(T(v))=v$. Clearly, $T\circ
+  $w$ back to its original $v$; that is, since $w=T(v)$, we have $T(S(w))=T(v)=w$. Clearly, $T\circ
   S$ is the identity map $I_W$. To show that $S\circ T=I_V$, consider any $v\in V$. Then \[
     T(S\circ T(v))=(T\circ S)T(v)=I_WT(v)=T(v)
   .\] Then $T(S\circ T(v))=T(v)$; but since $T$ is an injection, we have $S\circ T(v)=v$, and so
