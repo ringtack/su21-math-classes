@@ -97,6 +97,8 @@
 \DeclareMathOperator{\Imag}{Imag}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\range}{range}
 \DeclareMathOperator{\trace}{tr}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\Sym}{Sym}

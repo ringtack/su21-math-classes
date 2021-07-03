@@ -1,0 +1,181 @@
+\documentclass{homework}
+\homework{Week 8}
+
+\begin{document}
+
+
+\begin{problem}{\S 3}
+  (4.15) Suppose $V$ is an $F$-vector space, $\mc{A}$ and $\mc{B}$ are subsets of $V$, and
+  \begin{itemize}
+    \item $\mc{B}$ is linearly independent.
+    \item $\left| A \right| =\left| B \right| $.
+    \item $\Span{(B)}\subseteq \Span{(A)}$.
+  \end{itemize}
+  Prove $\Span{(A)}=\Span{(B)}$.
+\end{problem}
+
+\begin{solution}
+  We start with $2$ lemmas.
+
+  \begin{lemma}{}
+    Let $V$ be an $F$-vector space. Given a subset $\mc{A}\subseteq V$, $\Span{(A)}$ is a subspace
+    of $V$; and if $\mc{A}$ is linearly independent, then $\mc{A}$ forms a basis of $\Span{(A)}$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Clearly, given $v_1,v_2\in \Span{(A)}$, we have $v_1+v_2\in \Span{(A)}$ (since for each
+    component $a_i\alpha_i$ of $v_1$ and corresponding $a_i'\alpha_i$ of $v_2$, $(a_i+a_i')\in F$ by
+    closure of addition in fields, so $v_1+v_2$ is still in $\Span{(A)}$ by definition); and for any
+    $c\in F$, $cv\in \Span{(A)}$ as well (like above, for each component $a_i\alpha_i$ of $v$,
+    $(ca_i)\in F$, so $cv\in \Span{(A)}$ by definition). Finally, setting each $a_i$ coefficient
+    to $0$ shows that $\textbf{0}\in \Span{(A)}$. Hence $\Span{(A)}$ is a subspace of $V$.
+
+    If $\mc{A}$ is linearly independent, clearly $\mc{A}$ forms a basis for $\Span{(A)}$ (since
+    $\mc{A}$ is both linearly independent and spans $\Span{(A)}$. Wow!)
+  \end{proof}
+  
+  \begin{lemma}{}
+    Let a set $\mc{A}$ span a vector space $V$. If a linearly independent set $\mc{B}$ has the same
+    number of elements as $\mc{A}$, $\mc{A}$ is also linearly independent, and is thus a basis for
+    $V$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Suppose $\mc{A}$ is linearly dependent. Then for some $\alpha_i\in \mc{A}$, $\alpha_i\in
+    \Span{(\mc{A}\setminus \{ \alpha_i \})}$, so $\mc{A}\setminus \{ \alpha_i \}$ spans $V$ as well.
+    But then $\left| \mc{A}\setminus \{ \alpha_I \} \right| <\left| \mc{A} \right| =\left| \mc{B}
+    \right| $ a linearly independent set in $V$, a contradiction of Lemma 4.24. Thus $\mc{A}$ is
+    linearly independent in $V$ as well, and thus is a basis for $V$.
+  \end{proof}
+  
+  
+  \begin{lemma}{}
+    Let $\mc{A}$ be a basis for a vector space $V$. If a linearly independent set $\mc{B}$ has the
+    same number of elements as $\mc{A}$, then $\mc{B}$ is a basis for $V$ as well.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Suppose $\mc{B}$ is not a basis for $V$. Then for some $v\in V$ where $v\not\in
+    \Span{(\mc{B})}$, $\mc{B}'=\mc{B}\cup \{ v \}$ is linearly independent. However, Lemma 4.24
+    tells us that the size of any linearly independent set in $V$ is less than or equal to the
+    length of any spanning set in $V$, and since $\mc{A}$ spans $V$ and $\left| \mc{A} \right| =
+    \left| \mc{B} \right| < \left| \mc{B}' \right| $, this is a contradiction. Hence $\mc{B}$ must
+    span $V$ as well, and so $\mc{B}$ is a basis for $V$.
+  \end{proof}
+
+  Lemma 1 tells us that $\Span{(\mc{A})}$ is a subspace of $V$ (and thus also a vector space,
+  allowing us to apply theorems about bases and dimensions of vector spaces). Since
+  $\Span{(\mc{B})}\subseteq \Span{(\mc{A})}$, clearly $\mc{B}\subseteq \Span{(\mc{A})}$. Thus
+  $\mc{B}$ is a linearly independent set in $\Span{(\mc{A})}$. Since $\mc{A}$ and $\mc{B}$ have the
+  same number of elements, Lemma 2 tells us that $\mc{A}$ is linearly independent in
+  $\Span{(\mc{A})}$ as well, and thus is a basis. Lemma 3 then tells us that $\mc{B}$ is a basis for
+  $\Span{(\mc{A})}$ too; thus $\Span{(\mc{A})} = \Span{(\mc{B})}$, as required.
+  
+\end{solution}
+
+
+\begin{problem}{\S 4}
+  Suppose $V,W$ are finite-dimensional $F$-vector spaces. Let $L:V\to W$ be a linear transformation.
+  \begin{itemize}
+    \item If $L$ injective, prove $\dim{V}\le \dim{W}$.
+    \item If $L$ surjective, prove $\dim{V}\ge \dim{W}$.
+  \end{itemize}
+\end{problem}
+\begin{solution}
+  Let $\{ v_1,\ldots,v_n \}$, $\{ w_1,\ldots,w_m \}$ be basis for $V$ and $W$ respectively.
+  \begin{itemize}
+    \item Suppose $L:V\to W$ is injective. For any $v\in V$, we can write \[
+        v = \sum_{i=1}^{n} a_iv_i, ~\text{where}~a_i\in F
+      .\] Clearly, $\mc{B}=\{ L(v_1),\ldots,L(v_n) \}$ spans $\range{L}$, since for any $L(v)\in
+      \range{L}$, we have \[
+        L(v)=L(a_1v_1+\ldots+a_nv_n)=a_1L(v_1)+\ldots+a_nL(v_n)
+      .\] We claim that $\mc{B}$ is a basis for $\range{L}$.
+
+      Suppose $L(v),\ L(v')\in \range{L}$ are different ways of representing a vector in
+      $\range{L}$; in other words, $L(v)=L(v')$ and \[
+        L(v)=\sum_{i=1}^{n} a_iL(v_i),\ L(v')=\sum_{i=1}^{n} a_i'L(v_i),\ a_i\neq a_i'
+      .\] By linearity, \[
+        L(v)=\sum_{i=1}^{n} a_iL(v_i)=\sum_{i=1}^{n} L(a_iv_i)
+      \] and \[
+        L(v')=\sum_{i=1}^{n} a_i'L(v_i)=\sum_{i=1}^{n} L(a_i'v_i)
+      .\]  $L$ injective then means \[
+        \sum_{i=1}^{n} a_iv_i=\sum_{i=1}^{n} a_i'v_i
+      ,\] and since $\{ v_1,\ldots,v_n \}$ is a basis for $V$ (and thus is linearly independent), we
+      necessarily have \[
+        \sum_{i=1}^{n} (a_i-a_i')v_i=0,\ a_i-a_i'=0
+        .\] and hence $a_i=a_i'$. Equivalently, $L(v)$ and $L(v')$ are the same, and thus every
+        $L(v)\in \range{L}$ can be represented uniquely as \[
+        L(v)=\sum_{i=1}^{n} a_iL(v_i)
+      .\] In other words, $\mc{B}$ is a basis for $\range{L}$.
+
+      Since $\range{L}\subseteq W$ and $\mc{B}$ is linearly independent in $\range{L}$ (and thus in
+      $W$ as well), by Lemma 4.24 any spanning set must have at least as many elements as $\mc{B}$.
+      Hence any basis of $W$ must have at least as many elements as $\mc{B}$; and since $\left| \mc{B}
+      \right| =\dim{V}$, we get $\dim{V}\le \dim{W}$, as required.
+
+    \item Suppose $L:V\to W$ is surjective. From before, we know that $\mc{B}=\{
+      L(v_1),\ldots,L(v_n)\}$ spans $\range{L}$; since $L$ is surjective (and so $\range{L}=W$),
+      $\mc{B}$ spans $W$ as well. By Lemma 4.24, the size of any linearly independent set in $W$ is
+      less than or equal to the size of any spanning set of $W$. Since $\{ w_1,\ldots,w_m \}$ is
+      linearly independent, we thus have $\dim{W}\le \range{L}=\dim{V}$. Therefore $\dim{V}\ge
+      \dim{W}$, as required.
+  \end{itemize}
+\end{solution}
+
+
+\begin{problem}{\S 5}
+  (4.18) Let $V$ be a finite-dimensional $F$-vector space, and let $U\subseteq V$ be a vector
+  subspace.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $U$ is finite-dimensional.
+    \item Prove that $\dim_F{U}\le \dim_F{V}$.
+    \item Prove that \[
+      U=V \iff \dim_F{U}=\dim_F{V}
+    .\] 
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item If $U=\{ 0 \}$, $U$ is clearly finite-dimensional, so suppose $U\neq \{ 0 \}$. Let $u_1\in
+      U$ be a non-zero vector. If $U=\Span{(\{ u_1 \})}$, then we are done; otherwise, continue adding
+      non-zero vectors $u_j\in U$ such that \[
+        u_j\not\in \Span{(\{ u_1,\ldots,u_{j-1} \})}
+      ,\] until $\{ u_1,\ldots,u_j \}$ forms a spanning set of $U$. With each addition,
+      $\{u_1,\ldots,u_j \}$ is a linearly independent set by construction (since each added vector
+      was not in the span of the previous vectors). Moreover, every linearly independent set $\{
+      u_1,\ldots,u_j \}$ is in $V$, since each $u_i\in U\subseteq V$.
+
+      Let $n=\dim{V}$. Since any basis of $V$ is spanning, and by Lemma 4.24, the number of elements
+      in any linearly independent set in $V$ must be less than or equal to the length of any
+      spanning set in $V$, the length of $\{ u_1,\ldots,u_j \}$ must be less than or equal to $n$.
+      Thus the above process will eventually terminate (it cannot repeat infinitely --- or past $j=n$
+      --- since the number of elements must be less than or equal to $n$), and so we are left with a
+      finite linearly independent spanning set $\{ u_1,\ldots,u_j \} $ of $U$. Thus $U$ is
+      finite-dimensional.
+
+    \item From above, we see that a basis $\{ u_1,\ldots,u_j \}$ of $U$ cannot have more elements
+      than $n=\dim{V}$. Hence $\dim_F{U}\le \dim_F{V}$.
+
+      Alternatively, let $\{ u_1,\ldots,u_m \}$ be a basis for $U$. Then $\{ u_1,\ldots,u_m
+      \}\subseteq U\subseteq V$ is a linearly independent set of vectors in $V$. By Lemma $4.24$,
+      any linearly independent set of vectors in $V$ cannot have more elements than any spanning set
+      of $V$. Since a basis $\{ v_1,\ldots,v_n \}$ of $V$ is the smallest spanning set of $V$ and
+      has $n=\dim{V}$ elements, any linearly independent set cannot have more than $n$ elements.
+      Thus $\left| \{ u_1,\ldots,u_m \} \right| =\dim_F{U}\le \dim_F{V}=n=\left| \{ v_1,\ldots,v_n
+      \} \right| $.
+
+    \item Suppose $U=V$. Then a basis $\{ v_1,\ldots,v_n \}$ of $U$ is also a basis of $V$, and so
+      $\dim_F{U}=\dim_F{V}$.
+
+      Conversely, suppose $\dim_F{U}=\dim_F{V}=n$, and let $\{ u_1,\ldots,u_n \},\ \{ v_1,\ldots,v_n
+      \}$ be bases for $U$ and $V$ respectively. Since $U$ is a subspace of $V$, we know that $\{
+    u_1,\ldots,u_n \}$ is a linearly independent set of vectors in $V$. From Lemma 3 (of Problem
+    $\S 3$), since $\{ u_1,\ldots,u_n \}$ is a linearly independent set of vectors with the same
+    number of elements as a basis $\{ v_1,\ldots,v_n \}$ of $V$, $\{ u_1,\ldots,u_n \}$ is a basis
+    of $V$ as well. Thus \[
+      U=\Span{(\{ u_1,\ldots,u_n \})}=V
+    ,\] and so $U=V$, as required.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+\end{document}
