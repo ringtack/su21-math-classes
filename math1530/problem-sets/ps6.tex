@@ -3,6 +3,118 @@
 
 \begin{document}
 
+\begin{problem}{\S 1}
+  (4.4) Let $V,\ W$ be $F$-vector spaces, let \[
+    L_1:V\longrightarrow W~\text{and}~L_2:V\longrightarrow W
+  \] be linear transformations from $V$ to $W$, and let $c\in F$ be a scalar. We define new
+  functions $L_1+L_2$ and $cL_1$ that map $V$ to $W$ as follows: \[
+    \left( L_1+L_2 \right)(v)=L_1(v)+L_2(v) ~\text{and}~ \left( cL_1 \right)(v)=c(L_1(v))
+  .\]
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $L_1+L_2$ and $cL_1$ are linear transformations.
+    \item We denote the set of $F$-linear transformations from $V$ to $W$ by \[
+        \Hom_F(V,W)=\{\text{linear transformations} L:V\to W \}
+      .\] Prove that the addition and scalar multiplication defined above make $\Hom_F(V,W)$ a
+      vector space.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Pretty trivial by the definition, but here goes: for $a_1,a_2\in F$ and $v_1,v_2\in V$,
+      \begin{align*}
+        (L_1+L_2)(a_1v_1+a_2v_2)&=L_1(a_1v_1+a_2v_2)+L_2(a_1v_1+a_2v_2)\\
+          &=a_1L_1(v_1)+a_1L_2(v_1)+ a_2L_1(v_2)+a_2L_2(v_2)\\
+          &=a_1(L_1+L_2)(v_1)+a_2(L_1+L_2)(v_2)
+      .\end{align*}
+       and for $c\in F$, \[
+        (cL_1)(a_1v_1+a_2v_2)=c(L_1(a_1v_1+a_2v_2))=ca_1L_1(v_1)+ca_2L_1(v_2)=a_1(cL_1)(v_1)+a_2(cL_1)(v_2)
+      \] by commutativity of multiplication in fields. Hence $L_1+L_2$ and $cL_1$ are linear
+      transformations... wow!
+    \item $\Hom_F(V,W)$ clearly forms an Abelian group under addition:
+      \begin{itemize}
+        \item Associativity follows since $W$ is a vector space (and so addition of vectors is
+          associative)
+        \item The zero map $0:V\to W,\ v\mapsto 0$ is the identity, since
+          $(L_1+0)(v)=L_1(v)+0=L_1(v)$ for any $L\in \Hom_F(V,W)$.
+        \item For any $L\in \Hom_F(V,W)$, the map $(-L)(v)=-(L(v))$ is the inverse of $L$ (existence
+          and uniqueness follow trivially from $W$ being a vector space).
+        \item Commutativity also follows since $W$ is a vector space.
+      \end{itemize}
+      Moreover, for any $L_1,L_2\in \Hom_F(V,W)$, $c_1,c_2\in F$, 
+      \begin{itemize}
+        \item $(1L)(v)=1(L(v))=L(v)$, since $1\in F$, $L(v)\in W$, and $1w=w$ for any $w\in W$;
+          hence $1L=L$.
+        \item $(c(L_1+L_2))(v)=c(L_1(v)+L_2(v))=cL_1(v)+cL_2(v)$, by distributivity of $W$. Hence
+          $c(L_1+L_2)=cL_1+cL_2$.
+        \item $((c_1+c_2)L)(v)=(c_1+c_2)(L(v))=c_1L(v)+c_2L(v)$, again by distributivity of $W$.
+          Hence $(c_1+c_2)L=c_1L+c_2L$.
+        \item $c_1(c_2L)(v)=c_1c_2(L(v))=((c_1c_2)L)(v)$, since $(cL)(v)=c(L(v))$ for all $c\in F$,
+          $L\in \Hom_F(V,W)$, and $F$ is closed under multiplication, so $c_1c_2\in F$. Hence
+          $c_1(c_2L)=(c_1c_2)L$.
+      \end{itemize}
+      Thus $\Hom_F(V,W)$ forms a vector space. . . . . .
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  (4.5) Let $V$ be an $F$-vector space, and let \[
+    L_1:V\longrightarrow V ~\text{and}~ L_2:V\longrightarrow V
+  \] be linear operators on $V$. Define $L_1+L_2$ and $L_1L_2$ as follows: \[
+    (L_1+L_2)(v)=L_1(v)+L_2(v) ~\text{and}~ (L_1L_2)(v)=L_1(L_2(v))
+  .\]
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $L_1+L_2$ and $L_1L_2$ are linear transformations.
+    \item Let $L:V\to V$ be another linear transformation. Prove the following formulas:
+      \begin{enumerate}[label=(\alph*)]
+        \item $(L_1+L_2)+L_3=L_1+(L_2+L_3)$
+        \item $(L_1L_2)L_3=L_1(L_2L_3)$
+        \item $L_1(L_2+L_3)=L_1L_2+L_1L_3$ and $(L_1+L_2)L_3=L_1L_3+L_2L_3$
+      \end{enumerate}
+    \item Prove that the set of linear transformations from $V$ to $V$ is a ring, where addition and
+      multiplication are given above. What is the identity element of this ring? What is the
+      additive inverse of a linear transformation $L$?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item See above for $L_1+L_2$; essentially the same steps. For $c_1,c_2\in F$, $L_1,L_2\in
+      \mc{L}(V)$, $v_1,v_2\in V$, 
+      \begin{align*}
+        (L_1L_2)(c_1v_1+c_2v_2)&= L_1(L_2(c_1v_1+c_2v_2)) \\
+                               &=L_1(c_1L_2(v_1)+c_2L_2(v_2))\\
+                               &=c_1L_1(L_2(v_1))+c_2L_1(L_2(v_2))\\
+                               &=c_1(L_1L_2)(v_1)+c_2(L_1L_2)(v_2)
+      .\end{align*}
+      Hence $L_1L_2$ is a linear transformation as well.
+    \item 
+      \begin{itemize}
+        \item Trivial: $V$ is associative under addition, and any $L(v)\in V$. Thus
+          $(L_1+(L_2+L_3))(v)=L_1(v)+L_2(v)+L_3(v)=(L_1+L2)(v)+L_3(v)$.
+        \item
+          $((L_1L_2)L_3)(v)=(L_1L_2)(L_3(v))=L_1(L_2(L_3(v)))=L_1((L_2L_3)(v))=(L_1(L_2L_3))(v)$, as
+          required.
+        \item $L_1(L2+L_3)(v)=L_1(L_2(v)+L_3(v))=\underbrace{L_1(L_2(v))+L_1(L_3(v))}_\text{by
+          linearity}=(L_1L_2)(v)+(L_1L_3)(v)$, and \[
+            ((L_1+L_2)L_3)(v)=(L_1+L_2)(L_3(v))=L_1(L_3)(v))+L_2(L_3(v))=(L_1L_3)(v)+(L_2L_3)(v)
+          ,\] as required.
+      \end{itemize}
+    \item (a) proves closure/well-definedness (addition and multiplication make sense). (b)1,2
+      proves associativity of addition and multiplication. (b)3 proves distributivity. Commutativity
+      of addition follows since $V$ forms an Abelian group under vector addition (and since $L(v)\in
+      V$, we have $L_1(v)+L_2(v)=L_2(v)+L_1(v)$). For any $L\in \mc{L}(V)$, since $L(v)\in V$ and
+      $V$ is a group, there exists some $w=-L(v)\in V$. So, if we define $-L$ as $(-L)(v)=-L(v)$, \[
+        (L+ -L)(v)=L(v)+ -L(v)=0=(-L+L)(v)=-L(v)+L(v)
+      .\] Hence every element has an additive inverse. Clearly, $0:V\to V$, $v\mapsto 0$ is in
+      $\mc{L}(V)$, and $0+L=L+0=L$ for any $L\in \mc{L}(V)$; hence additive identity exists.
+      Moreover, for $I:V\to V,\ v\mapsto v$, $I\in \mc{L}(V)$, and clearly $IL=LI=L\in \mc{L}(V)$;
+      hence multiplicative identity exists. Thus $\mc{L}(V)$ is an Abelian group under addition and
+      a monoid under multiplication. Therefore $\mc{L}(V)$ is a ring.
+  \end{enumerate}
+\end{solution}
+
+
 
 \begin{problem}{\S 3}
   (4.15) Suppose $V$ is an $F$-vector space, $\mc{A}$ and $\mc{B}$ are subsets of $V$, and
