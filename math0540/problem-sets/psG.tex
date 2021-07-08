@@ -1,0 +1,103 @@
+\documentclass{homework}
+\homework{G}
+
+\begin{document}
+
+\begin{problem}{\S 3}
+  Let $V$ be a finite-dimensional $\F$-vector space and let $T\in \mc{L}(V)$ be an operator. Prove
+  that the following are equivalent:
+  \begin{enumerate}[label=(\alph*)]
+    \item $T^2=T$.
+    \item There exist subspaces $U_1,U_2$ of $V$ such that $V=U_1\oplus U_2$ and \[
+        T(u_1+u_2)=u_1
+      \] for all $u_1\in U_1,u_2\in U_2$.
+    \item $T$ is diagonalizable and its set of eigenvalues is a subset of $\{ 0,1 \}$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  We start with a lemma.
+  \begin{lemma}{}
+    Suppose $V$ is a finite-dimensional $\F$-vector space, $T\in \mc{L}(V)$, and $T^2=T$. Then
+    $V=\range{T}\oplus\Null{T}$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    First, consider $v-T(v)\in V$. $T^2=T$ implies $T(v-T(v))=T(v)-T^2(v)=0$, so $v-T(v)\in
+    \Null{T}$. Moreover, $T(v)\in \range{T}$ trivially. Thus for any vector $v\in V$, \[
+      v=T(v)+v-T(v)=u_1+u_2, ~\text{where}~u_1\in \range{T},\ u_2\in \Null{T}
+    ,\] and so $V=\range{T}+\Null{T}$. Now, consider $v\in \range{T}\cap \Null{T}$. Then for some
+    $v'\in V$, $T(v')=v$; moreover, $T(v)=0$. Thus \[
+      v=T(v')=T^2(v')=T(T(v'))=T(v)=0
+    \] and so $v=0$. Thus $\range{T}\cap \Null{T}=\{ 0 \}$, and so $V=\range{T}\oplus\Null{T}$.
+  \end{proof}
+
+  Assume $T^2=T$. By the lemma, $V=\range{T}\cap \Null{T}$. We know $\range{T}$ and $\Null{T}$ are
+  both subspaces of $V$. Let $u_1\in \range{T}$ (and so $u_1=T(v)$ for some $v\in V$), $u_2\in
+  \Null{T}$. Then \[
+    T(u_1+u_2)=T(u_1)+T(u_2)=T(T(v))+0=T^2(v)
+  .\] But $T^2=T$, so $T^2(v)=T(v)=u_1$. Thus $T(u_1+u_2)=u_1$, as required.
+
+  Now, assume there exist subspaces $U_1,U_2$ of $V$ such that $V=U_1\oplus U_2 $ and \[
+    T(u_1+u_2)=u_1
+  \] for all $u_1\in U_1,u_2\in U_2$. Recall that all subspaces $U$ of $V$ must have $\textbf{0}\in
+  U$. For any $u_2\in U_2$, \[
+    0=T(0+u_2)=T(u_2)=0u_2, ~\text{so}~\lambda_1=0
+  .\] Thus, if $U_2\neq \{ 0 \}$ and $v_1,\ldots,v_j$ form a basis of $U_2$, then $T$ has an
+  eigenvalue $0$, and $v_1,\ldots,v_j\in E(0,T)$. Similarly, for any $u_1\in U_1$, \[
+    T(u_1)=T(u_1+0)=u_1=1u_1, ~\text{so}~\lambda_2=1
+  .\] Thus, if $U_1\neq \{ 0 \}$, and $v_{j+1},\ldots,v_n$ form a basis of $U_1$, then $T$ has an
+  eigenvalue $1$, and $v_{j+1},\ldots,v_n\in E(1,T)$.
+
+  Since $U_1\oplus U_2=V$, any vector $v\in V$ can be uniquely represented in terms of the two bases
+  of $U_1$ and $U_2$: $a_1v_1+\ldots+a_jv_j+a_{j+1}v_{j+1}+\ldots+a_nv_n$. Moreover, since all $v_i$
+  are eigenvectors, $T$ is thus diagonalizable; additionally, any eigenvalue of $T$ is either $0$ or
+  $1$, as required.
+
+  Finally, assume $T$ is diagonalizable and its set of eigenvalues are a subset of $\{ 0,1 \}$.
+  Recall that $T$ diagonalizable means that $V$ has a basis of eigenvectors of $T$. Let
+  $v_1,\ldots,v_n$ be a basis of $V$. $T$ must clearly have eigenvalues (since otherwise it wouldn't
+  be diagonalizable).
+
+  If $\lambda=0$ is the only eigenvalue, then for any $v\in V$, $v=a_1v_1+\ldots+a_nv_n$ and \[
+    T(v)=T(a_1v_1+\ldots+a_nv_n)=0=T(0)=T(T(v))=T^2(v)
+  .\] Similarly, if $\lambda=1$ is the only eigenvalue, then \[
+  T^2(v)=T(T(v))=T(v)
+  .\] Finally, suppose $T$ has two eigenvalues $\lambda_1=0,\ \lambda_2=1$. Let $v_1,\ldots,v_j\in
+  E(0,T),\ v_{j+1},\ldots,v_n\in E(1,T)$. Then for any $v\in V$, we have \[
+    T(v)=T(a_1v_1+\ldots+a_jv_j+a_{j+1}v_{j+1}+\ldots+a_nv_n)=a_1\cdot 0v_1+\ldots+a_j\cdot
+    0v_j+a_{j+1}\cdot 1v_{j+1}+\ldots+a_n\cdot 1v_n=a_{j+1}v_{j+1}+\ldots+a_nv_n
+  \] and \[
+  T(v^2)=T(T(a_1v_1+\ldots+a_jv_j+a_{j+1}v_{j+1}+\ldots+a_nv_n))=T(a_{j+1}v_{j+1}+\ldots+a_nv_n)=a_{j+1}v_{j+1}+\ldots+a_nv_n
+  .\] Thus for any $v\in V$, $T^2=T$, as required.
+  
+  Therefore (a) implies (b), (b) implies (c), and (c) implies (a), and so the three statements are
+  equivalent.
+\end{solution}
+
+\begin{problem}{\S 4}
+  Suppose $T\in \mc{L}(V)$, $\F=\C$, $p\in \mc{P}(\C)$, and $\alpha\in \C$. Prove that $\alpha$ is
+  an eigenvalue of $p(T)$ if and only if $\alpha=p(\lambda)$ for some eigenvalue $\lambda$ of $T$.
+\end{problem}
+\begin{solution}
+  Suppose $\alpha$ is an eigenvalue of $p(T)$, and consider $q(z)=p(z)-\alpha$. Since $\alpha$ is an
+  eigenvalue, $p(T)-\alpha I$ is not injective; thus $(p(T)-\alpha I)(v)=0$ for some non-zero $v\in
+  V$, and so \[
+    q(T)(v)=\left( c(T-\lambda_1 I)\ldots(T-\lambda_m I) \right) (v)=0
+  .\] Hence one of $T-\lambda_jI$ is not injective, and so $\lambda_j$ is an eigenvalue of $T$.
+  Moreover, \[
+    q(\lambda_j)=p(\lambda_j)-\alpha=0
+  ,\] so $\alpha=p(\lambda_j)$ for some eigenvalue $\lambda_j$ of $T$.
+
+  Conversely, suppose $\alpha=p(\lambda)$ for some eigenvalue $\lambda$ of $T$. Let $v\in
+  E(\lambda,T)$. Then $T(v)=\lambda(v)$; moreover, $T^2(v)=T(T(v))=\lambda T(v)=\lambda^2v$. Trivial
+  induction leads to $T^n(v)=\lambda^nv$. Thus for any polynomial \[
+    p(z)=a_0+a_1z+\ldots+a_nz^n
+  ,\] we have \[
+  p(T)(v)=(a_0I+a_1T+\ldots+a_nT^n)(v)=a_0v+a_1T(v)+\ldots+a_nT^n(v)=a_0v+a_1\lambda
+  v+\ldots+a_n\lambda^nv=p(\lambda)(v)
+.\] Thus $p(T)(v)=p(\lambda)(v)=\alpha v$, and so $\alpha=p(\lambda)$ is an eigenvalue of $p(T)$.
+\end{solution}
+ 
+
+
+
+\end{document}
