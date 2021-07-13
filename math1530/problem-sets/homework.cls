@@ -92,6 +92,7 @@
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Imag}{Imag}
@@ -137,6 +138,7 @@
 \newcommand{\R}{\mathds{R}}
 \newcommand{\Q}{\mathds{Q}}
 \newcommand{\C}{\mathds{C}}
+\newcommand{\F}{\mathds{F}}
 \newcommand{\HH}{\mathds{H}}
 \newcommand{\D}{\mathcal{D}}
 
