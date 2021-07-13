@@ -239,14 +239,14 @@
 \begin{solution}
   \begin{enumerate}[label=(\alph*)]
     \item First, we show closure (to ensure that two $K$-automorphisms in $\Gal_KL$ is still a
-      $K$-automorphism in $\Gal_KL$). Let $phi_1,\phi_2\in \Gal_KL$. If $a\in K$, then \[
+      $K$-automorphism in $\Gal_KL$). Let $\phi_1,\phi_2\in \Gal_KL$. If $a\in K$, then \[
         \phi_1\circ \phi_2(a)=\phi_1(a)=a=\phi_2(a)=\phi_2\circ \phi_1(a)
       .\] Moreover, recall that the composition of two isomorphisms is itself an isomorphism. Thus
       $\phi_1\circ \phi_2$ is a $K$-automorphism, and so $\Gal_KL$ is closed.
 
       Associativity naturally follows from the associativity of function composition: for
       $\phi_1,\phi_2,\phi_3\in \Gal_KL$, $a\in L$, \[
-        (\phi_1\circ (\phi_2\circ \phi3))(a)=\phi_1\circ
+        \phi_1\circ (\phi_2\circ \phi_3)(a)=\phi_1\circ
         (\phi_2(\phi_3(a)))=\phi_1(\phi_2(\phi_3(a)))=(\phi_1\circ \phi_2)\circ \phi_3(a)
       .\] 
 
@@ -259,7 +259,7 @@
       isomorphism properties force $b'\in L\setminus K$, and $b'$ unique. Define a function \[
         \phi':L\to L,\ a\mapsto a \forall a\in K,\ b'\mapsto b \forall b'\in L\setminus K
       .\] In other words, $\phi'$ maps all $a\in K$ to itself, and for any $b'\in L\setminus K$,
-      $\phi'$ maps $b'$ to the unique $b$ that satisfies $phi(b)=b'$ (again, we know the existence
+      $\phi'$ maps $b'$ to the unique $b$ that satisfies $\phi(b)=b'$ (again, we know the existence
       and uniqueness of $b$ because $\phi$ is isomorphic). By definition, we have \[
         \phi\circ \phi'(a)=\phi(a)=a=\phi'(a)=\phi\circ \phi'(a)
       \] for all $a\in K$, and \[
