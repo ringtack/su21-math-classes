@@ -1,0 +1,144 @@
+\documentclass{homework}
+\homework{2}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  Compute the following determinants, using properties of determinants or the definition given in
+  class. Explain answers \textit{very briefly}. (NB: determinants are omitted for timeliness).
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $\det{A}=0$. By the alternating property, since rows 1 and 2 are identical, the
+      determinant is $0$.
+    \item $\det{A}=-1$. Determinants of upper triangular matrices are simply the result of
+      multiplying the diagonal values.
+    \item $\det{A}=-2$. Adding columns to other columns doesn't change the determinant value, so
+      adding columns $-5 + 6$ gives us a diagonal matrix of all $1$s, except the last column (with
+      value $-2$).
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Suppose $T:\R^3\to \R^3$ is a linear map with eigenvalues and corresponding eigenvectors:
+  \begin{itemize}
+    \item $\lambda_1=2,\ v_1=(1,1,0)$
+    \item $\lambda_2=-1,\ v_2=(1,0,0)$
+    \item $\lambda_3=0,\ v_3=(0,0,1)$
+  \end{itemize}
+  \begin{enumerate}[label=(\alph*)]
+    \item Express $(3,1,4)$ as a linear combination of the three vectors above.
+    \item Compute $T^{10}(3,1,4)$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $(3,1,4)=1(1,1,0)+2(1,0,0)+4(0,0,1)=v_1+2v_2+4v_3$.
+    \item
+      \begin{align*}
+        T^{10}(3,1,4)=T^{10}(v_1+2v_2+4v_3)&= T^{10}(v_1)+2T^{10}(v_2)+4T^{10}(v_3) \\
+                                           &=
+        \lambda_1^{10}v_1+2\lambda_2^{10}v_2+4\lambda_3^{10}v_3 && [\text{since
+        $T^n(v)=\lambda^nv$}]\\
+                                                                &= 1024v_1+2v_2\\
+          T^{10}(3,1,4)&=(1026,1024,0)
+      .\end{align*}
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  Let $V$ be a finite-dimensional vector space, and let $T:V\to V$ be a linear operator. Prove that
+  if $T^3=T^2$ and $T$ injective, then $T=I$.
+\end{problem}
+\begin{solution}
+  Suppose $T^3=T^2$ and $T$ injective. Then
+  \begin{align*}
+    T^3=T^2 &\iff T^3-T^2=0\\
+            &\iff T^2(T-I)=0
+  .\end{align*}
+  Let $p(z)=z^3-z^2=z^2(z-1)$. From above, for any $v\in V$, we have \[
+    p(T)(v)=(T^2(T-I))(v)=0
+  ,\] so either $T^2$ is not injective or $T-I$ is not injective (and so at least one of them is a
+  root of $p(T)$). But $T$ is injective, so $T^2$ must be injective as well; hence $T-I$ is not
+  injective. In other words, since $T^2$ injective means it's not a root of $p(T)$, and $T-I$ not
+  injective means it is a root of $p(T)$, and $p(T)v=0$ for any $v\in V$; for any non-zero $v\in V$,
+  \[
+    T^2(v)\neq 0 ~\text{and}~ (T-I)(v)=0
+  ;\] or $\Null{T^2}=\{ 0 \}$, and $\Null{(T-I)}=V$. But this means that for any $v\in V$, \[
+  (T-I)(v)=T(v)-v=0 \implies T(v)=v
+  ,\] and so $T=I$.
+\end{solution}
+
+\begin{problem}{\S 4}
+  Let $V$ and $W$ be vector spaces, and suppose $W$ is finite-dimensional. Suppose $T:V\to W$ is a
+  surjective linear map. Prove that there exists a linear map $S:W\to V$ such that $TS=I_W$.
+\end{problem}
+
+\begin{solution}
+  Since $T$ is surjective and $W$ finite-dimensional, $\range{T}=W$, and so any $w_i\in W$ can be
+  represented as \[
+    T(v_i)=w_i
+  \] for some (not necessarily unique) $v\in V$.
+
+  For any $w_i\in W$, let $T_{w_i}=\{v\in V\mid T(v)=w_i\} $. In other words, if
+  $T(v_{i_1})=\ldots=T(v_{i_n})=w_i$, then \[
+    T_{w_i}=\{ v_{i_1},\ldots,v_{i_n} \}
+  .\] Define a map $S:W\to V$ as \[
+    S(w_i)=v_{i_1}, ~\text{where}~ v_{i_1}\in T_{w_i}
+  .\] Surjectivity guarantees that $T_{w_i}$ is non-empty (since at least one $v_i$ is mapped to
+  $w_i$), so $v_{i_1}$ exists. Then by construction, we have $TS=I_W$: \[
+    T\circ S(w_i)=T(v_{i_1})=w_i=I_W(w_i) ~\text{for any}~ w_i\in W
+  .\] It remains to show that $S$ is a linear map. For any $c_1,c_2\in \F,\ w_1,w_2\in W$, we have
+  \begin{align*}
+    S(c_1w_1+c_2w_2)&= S(c_1T(v_{1_1})+c_2T(v_{2_1})) && [T ~\text{surjective means}~ v_{i_1}\in
+    T_{w_i} ~\text{exists}]\\
+                    &= S(T(c_1v_{1_1}+c_2v_{2_1})) && [T ~\text{is a linear map}]\\
+                    &=c_1v_{1_1}+c_2v_{2_1} && [\text{by construction of $S$\footnotemark}]\\
+                    &=c_1S(w_1)+c_2S(w_2)
+  .\end{align*}
+  Thus $S$ is a linear map that satisfies $TS=I_W$. [1: since if $w_3=v_{3_1}=c_1v_{1_1}+c_2v_{2_1}=w_1+w_2$, then $S(w_3)=v_{3_1}=c_1v_{1_1}+c_2v_{2_1}$]
+\end{solution}
+
+\begin{problem}{\S 5}
+  Let $W$ be the subspace of $\mc{P}_6(\R)$ consisting of polynomials $f\in \mc{P}_6(\R)$ such that
+  \[
+    f(7)=f(11)=f(15)=f(19)=0
+  .\] What is the dimension of $W$?
+\end{problem}
+
+\begin{solution}
+  We start with two observations:
+  \begin{enumerate}
+    \item $W=\{f\in \mc{P}_6(\R)\mid f(x)=(x-7)(x-11)(x-15)(x-19)a(x),\ a(x)\in \mc{P}_2(\R)\} $; in
+      other words, $W$ consists of all polynomials with roots $7,11,15, ~\text{and}~19$.
+    \item $\mc{P}_3(\R)$ is a subspace of $\mc{P}_6(\R)$.
+  \end{enumerate}
+
+  Recall from Problem Set F, Problem 4 where we proved that for distinct $a_0,a_1,a_2,a_3$, the map
+  $T:\mc{P}_3(\R)\to \R^4$ given by \[
+    T(f)=(f(a_0),f(a_1),f(a_2),f(a_3))
+  \] is an isomorphism. In other words, $\mc{P}_3(\R)\cong \R^4$.
+
+  Consider the map $T:\mc{P}_6(\R)\to \R^4$ given by \[
+    T(f)=(f(7),f(11),f(15),f(19))
+  .\] Then any function $f\in \mc{P}_6(\R)$ is in $\Null{T}$ only if it has $7,11,15$, and $19$ as
+  roots (since we need $f(7)=f(11)=f(15)=f(19)=0$ in order to get $(0,0,0,0)$); in other words, \[
+    \Null{T}=W=\{f\in \mc{P}_6(\R)\mid f(x)=(x-7)(x-11)(x-15)(x-19)a(x),\ a(x)\in \mc{P}_2(\R)\} 
+  .\] Additionally, $T$ is surjective, since by observation 2 and from above, $\mc{P}_3(\R)\subset
+  \mc{P}_6(\R)$ is isomorphic to $\R^4$, so any $(b_0,b_1,b_2,b_3)\in \R^4$ can be represented by
+  $T(f)$ for some $f\in \mc{P}_3(\R)\subset \mc{P}_6(\R)$ (note that the chosen $f$ is not unique;
+  there could very well be some $f\in \mc{P}_6(\R)$ that also satisfies $T(f)=(b_0,b_1,b_2,b_3)$).
+  Thus \[
+    \range{T}=\R^4
+  .\] By the rank-nullity theorem, \[
+    \dim{\mc{P}_6(\R)}=\dim{\Null{T}}+\dim{\range{T}}=\dim{W}+\dim{\R^4}
+  .\] But we know that $\dim{\mc{P}_6(\R)}=7$, and $\dim{\R^4}=4$; thus \[
+    \dim{W}=\dim{\Null{T}}=\dim{\mc{P}_6(\R)}-\dim{\R^4}=7-4=3
+  .\] Thus the dimension of $W$ is $3$.
+\end{solution}
+
+
+
+
+\end{document}
