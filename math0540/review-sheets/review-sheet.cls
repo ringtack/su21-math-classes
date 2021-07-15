@@ -95,6 +95,7 @@
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\pf}{pf}
