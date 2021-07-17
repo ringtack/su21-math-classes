@@ -1,0 +1,87 @@
+\documentclass{review-sheet}
+\homework{16}
+
+\begin{document}
+\begin{problem}{\S 1}
+  (Treil 5.4) Use cofactor formula to compute the inverses of the following matrices:
+  \begin{enumerate}[label=(\alph*)]
+    \item $\begin{pmatrix} 1&2\\3&4 \end{pmatrix} $
+    \item $\begin{pmatrix} 19&-17\\3&-2 \end{pmatrix} $
+    \item $\begin{pmatrix} 1&0\\3&5 \end{pmatrix} $
+    \item $\begin{pmatrix} 1&1&0\\2&1&2\\0&1&1 \end{pmatrix} $
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $A^{-1}=\frac{1}{4-6}\begin{pmatrix} 4&-2\\-3&1 \end{pmatrix}^T =\begin{pmatrix}
+      -2&\frac{3}{2}\\ 1&-\frac{1}{2} \end{pmatrix} $
+    \item $A^{-1}=\frac{1}{-38-(-51)}\begin{pmatrix} -2&-3\\17&-19 \end{pmatrix}^T =\begin{pmatrix}
+      -\frac{2}{13}&\frac{17}{13}\\-\frac{3}{13}&-\frac{19}{13} \end{pmatrix} $
+    \item $A^{-1}=\frac{1}{5}\begin{pmatrix} 5&-3\\0&1 \end{pmatrix}^T =\begin{pmatrix}
+      1&0\\-\frac{3}{5}&\frac{1}{5} \end{pmatrix} $
+    \item $A^{-1}=\frac{1}{(1-2)-(2)}\begin{pmatrix} -1 & (-1)^3(2) & 2\\ (-1)^3(1)&1&(-1)^5(1)\\
+        2&(-1)^5(2)&-1 \end{pmatrix}^T=\begin{pmatrix}
+      \frac{1}{3}&\frac{1}{3}&-\frac{2}{3}\\\frac{2}{3}&-\frac{1}{3}
+                 &\frac{2}{3}\\-\frac{2}{3}&\frac{1}{3}&\frac{1}{3} \end{pmatrix} $
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  (Axler Problem 5.C.16) The \textbf{Fibonacci Sequence} $F_1,F_2,\ldots$ is defined by \[
+    F_1=1,\ F_2=1,\ F_n=F_{n-2}+F_{n-1},\ n\ge 3
+  .\] Define $T\in \mc{L}(\R^2)$ by $T(x,y)=(y,x+y)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $T^n(0,1)=(F_n,F_{n+1})$ for all positive integers $n$.
+    \item Find the eigenvalues of $T$.
+    \item Find a basis of $\R^2$ consisting of eigenvectors of $T$.
+    \item Use the solution to part (c) to compute $T^n(0,1)$. Conclude that \[
+        F_n=\frac{1}{\sqrt{5}}\left[ \left( \frac{1+\sqrt{5}}{2} \right) ^n-\left(
+        \frac{1-\sqrt{5}}{2} \right)^n \right] 
+    .\] 
+
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We begin by induction. Clearly, $T^1(0,1)=(1,1)=(F_1,F_2)$. Now, assume
+      $T^n(0,1)=(F_n,F_{n+1})$. Then \[
+        T^{n+1}(0,1)=T(T^n(0,1))=T(F_n,F_{n+1})=(F_{n+1},F_n+F_{n+1})=(F_{n+1},F_{n+2})
+      ,\] as required. Thus \[
+        T^n(0,1)=(F_{n},F_{n+1})
+      \] for all positive integers $n$.
+    \item Let $A=\mc{M}(T)$ with respect to the standard basis. Then \[
+        A = \begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix} 
+    .\] Then \[
+    \det{(A-\lambda I)}=\begin{vmatrix} -\lambda & 1\\1 & 1-\lambda \end{vmatrix}
+      =\lambda^2-\lambda-1
+      .\] Thus \[
+        \lambda_1=\frac{1+\sqrt{5}}{2},\ \lambda_2=\frac{1-\sqrt{5}}{2}
+      ,\] since those are the roots of $\lambda^2-\lambda-1$.
+    \item We now find the eigenspaces associated with $\lambda_1,\lambda_2$: \[
+        E(\lambda_1,T)=\{ (x,y)\mid y=\left( \frac{1+\sqrt{5}}{2} \right)x,\ x+y=\left(
+        \frac{1+\sqrt{5}}{2} \right)y \}
+      .\] From the first condition, we get that any eigenvector corresponding to $\lambda_1$ is a
+      scalar multiple of $\left( 1,\left( \frac{1+\sqrt{5}}{2} \right)  \right)$. Similarly, we get
+      that any eigenvector corresponding to $\lambda_2$ is a scalar multiple of $\left( 1,\left(
+      \frac{1-\sqrt{5}}{2} \right)  \right) $. Thus \[
+        \{ \left( 1,\frac{1+\sqrt{5}}{2} \right) , \left( 1, \frac{1-\sqrt{5}}{2} \right)  \}
+      \] is a basis of eigenvectors in $\R^2$ (since eigenvalues of distinct eigenvalues are
+      linearly independent, and thus we have a list of $2$ linearly independent vectors in $\R^2$,
+      thus forming a basis).
+    \item Let $v_1=\left( 1,\frac{1+\sqrt{5}}{2} \right) $, $v_2=\left( 1, \frac{1-\sqrt{5}}{2}
+      \right)$. Note that $(0,1)=\frac{v_1-v_2}{\sqrt{5}}$. Thus \[
+        T^n(0,1)=\frac{1}{\sqrt{5}}T^n(v_1-v_2)=\frac{1}{\sqrt{5}}\left[
+        \left(   \frac{1+\sqrt{5}}{2}\right)^nv_1-\left(\frac{1-\sqrt{5}}{2}\right)^nv_2 \right]
+        .\] Since the first component is $F_n$, we get \[
+        F_n = \frac{1}{\sqrt{5}}\left[
+        \left(   \frac{1+\sqrt{5}}{2}\right)^n-\left(\frac{1-\sqrt{5}}{2}\right)^n\right]
+      ,\] as required.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+\end{document}
