@@ -43,11 +43,11 @@
       \] which is in contrast to $P_{i,\sigma(i)}$; this aligns with our intuition of ``reverting''
       a permutation.
 
-    \item Let $\sigma\in \mc{S}_n$ as defined above. In cycle notation, \[
-        \sigma=\left( p_1p_2\ldots p_n \right) ,\ \sigma(p_i)=p_{i+1} [~\text{with modular
-        arithmetic at the edges}~]
-      \] for $p_i\in \{ 1,\ldots,n \}$. Then $\sigma$ has order $n$ (i.e. $\sigma^n=e$, the identity
-      permutation), since applying $\sigma^n$ on any $p_i$ will cycle back to $p_i$.
+    \item Let $\sigma\in \mc{S}_n$ as defined above. $\sigma\in \mc{S}_n$ forms a cyclic subgroup in
+      $\mc{S}_n$, and by Lagrange's Theorem, the order of $\left<\sigma \right>\subseteq \mc{S}_n$
+      divides the order of $\mc{S}_n$ (which we know to be finite, specifically $n!$). Thus the
+      order of $\sigma$ is finite (i.e. $\sigma^{k}=e$ the identity permutation for some integer
+      $k$).
 
       Next, we observe that multiplying an $n\times n$ matrix $A$ by $P$ permutes the columns of $A$
       by $\sigma$: \[
@@ -58,7 +58,17 @@
       This repeats for powers, until we get \[
         P^n_{i,\sigma(\sigma^{n-1}(1))}=P^n_{i,\sigma^n(i)}=P^n_{i,i}=1
       .\] In other words, for any row $i$, its (only) $1$ entry is at $P^n_{i,i}$, and all
-      $P^n_{i,j}$ with $i\neq j$ has value $0$. Thus $P^n=I$, where $n$ is the order of $\sigma$.
+      $P^k_{i,j}$ with $i\neq j$ has value $0$. Thus $P^k=I$, where $k$ is the order of $\sigma$.
+
+      Alternatively, recall that $\mc{S}_n$ has a finite number of permutations, specifically $n!$.
+      Raise $P$ to the power $n!+1$ (i.e. $P^{n!+1}$). Then by the Pigeonhole Principle, for some
+      $1\le j,k\le n!+1$, $P^j=P^k$ (since we have $n!+1$ different powers, and only $n!$
+      permutations).  Assume without loss of generality that $j<k$ (we ignore the trivial $j=k$).
+      Since $P^{-1}$ exists from above, we have \[
+        P^k=P^j \iff P^kP^{-j}=P^jP^{-j}\iff P^{k-j}=I
+      .\] Since $j<k$, the integer $0<k-j=N$ exists, and so \[
+        P^N=I
+      \] for some $N>0$, as required.
   \end{enumerate}
 \end{solution}
 
