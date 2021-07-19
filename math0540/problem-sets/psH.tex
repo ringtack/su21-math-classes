@@ -130,6 +130,24 @@
   \end{enumerate}
 \end{solution}
 
+\begin{problem}{\S 4}
+  Prove the formula $x_i=\frac{\det{B_i}}{A}$ in Cramer's Rule.
+\end{problem}
+\begin{solution}
+  Suppose $\det{A}\neq 0$ (since otherwise, Cramer's Rule would not hold). Then $A$ is invertible,
+  with $A^{-1}=\frac{1}{\det{A}}C^T$ (as proven in class). Thus \[
+    Ax=b\iff A^{-1}Ax=A^{-1}b\iff x=\frac{1}{\det{A}}C^Tb
+  .\] Next, consider the $i$-th row of $C^Tb$: \[
+    (C^Tb)_{i,1}=\sum_{r=1}^{n} C^T_{i,r}b_{r,1}=b_{1,1}C^T_{i,1}+\ldots+b_{n,1}C^T_{i,n}
+  .\] But this is the same as \[
+    b_{1,1}C_{1,i}+\ldots+b_{n,1}C_{n,i}
+  ,\] which is exactly the formula for the cofactor expansion for the determinant along column $i$: \[
+    \det{B_i}=\sum_{r=1}^{n} b_{r,1}C_{r,i}
+  .\] Thus the $i$-th row of $C^Tb=\det{B_i}=\det{A}x_i$ (since $x=\frac{1}{\det{A}}C^Tb$, and the $i$-th row of $x$ is
+  $x_i$), and so we get \[
+    x_i = \frac{\det{B_i}}{\det{A}}
+  ,\] as required.
+\end{solution}
 
 
 
