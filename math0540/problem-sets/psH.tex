@@ -1,0 +1,136 @@
+\documentclass{homework}
+\homework{H}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  (Treil 4.2) Let $P$ be a \textbf{permutation matrix}, i.e. an $n\times n$ matrix consisting of
+  zeroes and ones such that there is exactly one $1$ in every row and every column.
+  \begin{enumerate}[label=(\alph*)]
+    \item Can you describe the corresponding linear transformation? That will explain the name.
+    \item Show that $P$ is invertible. Can you describe $P^{-1}$?
+    \item Show that for some $N>0$ \[
+        P^N := \underbrace{PP\ldots P}_\text{$N$ times}=I
+    .\]
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item It swaps the basis vectors around (e.g. it \textit{permutes} them); for instance, $e_i$
+      becomes $Te_i=e_j$ for some $j$ not necessarily equal to $i$.
+    \item One can clearly see that no column is a linear combination of other columns (since each
+      row and column only has one $1$ element); thus all columns are linearly independent, and so
+      $\det{A}\neq 0$; i.e. $P$ is invertible.
+
+      Alternatively, let $\sigma\in \mc{S}_n$ such that $P_{i,\sigma(i)}=1$ for all $1\le i\le n$.
+      Since each row and column only has one $j$ such that $\sigma(i)=j$ and $P_{i,j}=1$, $\sigma$
+      is unique (if another permutation $\varphi$ does the same for all $1\le i\le n$, then
+      $\varphi=\sigma$).  Additionally, for any other permutation $\tau\in \mc{S}_n$ with $\tau\neq
+      \sigma$, we have $P_{i,\tau(i)}=0$ (since otherwise, we must have $\sigma=\tau$). Thus, \[
+        \det{P}=\sum_{\phi\in \mc{S}_n} p_{1,\phi(1)}\ldots p_{n,\phi(n)}\sgn{(\phi)}
+      \] becomes $p_{1,\sigma(1)}\ldots p_{n,\sigma(n)}\sgn{(\sigma)}$, since all $\tau\in
+      \mc{S}_n,\ \tau\neq \sigma$ has $p_{j,\tau(j)}=0$ for some $1\le j\le n$ (since that means
+      $\tau(j)\neq \sigma(j)$ for some $1\le j\le n$, and so $p_{j,\sigma(j)}\neq p_{j,\tau(j)}=0$).
+      
+      All $p_{i,\sigma(i)}=1$, and $\sgn{(\sigma)}=\pm 1$, so \[
+        \det{P}=\pm 1\neq 0
+      ,\] so $P$ is invertible.
+
+      $P^{-1}$ essentially reverts any permutation that $\sigma$ applies to $i$; thus, we get that
+      all $1$s are in the indices \[
+        P_{\sigma(i),i}
+      \] which is in contrast to $P_{i,\sigma(i)}$; this aligns with our intuition of ``reverting''
+      a permutation.
+
+    \item Let $\sigma\in \mc{S}_n$ as defined above. In cycle notation, \[
+        \sigma=\left( p_1p_2\ldots p_n \right) ,\ \sigma(p_i)=p_{i+1} [~\text{with modular
+        arithmetic at the edges}~]
+      \] for $p_i\in \{ 1,\ldots,n \}$. Then $\sigma$ has order $n$ (i.e. $\sigma^n=e$, the identity
+      permutation), since applying $\sigma^n$ on any $p_i$ will cycle back to $p_i$.
+
+      Next, we observe that multiplying an $n\times n$ matrix $A$ by $P$ permutes the columns of $A$
+      by $\sigma$: \[
+        (AP)_{i,\sigma(j)}=A_{i,j}
+      \] (one can check this: only $p_{j,\sigma(j)}=1\neq 0$, so we have
+      $(AP)_{i,\sigma(j)}=\sum_{r=1}^{n} A_{i,r}P_{r,\sigma(j)}=A_{i,j}P_{j,\sigma(j)}=A_{i,j}$).
+      Thus $P^2_{i,\sigma(j)}=1$ only when $j=\sigma(i)$, and so we get $P^2_{i,\sigma^2(i)}=1$.
+      This repeats for powers, until we get \[
+        P^n_{i,\sigma(\sigma^{n-1}(1))}=P^n_{i,\sigma^n(i)}=P^n_{i,i}=1
+      .\] In other words, for any row $i$, its (only) $1$ entry is at $P^n_{i,i}$, and all
+      $P^n_{i,j}$ with $i\neq j$ has value $0$. Thus $P^n=I$, where $n$ is the order of $\sigma$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  Let $n$ be a positive integer, and let $A\in \R^{n,n}$ be a square matrix whose diagonal entries
+  are odd integers, and whose off-diagonal entries are even integers. Prove that $A$ is invertible.
+\end{problem}
+
+\begin{solution}
+  We use induction to prove that any matrix $A_n\in \R^{n,n}$ with the above property (odd on diagonal,
+  even elsewhere) has an odd (and thus non-zero) determinant. This is clearly true for $n=1$, so
+  assume the property holds for $1,\ldots,n-1$.
+
+  Let $A_n\in R^{n\times n}$ be a matrix with the above property. By co-factor expansion, \[
+      \det{A_n}=\sum_{j=1}^{n} a_{1,j}C_{1,j}
+    .\] But note that $a_{1,1}$ is odd, and all $a_{1,j}$ for $1<j\le n$ are even (since they're all
+    off-diagonal), and that $C_{1,1}=A_{n-1}$ (since all of the diagonal entries of $C_{1,1}$ are
+    also on the diagonal of $A_{n}$, which are all odd, and all of the off-diagonal entries of
+    $C_{1,1}$ are also off the diagonal of $A_n$; thus $C_{1,1}$ has the same property as above).
+
+    By induction, we know $\det{A_{n-1}}$ is odd. Thus $a_{1,1}C_{1,1}$ is odd (since for two odds
+    $2i+1,\ 2j+1,\ (2i+1)(2j+1)=(4ij+2i+2j)+1=2k+1$), and all $a_{1,j}C_{1,j}$ for $1<j\le n$ are
+    even (since for an even $2i$ and any integer, even $2j$ or odd $2k+1$, the resulting product,
+    either $2i\cdot 2j=4ij=2(2ij)$ or $2i(2k+1)=4ik+2i=2(2ik+i)$, is even). Therefore the
+    determinant \[
+      \det{A_n}=~\text{odd integer}~+\sum_{j=2}^{n} ~\text{even integer}~=~\text{odd integer}~\neq 0
+    \] is odd, and thus non-zero (clearly, odd + even is still odd).
+
+    Thus, by induction any $A_n\in \R^{n,n}$ with the above property has an odd (non-zero)
+    determinant for all $n\in \N$, and so $A_n$ is invertible.
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  Use Cramer's Rule to solve the following system of linear equations:
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      \begin{align*}
+        3x_1+4x_2&= 5 \\
+        2x_1+3x_2&= 4
+      .\end{align*}
+    \item 
+      \begin{align*}
+        -x_1+0x_2+2x_3&= 0 \\
+        0x_1+5x_2+x_3&= 4 \\
+        3x_1-x_2-x_3 &=7
+      .\end{align*}
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $\det{A}=3\cdot 3-4\cdot 2=1$. 
+      \begin{enumerate}
+        \item $B_1=\begin{pmatrix} 5&4\\4&3 \end{pmatrix} $, so $\det{B_1}=5\cdot 3-4\cdot 4=-1$, so
+          $x_1=-1$.
+        \item $B_2=\begin{pmatrix} 3&5\\2&4 \end{pmatrix} $, so $\det{B_2}=3\cdot 4-5\cdot 2=2$, so
+          $x_2=2$.
+      \end{enumerate}
+    \item $\det{A}=-1(-5-(-1))+2(-15)=-26$.
+      \begin{enumerate}
+        \item $B_1=\begin{pmatrix} 0&0&2\\4&5&1\\7&-1&-1 \end{pmatrix} $, so
+          $\det{B_1}=2(-4-35)=-78$, so $x_1=\frac{78}{26}=3$.
+        \item $B_2=\begin{pmatrix} -1&0&2\\0&4&1\\3&7&-1 \end{pmatrix} $, so
+          $\det{B_2}=-(-4-7)+2(-12)=-13$, so $x_2=\frac{1}{2}$.
+        \item $B_3=\begin{pmatrix} -1&0&0\\0&5&4\\3&-1&7 \end{pmatrix} $, so
+          $\det{B_3}=-(35-(-4))=-39$, so $x_3=\frac{39}{26}=\frac{3}{2}$.
+      \end{enumerate}
+  \end{enumerate}
+\end{solution}
+
+
+
+
+\end{document}
