@@ -1,0 +1,417 @@
+\documentclass{homework}
+\homework{Week 10}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  (6.3) In the dihedral group $\D_n$, Let $R$ be a clockwise rotation of $\frac{2\pi}{n}$ radians,
+  and let $F$ be a flip.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that the subgroup of rotations, $\{ e,R,R^2,\ldots,R^{n-1} \}$ is a normal subgroup
+      of $\D_n$.
+    \item Prove that the subgroup $\{ e,F \}$ is not a normal subgroup.
+  \end{enumerate}
+
+  (6.5) Let $G$ be a group, and $H\subseteq G$ a subgroup with index $2$. Prove that $H$ is a normal
+  subgroup of $G$.
+\end{problem}
+
+\begin{solution}
+
+  (6.3) Recall our definition of a flip: \[
+    f_i(j)=n-j+i\mod{n}
+  ,\] and our definition of a rotation: \[
+    r_i(j)=j+i\mod{n}
+  ,\] where $j\in V_n=\{ 0,1,\ldots,n-1 \}$. One can easily verify that $f_i^{-1}=f_i$, and
+  $r_i^{-1}=r_{n-i}$. We show three things:
+  \begin{itemize}
+    \item Rotation * Rotation * Rotation = Rotation; that is, three rotations is still a rotation.
+      For any rotations $r_i,r_j,r_k$ and any $m\in V_n$, \[
+        r_i\circ r_j\circ r_k(m)=r_i\circ r_j(m+k)=r_i(m+j+k)=m+(i+j+k)=r_{i'}(m)
+      ,\] where $i'\equiv i+j+k\mod{n}\in V_n$.
+    \item Flip * Rotation * Flip = Rotation; that is, any flip, followed by a rotation, followed by
+      the flip again, yields a rotation. For any rotation $r_i$ any flip $f_j$, and any $k\in V_n$,
+      \[
+        f_j\circ r_i\circ f_j(k)=f_j\circ r_i(n-k+j)=f_j(n-k+i+j)=n-(n-k+i+j)+j=k-i=r_{n-i}(k)
+      .\] 
+    \item For different flips $f_i,f_j$ where $2j\not\equiv 0\mod{n}$, $f_i\circ f_j\circ f_i\neq
+      f_j$. Let $k\in V_n$; then \[
+        f_j\circ f_i\circ f_j(k)=f_j\circ
+        f_i(n-k+j)=f_j(n-(n-k+j)+i)=n-(k-j+i)+j=n-k+2j+i\not\equiv n-k+i\mod{n}=f_i(k)
+    .\] Thus $f_j\circ f_i\circ f_j\neq f_i$.
+  \end{itemize}
+
+  From the first two observations, (a) follows immediately: since every element in $\D_n$ is either
+  a flip or a rotation, the inverse of a rotation is also a rotation, and the inverse of a flip is
+  the same flip, we can see that for any $\sigma\in \D_n$ and any $R^k\in H=\{ e,R,\ldots,R^{n-1}
+  \}$, \[
+    \sigma^{-1}R^k\sigma\in H
+  ,\] and so $\sigma^{-1}H\sigma\subseteq H$ for every $\sigma\in \D_n$; Proposition 6.10 then shows
+  that $H$ is a normal subgroup. The third observation also proves (b); for any flip $\phi_j\in \D_n$ where $\phi_j\neq F$ and
+  $2j\not\equiv 0\mod{n}$ (clearly, such a flip exists in any $n>2$), \[
+    \phi_j^{-1}F\phi_j\neq F
+  ,\] and so $H=\{ e,F \}$ does not satisfy $\phi^{-1}H\phi$, and so is not a normal subgroup. \\
+
+  
+  (6.5) Since $H$ has index $2$, there are only two cosets of $H$: $H$ itself, and some $\mc{C}$
+  where $H\cap \mc{C}=\varnothing$, and $H\cup \mc{C}=G$ is a disjoint union (by Proposition 2.39).
+  If $g\in H$, then clearly $H=gH=Hg$ (by subgroup closure). 
+
+  Consider an element $g'\in G,\ g'\not\in H$. Then the coset $g'H\neq H$, since $g'\not\in H$ and
+  $e\in H$ implies $g'e=g'\in g'H, g'\not\in H$; similarly, $Hg'\neq H$, since $eg'=g'\in Hg',
+  g'\not\in H$. Thus we must have $\mc{C}=g'H=H'g$. 
+
+  Therefore, for any $g\in G$, we have $gH=Hg$. Thus \[
+    g^{-1}gH=g^{-1}Hg \implies H=g^{-1}Hg
+  ,\] and so $H$ is a normal subgroup of $G$.
+
+\end{solution}
+
+\begin{problem}{\S 2}
+  (6.6) Let $G$ be a group, $H,K$ subgroups of $G$, and assume $K$ is a normal subgroup of $G$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $HK=\{hk\mid h\in H,\ k\in H\} $ is a subgroup of $G$.
+    \item Prove that $H\cap K$ is a normal subgroup of $H$, and that $K$ is a normal subgroup of
+      $HK$.
+    \item Prove that $HK/K$ is isomorphic to $H / (H\cap K)$. 
+    \item Rather than assuming that $K$ is a normal subgroup, suppose we only assume that $H\subset
+      N(K)$, i.e. we assume that $H$ is contained in the normalizer of $K$. Prove that (a), (b), and
+      (c) are true.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We start with a lemma:
+      \begin{lemma}{}
+        Let $G$ be a group, $H,K$ subgroups of $G$, and $K$ a normal subgroup. Then $HK=KH$.
+      \end{lemma}
+      \begin{proof}[Proof]
+        For $HK\subseteq KH$: let $h\in H$, $k\in K$. $K$ normal means that $k=h^{-1}k'h$ for some
+        $k'\in K$; thus for any $hk\in HK$, we have \[
+          hk=hh^{-1}k'h=k'h\in KH
+        .\] Thus $HK\subseteq KH$.
+        
+        For $KH\subseteq HK$: Let $k\in K$, $h\in H$. $H$ subgroup means $h^{-1}\in H$ as well, and
+        $K$ normal means $k=(h^{-1})^{-1}k'h^{-1}=hk'h^{-1}$ for some $k'\in K$. Thus for any $kh\in
+        KH$, we have \[
+          kh=hk'h^{-1}h=kh'\in HK
+        .\] Thus $KH\subseteq HK$, and so $HK=KH$.
+      \end{proof}
+
+      To show closure, let $h_1,h_2\in H$, $k_1,k_2\in K$. From the lemma, $k_1h_2\in KH\subseteq
+      HK$, so $k_1h_2=h'k'\in HK$ for some $h'\in H,\ k'\in K$. Then \[
+        h_1k_1h_2k_2=\underbrace{h_1h'}_\text{in $H$}\underbrace{k'k_2}_\text{in $K$}\in HK
+      .\] 
+
+      $e\in H,\ e\in K$ by subgroup definition; thus $ee=e\in HK$.
+
+      For $h\in H,\ k\in K$, we have $k^{-1}\in K,\ h^{-1}\in H,\ k^{-1}h^{-1}\in KH\subseteq HK$,
+      so $k^{-1}h^{-1}\in HK$. Thus \[
+        hkk^{-1}h^{-1}=e,\ k^{-1}h^{-1}hk=e
+      .\] Thus $HK$ is a subgroup of $G$.
+      
+    \item 
+      \begin{itemize}
+        \item First, we show that $H\cap K$ is a subgroup of $H$.
+          \begin{itemize}
+            \item $e\in H,\ e\in K$ by subgroup definition, so $e\in H\cap K$.
+            \item Let $g_1, g_2\in H\cap K$. Then $g_1=h_1,g_2=h_2$ for some $h_1,h_2\in H$, and
+              since $H$ is closed, $g_1g_2=h_1h_2\in H$ as well; likewise for $K$ ($g_1=k_1,g_2=k_2$
+              for some $k_1,k_2\in K$), and so $g_1g_2\in H\cap K$.
+            \item Finally, $H, K$ subgroup means $h_1^{-1}\in H$, $k_1^{-1}\in K$.
+              $h_1^{-1}g_1=h_1^{-1}h_1=e$ (and similarly for $g_1h_1^{-1}$), but $g_1=h_1=k_1$, so
+              $h_1^{-1}h_1=h_1^{-1}k_1=e$; uniqueness of inverse means $h_1^{-1}=k_1^{-1}$, and so
+              $h_1^{-1}\in H\cap K$. An analogous argument follows for $k_1^{-1}$, so
+              $g_1^{-1}=h_1^{-1}=k_1^{-1}\in H\cap K$ for any $g_1\in H\cap K$. Thus for any element
+              $g\in H\cap K$, the inverse exists.
+          \end{itemize}  
+
+          Hence, $H\cap K$ is a subgroup of $H$. Now, we show that $H\cap K$ is a normal subgroup.
+          For any $g\in H\cap K$, $g=h=k$ for some $h\in H,\ k\in K$. Additionally, $K$ normal means
+          that for any $h'\in H$, (since $h'\in H$ means $h'^{-1}\in H$) we have \[
+            k=(h'^{-1})^{-1}k'h'^{-1}~\text{for some}~k'\in K
+          .\] Thus for any $h'\in H$, $g\in H\cap K$, we have \[
+            h'^{-1}gh'=h'^{-1}h'k'h'^{-1}h'=k'\in K
+          ;\] but $g=h$ means $k'=h'^{-1}gh'=h'^{-1}hh'\in H$. Thus $h'^{-1}gh'\in H\cap K$. Since
+          our choice of $g,h$ was arbitrary, we thus have \[
+            h^{-1}(H\cap K)h\subseteq H\cap K
+          ,\] and so $H\cap K$ is a normal subgroup of $H$ by Proposition 6.10.
+
+        \item $K$ is clearly a subgroup of $HK$, so we only need to show that $K$ is a normal
+          subgroup of $HK$. Since $K$ is a normal subgroup of $G$, $g^{-1}Kg=K$ for any $g\in G$;
+          but $HK$ is a subgroup of $G$ (from (a)), so any $hk\in HK$ satisfies $hk=g'\in G$. Thus,
+          for any $hk\in HK$, \[
+            (hk)^{-1}K(hk)=g'^{-1}Kg=K
+          ,\] and so $K$ is a normal subgroup of $HK$.
+      \end{itemize}
+
+    \item Consider the map \[
+        \phi: H\longrightarrow HK / K,\ \phi(h)=hK
+        .\] This is a group homomorphism, as for any $h_1,h_2\in H$, $\phi(h_1h_2)=h_1h_2K=h_1K\cdot
+        h_2K=\phi(h_1)\phi(h_2)$ (coset multiplication is well-defined since $K$ is a normal
+        subgroup of $HK$). This map is also surjective; all (left) cosets of $K$ in $HK$ are of the
+        form \[
+        hkK=hK
+      \] for some $h\in H,\ k\in K$ (since $kk'\in K$ for any $k'\in K$, so $kK=K$), so for any
+      coset $hK$, we can simply choose $h\in H$ such that $\phi(h)=hK$.
+
+      Now, recall that a coset $K=hK$ if and only if $h\in K$, and that the identity element of $HK
+      / K$ is $e_{HK / K}=K$. Thus the kernel of $\phi$ is simply the elements in $H$ that are also
+      elements of $K$; equivalently, \[
+        \ker{(\phi)}=\{ h\in H\mid h\in K \}=H\cap K
+      .\] Theorem 6.12 then tells us that the homomorphism \[
+        \lambda: H / \ker{(\phi)}=H / (H\cap K)\longrightarrow HK / K,\ \lambda(h(H\cap K))=\phi(h)
+      \] is injective, and isomorphic to the range of $\lambda$; but since $\phi$ is surjective onto
+      $HK / K$, so is $\lambda$, so $\lambda$ is an isomorphism. Therefore $H / (H\cap K)\cong HK /
+      K$.
+
+    \item Suppose now that $H\subset N(K)$, where $N(K)=\{g\in G\mid g^{-1}Kg=K\}$. It turns out
+      that many of the proofs remain unaffected by this change, since they only used the fact that
+      $K$ is normal over any element $h\in H$, and this remains true since $h\in H\subset N(K)$, so
+      $h^{-1}Kh=K$ still!
+      \begin{enumerate}[label=(\alph*)]
+        \item The lemma can be loosened to satisfy our current constraints:
+          \begin{lemma}{}
+            Let $G$ be a group, $H,K$ subgroups of $G$, and $H\subset N(K)$. Then $HK=KH$.
+          \end{lemma}
+          \begin{proof}[Proof]
+            For $HK\subseteq KH$: let $h\in H$, $k\in K$. $h\in H\subset N(K)$ means that for any
+            $h\in H$, $k=h^{-1}k'h$ for some $k'\in K$. The proof then follows analogously to the
+            proof of the previous lemma.
+
+            For $KH\subseteq HK$: Let $k\in K,\ h\in H$. $H$ subgroup means $h^{-1}\in H$ as well,
+            and $h^{-1}\in H\subset N(K)$ means $k=(h^{-1})^{-1}k'h^{-1}=hk'h^{-1}$ for some $k'\in
+            K$. The proof also follows analogously. Thus $HK=KH$.
+          \end{proof}
+
+          Closure and Inverse thus follows the same structure given in part (a), and Identity is
+          trivial; thus $HK$ is still a subgroup of $G$.
+
+        \item The proof that $H\cap K$ is a subgroup of $H$ remains unaffected by this change. For
+          any $g\in H\cap K$, $g=h=k$ for some $h\in H,\ k\in K$. Additionally, $H\subset N(K)$
+          means that for any $h'\in H$, we have \[
+            k=(h'^{-1})^{-1}k'h'^{-1} ~\text{for some}~k'\in K
+          .\] Thus for any $h'\in H$, $g\in H\cap K$, we have \[
+            h'^{-1}gh'=h'^{-1}h'k'h'^{-1}h'=k'\in K
+          ,\] and $g=h$ means $k'=h'^{-1}gh'=h'^{-1}hh'\in H$; thus $h'^{-1}gh'\in H\cap K$, and so
+          $h^{-1}(H\cap K)h\subseteq H\cap K$. Proposition 6.10 then tells us that $H\cap K$ is a
+          normal subgroup of $H$.\\
+
+          $K$ is still a subgroup of $HK$, so we only need to show that $K$ is a normal subgroup of
+          $HK$. From the above lemma, we see that $hk\in HK$ satisfies $hk=k'h'\in KH$ for some
+          $k'\in K,h'\in H$; additionally, $(k'h')^{-1}=h'^{-1}k'^{-1}$. Thus for any $hk\in HK$, \[
+            (hk)^{-1}K(hk)=(k'h')^{-1}K(k'h')=h'^{-1}k'^{-1}Kk'h'=h'^{-1}Kh'=K
+          ,\] since any $h\in H\subset N(K)$, so $h^{-1}Kh=K$ for any $h\in H$ (also, one can easily
+          verify that if $k\in K$, then $kK=K=Kk$). Thus $(hk)^{-1}K(hk)\subseteq K$, so Proposition
+          6.10 tells us that $K$ is a normal subgroup of $HK$.
+
+        \item The map $\phi:H \to HK / K,\ \phi(h)=hK$ remains well-defined, since $K$ is still a
+          normal subgroup of $HK$ (despite not being a normal subgroup of $G$); $\phi$ is also
+          still surjective for the same reasons given above. The rest of the proof remains
+          identical, so $HK / K\cong H / (H\cap K)$ is maintained.
+      \end{enumerate}
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  (6.9) Let $G$ be a group, let $X$ be a set, and let $\mc{S}_n$ be the symmetry group of $X$. Let
+  \[
+    \alpha:G\longrightarrow \mc{S}_X
+  \] be a function from $G$ to $\mc{S}_X$, and for $g\in G$ and $x\in X$, let $g\cdot
+  x=\alpha(g)(x)$. Prove that this defines a group action if and only if $\alpha$ is a group
+  homomorphism.
+\end{problem}
+\begin{solution}
+  Suppose that $\alpha$ defines a group action, and let $g_1,g_2\in G$. Then for any $x\in X$, \[
+    \alpha(g_1g_2)(x)=(g_1g_2)\cdot x=g_1\cdot (g_2\cdot x)=g_1\cdot
+    (\alpha(g_2)(x))=\alpha(g_1)\circ \alpha(g_2)(x)
+  \] by the associativity of group actions. Thus $\alpha(g_1g_2)=\alpha(g_1)\alpha(g_2)$, and so
+  $\alpha$ is a group homomorphism.
+
+  Conversely, suppose $\alpha$ is a group homomorphism. Then for any $g_1,g_2\in G$,
+  $\alpha(g_1g_2)=\alpha(g_1)\alpha(g_2)$. Recall that for any homomorphism,
+  $\alpha(e)=e_{\mc{S}_X}$, the identity element of $\mc{S}_X$ (here the identity permutation). Thus
+  $e\cdot x=\alpha(e)(x)=x$, so the identity axiom holds. For any two $g_1,g_2\in G$ and any $x\in
+  X$, \[
+    (g_1g_2)\cdot x=\alpha(g_1g_2)(x)=\alpha(g_1)\alpha(g_2)(x)=\alpha(g_1)(g_2\cdot x)=g_1\cdot
+    (g_2\cdot x)
+  .\] Hence the associative axiom holds, and so $\alpha$ is a group action.
+\end{solution}
+
+
+\begin{problem}{\S 4}
+  (6.10)
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $G$ acts transitively on $X$ if and only if there is at least one $x\in X$ such
+      that $Gx=X$.
+    \item Prove that $G$ acts transitively on $X$ if and only if for every pair of elements $x,y\in
+      X$ there exists a group element $g\in G$ such that $gx=y$.
+    \item If $G$ acts transitively on $X$, prove that $\left| X \right| $ divides $\left| G \right|
+      $.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose first that $G$ acts transitively on $X$. By definition, for all $x\in X$, $Gx=X$;
+      thus at least one $x\in X$ satisfies $Gx=X$.
+
+      Conversely, suppose that at least one $x\in X$ satisfies $Gx=X$. Then for every $y\in X$,
+      there exists some $g\in G$ such that \[
+        y=gx
+      .\] Thus $x\sim y$ for every $y\in X$; equivalently, if $[x]$ is the equivalence class of an
+      $x\in X$, then $Gx=[x]$. But for any $y\in X$, $[x]=[y]$, since $\sim $ is an equivalence
+      relation; hence $Gy=[y]=[x]=Gx=X$, and so every $y\in X$ satisfies $Gy=X$. Therefore $G$ acts
+      transitively on $X$.
+
+    \item Suppose first that $G$ acts transitively on $X$. Then for any $x\in X$, $Gx=X$. Recall
+      that $Gx=\{g\cdot x\mid g\in G\} $. $Gx=X$ thus means that every $y\in X$ has some $g\in G$
+      such that $g\cdot x=y$. Therefore, for any pair $x,y\in X$, there exists some $g\in G$ such
+      that $g\cdot x=y$.
+
+      Conversely, suppose that for any pair $x,y\in X$, there exists some $g\in G$ such that $gx=y$.
+      Then for any $x\in X$, $x\sim y$ for every $y\in X$; equivalently, $[x]=Gx=X$. Like in (a),
+      this thus means that for any $y\in X$, $[x]=[y]$, so $Gy=[y]=[x]=Gx=X$, and so $Gx=X$ for
+      every $x\in X$. Therefore $G$ acts transitively on $X$.
+
+    \item We know that for any $x\in X$, there is a well-defined bijection \[
+      \alpha: G / G_x \to Gx
+    ,\] and \[
+      \left| Gx \right| =\frac{\left| G \right| }{\left| G_x \right| }
+    ,\] by Proposition 6.19.  Note that $\left| G_x \right| \ge 1$ (is non-empty), since by
+    definition $e\in G$ stabilizes $x$ (and so $e\in G_x$). Since $G$ acts transitively on $X$, for
+    any $x\in X$, $Gx=X$. The above equation thus becomes \[
+      \left| X \right| =\frac{\left| G \right| }{\left| G_x \right| }\iff \left| G_x \right| \left|
+      X\right| =\left| G \right| 
+    \] for every $x\in X$. Thus $\left| G \right| =k\left| X \right| $ for some positive integer
+    $k=\left| G_x \right| $, so $\left| X \right| $ divides $\left| G \right| $.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 5}
+  (6.11) Let $G$ be a group that acts on a set $X$. We say that the action is \textbf{doubly
+  transitive} if it has the following property: \begin{center}
+    For all $x_1,x_2,y_1,y_2\in X$ with $x_1\neq x_2$ and $y_1\neq y_2$, there exists an element
+    $g\in G$ of the group satisfying $gx_1=y_1$ and $gx_2=y_2$.
+  \end{center}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $Z$ be the following set of ordered pairs: \[
+          Z = \{(x,y)\in X\times X\mid z_1\neq z_2\} 
+      .\] Let $G$ act on $Z$ by the rule \[
+        (z_1,z_2)=(gz_1,gz_2)
+      .\] Prove that the action of $G$ on $X$ is doubly transitive if and only if the action of $G$ on
+      $Z$ is transitive.
+    \item For each of the following groups and group actions, determine whether the action is
+      transitive, and also whether the action is doubly transitive:
+      \begin{itemize}
+        \item The symmetric group $\mc{S}_n$ acting on the set $\{ 1,2,\ldots,n \}$.
+        \item The dihedral group $\D_n$ acting on the vertices of a regular $n$-gon.
+        \item A group $G$ that acts on itself via left-multiplication, i.e. take $X$ to be another
+          copy of $G$, and let $g\in G$ send $x\in X$ to $gx$.
+        \item The group of invertible $2\times 2$ matrices $\GL_{2}(\R)$ acting on the set of
+          non-zero vectors $X=\R^2\setminus \{ 0,0 \}$.
+      \end{itemize}
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose first that the action of $G$ on $X$ is doubly transitive. Then for any
+      $x_1,x_2,y_1,y_2\in X$ with $x_1\neq x_2,\ y_1\neq y_2$, there exists some $g\in G$ such that
+      $gx_1=y_1$ and $gx_2=y_2$.
+
+      Let $(x_1,x_2)\in Z$ be any pair of elements of $X$ satisfying $x_1\neq x_2$. Since $G$ acts
+      doubly transitively on $X$, for any pair $(y_1,y_2)\in Z$, there exists a $g\in G$ such that
+      \[
+        gx_1=y_1, ~\text{and}~gx_2=y_2
+      .\] Equivalently, the orbit of any pair $(x_1,x_2)\in Z$ is equivalent to all of $Z$; thus for
+      any $z=(z_1,z_2)\in Z$, \[
+        Gz=\{ (y_1,y_2)\in X\times X\mid y_1\neq y_2 \}=Z
+      .\] Thus $G$ acts transitively on $Z$.
+
+      Conversely, suppose that $G$ acts transitively on $Z$. Then for any pair $(x_1,x_2)\in Z$,
+      $G(x_1,x_2)=Z$. Equivalently, for any $(y_1,y_2)\in Z$, there exists some $g\in G$ such that
+      \[
+        g(x_1,x_2)=(gx_1,gx_2)=(y_1,y_2)
+      .\] But then $gx_1=y_1,\ gx_2=y_2$, so this is the same as the following statement:
+      \begin{center}
+        For any two pairs $x_1,x_2\in X$, $y_1,y_2\in Z$ with $x_1\neq x_2$ (a requirement
+        for $(x_1,x_2)\in Z$) and $y_1\neq y_2$, there exists some $g\in G$ such that \[
+          gx_1=y_1~\text{and}~gx_2=y_2
+        .\] 
+      \end{center}
+      In other words, if $G$ acts transitively on $Z$, then $G$ acts doubly transitively on $X$.
+
+    \item
+      \begin{itemize}
+        \item The symmetric group $\mc{S}_n$ acting on $X=\{ 1,\ldots,n \}$ is transitive, as noted in
+          Example 6.16 (for any pair $x,y\in X$, some permutation exists that swaps $x$ and $y$).
+          $\mc{S}_n$ is also doubly transitive on $X$, since for any $x_1,x_2,y_1,y_2\in X$ with
+          $x_1\neq x_2,\ y_1\neq y_2$, there exists a permutation $\pi\in \mc{S}_n$ with
+          $\pi(x_1)=y_1,\ \pi(x_2)=y_2$, and $\pi(z)=z$ for all other $z\in X$. $x_1\neq x_2$ and
+          $y_1\neq 2$ means $\pi$ is still bijective; moreover, we can thus find a $\pi\in \mc{S}_n$
+          that sends any two $x_1,x_2\in X$ with $x_1\neq x_2$ to any other $y_1,y_2\in X$ with
+          $y_1\neq y_2$.
+        \item The dihedral group $\D_n$ acting on vertices of an $n$-gon is transitive, as noted in
+          Example 6.17 (for any two vertices $x,y\in V_n$, since there's a rotation that sends $x$
+          to $y$). However, $\D_n$ is not doubly transitive for any $n>3$ (one can check that $\D_3$
+          is doubly transitive by permuting through all possible combinations of $x_1,x_2,y_1,y_2\in
+          X$ with $x_1\neq x_2$ and $y_1\neq y_2$; I won't list them here). Consider the combination
+          $x_1=i, x_2=i+1,y_1=i,y_2=i+2\in V_n$. All actions of $\D_n$ on $V_n$ must ``preserve
+          geometric structure'' in that for any vertex $i\in V_n$ and any transformation $\sigma\in
+          \D_n$, we must have \[
+            \sigma(i\pm 1)=\sigma(i)\pm 1~\text{or}~\sigma(i\pm 1)=\sigma(i)\mp 1
+          \] (intuitively, any action on an $n$-gon must preserve every vertex's neighbors;
+          otherwise the $n$-gon would be distorted). Thus, no such $\sigma\in \D_n$ can have both
+          $\sigma(x_1)=\sigma(i)=i$ and $\sigma(y_1)=\sigma(i+1)=i+2$, since $i$ would lose $i+1$ as
+          its neighbor and thus fail the above condition of ``preserving geometric structure.''
+        \item $G$ acting on $X=G$ is transitive. Since $e\in X=G$, $Ge=X=G$; and by Problem 4(a), if
+          at least one $x\in X$ satisfies $Gx=X$, then $G$ acts transitively on $X$. However, $G$ is
+          not transitive for any $G$ with $\left| G \right| >2$ (one can easily see why groups with
+          one or two elements are doubly transitive). Consider $x_1=e,x_2=g,y_1=e,y_2=g'\in X$ for
+          some non-trivial $g,g'\in G$, $g\neq g'$ ($g,g'$ exist since $G$ has at least $3$
+          elements). In order for $gx_1=ge=e=y_1$, we need $g=e$; but then $gx_2=eg=g\neq g'$. Hence
+          it is not possible for this combination to work, and so $G$ does not act doubly
+          transitively on $X$.
+        \item $\GL_{2}(\R)$ acting on $X=\R^2\setminus \{ (0,0) \}$ is transitive. Let
+          $\textbf{x}=\begin{pmatrix} x_1\\x_2 \end{pmatrix}\in X $ be any vector in $X$ where
+          $x_1,x_2\in \R$ and $x_1,x_2$ not both $0$. 
+
+          Consider the orbit of $\begin{pmatrix} 1\\0 \end{pmatrix} \in X$; that is, the collection
+          of all vectors in the form \[
+            \GL_{2}(\R)\begin{pmatrix} 1\\0 \end{pmatrix} =\left\{M\begin{pmatrix} 1\\0
+          \end{pmatrix} \mid M\in \GL_{2}(\R)\right\} 
+            .\] If $x_1,x_2$ both non-zero, then let $M=\begin{pmatrix} x_1&0\\x_2&\lambda
+          \end{pmatrix}$, where $\lambda\in \R\setminus \{ 0 \}$ (in order to preserve
+          invertibility). $M$ is invertible, and $M\begin{pmatrix} 1\\0 \end{pmatrix}
+          =\begin{pmatrix} x_1\\x_2 \end{pmatrix}=\textbf{x} $. If $x_1=0$, then $x_2\neq 0$, so let
+            $M=\begin{pmatrix} 0&\lambda\\x_2&0 \end{pmatrix} $. $M$ is invertible, and
+            $M\begin{pmatrix} 1\\0 \end{pmatrix} =\begin{pmatrix} 0\\x_2 \end{pmatrix}
+            =\begin{pmatrix} x_1\\x_2 \end{pmatrix} $.
+            Alternatively, if $x_2=0$, then $x_1\neq 0$, and use the first matrix:
+            $M=\begin{pmatrix} x_1&0\\0&\lambda \end{pmatrix} $. $M$ is invertible, and
+            $M\begin{pmatrix} 1\\0 \end{pmatrix} =\begin{pmatrix} x_1\\0 \end{pmatrix}
+            =\begin{pmatrix} x_1\\x_2 \end{pmatrix} $. Thus $\GL_{2}(\R)\begin{pmatrix} 1\\0
+          \end{pmatrix} =X$, and so by Problem 4(a), since at least one $x\in X$ satisfies
+          $\GL_{2}(\R)x=X$, it follows that $\GL_{2}(\R)$ acts transitively on $X$.
+
+          However, $\GL_{2}(\R)$ acting on $X$ is \textit{not} doubly transitive. Let $Z=X\times X$
+          be the set of all non-zero pairs of elements in $X$. Let $(\vec{v},2\vec{v})\in Z$, where
+          $\vec{v}\in X$. Then $2\vec{v}$ is linearly dependent on $\vec{v}$; and for any $M\in
+          \GL_{2}(\R)$, \[
+            M(\vec{v},2\vec{v})=(M\vec{v},2M\vec{v})
+          .\] Thus the resulting vector pair $(M\vec{v},2M\vec{v})\in Z$ is linearly dependent as
+          well, and so $(M\vec{v},2M\vec{v})\neq (\vec{v}_1,\vec{v}_2)$, where
+          $(\vec{v}_1,\vec{v}_2)\in Z$ and $\vec{v}_1,\vec{v}_2$ are linearly independent vectors
+          (since it's impossible for $M(\vec{v},2\vec{v})$ to form a pair of linearly independent
+          vectors).  Thus $\GL_{2}(\R)(\vec{v},2\vec{v})\neq Z$, and so $\GL_{2}(\R)$ is not doubly
+          transitive on $X$.
+      \end{itemize}
+  \end{enumerate}
+\end{solution}
+
+
+
+
+\end{document}

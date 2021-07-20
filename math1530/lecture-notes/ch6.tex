@@ -1,0 +1,445 @@
+\documentclass[math1530-lecture-notes]{subfiles}
+\begin{document}
+
+\chapter{Groups: Part II}
+
+We now continue our study of group theory. POGGIES!!!
+
+\section{Normal Subgroups and Quotient Groups}
+
+Let $G$ be a group, and let $H$ be a subgroup. Recall that each $g\in G$ gives a left coset of $H$,
+defined by \[
+  gH = \{gh\mid h\in H\} 
+.\] We now define the collection of cosets of $H$.
+
+\begin{definition}[Set of Cosets]{}
+  Let $G$ be a group, with $H<G$ a subgroup. We denote the set of (left) cosets of $H$ in $G$ by \[
+    G / H = \{ ~\text{(left) cosets of}~ H\}
+  .\] 
+\end{definition}
+
+Let $\mc{C}_1, \ldots,\mc{C}_k$ be distinct cosets of $H$. Proposition 2.39 tells us that $G$ is
+equal to the disjoint union \[
+  G = \mc{C}_1\cup \ldots\cup \mc{C}_k
+\] We use the notation $\mc{C}_i$ to emphasize that for a given coset $\mc{C}$, many different
+elements $g\in G$ will satisfy $\mc{C}=gH$. Indeed, (as one should check) if $\mc{C}$ is a coset of
+$H$, then \[
+  \mc{C}=gH \iff g\in \mc{C}
+.\] 
+
+Now, is there a way to turn this collection of cosets $\{ \mc{C}_1,\ldots,\ldots,\mc{C}_k \}$ into a
+group? If so, how should we define the product of two cosets $\mc{C}_i$ and $\mc{C}_j$? One
+intuitive method may be to take a product of two elements, one from $\mc{C}_i$ and one from
+$\mc{C}_j$, and declare the resulting set $\mc{C}_i\cdot \mc{C}_j$ to be the coset of the product.
+
+\begin{definition}[Proposed Coset Multiplication]{}
+  Let $G$ be a group, and $H < G$ a subgroup. Given cosets $\mc{C}_i, \mc{C}_j$ of $H$, select one
+  element from each ($g_1\in \mc{C}_i$, $g_2\in \mc{C}_j$), and define the resultant coset
+  $g_1g_2H$.
+\end{definition}
+
+Is this a good definition? Where might this go wrong?
+
+Well, if we have three cosets of a group $G$, and we select one element from each of two cosets,
+there's a possibility that if we select different elements from each of the cosets, the first
+product might not be in the same coset as the second product. Concretely, consider the dihedral
+group of three vertices, $\D_3$. The subgroup $\{ e, \phi_1 \}$ (where $\phi_i$ are flips, and
+$\rho_j$ are rotations) has three cosets, \[
+  \mc{C}_1 = \{ e,\phi_1 \},\ \mc{C}_2=\{ \rho_1,\phi_2 \},\ \mc{C}_3=\{ \rho_2,\phi_3 \}
+.\] If we select $\phi_1\in \mc{C}_2,\ \phi_2\in \mc{C}_3$, then we get $e\in \mc{C}_1$; but if we
+select $\phi_2\in \mc{C}_2,\ \phi_3\in \mc{C}_3$, then we get $\rho_2\in \mc{C}_3$. The above
+definition thus gives us two different results: either $\mc{C}_2\cdot \mc{C}_3=\mc{C}_1$, or
+$\mc{C}_2\cdot \mc{C}_3=\mc{C}_3$!
+
+However, the above definition \textit{does} work if we select our subgroup $H$ more carefully; for
+instance, if we chose $H=\{ e,\rho_1,\rho_2 \}$, then the definition seems to work! So the
+definition works for some, but not all, subgroups. How do we distinguish the ``good'' subgroups? We
+want the subgroups to have the following property: \begin{center}
+  For all cosets $\mc{C}_1, \mc{C}_2$ of $H$, for all pairs of elements $g_1,g_1'\in \mc{C}_1,\
+  g_2,g_2'\in \mc{C}_2$, we wish for \[
+    g_1g_2H=g_1'g_2'H
+  .\] 
+\end{center}
+
+Let's see where this takes us. $g_1$ and $g_1'$ in the same coset $\mc{C}_1$ of $H$ means that there
+is some $h_1\in H$ with $g_1'=g_1h_1$ (since all elements of a coset of $H$ can be represented as
+$g_1h_1$, where $g_1$ is in the coset, and $h_1$ is in the subgroup), and similarly $g_2'=g_2h_2$
+for some $h_2\in H$. So, we want \[
+  g_1'=g_1h_1~\text{and}~g_2'=g_2h_2 \implies g_2^{-1}g_1^{-1}g_1'g_2'\in H
+\] (since we want $g_1'g_2'=g_1g_2h_1h_2$ in order for $g_1'g_2'\in g_1g_2H$; or equivalently,
+$g_2^{-1}g_1^{-1}g_1'g_2'\in H$). Substituting values of $g_1', g_2'$, we want \[
+  g_2^{-1}g_1^{-1}g_1h_1g_2h_2\in H ~\text{for all}~g_1,g_2\in G,\ h_1,h_2\in H
+.\] With cancellation, this becomes \[
+  g_2^{-1}h_1g_2h_2\in H~\text{for all}~g_2\in G,\ h_1,h_2\in H
+.\] But we know that $g_2h_2\in H$ if and only if $g_2\in H$, so we end up with \[
+  g_2^{-1}h_1g_2\in H~\text{for all}~g_2\in G,\ h_1\in H
+.\] Dropping subscripts, we now get the following definition:
+\begin{definition}[Normal Subgroups]{}
+  Let $G$ be a group, let $H < G$ be a subgroup, and let $g\in G$. The \textbf{$g$-conjugate of $H$}
+  is the subgroup \[
+    g^{-1}Hg=\{g^{-1}hg\mid g\in G\} 
+  .\] We say that $H$ is a \textbf{normal subgroup} if it satisfies \[
+    g^{-1}Hg=H~\text{for every }~g\in G
+  .\] 
+\end{definition}
+
+\begin{example}
+  If $G$ is an Abelian group, then every subgroup $H\subseteq G$ is normal, since \[
+    g^{-1}hg=g^{-1}gh=h
+  .\] 
+\end{example}
+
+\begin{definition}[Simple Groups]{}
+  Every group $G$ has two normal subgroups, $\{ e \}$ and $G$. If these are the only two normal
+  subgroups, then $G$ is called a \textbf{simple group}.
+\end{definition}
+
+\begin{example}
+  As shown above, the subgroup $H=\{ e,\phi_1 \}$ is not a normal subgroup, since for example \[
+    \phi_2^{-1}\{ e,\phi_1 \}\phi_2=\{ \phi_2^{-1}e\phi_2,\phi_2^{-1}\phi_1\phi_2 \}=\{ e,\phi_3 \}
+  .\] However, the other subgroup $H=\{ e,\rho_1,\rho_2 \}$ is a normal subgroup. One could
+  tediously check all conjugates, or realize that three rotations is a rotation, or a flip,
+  rotation, flip is still a rotation. Similar results hold for $\D_n$.
+\end{example}
+
+Here is an important source of normal subgroups. Indeed, we will later show that every normal
+subgroup of a group $G$ arises in this way.
+\begin{proposition}
+  Let $\phi:G\to G'$ be a homomorphism of groups. Then $\ker{(\phi)}$ is a normal subgroup of $G$.
+\end{proposition}
+\begin{proof}[Proof]
+  We know from before that $\ker{(\phi)}$ is a subgroup of $G$. Let $h\in \ker{(\phi)}$, $g\in G$.
+  Then
+  \begin{align*}
+    \phi(g^{-1}\cdot h\cdot g)&= \phi(g^{-1}) \cdot \phi(h)\cdot \phi(g)\\
+                              &=\phi(g)^{-1}\cdot \phi(h)\cdot \phi(g)\\
+                              &=\phi(g)^{-1}\cdot \phi(g) && [~\text{since $h\in \ker{(\phi)}$, so
+                              $\phi(h)=e'$}~]\\
+                              &= e'
+  .\end{align*}
+  Hence $g^{-1}\cdot h\cdot g\in \ker{(\phi)}$; since the choice of $g,h$ were arbitrary,
+  $\ker{(\phi)}$ is thus a normal subgroup of $G$.
+\end{proof}
+
+Before turning the collection of cosets $G / H$ into a group, we now give three elementary
+properties of normal subgroups. 
+\begin{proposition}[Properties of Normal Subgroups]{}
+  Let $G$ be a group, and $H < G$ a subgroup.
+  \begin{enumerate}
+    \item If $g^{-1}Hg\subseteq H$, then $H$ is a normal subgroup of $G$; in other words, it is
+      enough only to check one inclusion.
+    \item For all $g\in G$, the conjugate set $g^{-1}Hg$ is a subgroup of $G$.
+    \item For all $g\in G$, the map $H\to g^{-1}Hg$ defined by $h\mapsto g^{-1}hg$ is a group
+      isomorphism. In particular, if $H$ is finite, then $H$ and its conjugates have the same number
+      of elements.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  Left as an exercise.
+\end{proof}
+
+We now go back to our goal of turning the set of cosets $G / H$ into a group via the multiplication
+rule \[
+  g_1H\cdot g_2H=g_1g_2H
+.\] Unfortunately, as we've seen before, choosing different elements $g_1'\in g_1H,\ g_2'\in g_2H$
+may yield a different coset $g_1'g_2'H$. However, if $H$ is a \textit{normal} subgroup of $G$, then
+we do actually get the same coset. Yay! Let us formally verify this.
+
+\begin{lemma}{}
+  Let $G$ be a group, and let $H<G$ be a normal subgroup. Let $g_1,g_1',g_2,g_2'\in G$ be elements
+  of $G$ satisfying \[
+    g_1H=g_1'H ~\text{and}~g_2H=g_2'H
+  .\] Then \[
+    g_1g_2H=g_1'g_2'H
+  .\] 
+\end{lemma}
+\begin{proof}[Proof]
+  The assumption that $g_1H=g_1'H$ implies in particular that \[
+    g_1'\in g_1'H=g_1H, ~\text{so}~g_1'=g_1h_1 ~\text{for some}~h_1\in H
+  .\] Similarly, \[
+    g_2'\in g_2'H=g_2H \implies g_2'=g_2h_2~\text{for some}~h_2\in H
+  .\] We now wish to prove the inclusion $g_1'g_2'H\subseteq g_1g_2H$, so let $g_1'g_2'h$ be an
+  element of $g_1'g_2'H$. We want \[
+     g_1'g_2'h\subseteq g_1g_2H
+  .\] From above, we see that \[
+     g_1'g_2'h=g_1h_1g_2h_2h
+   .\] If we could flip $h_2$ and $g_2$, we are done (since we are left with $g_1g_2$ times an
+   element of $H$); but alas, $G$ is not necessarily commutative, so we must look elsewhere.
+
+   We want the leftmost $g_1$ to be followed by $g_2$; we can't just insert a $g_2$ there, but we
+   can use the standard mathematical trick of putting the quantity where we want, and multiplying it
+   to cancel it out: we do this by multiplying by $e=g_2g_2^{-1}$. So, we have \[
+     g_1h_1g_2h_2h=g_1g_2g_2^{-1}h_1g_2h_2h=(g_1g_2)(g_2^{-1}h_1g_2)h_2h
+   .\] But $g_2^{-1}h_1g_2\in H$, since $H$ is a normal subgroup; and closure implies $h_2h\in H$.
+   Thus, we have \[
+     g_1'g_2'h=g_1h_1g_2h_2h=g_1g_2(~\text{three elements in $H$}~)\in g_1g_2H
+   ,\] and hence that \[
+     g_1'g_2'H\subseteq g_1g_2H
+   .\] Reversing the roles gives an analogous argument for $g_1g_2H\subseteq g_1'g_2'H$, and thus we
+   get \[
+     g_1g_2H=g_1'g_2'H
+   .\] 
+\end{proof}
+
+Essentially, this lemma demonstrates that the multiplication rule for cosets, $g_1H\cdot
+g_2H=g_1g_2H$, is well-defined if $H$ is a normal subgroup of $G$. We are now able to turn $G / H$
+into a group!
+
+\begin{theorem}[First Isomorphism Theorem For Groups]{}
+  Let $G$ be a group, and let $H$ be a normal subgroup of $G$.
+  \begin{enumerate}
+    \item The collection of cosets $G / H$ is a group via the well-defined group operation \[
+        g_1H\cdot g_2H=g_1g_2H
+      .\] 
+    \item The map \[
+        \phi: G\longrightarrow G / H,\ \phi(g)=gH
+      ,\] is a homomorphism whose kernel is $\ker{(\phi)}=H$.
+    \item Let \[
+      \psi:G\longrightarrow G'
+      \] be a homomorphism with the property that $H\subseteq \ker{(\psi)}$. Then there is a unique
+      homomorphism \[
+        \lambda: G / H \longrightarrow G'~\text{satisfying}~\lambda(gH)=\psi(g)
+      .\] 
+    \item If we take $H=\ker{(\psi)}$ from above, then the homomorphism \[
+        \lambda:G / \ker{(\psi)}\longrightarrow G'
+      \] is injective. In particular, we get an isomorphism onto the image of $\lambda$, \[
+        \lambda: G / \ker{(\psi)} \longrightarrow \lambda(G)\subseteq G'
+      .\] 
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item The above lemma proves that coset multiplication is well-defined (with a normal subgroup
+      $H$). The other group properties follow directly from the corresponding properties of the
+      group operation on $G$:
+      \begin{gather}
+        eH\cdot gH=gH\cdot eH=gH\\
+        gH\cdot g^{-1}H=g^{-1}H\cdot gH=eH\\
+        (g_1H\cdot g_2H)\cdot g_3H=g_1H\cdot (g_2H\cdot g_3H)
+      .\end{gather} Thus $G / H$ is a group under coset multiplication.
+    \item We first check that $\phi$ is a homomorphism. Note that \[
+        \phi(g_1)\phi(g_2)=g_1H\cdot g_2H=g_1g_2H=\phi(g_1g_2)
+      .\] Thus $\phi$ is a homomorphism. The kernel of $\phi$ is \[
+        \ker{(\phi)}=\{g\in G\mid \phi(g)=H \} =\{g\in G\mid gH=H\} =H
+      .\] 
+    \item We want to define a homomorphism $\lambda:G / H \to G'$ by the following algorithm:
+      \begin{enumerate}
+        \item Let $\mc{C}\in G / H$ be a coset of $H$.
+        \item Choose some $g\in \mc{C}$ with $\mc{C}=gH$.
+        \item Define $\lambda(\mc{C})$ to be $\psi(g)=g'$; that is, $\psi(g)=\lambda(gH)=g'$.
+      \end{enumerate}
+      However, step 2 may pose a problem, since many possible $g\in \mc{C}$ can work. So, we need to
+      prove that if $gH=g'H$, then $\psi(g)=\psi(g')$.
+
+      $gH=g'H$ means that $g'=gh$ for some $h\in H$. Then
+      \begin{align*}
+        \psi(g')&= \psi(gh) \\
+                &= \psi(g)\psi(h)\\
+                &=\psi(g)e' && [~\text{since $H\subseteq \ker{(\psi)}$}~]\\
+                &=\psi(g)
+      ,\end{align*} as required. Thus our algorithm gives a well-defined map \[
+        \lambda: G / H \longrightarrow G'
+      .\] It's also easy to check that $\lambda$ is a homomorphism: for $g_1,g_2\in G$, \[
+        \lambda(g_1g_2H)=\psi(g_1g_2)=\psi(g_1)\psi(g_2)=\lambda(g_1H)\lambda(g_2H)
+      .\] Finally, for any given homomorphism $\psi:G\to G'$, there's only one map $\lambda$
+      satisfying $\psi(g)=\lambda(gH)$, since this equality completely determines the values of
+      $\lambda$ in terms of values of $\psi$; that is, for any $\lambda$ that maps $G / H$ to $G'$,
+      every $gH\in G / H$ must be mapped to the same $\psi$.
+    \item Let $H=\ker{(\psi)}$. From (c) we get that \[
+        \lambda: G / H\longrightarrow G',\ \lambda(gH)=\psi(g)
+    ;\] we just need to show that $\lambda$ is injective.
+
+    Let $gH\in ker(\lambda)$. Then $\lambda(gH)=\psi(g)=e'$, so $g\in \ker{(\psi)}=H$. Therefore
+    $gH=H$, which is the identity element of $G / H$. Thus, the kernel $\ker{(\lambda)}$ is trivial
+    and consists of only the identity element, so $\lambda$ is injective. Surjectivity follows by
+    definition of a function; any $\lambda$ surjects onto its image. Thus $\lambda: G/H\to G'$ is an
+    is an isomorphism.
+  \end{enumerate}
+\end{proof}
+
+\section{Groups Acting On Sets}
+
+Among the first groups studied were the symmetric groups $\mc{S}_n$, and the dihedral groups $\D_n$.
+The elements of $\mc{S}_n$ were permutations of $\{ 1,\ldots,n \}$, so one could view an element of
+$\mc{S}_n$ as giving a rule that takes a number in $\{ 1,\ldots,n \}$ and assigns it to another
+number in $\{ 1,\ldots,n \}$. Similarly, the elements of $\D_n$ are rigid re-arrangements of
+vertices of an $n$-gon, so we can also view elements of $\D_n$ as assigning a rule that takes the
+vertex of an $n$-gon to another vertex of the $n$-gon (with additional restrictions). We can
+axiomatize these examples into arbitrary groups, by starting with a group $G$ and a set $X$ and
+having each element in $G$ re-arrange elements in $X$ (with some restrictions).
+
+\begin{definition}[Group Actions on Sets]{}
+  Let $G$ be a group, and let $X$ be a set. An \textbf{action of $G$ on $X$} is a rule $\cdot$ that
+  assigns to each element $g\in G$ and each element $x\in X$ another element $g\cdot x\in X$, so
+  that the following two axioms hold:
+  \begin{itemize}
+    \item \textbf{Identity Axiom}: $e\cdot x=x$ for all $x\in X$.
+    \item \textbf{Associative Axiom}: $(g_1g_2)\cdot x=g_1\cdot (g_2\cdot x)$ for all $g_1,g_2\in
+      G$ and all $x\in X$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  We can choose a fancier definition by showing that defining an action of $G$ on $X$ is the same as
+  giving a group homomorphism \[
+    \alpha: G\longrightarrow \mc{S}_X
+  \] from the group $G$ to the symmetric group of $X$. Thus $\alpha$ sends each $g\in G$ to a
+  permutation $\alpha(g):X\to X$ of the set $X$, and the group action is $g\cdot x=\alpha(g)(x)$.
+\end{remark}
+
+\begin{definition}[Orbits and Stabilizers]{}
+  Given a group $G$ acting on a set $X$, each element $x\in X$ determines two natural objects of
+  interest:
+  \begin{itemize}
+    \item What are the elements of $X$ to which $x$ is sent by the action of $G$? This set is the
+      \textbf{orbit of $x$}, denoted \[
+        Gx=\{ g\cdot x\mid g\in G \}
+      .\] In other words, it is the all possible values that an $x\in X$ can take---its
+      ``range''---when acted upon by the group $G$.
+    \item What are the elements of $G$ that leave $x$ unchanged? This set is the \textbf{stabilizer
+      of $x$}, denoted \[
+        G_x=\{g\in G\mid g\cdot x=x\} 
+      .\] In other words, it is all values in $G$ that preserve $x$; similar to the ``kernel'' of
+      the action.
+  \end{itemize}
+\end{definition}
+\begin{example}
+  Consider the action of $G=\mc{S}_n$ on $X=\{ 1,\ldots,n \}$. Given any two elements $x,y\in X$,
+  there is a permutation $\pi\in \mc{S}_n$ that sends $x$ to $y$ (e.g. $\pi(x)=y,\ \pi(y)=x$), and
+  fixes all other elements of $X$. Thus, the orbit of $x$ is all of $X$, i.e. $Gx=X$, since there
+  exists a $\pi\in G$ that sends $x$ to any other element in $X$. The stabilizer $G_x$ of $x$
+  consists of all permutations of $X$ that fix $x$, so they are the permutations of the remaining
+  $n-1$ elements of $X$. Thus $G_x$ is isomorphic to $\mc{S}_{n-1}$.
+\end{example}
+\begin{example}
+  Consider the action of $G=\D_n$ on an $n$-gon whose vertices are labeled $X=\{ 1,\ldots,n \}$
+  clockwise around the $n$-gon. The orbit of any vertex consists of every vertex ($X$), since
+  there's a rotation that takes any vertex to any other vertex. With stabilizers, it's not quite as
+  simple. Clearly, non-trivial rotations do not fix $x$; same with most flips. However, the flip
+  about the axis that goes through $x$ fixes $x$ (it also fixes the opposite vertex if $n$ is even)
+  Thus $G_x$ consists of two elements, the identity and the flip about the axis through $x$, so
+  $G_x$ is a cyclic group of order $2$.
+\end{example}
+\begin{example}
+  Let $G$ be the subgroup of $\mc{S}_5$ generated by the permutation \[
+    \pi=(134)(25)
+  .\] Clearly, $\pi$ has order $6$, so $G=\{ e,\pi,\pi^2,\pi^3,\pi^4,\pi^5 \}$. Then \[
+    G\cdot 1=G\cdot 3=G\cdot 4=\{ 1,3,4 \},~\text{and}~G\cdot 2=G\cdot 5=\{ 2,5 \}
+  .\] Thus $G$ has two distinct orbits.
+\end{example}
+
+\begin{proposition}{}
+  Let $G$ be a group that acts on a set $X$.
+  \begin{enumerate}
+    \item Let $x\in X$. The stabilizer $G_x$ is a subgroup of $G$.
+    \item Define a relation $\sim$ on $X$ by the following rule: \[
+        x\sim y ~\text{if}~ y=gx ~\text{for some}~g\in G
+      .\] Then $\sim$ is an equivalence relation, and \[
+        (~\text{the equivalence class of $x$}~)=(~\text{the orbit $Gx$ of $x$}~)
+      .\] 
+    \item Let $x\in X$. There is a well-defined bijection \[
+      \alpha:G / G_x \longrightarrow Gx
+    \] defined by the following algorithm:
+    \begin{itemize}
+      \item \textbf{Input}: A coset $\mc{C}$ of the subgroup $G_x$.
+      \item \textbf{Computation}: Choose an element $g\in \mc{C}$.
+      \item \textbf{Output}: $\alpha(\mc{C})$ is the element $g\cdot x$ in the orbit $Gx$.
+    \end{itemize}
+    In particular, if $G$ is finite, then \[
+      \left| Gx \right| = \frac{\left| G \right| }{\left| G_x \right| }
+    .\] 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item First, we have $e\in G_x$, since the definition of a group action requires $ex=x$. Next, let
+      $g,g'\in G_x$. Then since $g,g'$ both fix $x$ together with the associative law of group actions
+      tell us that \[
+        (gg')x=g(g'x)=gx=x
+      ,\] so $gg'\in G_x$. Finally, applying $g^{-1}$ to both sides of $x=gx$ yields \[
+        g^{-1}x=g^{-1}(gx)=(g^{-1}g)x=ex=x
+      ,\] so $g^{-1}\in G_x$. Thus $G_x$ is a subgroup of $G$.
+    \item First we have \[
+        x=ex, ~\text{which shows that $x\sim x$}~
+      ,\] and so $\sim$ is reflexive. Second, we note that
+      \begin{align*}
+        x\sim y &\implies y=gx ~\text{for some}~g\in G\\
+                &\implies g^{-1}y=(g^{-1}g)x=x
+      ,\end{align*} thus $x=g^{-1}y$, and so $y\sim x$, which shows that $\sim$ is symmetric. Finally,
+      \begin{align*}
+        x\sim y~\text{and}~y\sim z &\implies y=gx~\text{and}~z=g'y~\text{for some}~g,g'\in G\\
+                                   &\implies z=g'(gx)=(g'g)x\\
+                                   &\implies x\sim z
+      .\end{align*} Thus $\sim$ is an equivalence relation.
+
+      The equivalence class of an element $x\in X$ is \[
+        \{y\in X\mid x\sim y\} =\{y\in X\mid y=gx~\text{for some}~g\in G\} =\{gx\mid g\in G\} =Gx
+      .\] 
+
+    \item We first must show that the output is well-defined, in that it doesn't depend on the
+      choice of the group element in the coset $\mc{C}$. Suppose that $g'\in \mc{C}$ is some other
+      element in the coset. This means that \[
+        g'\in \mc{C}=gG_x,~\text{so}~g'=gh~\text{for some}~h\in G_x
+      .\] It follows that \[
+        g'x=(gh)x=g(hx)=gx
+      ,\] since $h\in G_x$ means $hx=x$. This shows that $\alpha(\mc{C})=gx$ is well-defined, since
+      it doesn't depend on choice of $g\in \mc{C}$ (explicitly, $\alpha(g'G_x)=g'x=gx=\alpha(gG_x)$
+      for $g,g'\in \mc{C}$, a coset of $G_x$). It's easy to see that $\alpha$ is surjective, since
+      every element of $Gx$ looks like $gx$ for some $g\in G$, and so we can simply choose
+      $\alpha(gG_x)=gx$.
+
+      Finally, we prove that $\alpha$ is injective, so suppose we have cosets $\mc{C}_1, \mc{C}_2$
+      such that \[
+        \alpha(\mc{C}_1)=\alpha(\mc{C}_2)
+      .\] We wish to show that $\mc{C}_1=\mc{C}_2$. Write the cosets as \[
+        \mc{C}_1=g_1G_x~\text{and}~\mc{C}_2=g_2G_x~\text{for some}~g_1,g_2\in G
+      .\] Then
+      \begin{align*}
+        \alpha(\mc{C}_1)=\alpha(\mc{C}_2)&\implies \alpha(g_1G_x)=\alpha(g_2G_x)\\
+                                         &\implies g_1x=g_2x\\
+                                         &\implies x=g_1^{-1}g_2x\\
+                                         &\implies g_1^{-1}g_2\in G_x&&[~\text{since $g_1^{-1}g_2$
+                                         fixes x}~]\\
+                                         &\implies g_1^{-1}g_2G_x=G_x\\
+                                         &\implies g_2G_x=g_1G_x\\
+                                         &\implies \mc{C}_1=\mc{C}_2
+      .\end{align*} Thus $\alpha$ is a well-defined bijection.
+
+      For the last part, we compute \[
+        \left| Gx \right| =\left| (G / G_x) \right| =\left| G \right| /\left| G_x \right| 
+      ,\] where the first equality is because they are isomorphic, and the second is due to
+      Lagrange's Theorem.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[Transitivity]{}
+  We say that $G$ \textbf{acts transitively on $X$} if $Gx=X$ for all $x\in X$.
+\end{definition}
+
+The dihedral group example demonstrates that $\D_n$ acts transitively on the vertices of an $n$-gon,
+while the following example about the cyclic subgroup generated by $\pi$ gives an example of a group
+and a set on which the group does not act transitively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
