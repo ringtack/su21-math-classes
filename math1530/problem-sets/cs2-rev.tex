@@ -1,0 +1,38 @@
+\documentclass{homework}
+\homework{--- Capstone 2: Revisions}
+
+\begin{document}
+
+\begin{problem}{\S 5c}
+  Let $L=\Q(\sqrt{D})$ for some square-free integer $D$. Write down all elements in $\Gal_{\Q}L$,
+  justifying your reasoning.
+\end{problem}
+
+\begin{solution}
+  We have shown that $\sigma(a+b\sqrt{D})=a\pm b\sqrt{D}$ are the only two possible automorphisms in
+  $\Gal_{\Q}L$. The identity automorphism, $\sigma_I(a+b\sqrt{D})=a+b\sqrt{D}$ is clearly an
+  isomorphism; it remains to show that $\sigma(a+b\sqrt{D})=a-b\sqrt{D}$ is an isomorphism.
+
+  Consider $a+b\sqrt{D},c+d\sqrt{D}\in \Q(\sqrt{D})$. Then
+  \begin{align*}
+    \sigma((a+b\sqrt{D})(c+d\sqrt{D}))&= \sigma(ac+(ad+bc)\sqrt{D}+bdD) \\
+                                      &= (ac+bdD)-(ad+bc)\sqrt{D}\\
+                                      &=ac-ad\sqrt{D}-bd\sqrt{D}+bdD\\
+                                      &=(a-b\sqrt{D})(c-d\sqrt{D})\\
+                                      &=\sigma(a+b\sqrt{D})\sigma(c+d\sqrt{D})  
+  .\end{align*}
+  Hence $\sigma$ is a homomorphism.
+
+  Injectivity is clear; suppose \[
+    \sigma(a+b\sqrt{D})=a-b\sqrt{D}=c-d\sqrt{D}=\sigma(c+d\sqrt{D})
+  \] for $a+b\sqrt{D}, c+d\sqrt{D}\in \Q(\sqrt{D})$. Then clearly we need $a=c$, $b=d$.
+
+  Surjectivity is also clear; for any $a+b\sqrt{D}\in \Q(\sqrt{D})$, simply choose $a-b\sqrt{D}\in
+  \Q(\sqrt{D})$. Then \[
+    \sigma(a-b\sqrt{D})=a+b\sqrt{D}
+  .\] Hence $\sigma$ is an isomorphism.
+\end{solution}
+
+
+
+\end{document}
