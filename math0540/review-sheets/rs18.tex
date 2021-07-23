@@ -1,0 +1,80 @@
+\documentclass{review-sheet}
+\homework{18}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Apply the Gram-Schmidt Algorithm to the vectors $(2i,0,0),(1,1,i),(1,1,-i)\in \C^3$ with the
+  Euclidean inner product.
+\end{problem}
+\begin{solution}
+  Let $e_1=\frac{(2i,0,0)}{\|(2i,0,0)\|}=\frac{(2i,0,0)}{2}=(i,0,0)$. Then for $v_2=(1,1,i)$, we get
+  \begin{align*}
+    e_2&=\frac{(1,1,i)-\left<(1,1,i),(i,0,0) \right>(i,0,0)}{\|(1,1,i)-\left<(1,1,i),(i,0,0)
+    \right>(i,0,0)\|}\\
+       &=\frac{(0,1,i)}{\|(0,1,i)\|}\\
+       &=\left( 0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}} \right) 
+  .\end{align*}
+
+  For $v_3=(1,1,-i)$, we get
+  \begin{align*}
+    e_3&= \frac{(1,1,-i)-\left<(1,1,-i),(i,0,0) \right>(i,0,0)-\left<(1,1,-i),\left(
+    0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}} \right)
+  \right>\left(0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}}\right)}{\|(1,1,-i)-\left<(1,1,-i),(i,0,0)
+\right>(i,0,0)-\left<(1,1,-i),\left( 0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}} \right)
+\right>\left(0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}}\right)\|} \\
+       &= \frac{(0,1,-i)}{\|(0,1,-i)\|} \\
+       &= \left( 0,\frac{1}{\sqrt{2}},-\frac{i}{\sqrt{2}} \right) 
+  .\end{align*}
+  Thus, with starting vectors $(2i,0,0),(1,1,i),(1,1,-i)\in \C^3$, we get an three orthonormal
+  vectors \[
+    (i,0,0),\
+    \left(0,\frac{1}{\sqrt{2}},\frac{i}{\sqrt{2}}\right),~\text{and}~\left(0,\frac{1}{\sqrt{2}},-\frac{i}{\sqrt{2}}\right)
+  .\] 
+\end{solution}
+
+\begin{problem}{\S 2}
+  Find an orthonormal basis for $\mc{P}_1(\R)$ with respect to the following inner product: \[
+    \left<p,q \right>=\int_0^1p(x)q(x)dx
+  .\] 
+\end{problem}
+\begin{solution}
+  We start with the basis $1,x$, and use Gram-Schmidt. Let $e_1=\frac{1}{\|1\|}=1$. Then for
+  $v_2=x$, we get
+  \begin{align*}
+    e_2&= \frac{x-\left<x,1 \right>1}{\|x-\left<x,1 \right>1\|} \\
+       &= \frac{x-\int_0^1xdx}{\|x-\int_0^1xdx\|}\\
+       &= \frac{x-\frac{1}{2}}{\|x-\frac{1}{2}\|}\\
+       &= \frac{x-\frac{1}{2}}{\sqrt{\left( \int_0^1(x-\frac{1}{2})^2dx \right)}}\\
+       &=\frac{x-\frac{1}{2}}{\sqrt{\frac{1}{12}}}\\
+       &= 2x\sqrt{3}-\sqrt{3}
+  .\end{align*}
+  Thus we have an orthonormal basis \[
+    1, 2x\sqrt{3}-\sqrt{3}
+  .\] 
+\end{solution}
+
+\begin{problem}{\S 3}
+  (6.A.10) Find vectors $u,v\in \R^2$ such that $u$ is a scalar multiple of $(1,3)$, $v$ is
+  orthogonal to $(1,3)$, and $(1,2)=u+v$. 
+\end{problem}
+
+\begin{solution}
+  We decompose $(1,2)$ into a scalar multiple of $(1,3)$, and a vector orthogonal to $(1,3)$: \[
+    (1,2)=\frac{\left<(1,2),(1,3) \right>}{\left<(1,3),(1,3) \right>}(1,3)+\left(
+    u-\frac{\left<(1,2),(1,3) \right>}{\left<(1,3),(1,3) \right>}(1,3) \right) 
+  .\] The left vector becomes \[
+  \frac{1+6}{1+9}(1,3)=\left( \frac{7}{10}, \frac{21}{10} \right) 
+  ;\] this is the scalar multiple of $(1,3)$ we're looking for; in other words, $u=\left(
+  \frac{7}{10},\frac{21}{10} \right) $. The right vector then becomes \[
+    (1,2)-u=\left( \frac{3}{10},-\frac{1}{10} \right) 
+  ;\] but this is the vector orthogonal to $(1,3)$ that we were looking for.
+
+  Thus \[
+    u=\left( \frac{7}{10},\frac{21}{10} \right) ~\text{and}~ v=\left( \frac{3}{10},-\frac{1}{10} \right) 
+  .\] 
+\end{solution}
+
+
+
+
+\end{document}

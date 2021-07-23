@@ -250,13 +250,13 @@ To do this, let $c\in \F$ denote a scalar. Then \[
 \end{proposition}
 
 If we only look at $cu$, this is essentially the value of the vector $v$ if \textbf{projected} onto
-the vector $u$; that is, if we look at the value of $v$ only on $u$. This process has a special
+the vector $u$; that is, if we look at the value of $v$ only on $u$. This value has a special
 name:
-\begin{definition}[Gram-Schmidt Process]{}
-  Let $u,v\in V$ with $v\neq 0$. The \textbf{projection of $v$ onto $u$}, denoted $\proj_{v}(u)$, is
+\begin{definition}[Projection]{}
+  Let $u,v\in V$ with $v\neq 0$. The \textbf{projection of $v$ onto $u$}, denoted $\proj_{u}(v)$, is
   defined by \[
-    \proj_{v}(u)=\frac{\left<u,v \right>}{\left<v,v \right>}v
-  .\] [Gram-Schmidt Process, postponed.]
+    \proj_{v}(u)=\frac{\left<u,v \right>}{\left<u,u \right>}u
+  .\] We will see later that this has important implications for finding orthogonal bases.
 \end{definition}
 
 Orthogonal decomposition is quite useful, especially in the proof of the following important
@@ -336,6 +336,267 @@ squares of the lengths of the four sides.
                        &=2(\|u\|^2+\|v\|^2)
   ,\end{align*} as desired.
 \end{proof}
+
+\section{Orthonormal Bases}
+
+\begin{definition}[Orthonormal]{}
+  A list of vectors is called \textbf{orthonormal} if each vector in the list has norm $1$ and is
+  orthogonal to all the other vectors in the list.
+
+  In other words, a list $e_1,\ldots,e_m$ of vectors in $V$ is orthonormal if \[
+    \left<e_j,e_k \right>=\left\{\begin{array}{rl} 1 & ~\text{if}~j=k,\\ 0 &~\text{if}~j\neq k
+    \end{array}\right.\] 
+\end{definition}
+
+\begin{example}
+  The standard basis in $\F^{n}$ is an orthonormal list. In addition, \[
+    \left( \frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}} \right), \left(- \frac{1}{\sqrt{2}},
+    \frac{1}{\sqrt{2}}, 0\right), \left( \frac{1}{\sqrt{6}},\frac{1}{\sqrt{6}}, - \frac{2}{\sqrt{6}} \right) 
+  \] is also an orthonormal list.
+\end{example}
+
+Why do we desire this result? It turns out that orthonormal lists are particularly easy to work
+with.
+
+\begin{proposition}[Norm of Orthonormal Linear Combination]{}
+  If $e_1,\ldots,e_m$ is an orthonormal list of vectors in $V$, then \[
+    \|a_1e_1+\ldots+a_me_m\|^2=\left| a_1 \right| ^2+\ldots+\left| a_m \right| ^2
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  Because each $e_j$ has norm $1$, this follows easily from repeated applications of the Pythagorean
+  Theorem (which states that for orthogonal vectors $u,v\in V$, $\|u+v\|^2=\|u\|^2+\|v\|^2$; and the
+  norm of a particular vector $\|a_ie_i\|^2=\left| a_i \right| ^2\|e_i\|^2=\left| a_i \right| ^2$).
+\end{proof}
+
+This result has the following important corollary.
+\begin{corollary}[Orthonormal Lists are Linearly Independent]{}
+  Every orthonormal list of vectors is linearly independent.
+\end{corollary}
+\begin{proof}[Proof]
+  Suppose $e_1,\ldots,e_m$ is an orthonormal list of vectors in $V$ and $a_1,\ldots,a_m\in \F$ are
+  such that \[
+    a_1e_1+\ldots+a_me_m=0
+  .\] Then $\left| a_1 \right|^2+\ldots+\left| a_m \right| ^2=0 $; but this is true only when every
+  $a_i=0$. Thus $e_1,\ldots,e_m$ are linearly independent.
+\end{proof}
+
+Using this, we have the following definition.
+\begin{definition}[Orthonormal Basis]{}
+  An \textbf{orthonormal basis} of $V$ is an orthonormal list of vectors in $V$ that is also a basis
+  of $V$.
+\end{definition}
+For instance, the standard basis of $\F^{n}$ is also an orthonormal basis.
+
+Using linear independence of orthonormal lists, we get the following result:
+\begin{proposition}{}
+  Every orthonormal list of vectors in $V$ with length $\dim{V}$ is an orthonormal basis of $V$.
+\end{proposition}
+
+In general, given a basis $e_1,\ldots,e_m\in V$ and a vector $v\in V$, we know that there is some
+choice of scalars $a_1,\ldots,a_m\in \F$ such that \[
+  v=a_1e_1+\ldots+a_ne_n
+.\] Computing the scalars $a_1,\ldots,a_m$ may be difficult for an arbitrary basis of $V$; however,
+this is quite easy for an orthonormal basis: simply take \[
+  a_j=\left<v,e_j \right>
+!\] 
+
+\begin{proposition}{}
+  Suppose $e_1,\ldots,e_n$ is an orthonormal basis of $V$ and $v\in V$. Then \[
+    v=\left<v,e_1 \right>e_1+\ldots+\left<v,e_n \right>e_n
+  ,\] and \[
+    \|v\|^2=\left| \left<v,e_1 \right> \right| ^2+\ldots+\left| \left<v,e_n \right> \right| ^2
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  Because $e_1,\ldots,e_m$ is a basis, there exist scalars $a_1,\ldots,a_n\in \F$ such that \[
+    v=a_1e_1+\ldots+a_ne_n
+  .\] Because $e_1,\ldots,e_n$ is orthonormal, taking the inner product with $e_j$ of both sides
+  gives us \[
+    \left<v,e_j \right> = a_1\left<e_1,e_j \right>+\ldots+a_n\left<e_n,e_j \right>
+  .\] But $\left<e_i,e_j \right>=0$, unless $i=j$, in which case it equals $1$; thus \[
+    \left<v,e_j \right>=a_j
+  .\]
+
+  The second equation follows immediately from above, and the previous proposition.
+\end{proof}
+
+Now that we see the usefulness of orthonormal bases, how do we find them? For example, does
+$\mc{P}_m(\R)$ have an orthonormal basis? The following result will provide a procedural method to
+generating orthonormal bases from linearly independent bases.
+
+\begin{theorem}[Gram-Schmidt Procedure]{}
+  Suppose $v_1,\ldots,v_m$ is a linearly independent list of vectors in $V$. Let
+  $e_1=\frac{v_1}{\|v_1\|}$. For $j=2,\ldots,m$, define $e_j$ inductively by \[
+    e_j=\frac{v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1}
+    \right>e_{j-1}}{\|v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1} \right>e_{j-1}\|}
+  .\] Then $e_1,\ldots,e_m$ is an orthonormal list of vectors in $V$ such that \[
+  \Span{(v_1,\ldots,v_j)}=\Span{(e_1,\ldots,e_j)}
+  \] for $j=1,\ldots,m$.
+\end{theorem}
+\begin{proof}[Proof]
+  We show by induction on $j$ that the desired conclusion holds. For $j=1$,
+  $\Span{(v_1)}=\Span{(e_1)}$, since $ v_1$ is a positive multiple of $e_1$.
+
+  Suppose $1<j<m$ and \[
+    \Span{(v_1,\ldots,v_{j-1})}=\Span{(e_1,\ldots,e_{j-1})}
+  \] holds. Note that $v_j\not\in \Span{(v_1,\ldots,v_{j-1})}$, since $v_1,\ldots,v_m$ is linearly
+  independent; thus $v_j\not\in \Span{(e_1,\ldots,e_{j-1})}$ either. Hence in the definition above,
+  we are not dividing by zero, since $v_j$ not in span means it is impossible for
+  $v_j-\sum_{i=1}^{j-1} a_ie_i$ to be zero either. Dividing a vector by its norm produces a new
+  vector with norm $1$; thus $\|e_j\|=1$.
+
+  Let $1\le k<j$. Then
+  \begin{align*}
+    \left<e_j,e_k \right> &= \left<\frac{v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1}
+    \right>e_{j-1}}{\|v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1} \right>e_{j-1}\|},e_k \right> \\
+    &= \frac{\left<v_j,e_k \right>-\left<v_j,e_k \right>}{\|v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1} \right>e_{j-1}\|} \\
+    &=0
+  ,\end{align*}
+  where the second last step follows because $\left<e_j,e_k \right>=0$ for all $j\neq k$. Thus $e_j$
+  is orthonormal to all previous vectors, and so $e_1,\ldots,e_j$ is an orthonormal list.
+
+  From the above definition of $e_j$, we see that $v_j\in \Span{(e_1,\ldots,e_j)}$. Since we've
+  assumed that $\Span{(e_1,\ldots,e_{j-1})}=\Span{(v_1,\ldots,v_{j-1})}$, we thus get \[
+    \Span{(v_1,\ldots,v_j)}\subset\Span{(e_1,\ldots,e_j)}
+  .\] Both lists above are linearly independent ($v$'s given, $e$'s by orthonormality). Therefore
+  both of these subspaces have dimension $j$, and hence they are equal.
+\end{proof}
+
+This definition of $e_j$ seems extremely complicated, at first glance. However, closer inspection
+reveals somewhat of an intuitive process:
+\begin{itemize}
+  \item First, we wish to convert a list of linearly independent vectors into a list of orthonormal
+    vectors. Let's first forget about orthonormality, and look solely at orthogonality.
+  \item We can start with any one vector; this will be the ``base'' vector, $v_1=u_1$. In order to find
+    the next \textit{orthogonal} vector, we must find a vector orthogonal to $u_1$:
+    \begin{itemize}
+      \item Recall that a vector $v_2\in V$ can be decomposed into $u_1$, plus a vector orthogonal
+        to it. To do this, we convert $v_2$ into $\frac{\left<u_1,v_2 \right>}{\left<u_1,u_1
+        \right>}u_1+w$, where $w$ is the vector orthogonal to $u_1$. \textbf{This is the vector
+      we're interested in!}
+    \end{itemize}
+    Thus, using orthogonal decomposition, we simply want the vector orthogonal to the base vector
+    $u_1$, and so we get \[
+      u_2=w=v_2-\frac{\left<u_1,v_2 \right>}{\left<u_1,u_1 \right>}u_1=v_2-\proj_{u_1}(v_2)
+    .\] 
+  \item Now, we wish to repeat this process with the rest of the vectors $v_i$. Like before, we wish
+    to find a vector orthogonal to every other vector. We can repeat the processes above
+    iteratively, by finding a vector (say $v_i'$) orthogonal to one vector (say $u_1$), then using
+    that to find another vector (say $v_i''$) orthogonal to both $u_1$ and another vector (say
+    $u_2$), and so on until we reach a vector $u_i$ orthogonal to all previous $u_{1\le j<i}$. This
+    gives us the desired (if complex) formula,
+    \begin{align*}
+      u_j&=v_j-\proj_{u_1}(v_j)-\proj_{u_2}(v_j)-\ldots-\proj_{u_{j-1}}(v_j)\\
+         &=v_j-\frac{\left<u_1,v_j \right>}{\left<u_1,u_1 \right>}u_1-\ldots-\frac{\left<u_{j-1},v_j
+         \right>}{\left<u_{j-1},u_{j-1} \right>}u_{j-1}
+    .\end{align*}
+  \item This process gives us a list of \textit{orthogonal} vectors; but if we desire an orthonormal
+    list, we need the extra step of dividing by the norm of the result. Luckily, if each $u_j$ is
+    orthogonal, then every $\left<u_j,u_j \right>=1$, so we can focus only on the numerator. That's
+    how we arrive at the final equation, \[
+      e_j=\frac{v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1}
+      \right>e_{j-1}}{\|v_j-\left<v_j,e_1 \right>e_1-\ldots-\left<v_j,e_{j-1} \right>e_{j-1}\|}
+    .\] 
+\end{itemize}
+
+
+Let's look at an example of the Gram-Schmidt process in action.
+\begin{example}
+  Find the orthonormal basis of $\mc{P}_2(\R)$, where the inner product is given by \[
+    \left<p,q \right>=\int_{-1}^{1}p(x)q(x)dx
+  .\] 
+\end{example}
+\begin{solution}
+  We apply the Gram-Schmidt procedure to the basis $1,x,x^2$.
+
+  We have \[
+    e_1=\frac{1}{\|1\|}=\frac{1}{\sqrt{\int_{-1}^11^2dx}}=\frac{1}{\sqrt{2}}
+  .\] Now, the numerator for $e_2$ is \[
+  x-\left<x,e_1 \right>e_1=x-\left( \int_{-1}^1x\frac{1}{\sqrt{2}}dx \right)\frac{1}{\sqrt{2}}=x
+  ;\] moreover, \[
+    \|x\|^2=\int_{-1}^1x^2dx=\frac{2}{3}
+  .\] Thus $\|x\|=\sqrt{\frac{2}{3}}$, and so
+  $e_2=\frac{x}{\sqrt{\frac{2}{3}}}=x\sqrt{\frac{3}{2}}$.
+
+  Finally, the numerator for $e_3$ is
+  \begin{align*}
+    x^2&-\left<x^2,e_1 \right>e_1-\left<x^2,e_2 \right>e_2\\
+       &= x^2-\left( \int_{-1}^1x^2\sqrt{\frac{1}{2}}dx\right)-\left(
+       \int_{-1}^1x^2\sqrt{\frac{3}{2}}dx \right) x\sqrt{\frac{3}{2}}\\
+       &= x^2-\frac{1}{3}
+  .\end{align*}
+  Moreover, \[
+    \|x^2-\frac{1}{3}\|^2=\int_{-1}^1(x^4-\frac{2}{3}x^2+\frac{1}{9})dx=\frac{8}{45}
+  .\] Thus $\|x^2-\frac{1}{3}\|=\sqrt{\frac{8}{45}}$, and so
+  $e_3=\sqrt{\frac{45}{8}}(x^2-\frac{1}{3})$.
+
+  Thus \[
+    \frac{1}{\sqrt{2}},\ x\sqrt{\frac{3}{2}},\sqrt{\frac{45}{8}}(x^2-\frac{1}{3})
+  \] is an orthonormal basis of $\mc{P}_2(\R)$.
+\end{solution}
+
+But do these orthonormal bases always exist? It turns out that yes, they do.
+\begin{proposition}[Existence of Orthonormal Basis]{}
+  Every finite-dimensional inner product space has an orthonormal basis.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $V$ is finite-dimensional. Choose a basis of $V$. Apply the Gram-Schmidt procedure to it,
+  producing an orthonormal list with length $\dim{V}$. From before, we see that any orthonormal list
+  of the right length ($\dim{V}$) is an orthonormal basis of $V$.
+\end{proof}
+
+Not only does an orthonormal basis always exist, we can also extend an orthonormal list of vectors
+to an orthonormal basis, using the Gram-Schmidt procedure.
+\begin{corollary}[Orthonormal List Extends to Orthonormal Basis]{}
+  Suppose $V$ is finite-dimensional. Then every orthonormal list of vectors in $V$ can be extended
+  to an orthonormal basis of $V$.
+\end{corollary}
+\begin{proof}[Proof]
+  Suppose $e_1,\ldots,e_m$ is an orthonormal list of vectors in $V$. Then $e_1,\ldots,e_m$ is
+  linearly independent, and thus this list can be extended to a basis \[
+    e_1,\ldots,e_m, v_1,\ldots,v_n
+  \] of $V$. Now, using the Gram-Schmidt procedure we can produce an orthonormal list \[
+    e_1,\ldots,e_m,f_1,\ldots,f_n
+  ;\] the first $m$ vectors remain unchanged since they're already orthonormal. Then the list is an
+  orthonormal basis.
+\end{proof}
+
+Now, let's explore some connections between orthonormal lists and upper-triangular matrices. We've
+shown before that every operator $T\in \mc{L}(V)$ has a basis that produces an upper-triangular
+matrix for $\mc{M}(T)$. Now, with inner product spaces, we're interested in whether there's an
+\textbf{orthonormal} basis that produces an upper-triangular matrix.
+
+With Gram-Schmidt, our wishes are fulfilled; as long as a basis admits an upper-triangular matrix,
+then we have what we need (this is always true for complex vector spaces, but only sometimes true
+for real vector spaces).
+\begin{proposition}[Upper-Triangular w.r.t. Orthonormal Basis]{}
+  Suppose $T\in \mc{L}(V)$. If $T$ has an upper-triangular matrix with respect to some basis of $V$,
+  then $T$ has an upper-triangular matrix with respect to some orthonormal basis of $V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $T$ has an upper-triangular matrix with respect to some basis $v_1,\ldots,v_n\in V$. Thus
+  $\Span{(v_1,\ldots,v_j)}$ is invariant under $T$ for each $1\le j\le n$.
+
+  Applying Gram-Schmidt to $v_1,\ldots,v_n$, we get an orthonormal basis $e_1,\ldots,e_n\in V$.
+  Since \[
+    \Span{(e_1,\ldots,e_n)}=\Span{(v_1,\ldots,v_n)}
+  ,\] we conclude that $\Span{(e_1,\ldots,e_n)}$ is invariant under $T$. Thus $T$ has an
+  upper-triangular matrix with respect to the orthonormal basis $e_1,\ldots,e_n$.
+\end{proof}
+
+This next result is an important application of the above result:
+\begin{theorem}[Schur's Theorem]{}
+  Suppose $V$ is a finite-dimensional complex vector space and $T\in \mc{L}(V)$. Then $T$ has an
+  upper-triangular matrix with respect to some orthonormal basis of $V$.
+\end{theorem}
+\begin{proof}[Proof]
+  Recall that $T$ has an upper-triangular matrix with respect to some basis of $V$ (since every
+  operator in a complex vector space admits an upper-triangular matrix). Then, from above, $T$ has
+  an upper-triangular orthonormal basis.
+\end{proof}
+
+
 
 
 
