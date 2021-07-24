@@ -1,0 +1,221 @@
+\documentclass{homework}
+\homework{Week 10}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  (6.12) Let $G$ be a group that acts on a set $X$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\left|G\right|=15$ and $\left|X\right|=7$. Prove there is some element in $X$ that is fixed by every
+      element of $G$.
+    \item What goes wrong if either $X=6$ or $X=8$?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\left|G\right|=15$ and $\left|X\right|=7$. We know from Proposition 6.19 that
+      $\left|Gx\right|$ divides $\left|G\right|$; furthermore, the distinct orbits
+      $Gx_1,\ldots,Gx_k$ form a disjoint union of $X$.
+
+      From the Orbit-Stabilizer Counting Theorem, we know that \[
+        \left|X\right|=\sum_{i=1}^{k} \left|Gx_i\right|=\sum_{i=1}^{k}
+        \frac{\left|G\right|}{\left|G_{x_i}\right|}
+      .\] Since $\left|Gx_i\right|$ divides $\left|G\right|=15$ for all $1\le i\le k$ and
+      $\sum_{i=1}^{k} \left|Gx_i\right|=\left|X\right|=7$, we must have \[
+        \left|Gx_i\right|=1,3,~\text{or}~5~\text{for all distinct orbits}~
+      .\] With these numbers, there are thus only three possible partitions of $X$ into distinct
+      orbits, up to ordering (each number represents the number of elements in each distinct orbit):
+      \begin{itemize}
+        \item $7=1+1+5$
+        \item $7=\underbrace{1+\ldots+1}_\text{$7$ times}$
+        \item $7=3+3+1$
+      \end{itemize}
+      In all cases, there is at least one orbit with only one element; this then implies that \[
+        1=\left|Gx_j\right|=\frac{\left|G\right|}{\left|G_{x_j}\right|}=\frac{15}{15}
+      \] for some orbit $Gx_j$ (from Proposition 6.19c). But then for some $x_j\in X$, its
+      stabilizer has $15=\left|G\right|$ elements; in other words, for some element in $X$, it is
+      fixed by every element of $G$.
+    \item Suppose instead that $\left| X \right| =6~\text{or}~8$. There are then different possible
+      partitions of $X$; but in either case, there exists a partition of $X$ into distinct orbits
+      that does not consist of any orbit with only $1$ element:
+      \begin{itemize}
+        \item For $\left| X \right|=6 $, $X$ can be partitioned into two orbits with $3$ elements
+          each (since $\left|Gx_1\right|+\left|Gx_2\right|=3+3=6=\left|X\right|$, as required by the
+          Orbit-Stabilizer Counting Theorem).
+        \item For $\left|X\right|=8$, $X$ can be partitioned into two orbits, one with $3$ elements
+          and one with $5$ ($\left|Gx_1\right|+\left|Gx_2\right|=5+3=8=\left|X\right|$).
+      \end{itemize}
+      Thus when the group $G$ acts on the set $X$, it is possible that there doesn't exist any orbit
+      with only one element; then by Proposition 6.19, since \[
+        1<\left|Gx_j\right|=\frac{\left|G\right|}{\left|G_{x_j}\right|}=\frac{15}{n}
+      ,\] where $1<n=3~\text{or}~5$. In other words, it is possible that no element in $X$ is fixed
+      by every element in $G$ (since the number of elements in the stabilizer of any $x$ could be
+      less than $15$).
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 2}
+  (6.14) Let $p$ be a prime. We proved that every group with $p^2$ elements is Abelian; now let $G$
+  be a group with $p^3$ elements.
+  \begin{enumerate}[label=(\alph*)]
+    \item Mimic the proof of Corollary 6.26 to try to prove that $p^3$ is Abelian. Where does the
+      proof go wrong?
+    \item Give two examples of non-Abelian groups with $2^3$ elements. 
+    \item What sort of information can you deduce about $G$ from the proof in (a) that failed?
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $Z=Z(G)$ as before. Since $Z$ is a subgroup of $G$, Lagrange's Theorem tells us that
+      the order of $Z$ divides $\left| G \right| =p^3$, so \[
+        \left| Z \right| =1,p,p^2,~\text{or}~p^3
+      .\] Theorem 6.25 tells us that $Z\neq \{ e \}$, so $\left| Z \right| \neq 1$. 
+
+      Suppose $\left| Z \right| =p^2$. Since the center $Z$ of $G$ is a normal subgroup, we form the
+      quotient subgroup $G / Z$, with Lagrange telling us that \[
+        \left| G/Z \right| =\frac{\left| G \right| }{\left| Z \right| }=\frac{p^3}{p^2}=p
+      .\] Thus $G / Z$ is of prime order, so Proposition 2.43 tells us that it is cyclic. Let $hZ$
+      be a coset that generates $G / Z$, \[
+        G / Z = \{ hZ,h^2Z,\ldots,h^{p-1}Z \}
+      .\] In particular, this implies that \[
+        G = Z\cup hZ\cup \ldots\cup h^{p-1}Z
+      ,\] since every element is in a coset of $Z$.
+
+      Let $g_1,g_2\in G$ be arbitrary elements. Since they're in some coset of $Z$, we have \[
+        g_1=h^{i_1}z_1,\ g_2=h^{i_2}z_2~\text{for some}~z_1,z_2\in Z~\text{and}~0\le i_1,i_2\le p-1
+      .\] Since $z_1,z_2\in Z$, we have
+      \begin{align*}
+          g_1g_2=(h^{i_1}z_1)(h^{i_2}z_2)=(h^{i_1}h^{i_2})(z_1z_2)&= h^{i_1+i_2}z_2z_1 \\
+    &= (h^{i_2}h^{i_1})(z_2z_1)=(h^{i_2}z_2)(h^{i_1}z_1)=g_2g_1
+      .\end{align*}
+      Y I K E S ! ! ! We've shown that every element in $G$ commutes with every other element; this
+      means that $Z=G$, a contradiction of our assumption that $\left| Z \right| =p^2\neq p^3=\left|
+      G\right| $. Thus $\left| Z \right| \neq p^2$.
+
+      Now, suppose $\left| Z \right| =p$. $Z$ normal allows us to form the quotient subgroup $G /
+      Z$, with Lagrange telling us that \[
+        \left| G / Z \right|  = \frac{\left| G \right| }{\left| Z \right| }=\frac{p^3}{p}=p^2
+      .\] Thus $G / Z$ has order $p^2$, so Corollary 6.26 tells us that it is Abelian. That means
+      for two cosets $gZ,hZ\in G / Z$, we have $ghZ=hgZ$.
+
+      Like before, since every element is in a coset of $Z$, and $G / Z$ is a collection of distinct
+      cosets of $G$, we have \[
+        G = h_1Z\cup h_2Z\cup \ldots\cup h_{p^2-1}Z
+      ,\] where $h_1,\ldots,h_{p^2-1}\in G$ form distinct cosets of $Z$.
+
+      Let $g_1,g_2\in G$ be arbitrary elements of $G$. Then \[
+        g_1=h_iz_1,\ g_2=h_jz_2~\text{for some}~h_1,h_2\in G~\text{and}~1\le i,j\le j-1
+      .\] With $g_1g_2$, we have \[
+      g_1g_2=(h_iz_1)(h_jz_2)=(h_ih_j)(z_1z_2)
+      ,\] and with $g_2g_1$, we have \[
+      g_2g_1=(h_jz_2)(h_iz_1)=(h_jh_i)(z_2z_1)=(h_jh_i)(z_1z_2)
+      .\] Are these two equal?
+
+      \textbf{Not necessarily}. $ghZ=hgZ$ means that for every $ghz\in ghZ$, $ghz\in hgZ$; and for
+      every $hgz'\in hgZ$, $hgz'\in ghZ$. However, this does \textbf{not} guarantee that $z=z'$.
+      Indeed, two examples (stated below) illustrate this: $ghZ=hgZ$ does not guarantee
+      that $gh=hg$ for all $g,h\in G$.
+
+      Therefore, since not every element necessarily commutes with every other element, it's
+      possible for $\left| Z \right| =p$; there is no contradiction.
+
+      Thus there exist non-Abelian groups of order $p^3$.
+
+
+
+    \item Two examples of non-Abelian groups of order $2^3$ are the dihedral group $\D_4$ (which one
+      can easily verify is not Abelian), and the quaternion group $\mc{Q}$ (see Example 2.18;
+      clearly $ji=-ij\neq ij$, and thus is non-commutative). These examples also illustrate that $G
+      / Z$ being Abelian does not necessarily force $G$ to be Abelian; both $\D_4$ and $\mc{Q}$ have
+      centers of order $2$ ($Z(\D_4)=\{ e,f \}$ where $f$ is the flip that fixes the first and third
+      vertices; and $Z(\mc{Q})=\{ \pm 1 \}$), so $G / Z$ is Abelian (since $\left| G / Z \right|
+      =4=2^2$), yet $G=\D_4$ or $\mc{Q}$ are not Abelian.
+
+    \item Let $G$ be a group with order $p^3$. If $G$ is Abelian, then definitionally $Z(G)=G$, so
+      suppose $Z(G)\neq G$ (i.e. $G$ is non-Abelian). Then $\left| Z(G) \right| \neq p^3$; and from
+      the proof in (a), we see that $\left| Z(G) \right| \neq 1$ and $\left| Z(G) \right| \neq p^2$;
+      the only possible value for $\left| Z(G) \right| $ is $p$. Therefore, if $G$ is a non-Abelian
+      group of order $p^3$, then its center $Z(G)$ has order $p$.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  (6.17) This exercise sketches an alternative proof of a key step in the proof of Corollary 6.26. 
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $G$ be a group, and let $g\in G$ be an element that is not in the center of $G$. Prove
+      that there is a strict inclusion \[
+        Z(G)\subsetneq Z_G(g)
+      ;\] i.e. prove that the centralizer of $g$ is strictly larger than the center of $G$.
+    \item Let $G$ be a finite group of prime power order, say $\left| G \right| =p^n$. Prove that if
+      the center of $G$ satisfies $\left| Z(G) \right| \ge p^{n-1}$, then $Z(G)=G$, and so $G$ is
+      Abelian. 
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $g\in G$ be an element not in the center of $G$. By definition, \[
+        Z(G)\subseteq Z_G(g)
+      ,\] since $Z_G(g)$ consists of all elements that commute with any element $g^{i}\in \left<g
+      \right>\subseteq G$; but every element $z\in Z(G)$ commutes with any element in $G$. Moreover,
+      since $g\not\in Z(G)$, we know $g\neq e$ ($g$ is non-trivial); hence $\left<g \right>\neq \{ e
+      \}$ (and so $\left<g \right>$ has at least one non-identity element). 
+
+      Clearly, any $g^{i}\in \left<g \right>$ commutes with any element in $\left<g \right>$. Let
+      $g^{i}, g^{j}\in \left<g \right>$. Then \[
+        g^ig^j=g^{i+j}=g^{j+i}=g^{j}g^{i}
+      .\] Therefore $\left<g \right>\subseteq Z_G(g)$. 
+
+      But $g\not\in Z(G)$ and $g\in Z_G(g)$; thus $Z(G)\subsetneq Z_G(g)$, as required.
+
+    \item We start with a lemma (since we didn't do 6.16):
+      \begin{lemma}[$Z_G(g)$ is Subgroup]{}
+        Let $G$ be a group, and $g\in G$ an element. Then $Z_G(g)$ is a subgroup of $G$.
+      \end{lemma}
+      \begin{proof}[Proof]
+        Clearly, $eg=ge$ for every $g\in G$; thus $e\in Z_G(g)$.
+
+        Let $z_g\in Z_G(g)$. Then $z_gg=gz_g$. Since $z_g\in Z_G(g)\subseteq G$, $z_g^{-1}\in G$ as
+        well. Then \[
+          z_gg=gz_g \iff z_g^{-1}z_gg=z_g^{-1}gz_g\iff
+          gz_g^{-1}=z_g^{-1}gz_gz_g^{-1}\iff g z_g^{-1}=z_g^{-1}g
+          .\] Hence $z_g^{-1}\in Z_G(g)$ for any $z_g\in Z_G(g)$.
+
+          Finally, suppose $z_g,z_g'\in Z_G(g)$, and consider $z_gz_g'$. Then \[
+            z_gz_g'g=z_ggz_g'=gz_gz_g'
+          ,\] and so $z_gz_g'\in Z_G(g)$ as well. Therefore $Z_G(g)$ is a subgroup of $G$.
+      \end{proof}
+      
+      Suppose $G$ has order $p^{n}$ for some prime number $p$, and $\left| Z(G) \right| \ge
+      p^{n-1}$. Since $Z(G)$ is a (normal) subgroup of $G$, Lagrange's Theorem tells us that $\left|
+      Z(G)\right| $ must be either $p^{n-1}$ or $p^{n}$.
+
+      Suppose $Z(G)\neq G$. Then $\left| Z(G) \right| =p^{n-1}$, and there exists some $g\in G$ such
+      that $g\not\in Z(G)$ (that is, there exists some $g\in G\setminus Z(G)$). From (a), we know
+      that \[
+        Z(G)\subsetneq Z_G(g)
+      ;\] that is, $Z_G(g)$ is strictly larger than $Z(G)$. But we know that $Z_G(g)$ is a subgroup
+      of $G$ from Lemma 1; thus Lagrange tells us that $\left| Z_G(g) \right| =p^r$ for some $0\le
+      r\le n$.  Since $\left| Z(G) \right| =p^{n-1}$, we need $p^{n-1}=\left| Z(G) \right|<\left|
+      Z_G(g) \right| =p^{n}$. Hence $Z_G(g)=G$; but since the choice of $g\in G\setminus Z(G)$ was
+      arbitrary, that means every element not in $Z(G)$ commutes with every element in $G$. In other
+      words, $g\in Z(G)$; a contradiction. 
+
+      Therefore $\left| Z(G) \right| $ must be $p^{n}$, and so $Z(G)=G$, and so $G$ is Abelian.
+  \end{enumerate}
+
+  In Corollary 6.26, the above result can be used instead of deriving a contradiction for $\left|
+  Z(G) \right| =p$. From Lagrange, we know that $\left| Z(G) \right| =1,p,$ or $p^2$. Theorem 6.25
+  tells us that $Z(G)\neq \{ e \}$, so $\left| Z(G) \right| \neq 1$; that is, $\left| Z(G) \right|
+  =p$ or $p^2$. In either case, $\left| Z(G) \right| \ge p^{2-1}=p$, so from the result above, we
+  know that $G$ is Abelian.
+\end{solution}
+
+
+
+
+
+
+\end{document}
