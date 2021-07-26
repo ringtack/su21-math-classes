@@ -207,10 +207,206 @@
   \end{enumerate}
 
   In Corollary 6.26, the above result can be used instead of deriving a contradiction for $\left|
-  Z(G) \right| =p$. From Lagrange, we know that $\left| Z(G) \right| =1,p,$ or $p^2$. Theorem 6.25
+  Z(G) \right| =p$. From Lagrange, we know that $\left| Z(G) \right|=1$, $p$, or $p^2$. Theorem 6.25
   tells us that $Z(G)\neq \{ e \}$, so $\left| Z(G) \right| \neq 1$; that is, $\left| Z(G) \right|
   =p$ or $p^2$. In either case, $\left| Z(G) \right| \ge p^{2-1}=p$, so from the result above, we
   know that $G$ is Abelian.
+\end{solution}
+
+
+\begin{problem}{\S 4}
+  (6.19) Let $p$ be prime, and let $G$ be a group of order $p^n$. Prove that for every $0\le r\le
+  n$, there is a subgroup $H$ of $G$ of order $p^r$. 
+\end{problem}
+
+\begin{solution}
+  We begin with two lemmas.
+  \begin{lemma}[Subgroups of Center are Normal]{}
+    Let $G$ be a finite group, and $Z(G)$ its center. If $H\subseteq Z(G)$ is a subgroup of $Z(G)$,
+    then $H$ is a normal subgroup of $G$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    Suppose $H\subseteq Z(G)$ is a subgroup of $Z(G)$ (and thus of $G$ as well). Then for any $h\in
+    H$, \[
+      hg=gh~\text{for all}~g\in G
+    .\] But then \[
+      hg=gh\iff g^{-1}hg=h\in H
+    \] for every $g\in G$; thus $g^{-1}Hg\subseteq H$ for any $g\in G$. Proposition 6.10 then
+    informs us that $g^{-1}Hg$ is a normal subgroup of $G$.
+  \end{proof}
+  \begin{lemma}{}
+    If $G$ is a finite group with order $p^n$ for some $n\in \Z_{>0}$, $G$ has a normal subgroup of
+    order $p$.
+  \end{lemma}
+  \begin{proof}[Proof]
+    It suffices to prove that an element $z\in Z(G)$ has order $p$; this thus forms a cyclic
+    subgroup $\left<z \right>\subseteq Z(G)$ with order $p$.
+
+    Theorem 6.25 tells us that the center of $Z(G)\neq \{ e \}$; that is, the center $Z(G)$ of $G$
+    has non-trivial elements. Precisely, Lagrange tells us that $\left| Z(G) \right| =p^i$ for some
+    $1\le i\le n$. Let $z\in Z(G)$; since Corollary 2.42 implies $z^{p^i}=e$, consider
+    $z^{\frac{p^i}{p}}=z^{p^{i-1}}$. Then the order of $z^{p^{i-1}}$ is $p$, since clearly 
+    $k=p$ is the lowest power such that $(z^{p^{i-1}})^k=e$. Thus $z^{p^{i-1}}\in Z(G)$ has order
+    $p$, and so forms a cyclic subgroup of $Z(G)$, which is a normal subgroup of $G$ with order $p$
+    (by Lemma 2), as required.
+  \end{proof}
+
+  We now proceed to the main problem by induction on $n$. If $n=1$, then $\left| G \right| =p$, and
+  $\{ e \}$ (with order $p^0=1$) and $\{ G \}$ (with order $p$) are clearly subgroups of $G$; so
+  suppose $n\ge 2$, and that the statement holds for groups of order $p^{n'}$ with $n'<n$.
+
+  From Lemma 2, $G$ has a normal subgroup $N$ of $G$ with order $p$; thus the quotient group $G /N$
+  is well-defined by Theorem 6.12, and has order \[
+    \left| G / N \right| =\frac{\left| G \right| }{\left| N \right| }=\frac{p^n}{p}=p^{n-1}
+  .\] Since $n-1<n$, the inductive hypothesis says that $G / N$ has subgroups $H_r$ of order $p^r$
+  for every $0\le r\le n-1$. To complete the proof, we must now show that every $H_r\in G / N$ has
+  an analogous subgroup of $G$ with the same order.
+
+  Let $g_1N,g_2N,\ldots,g_{p^{n-1}}N$ denote the elements of $G / N$ (i.e. distinct cosets of $N$);
+  here $g_i\in G$ are distinct elements of $G$; i.e. $g_i\neq g_j$ for $i\neq j$ (we can impose a
+  stricter condition on $g_i$ and $g_j$, since $g_iN\neq g_jN$; but this suffices). Consider the
+  homomorphism \[
+    \phi: G / N\longrightarrow G,\ \phi(g_iN)=g_i
+  .\] To see why this is a well-defined function, consider two cosets $gN=g'N\in G / N$. Then
+  $gN=g'N=g_iN$ for one of the cosets above, $g_iN\in G / N$ (since $g_1N,\ldots,g_{p^{n-1}}N$
+  represent all elements of $G / N$). So, \[
+    \phi(gN)=\phi(g_iN)=g_i=\phi(g_iN)=\phi(g'N)
+  ,\] and so $\phi(gN)=\phi(g'N)$. Homomorphism properties follow trivially from coset
+  multiplication properties.
+
+  We now show that for every $0\le r\le n-1$, the image of the subgroup $H_r$---denoted
+  $\phi(H_r)$---forms a subgroup in $G$ with order $p^r$. Let $H_r$ be a subgroup of $G / N$ with
+  order $p^r$. Clearly, $\phi(H_r)$ is a subset of $G$, since for every element $g_jN\in
+  H_r\subseteq G / N$, $g_j\in G$, so every element $\phi(g_jN)=g_j\in \phi(H_r)$ is in $G$ as well.
+  Moreover, since there are $p^r$ elements $g_jN\in H_r$ and for different elements $g_jN$ and
+  $g_kN$, $g_j\neq g_k$, there are necessarily $p^r$ elements in $\phi(H_r)$ as well.
+
+  Since $H_r$ has an identity element $eN=N\in H_r$, its image $\phi(N)=e$ has the identity element
+  as well. For two $g=\phi(gN),g'=\phi(g'N)\in \phi(H_r)$, their product \[
+    \phi(gN\cdot g'N)=\phi(gg'N)=gg'\in \phi(H_r)
+  \] is in the image as well. Finally, for every $gN\in H_r$, $g^{-1}N\in H_r$ as well, since $H_r$
+  is itself a subgroup; thus for every $g=\phi(gN)\in \phi(H_r)$, we have \[
+    \phi(g^{-1}N)=g^{-1}\in \phi(H_r)
+  \] as well. Therefore $\phi(H_r)$ is a subgroup of $G$ with order $p^r$.
+
+  Since this holds for any $H_r$ with $0\le r\le n-1$, we have thus shown that $G$ has subgroups of
+  order $p^r$ for every $0\le r\le n-1$. Clearly, $G$ is a subgroup of itself; thus $G$ has a
+  subgroup of order $p^n$ as well. Therefore, every group $G$ of order $p^n$ has subgroups of order
+  $p^r$ for every $0\le r\le n$.
+  
+\end{solution}
+
+\begin{problem}{\S 5}
+  (6.20) Give two different proofs of the following stronger version of Sylow's Theorem: \begin{center}
+    Let $G$ be a finite group, let $p$ prime, and suppose that $\left| G \right| $ is divisible by
+    $p^r$. Prove that $G$ has a subgroup of order $p^r$. (Note that here, $p^r$ is not required to
+    be the largest power of $p$ that divides $\left| G \right| $).
+  \end{center}
+  \begin{enumerate}[label=(\alph*)]
+    \item Give a proof that directly mimics the proof of Theorem 6.29 by considering the sets of all
+      subsets of $G$ that contain $p^r$ elements. 
+    \item Combine the version of Sylow's Theorem that we did prove with Exercise 6.19.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  Let $p^n$ be the largest power of $p$ that divides $\left| G \right| $, and suppose $r<n$ (since
+  otherwise, we can just apply Sylow's Theorem). We're given that $p^r$ divides $\left| G \right| $,
+  so we can factor \[
+    \left| G \right| =p^rk=p^nm
+  \] for some integers $k$ and $m$ where $m\nmid p$. The proof is by induction on $k$. If $k=1$,
+  then $\left| G \right| =p^r$, so $G$ itself is the desired subgroup. Suppose now that $k\ge 2$,
+  and that the stronger theorem holds for groups of order $p^rk'$ with $k'<k$.
+
+  Recall that a subset $A\subseteq G$ is a subgroup if and only if $aA=A$ for every $a\in A$. Let's
+  look at the collection of $p^r$-element subsets of $G$ and let $G$ act on these subsets by left
+  multiplication. Let \[
+    S=\{A\subseteq G\mid A~\text{has $p^r$ elements}~\} 
+  .\] Since $G$ has $p^rk$ elements and we need to choose $p^r$ of them, the number of elements
+  of $S$ is equal to \[
+    \left| S \right| =\binom{p^rk}{p^r}
+  .\] 
+  Let $A_1,\ldots,A_d\in S$ so that $GA_1,\ldots,GA_d$ form distinct orbits. With the
+  Orbit-Stabilizer Counting Theorem, we thus have \[
+    \left| S \right| =\sum_{i=1}^{d} \left| GA_i \right| =\sum_{i=1}^{d} \frac{\left| G \right|
+    }{\left| G_{A_i} \right| }
+  .\] Observe that \[
+    \left| S \right|
+    =\binom{p^rk}{p^r}=\frac{(p^rk)!}{p^r!(p^rk-p^r)!}=\frac{p^rk(p^rk-1)\ldots(p^rk-p^r+1)}{p^r(p^r-1)\ldots\cdot
+    2\cdot 1}
+  .\] Unfortunately, we cannot apply Lemma 6.30 here, since $n>r$; that is, the above product is
+  still divisible by $p$. However, we can glean some information about its divisibility:
+
+  \begin{mdframed}
+  Recall that $p^rk=p^nm$, where $p\nmid m$. Thus $k=p^{n-r}m$, and $p^{n-r}$ is the maximal power
+  of $p$ that divides $k$. It turns out that $p^{n-r}$ is the maximal power of $p$ that divides
+  $\left| S \right| $ as well. Since \[
+    \left| S \right| =\prod_{j=0}^{p^{r}-1} \frac{p^rk-j}{p^r-j} 
+  ,\] we can inspect each individual fraction. For $j=0$, the fraction $\frac{p^rk}{p^r}=k$ has
+  maximal $p$-power $p^{n-r}$. It remains to show that none of the $1\le j\le p^r-1$ fractions are
+  divisible by $p$. Take any $j$ between $1$ and $p^r-1$, and factor it into \[
+    j=p^is~\text{with}~0\le i<r~\text{and}~p\nmid s
+  .\] Then \[
+    \frac{p^rk-j}{p^r-j}=\frac{p^rk-p^is}{p^r-p^is}=\frac{p^{r-i}k-s}{p^{r-i}-s}
+  .\] Since $i<r$ and $p\nmid s$, we see that neither the numerator or the denominator is divisible
+  by $p$. Thus, the maximal power of $p$ that divides $\left| S \right| $ is $p^{n-r}$.
+  \end{mdframed}
+
+  Thus, since
+  \begin{itemize}
+    \item $\left| S \right| $ is divisible by $p^{n-r}$ (and not divisible for any $\alpha>n-r$);
+    \item $\left| S \right| =\sum_{i=1}^{d} \left| GA_i \right| =\sum_{i=1}^{d} \frac{\left| G
+      \right| }{\left| G_{A_i} \right| }$; and
+    \item $\frac{\left| G \right| }{\left| G_{A_i} \right| }$ is an integer,
+  \end{itemize}
+  every individual summand $\frac{\left| G \right| }{\left| G_{A_i} \right| }$ is divisible by
+  $p^{n-r}$; however, does this guarantee that for some $G_{A_i}$, $p^r$ divides $\left| G_{A_i}
+  \right|$?
+
+  Suppose that $p^r\nmid\left| G_{A_i} \right| $ for every $1\le i\le d$ (that is, $p^r$ does not
+  divide the order of any stabilizer). In other words, $\left| G_{A_i} \right| $ is only divisible
+  by smaller powers of $p$, say $p^{r-j_i}$ for some $1\le j_i\le r$ (and so factors into $\left|
+  G_{A_i} \right| =p^{r-j_i}s$, where $p\nmid s$). Then every orbit $GA_i$ would have order \[
+    \left| GA_i \right| =\frac{\left| G \right| }{\left| G_{A_i}
+    \right|}=\frac{p^nm}{p^{r-j_i}s}=p^{n-r+j_i}\frac{m}{s}
+  .\] But then every orbit would be divisible by some $p^{n-r+\alpha}$, where
+  $\alpha=\min\{j_1,\ldots,j_d\}$. Since every $j_i\ge 1$, $\alpha\ge 1$, so $n-r+\alpha>n-r$, a
+  contradiction of above (since $p^{n-r}$ is the maximal power of $p$ that divides $\left| S \right|
+  $). Thus at least one stabilizer $G_{A_i}$ has order $\left| G_{A_i} \right|$ divisible by $p^r$.
+
+  In other words, we have shown that there exists a subset $A\subseteq G$ with $\left| A \right|
+  =p^r$ such that the stabilizer $G_A$ of $A$ has order \[
+    \left| G_A \right| =p^rk' ~\text{with}~k'|k
+  ,\] since $p^r$ dividing $\left| G_A \right| $ means $\left| G_A \right| =p^rk'$ for some
+  integer $k'$; and $\frac{\left| G \right| }{\left| G_A \right| }=\beta$ for some integer
+  $\beta$ means \[
+    \beta=\frac{p^nm}{p^rk'}=\frac{p^{n-r}m}{k'}\implies k'\beta=p^{n-r}m=k
+  ,\] and so $k'|k$.
+
+  We consider two cases. If $k'<k$, then the induction hypothesis says that $G_A$ has a subgroup
+  $H$ with order $p^r$; but $H$ is thus also a subgroup of $G$ (since $G_A$ is a subgroup of $G$),
+  so we are done.
+
+  Otherwise, suppose $k'=k$. Then $\left| G_A \right| =\left| G \right| $, so $G_A=G$. By definition
+  of a stabilizer $G_A$, this means that \[
+    gA=A~\text{for every element}~g\in G
+  .\] The set has $A$ has $p^r$ elements, so it must be non-empty. Let $a\in A$ be some element of
+  $A$. Then for every $g\in G$, we have \[
+    g=(ga^{-1})a\in (ga^{-1})A=A
+  .\] Thus every element of $G$ is in $A$, so $G\subseteq A$; and since $A\subseteq G$, $G=A$, so
+  $\left| G \right| =\left| A \right| =p^r$. But $G$ has order $p^rk$ with $k\ge 2$, a
+  contradiction.
+
+  Therefore $k'<k$, and so $G$ has a subgroup of order $p^r$.\hfill$\square$\\
+
+  Alternatively, suppose $p^r$ divides $\left| G \right| $ for a prime $p$ and a positive
+  integer $r$. Let $p^n$ be the highest power of $p$ that divides $\left| G \right| $; then $0\le
+  r\le n$ (since $r$ is a positive integer, and any $p^r$ that divides $\left| G \right| $ also
+  divides $p^n$). By Sylow's Theorem, $G$ has a subgroup $H$ of order $p^n$; and by Exercise 6.19,
+  since $H$ is itself a group, $H$ has a subgroup $K$ of order $p^r$ (since $0\le r\le n$). But $H$
+  is a subgroup of $G$, so $K$ is a subgroup of $G$ as well. Thus if $\left| G \right|$ is divisible
+  by $p^r$ for some prime $p$ and some positive integer $r$, $G$ has a subgroup $K$ of order $p^r$,
+  as required.
+  
 \end{solution}
 
 
