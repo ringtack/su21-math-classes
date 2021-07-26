@@ -364,12 +364,14 @@
 
   Suppose that $p^r\nmid\left| G_{A_i} \right| $ for every $1\le i\le d$ (that is, $p^r$ does not
   divide the order of any stabilizer). In other words, $\left| G_{A_i} \right| $ is only divisible
-  by smaller powers of $p$, say $p^{r-j_i}$ for some $1\le j_i\le r$ (and so factors into $\left|
-  G_{A_i} \right| =p^{r-j_i}s$, where $p\nmid s$). Then every orbit $GA_i$ would have order \[
+  by a smaller maximal power of $p$, say $p^{r-j_i}$ for some $1\le j_i\le r$ (and so factors into
+  $\left| G_{A_i} \right| =p^{r-j_i}s$, where $p\nmid s$). Then every orbit $GA_i$ would have order
+  \[
     \left| GA_i \right| =\frac{\left| G \right| }{\left| G_{A_i}
     \right|}=\frac{p^nm}{p^{r-j_i}s}=p^{n-r+j_i}\frac{m}{s}
   .\] But then every orbit would be divisible by some $p^{n-r+\alpha}$, where
-  $\alpha=\min\{j_1,\ldots,j_d\}$. Since every $j_i\ge 1$, $\alpha\ge 1$, so $n-r+\alpha>n-r$, a
+  $\alpha=\min\{j_1,\ldots,j_d\}$. Since every $j_i\ge 1$, $\alpha\ge 1$, so $n-r+\alpha>n-r$, and
+  so $\sum_{i=1}^{d} \left| GA_i \right| =\left| S \right|$ is divisible by $ptdn-r+\alpha$, a
   contradiction of above (since $p^{n-r}$ is the maximal power of $p$ that divides $\left| S \right|
   $). Thus at least one stabilizer $G_{A_i}$ has order $\left| G_{A_i} \right|$ divisible by $p^r$.
 
