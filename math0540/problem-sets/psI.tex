@@ -1,0 +1,98 @@
+\documentclass{homework}
+\homework{I}
+
+\begin{document}
+\begin{problem}{\S 1}
+  (6.A.6) Suppose $u,v\in V$. Prove that $\left<u,v \right>=0$ if and only if \[
+    \|u\|\le \|u+av\|
+  \] for all $a\in \F$.
+\end{problem}
+\begin{solution}
+  Suppose $\left<u,v \right>=0$. Observe that $\left<u,av \right> =0$ for all $a\in \F$; the
+  Pythagorean Theorem then tells us that \[
+    \|u+av\|^2=\|u\|^2+\|av\|^2
+  .\] Since $\|av\|^2\ge 0$ for any $a\in F,\ v\in V$, we have \[
+    \|u+av\|^2=\|u\|^2+\|av\|^2\ge \|u\|^2
+  .\] Taking the square root of both sides, we get $\|u\|\le \|u+av\|$.
+
+  Conversely, suppose $\|u\|\le \|u+av\|$. Then \[
+    \|u\|^2\le \|u+av\|^2 \implies \|u+av\|^2-\|u\|^2\ge 0  
+  .\] But $\|u+av\|^2=\left<u+av,u+av \right> $, and likewise for $\|u\|^2$, so \[
+    \|u+av\|^2-\|u\|^2=\left<u,u \right> +\overline{a}\left<u,v \right> +a\left<v,u \right>
+    +a\overline{a}\left<v,v \right> -\left<u,u \right> \ge 0
+  .\] This then becomes \[
+    \left| a \right| ^2\|v\|^2+\overline{a}\left<u,v \right> +a\left<v,u \right> \ge 0
+  .\] Observe that $\left<u,v \right> \left<v,u \right> =\left| \left<u,v \right>  \right|
+  ^2=\left<u,v \right> \left<u,v \right> $.  Since the above situation holds for any $a\in \F$, let
+  \[
+    a=-\frac{\left<u,v \right> }{\|v\|^2}=\overline{a}
+  .\] Then
+  \begin{align*}
+    \left| a \right| ^2\|v\|^2+\overline{a}\left<u,v \right> +a\left<v,u \right> &= \frac{\left|
+    \left<u,v \right>  \right| ^2\|v^2\|}{(\|v\|^2)^2}-\frac{\left<u,v \right> \left<u,v \right>
+  }{\|v\|^2}-\frac{\left<u,v \right> \left<v,u \right> }{\|v\|^2}\\
+  &= \frac{\left| \left<u,v \right>  \right|^2 }{\|v\|^2}-2 \frac{\left| \left<u,v \right>  \right|
+  ^2}{\|v\|^2}\\
+  &= -\frac{\left| \left<u,v \right>  \right| ^2}{\|v\|^2}\\
+  &= -\left| \left<u,v \right>  \right| ^2 \\ 
+  &\ge 0
+  .\end{align*}
+  However, $\left| \left<u,v \right>  \right| ^2\ge 0$ for any $u,v$, with equality occurring only
+  when $\left<u,v \right> =0$. Thus $u$ and $v$ are orthogonal.
+\end{solution}
+
+\begin{problem}{\S 2}
+  (6.A.13) Suppose $u,v$ are non-zero vectors in $\R^2$. Prove that \[
+    \left<u,v \right> =\|u\|\|v\|\cos{\theta}
+  \] where $\theta$ is the angle between $u$ and $v$.
+\end{problem}
+\begin{solution}
+  Consider the triangle formed by $u,v,$ and $u-v$, with $\theta$ the angle between $u$ and $v$.
+  By the law of cosines, \[
+    \|u-v\|^2=\|u\|^2+\|v\|^2-2\|u\|\|v\|\cos{\theta}
+  .\] Note that since $\R$ is a real inner product space, $\left<u,v \right> =\left<v,u \right> $;
+  so \[
+    \|u-v\|^2=\left<u-v,u-v \right> =\left<u,u \right> -2\left<u,v \right> +\left<v,v \right>
+    =\|u\|^2-2\left<u,v \right> +\|v\|^2
+  .\] Then
+  \begin{align*}
+    \|u\|^2-2\left<u,v \right> +\|v\|^2&= \|u\|^2+\|v\|^2-2\|u\|\|v\|\cos{\theta} \\
+    -2\left<u,v \right> &= -2\|u\|\|v\|\cos{\theta} \\
+    \left<u,v \right> &=\|u\|\|v\|\cos{\theta}
+  ,\end{align*}as required.
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  (6.A.22) Show that the square of an average is less than or equal to the average of the squares;
+  that is, for $a_1,\ldots,a_n\in \R$, then \[
+    \left( \frac{a_1+\ldots+a_n}{n} \right) ^2\le \frac{a_1^2+\ldots+a_n^2}{n}
+  .\] Also: for which choices of $a_1,\ldots,a_n\in \R$ does inequality become equality?
+\end{problem}
+\begin{solution}
+  Let $u,v\in \R^n$, where $u=(a_1,\ldots,a_n)$ and $v=(1,\ldots,1)$. Then
+  \begin{align*}
+    \|u\|^2&=\left<u,u \right> =a_1^2+\ldots+a_n^2\\
+    \|v\|^2&= \left<v,v \right> =1+\ldots+1=n \\
+    \left<u,v \right> &= a_1+\ldots+a_n 
+  .\end{align*}
+  By the Cauchy-Schwarz Inequality, \[
+    \left| \left<u,v \right>  \right| \le \|u\|\|v\| \implies \left| \left<u,v \right>  \right|
+    ^2\le \|u\|^2\|v\|^2
+  .\] Thus \[
+  (a_1+\ldots+a_n)^2\le (a_1^2+\ldots+a_n^2)n \implies \frac{(a_1+\ldots+a_n)^2}{n} \le
+  a_1^2+\ldots+a_n^2
+  .\] Dividing by $n$ on both sides, we get \[
+    \left( \frac{a_1+\ldots+a_n}{n} \right) ^2\le \frac{a_1^2+\ldots+a_n^2}{n} 
+  .\] In other words, the square of the average is less than or equal to the average of the squares.
+
+  By Cauchy-Schwarz, inequality holds only when one vector is a scalar multiple of the other. Thus
+  \[
+    \left( \frac{a_1+\ldots+a_n}{n} \right) ^2= \frac{a_1^2+\ldots+a_n^2}{n} 
+  \] only when $a_1=\ldots=a_n$.
+\end{solution}
+
+
+
+
+\end{document}
