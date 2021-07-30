@@ -686,6 +686,208 @@ by $\varphi$; thus $u$ is invariant of chosen orthonormal basis $e_1,\ldots,e_n$
 \end{solution}
 
 
+\section{Orthogonal Complements and Minimization Problems}
+
+\subsection{Orthogonal Complements}
+\begin{definition}[Orthogonal Complement]{}
+  If $U$ is a subset of $V$, then the \textbf{orthogonal complement} of $U$, denoted $U^{\bot}$, is
+  the set of all vectors in $V$ that are orthogonal to every vector in $U$: \[
+    U^{\bot}=\{v\in V\mid \left<v,u \right> =0~\text{for every}~u\in U\} 
+  .\]
+\end{definition}
+For example, if $U$ is a line in $\R^3$, then $U^{\bot}$ is the plane containing the origin that is
+perpendicular to $U$. If $U$ is instead a plane in $\R^3$, then $U^{\bot}$ is the line containing
+the origin that is perpendicular to $U$.
+\begin{proposition}[Properties of Orthogonal Complements]{}
+  \begin{enumerate}
+    \item If $U$ is a subset of $V$, then $U^{\bot}$ is a subspace of $V$.
+    \item $\{ 0 \}^{\bot}=V$.
+    \item $V^{\bot}=\{ 0 \}$.
+    \item If $U$ is a subset of $V$, then $U\cap U^{\bot}\subseteq \{ 0 \}$.
+    \item If $U$ and $W$ are subsets of $V$ and $U\subseteq W$, then $W^{\bot}\subseteq U^{\bot}$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    \item Suppose $U$ is a subset of $V$. Then $\left<0,u \right> =0$ for every $u\in U$; thus $0\in
+        U^{\bot}$.
+      Suppose $v,w\in U^{\bot}$. If $u\in U$, then \[
+        \left<v+w,u \right> =\left<v,u \right> +\left<w,u \right> =0+0=0
+      .\] Thus $v+w\in U^{\bot}$.
+      Finally, suppose $\lambda\in \F,\ v\in U^{\bot}$. If $u\in U$, then \[
+        \left<\lambda v,u \right> =\lambda\left<v,u \right> =\lambda\cdot 0=0
+      .\] Thus $\lambda v\in U^{\bot}$, and so $U^{\bot}$ is a subspace of $V$.
+
+    \item Clearly, any $v\in V$ satisfies $\left<v,0 \right> =0$. Thus every $v\in V^{\bot}$, so
+      $V^{\bot}=V$.
+    \item Suppose $v\in V^{\bot}$. Then $\left<v,v \right> =0$, which forces $v=0$. Thus
+      $V^{\bot}=\{ 0 \}$.
+    \item Suppose $U$ is a subset of $V$ and $v\in U\cap U^{\bot}$. Then $\left<v,v \right> =0$,
+      which forces $v=0$. Thus $U\cap U^{\bot}\subseteq \{ 0 \}$.
+    \item Suppose $U,W$ are subsets of $V$ and $U\subseteq W$. Suppose $v\in W^{\bot}$. Since $u\in
+      U\subseteq W$, $\left<v,u \right> =0$ for every $u\in U$. Thus $W^{\bot}\subseteq U^{\bot}$.
+  \end{enumerate}
+\end{proof}
+
+With direct sums, we can start to see why it is referred to as the orthogonal complement. Suppose
+$U$ and $W$ are subspaces of $V$ such that $U\oplus W=V$ (in other words, every vector $v\in V$ can
+be written in exactly one way as a vector in $U$ plus a vector in $V$). It turns out that every
+vector space can be decomposed into a subspace and its orthogonal complement.
+
+\begin{theorem}[Direct Sum of Subspace and Orthogonal Complement]{}
+  Suppose $U$ is a finite-dimensional subspace of $V$. Then \[
+    V=U\oplus U^{\bot}
+  .\]
+\end{theorem}
+\begin{proof}[Proof]
+  First, we will show that $V=U+U^{\bot}$. Suppose $v\in V$, and suppose $e_1,\ldots,e_m\in U$ is an
+  orthonormal basis of $U$. Clearly, \[
+    v=\underbrace{\left<v,e_1 \right> e_1+\ldots+\left<v,e_m \right> e_m}_u
+    +\underbrace{v-\left<v,e_1 \right>e_1-\ldots-\left< v,e_m\right>e_m}_w
+  .\] Let $u$ and $w$ be vectors as defined above. Clearly, $u\in U$. Since $e_1,\ldots,e_m$ is an
+  orthonormal list, for each $j=1,\ldots,m$ we have \[
+    \left<w,e_j \right> =\left<v,e_j \right> -\left<v,e_j \right> =0
+  .\] This is because taking the inner product of $w$ with respect to $e_j$ gives us $\left<v,e_j
+  \right> -\left<v,e_j \right> \left<e_j,e_j \right> =\left<v,e_j \right> -\left<v,e_j \right> $,
+  since $\left<e_j,e_j \right> =1$ and $\left<e_j,e_k \right> =0$ for every $j\neq k$.
+
+  Thus $w$ is orthogonal to every vector in $\Span{(e_1,\ldots,e_m)}$. In other words, $w\in
+  U^{\bot}$. Thus we have written any vector $v\in V$ as $v=u+w$, where $u\in U$ and $w\in
+  U^{\bot}$.
+
+  From the properties shown above, we know $U\cap U^{\bot}=\{ 0 \}$. By Proposition 1.45 and above,
+  we see that $V=U\oplus U^{\bot}$.
+\end{proof}
+
+Now, computing $\dim{U^{\bot}}$ is trivial; simply take \[
+  \dim{U^{\bot}}=\dim{V}-\dim{U}
+.\] Another important consequence of the theorem is the following:
+\begin{proposition}{}
+  Suppose $U$ is a vinite-dimensional subspace of $V$. Then \[
+    U=\left( U^{\bot} \right) ^\bot
+  .\] 
+\end{proposition}
+\begin{proof}[Proof]
+  First, we show that \[
+    U\subseteq \left( U^{\bot} \right) ^\bot
+  .\] Suppose $u\in U$. Then $\left<u,v \right> =0$ for every $v\in U^{\bot}$ (by definition). Since
+  $u$ is thus orthogonal to every vector in $U^{\bot}$, we have $u\in \left( U^{\bot} \right)
+  ^\bot$.
+
+  To show $\left( U^{\bot} \right) ^\bot\subseteq U$, suppose $v\in \left( U^{\bot} \right) ^\bot$.
+  We can write $v=u+w$ (since the complement of a subset, here $U^{\bot}$, is a subspace of $V$),
+  where $u\in U$ and $w\in U^{\bot}$. Then \[
+    w=v-u\in U^{\bot}
+  .\] Since $v\in \left( U^{\bot} \right) ^bot$ and $u\in \left( U^{\bot} \right)^\bot$ (from above,
+  since $U\subseteq \left( U^{\bot} \right) ^\bot$), we have $v-u\in \left( U^{\bot} \right) ^\bot$.
+  But this means $v-u\in U^{\bot}\cap \left( U^{\bot} \right) ^\bot$, which implies that $v-u$ is
+  orthogonal to itself; in other words, $\left<v-u,v-u \right> =0$, so $v-u=0$, and so $v=u\in U$,
+  so $v\in U$ as well. Thus every vector in $\left( U^{\bot} \right) ^\bot$ is in $U$ as well, so
+  $\left( U^{\bot} \right) ^\bot\subseteq U$, completing the proof.
+\end{proof}
+
+We now define an operator $\mc{P}_U$ for every finite-dimensional subspace $U$ of $V$.
+
+\begin{definition}[Orthogonal Projection]{}
+  Suppose $U$ is a finite-dimensional subspace of $V$. The \textbf{orthogonal projection of $V$ onto
+  $U$} is the operator $\mc{P}_U\in \mc{L}(V)$, defined as follows: \begin{center}
+    For $v\in V$, write $v=u+w$ where $u\in U$ and $w\in U^{\bot}$. Then $\mc{P}_U(v)=u$.
+  \end{center}
+\end{definition}
+
+Since given a subpsace, every vector space uniquely decomposes into that subspace and its orthogonal
+complement, $\mc{P}_U$ is well-defined.
+
+\begin{example}
+  Suppose $x\in V$ with $x\neq 0$ and $U=\Span{(x)}$. Show that \[
+    \mc{P}_U(v)=\frac{\left<v,x \right> }{\|x\|^2}x
+  \] for every $v\in V$.
+\end{example}
+\begin{solution}
+  Suppose $v\in V$. Then \[
+    v=\frac{\left<v,v \right> }{\|x\|^2}x+\left( v-\frac{\left<v,x \right> }{\|x\|^2}x \right) 
+  ,\] where the first term on the right is in $\Span{(x)}$ (and thus in $U$) and the second term on
+  the right is orthogonal to $x$ (see the proof of the direct sum theorem above for why), and thus
+  in $U^{\bot}$. Thus $\mc{P}_U(v)$ equals the first term on the right, as desired.
+\end{solution}
+
+\begin{proposition}[Properties of Orthogonal Projections]{}
+  Suppose $U$ is a finite-dimensional subspace of $V$ and $v\in V$. Then
+  \begin{enumerate}
+    \item $\mc{P}_U\subseteq \mc{L}(V)$;
+    \item $\mc{P}_Uu=u$ for every $u\in U$;
+    \item $\mc{P}_Uw=0$ for every $w\in U^{\bot}$;
+    \item $\range{\mc{P}_U}=U$;
+    \item $\Null{\mc{P}_U}=U^{\bot}$;
+    \item $v-\mc{P}_Uv\in U^{\bot}$;
+    \item $\mc{P}_U^2=\mc{P}_U$;
+    \item $\|\mc{P}_Uv\|\le \|v\|$;
+    \item For every orthonormal basis $e_1,\ldots,e_m\in U$, \[
+      \mc{P}_Uv=\left<v,e_1 \right>e_1+\ldots+\left<v,e_m \right> e_m 
+    .\] 
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  \begin{enumerate}
+    To show that $\mc{P}_U$ is a linear map on $V$, suppose $v_1,v_2\in V$. Write them as \[
+        v_1=u_1+w_1,\ v_2=u_2+w_2
+      ,\] where $u_1,u_2\in U$ and $w_1,w_2\in U^{\bot}$. Thus $\mc{P}_Uv_1=u_1$ and $\mc{P}_Uv_2=u_2$.
+      Since $v_1+v_2=(u_1+u_2)+(w_1+w_2)$, clearly \[
+        \mc{P}_U(v_1+v_2)=u_1+u_2=\mc{P}_Uv_1+\mc{P}_Uv_2
+      .\] Similarly with $\lambda\in \F$, $\lambda v_1=\lambda u_1+\lambda w_1$, so \[
+      \mc{P}_U(\lambda v_1)=\lambda u_1=\lambda\mc{P}_Uv_1
+      .\] Thus $\mc{P}_U\in \mc{L}(V)$ is a valid linear map.
+
+      All but the last two follow trivially.
+
+      For the second last one, let $v=u+w$ with $u\in U,\ w\in U^{\bot}$. Then \[
+        \|\mc{P}_Uv\|^2=\|u\|^2\le \|u\|^2+\|w\|^2=\|v\|^2
+      ,\] where the last equality comes from the Pythagorean Theorem.
+
+      The last property follows from the proof of the direct sum decomposition.
+    
+  \end{enumerate}
+\end{proof}
+
+\subsection{Minimization Problems}
+
+This problem often arises: given a subspace $U$ of $V$ and a point $v\in V$, find a point $u\in U$
+such that $\|v-u\|$ is as small as possible. It turns out that this minimization problem is actually
+solved by taking $u=\mc{P}_Uv$.
+
+\begin{proposition}[Minimizing Distance to Subspace]{}
+  Suppose $U$ is a finite-dimensional subspace of $V$, $v\in V$, and $u\in U$. Then \[
+    \|v-\mc{P}_Uv\|\le \|v-u\|
+  .\] In other words, the distance between $v$ and $\mc{P}_Uv$ is smaller than the distance between
+  $v$ and any vector $u$ in $U$. Equality only holds if $u=\mc{P}_Uv$.
+\end{proposition}
+\begin{proof}[Proof]
+  We have
+  \begin{align*}
+    \|v-\mc{P}_Uv\|^2&\le \|v-\mc{P}_Uv\|^2+\|\mc{P}_Uv-u\|^2\\
+                     &=\|(v-\mc{P}_Uv)+(\mc{P}_Uv-u)\|^2\\
+                     &=\|v-u\|^2
+  .\end{align*}
+  The first inequality holds because $\|\mc{P}_Uv-u\|^2\ge 0$, and the secone equality holds due to
+  the Pythagorean Theorem (since $v-\mc{P}_Uv\in U^{\bot}$, and $\mc{P}_Uv-u\in U$). Taking square
+  roots gives the desired inequality.
+
+  Inequality becomes equality if and only if the above inequality is an equality, which happens if
+  and only if $\mc{P}_Uv-u=0$, or $\mc{P}_Uv=u$.
+\end{proof}
+
+
+
+
+
+
+ 
+
+
+
+
+
+
 
 
 
