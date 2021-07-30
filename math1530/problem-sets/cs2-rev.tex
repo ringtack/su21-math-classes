@@ -11,9 +11,17 @@
 \begin{solution}
   We have shown that $\sigma(a+b\sqrt{D})=a\pm b\sqrt{D}$ are the only two possible automorphisms in
   $\Gal_{\Q}L$. The identity automorphism, $\sigma_I(a+b\sqrt{D})=a+b\sqrt{D}$ is clearly an
-  isomorphism; it remains to show that $\sigma(a+b\sqrt{D})=a-b\sqrt{D}$ is an isomorphism.
+  isomorphism; it remains to show that $\sigma(a+b\sqrt{D})=a-b\sqrt{D}$ is a field isomorphism.
 
+  Clearly, $\sigma(1)=1$.
   Consider $a+b\sqrt{D},c+d\sqrt{D}\in \Q(\sqrt{D})$. Then
+  \begin{align*}
+    \sigma((a+b\sqrt{D})+(c+d\sqrt{D}))&= \sigma((a+c)+(b+d)\sqrt{D}) \\
+                                       &= (a+c)-(b+d)\sqrt{D} \\
+                                       &= a+c-b\sqrt{D}-d\sqrt{D} \\
+                                       &= a-b\sqrt{D}+c-d\sqrt{D}  \\
+                                       &= \sigma(a+b\sqrt{D})+\sigma(c+d\sqrt{D})
+  ,\end{align*} and 
   \begin{align*}
     \sigma((a+b\sqrt{D})(c+d\sqrt{D}))&= \sigma(ac+(ad+bc)\sqrt{D}+bdD) \\
                                       &= (ac+bdD)-(ad+bc)\sqrt{D}\\
