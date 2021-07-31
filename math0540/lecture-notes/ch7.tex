@@ -1,0 +1,139 @@
+\documentclass[math0540-lecture-notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Operators on Inner Product Spaces}
+
+\section{Self-Adjoint and Normal Operators}
+
+We start with a review of linear functional.
+
+\begin{definition}[Linear Functionals]{}
+  A linear map from a vector space $V$ to a field $\F$ is a \textbf{linear functional}.
+\end{definition}
+For example, if $V$ is an inner product space, then for a fixed $v\in V$, \[
+  \left<\cdot , v \right> :V\longrightarrow \F
+,\] is a linear functional on $V$. Indeed, this is a linear map, since inner products are linear in
+the first slot.
+
+\begin{theorem}[Reisz Representation Theorem]{}
+  Let $V$ be a finite-dimensional inner product space. Then given a linear functional $\phi:V\to
+  \F$, there exists a unique vector $u\in V$ such that \[
+    \phi(v)=\left<v,u \right> 
+  \] for every $v\in V$.
+\end{theorem}
+
+\begin{example}
+  Let $\phi:\R^2\to \R$ (with the usual Euclidean inner product) be given by $\phi(x,y)=x+y$. Reisz
+  then tells us that there exists some $v\in \R^2$ such that \[
+    \phi(x,y)=\left<(x,y),v \right> ~\text{for every}~(x,y)\in \R^2
+  .\] Indeed, let $v=(1,1)$. Then $\left<(x,y),(1,1) \right> =x+y$.
+\end{example}
+
+Reisz Representation Theorem actually gives us a bijective function \[
+  R:\mc{L}(V,\F)\longrightarrow V
+.\] In other words, the space of all linear functionals from $V$ to $\F$ is bijective to $V$!
+Indeed, $R$ is given by \[
+  R(\phi)=\overline{\phi(e_1)}e_1+\ldots+\overline{\phi(e_n)}e_n  
+,\] where $\phi\in \mc{L}(V,\F)$ is a linear functional and $e_1,\ldots,e_n$ is an orthonormal basis
+of $V$. $R$ is conjugate-linear, with linearity holding only when $\F$ is real.
+
+Now, we move onto adjoints.
+\begin{definition}[Adjoint, $T^*$]{}
+  Suppose $T\in \mc{L}(V,W)$. The \textbf{adjoint} of $T$ is the function $T^*:W\to V$ such that \[
+    \left<Tv,w \right> =\left<v,T^*w \right> 
+  \] for every $v\in V$ and $w\in W$.
+
+  Note that the left inner product is the \textbf{inner product on $W$}, while the right inner
+  product is the \textbf{inner product on $V$}.
+\end{definition}
+
+But why does such a function $T^*$ actually exist, and why is it unique? Fix a $w\in W$, and
+consider \[
+  V\longrightarrow \F, v\mapsto \left<Tv,w \right> 
+.\] This is a linear map from $V$ to $\F$, since it's just a linear map ($T$) composed with another
+linear map ($\left<\cdot ,w \right> $). Then by the Reisz Representation Theorem, there is a unique
+vector $T^*w\in V$ such that for all $v\in V$, \[
+  \left<Tv,w \right> =\left<v,T^*w \right> 
+.\] 
+
+\begin{example}
+  Define $T:\R^3\to \R^2$ by \[
+    T(x_1,x_2,x_3)=(x_2+3x_3,2x_1)
+  .\] Find a formula for $T^*$.
+\end{example}
+\begin{solution}
+  Here $T^*\in \mc{L}(\R^2,\R^3)$. To compute $T^*$, fix a point $(y_1,y_2)\in \R^2$. Then for every
+  $(x_1,x_2,x_3)\in \R^3$, we have
+  \begin{align*}
+    \left<(x_1,x_2,x_3),T^*(y_1,y_2) \right> &= \left<T(x_1,x_2,x_3),(y_1,y_2) \right>  \\ 
+                                             &= \left<(x_2+3x_3,2x_1),(y_1,y_2) \right>  \\
+                                             &= x_2y_1+3x_3y_1+2x_1y_2 \\
+                                             &= \left<(x_1,x_2,x_3),(2y_2,y_1,3y_1) \right>
+  .\end{align*} Thus \[
+  T^*(y_1,y_2)=(2y_2,y_1,3y_1)
+  .\] 
+\end{solution}
+\begin{example}
+  Fix $u\in V$ and $x\in W$. Define $T\in \mc{L}(V,W)$ by \[
+    Tv=\left<v,u \right> x
+  \] for every $v\in V$. Find a formula for $T^*$.
+\end{example}
+\begin{solution}
+  Fix $w\in W$. Then for every $v\in V$, we have
+  \begin{align*}
+    \left<v,T^*w \right> &= \left<Tv,w \right>  \\
+    &= \left<\left<v,u \right> x,w \right>  \\
+    &= \left<v,u \right> \left<x,w \right>  \\
+    &= \left<v,\left<w,x \right> u \right> 
+  .\end{align*} Thus \[
+    T^*w=\left<w,x \right> u
+  .\] 
+\end{solution}
+
+In the above examples, $T^*$ was not only a function, but indeed a linear map. This is true in
+general.
+\begin{proposition}[Adjoint is Linear]{}
+  If $T\in \mc{L}(V,W)$, then $T^*\in \mc{L}(W,V)$ (equivalently, $T^*$ is a linear map).
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $T\in \mc{L}(V,W)$. Fix $w_1,w_2\in W$. If $v\in V$, then
+  \begin{align*}
+    \left<v,T^*(w_1+w_2) \right>&= \left<Tv,w_1+w_2 \right>  \\
+    &= \left<Tv,w_1 \right> +\left<Tv,w_2 \right>  \\
+    &= \left<v,T^*w_1 \right> +\left<v,T^*w_2 \right>  \\
+    &=\left<v,T^*w_1+T^*w_2 \right> 
+  .\end{align*}
+  Hence $T^*(w_1+w_2)=T^*w_1+T^*w_2$. A similar computation follows for $\lambda\in \F$; thus
+  $T^*\in \mc{L}(W,V)$, as desired.
+\end{proof}
+
+Let's look at some properties of the adjoint.
+\begin{proposition}[Properties of Adjoints]{}
+  \begin{enumerate}
+    \item $(S+T)^*=S^*+T^*$ for all $S,T\in \mc{L}(V,W)$;
+    \item $\left( \lambda T \right)^*=\overline{\lambda}T^* $ for every $\lambda\in \F$, $T\in
+      \mc{L}(V,W)$;
+    \item $(T^*)^*=T$ for all $T\in \mc{L}(V,W)$;
+    \item $I^*=I$, where $I$ is the identity operator on $V$;
+    \item $(ST)^*=T^*S^*$ for all $T\in \mc{L}(V,W)$ and $S\in \mc{L}(W,U)$ (here $U$ is another
+      inner product space over $\F$).
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  TODO
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

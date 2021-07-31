@@ -1,0 +1,77 @@
+\documentclass{review-sheet}
+\homework{20}
+
+\begin{document}
+
+\begin{problem}{\S 1}
+  Let $c\in \R$ be any real number. Does there exist a polynomial $g\in \mc{P}_d(\R)$ such that for
+  all $f\in \mc{P}_d(\R)$, \[
+    \int_0^1f(x)g(x)dx=f(c)
+  ?\] 
+\end{problem}
+
+\begin{solution}
+  From Review Sheet 18, we know that \[
+    \left<p,q \right> =\int_0^1p(x)q(x)dx
+  \] is an inner product in the vector space $\mc{P}_d(\R)$. Additionally, the evaluation map at
+  $c$, \[
+    E_c: \mc{P}_d(\R)\to \R,\ E_c(f)=f(c)
+  \] is trivially a linear functional on $\mc{P}_d(\R)$. Then by the Reisz Representation Theorem,
+  there exists some $g(x)\in \mc{P}_d(\R)$ such that \[
+    E_c(f)=f(c)=\left<f,g \right> =\int_0^1f(x)g(x)dx
+  ,\] as required.
+\end{solution}
+
+\begin{problem}{\S 2}
+  Find such a polynomial above in the case $c=0$, $d=1$. 
+\end{problem}
+\begin{solution}
+  From previous review sheets, given the vector space $\mc{P}_1(\R)$ together with the inner product
+  \[
+    \left<p,q \right> =\int_0^1p(x)q(x)dx
+  ,\] we found an orthonormal basis \[
+    1, 2x\sqrt{3}-\sqrt{3}
+  .\] Consider the evaluation map $E_0\in \mc{L}(V,\F)$ (which is a linear functional); then by the
+  Reisz Representation Theorem, some $g\in \mc{P}_1(\R)$ exists that satisfies \[
+    \left<f,g \right> =\int_0^1f(x)g(x)dx=E_0(f)
+  \] for all $f\in \mc{P}_1(\R)$; in particular,
+  \begin{align*}
+    g(x)&=\overline{E_0(1)}\cdot 1+\overline{E_0(2x\sqrt{3}-\sqrt{3})}\cdot (2x\sqrt{3}-\sqrt{3})\\
+     &=1+(-\sqrt{3})(2x\sqrt{3}-\sqrt{3})\\
+     &=4-6x
+  .\end{align*}
+  Indeed, if we have any $f(x)=a_0+a_1x\in \mc{P}_1(\R)$, then
+  \begin{align*}
+    \int_0^1(a_0+a_1x)(4-6x)dx&= \int_0^14a_0-6a_0x+4a_1x-6a_1x^2dx \\
+    &= 4a_0-3a_0+2a_1-2a_1  \\
+    &= a_0=E_0(f)
+  ,\end{align*} as required.
+\end{solution}
+
+
+\begin{problem}{\S 3}
+  Consider $\R^2$ with the inner product \[
+    \left<(w_1,w_2),(z_1,z_2) \right> =2w_1z_1+3w_2z_2
+  .\] Let $T:\R^2\to \R^2$ be given by \[
+  T(x_1,x_2)=(x_1+3x_2,-x_1)
+  .\] Compute $T^*$. 
+\end{problem}
+
+\begin{solution}
+  Fix a point $(y_1,y_2)\in \R^2$. Then for any $(x_1,x_2)\in \R^2$, we have
+  \begin{align*}
+    \left<(x_1,x_2),T^*(y_1,y_2) \right> &= \left<T(x_1,x_2),(y_1,y_2) \right>  \\
+                                         &= \left<(x_1+3x_2,-x_1),(y_1,y_2) \right>  \\
+                                         &= 2(x_1y_1+3x_2y_1)-3x_1y_2 \\
+                                         &= 2x_1y_1+6x_2y_1-3x_1y_2 \\
+                                         &= 2y_1(x_1+3x_2)-3x_1y_2 \\
+                                         &=
+                                         \left<(x_1,x_2),\left(y_1-\frac{3}{2}y_2,2y_1\right)
+                                         \right>
+  .\end{align*}
+  Hence $T^*(y_1,y_2)=(y_1-\frac{3}{2}y_2,2y_1)$
+\end{solution}
+
+
+
+\end{document}
