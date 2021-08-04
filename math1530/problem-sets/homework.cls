@@ -93,6 +93,7 @@
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\Imag}{Imag}
