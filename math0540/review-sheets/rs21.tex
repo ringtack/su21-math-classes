@@ -1,0 +1,86 @@
+\documentclass{review-sheet}
+\homework{21}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Deduce directly from the Spectral Theorem that all eigenvalues of a self-adjoint operator $T\in
+  \mc{L}(V)$ are real.
+\end{problem}
+\begin{solution}
+  From the Spectral Theorem, a self-adjoint operator $T\in \mc{L}(V)$ has a diagonal matrix
+  $\mc{M}(T)$ with respect to some orthonormal basis of $V$. Recall that \[
+    \mc{M}(T^*)=\overline{\mc{M}(T)}^T
+  ;\] but transposing matrix preserves the diagonal entries (that is,
+  $\mc{M}(T)_{j,j}=(\mc{M}(T))^T_{j,j}$). Let $n=\dim{V}$. Then for every $1\le j\le n$, \[
+    \mc{M}(T)_{j,j}=\lambda_j=\overline{\lambda}_j=\overline{\mc{M}(T)}^T_{j,j}=\mc{M}(T^*)_{j,j}
+  .\] Thus every eigenvalue of $T$ satisfies $\lambda_j=\overline{\lambda}_j$, which means that
+  every eigenvalue of $T$ is real.
+\end{solution}
+
+\begin{problem}{\S 2}
+  Given any complex number $a\in \C$, consider the linear operator $T:\C^2\to \C^2$ given by \[
+    T(x,y)=((a-i)x+ay,-ax+y)
+  .\] 
+  \begin{enumerate}[label=(\alph*)]
+    \item For which $a\in \C$ is $T$ self-adjoint?
+    \item For any $a\in \C$ found in part (a), calculate the eigenvalues of $T$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item $T(1,0)=(a-i,-a)$, and $T(0,1)=(a,1)$. Thus \[
+        \mc{M}(T)=\begin{pmatrix} a-i&a\\-a&1 \end{pmatrix} 
+      .\] In order for $T$ to be self-adjoint, we need \[
+      \mc{M}(T^*)=\overline{\mc{M}(T)}^T=\begin{pmatrix}
+      \overline{a-i}&\overline{-a}\\\overline{a}&1 \end{pmatrix} 
+      .\] Thus, we need $a-i=\overline{a-i},\ \overline{a}=-a,\ \overline{-a}=a$. This occurs only
+      when $a=i$ (and so $\mc{M}(T)=\begin{pmatrix} 0&i\\-i&1 \end{pmatrix} $).
+    \item $\det{\mc{M}(T)-I}=\begin{vmatrix} -\lambda&i\\-i&1-\lambda
+      \end{vmatrix}=\lambda^2-\lambda-1 $. Thus the eigenvalues of $T$ are \[
+        \lambda=\frac{1\pm \sqrt{5}}{2}
+      ,\] which is consistent with Problem (1).
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 3}
+  Let $T:V\to W$ be a linear map on finite-dimensional inner product spaces $V$ and $W$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $T^*T$ is self-adjoint.
+    \item Prove that each eigenvalue of $T^*T$ is non-negative.
+    \item Prove that $T^*T+I$ is invertible.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Recall that $(T^*)^*=T$ (Axler 7.6c; I won't reproduce the proof here). Then for any $v\in V$,
+      $w\in W$, we have \[
+        \left<T^*Tv,w \right> =\left<Tv,(T^*)^*w \right> =\left<v,T^*Tw \right> 
+      .\] Thus $T^*T$ is self-adjoint.
+    \item Let $\lambda\in \F$ be an eigenvalue. Then for any $v\in V$, \[
+        \lambda\|v\|^2=\lambda\left<v,v \right> =\left<\lambda v,v \right> =\left<T^*Tv,v \right>
+        =\left<Tv,(T^*)^*v \right> =\left<Tv,Tv \right> 
+      .\] But $\left<Tv,Tv \right> \ge 0$ and $\|v\|^2\ge 0$ for every $v\in V$; thus we need
+      $\lambda\ge 0$ as well.
+    \item Recall that $\left<u,v \right> =0$ only if either $u=0$ or $v=0$, that a map $T:V\to V$ is
+      injective if and only if its null space is trivial, and finally that an operator is invertible
+      iff bijective iff injective. Thus, if \[
+        \left<(T^*T+I)v,v \right> \neq 0
+      \] for every $v\in V\setminus \{ 0 \}$, then $(T^*T+I)v\neq 0$ for all non-zero $v$ (and so
+      its null space is trivial), so $T^*T+I$ is injective and hence invertible.
+
+      We have, for all $v\in V\setminus \{ 0 \}$,
+      \begin{align*}
+        \left<(T^*T+I)v,v \right> &= \left<T^Tv+v,v \right>  \\
+                                  &= \left<T^*Tv,v \right> +\left<v,v \right>  \\
+                                  &= \left<Tv,Tv \right> +\left<v,v \right>  \\
+                                  &>0
+      ,\end{align*} since $\left<Tv,Tv \right> \ge 0$ and $\left<v,v \right> >0$.
+
+      Therefore $(T^*T+I)v\neq 0$ for all non-zero $v$, and so is injective and hence invertible.
+  \end{enumerate}
+\end{solution}
+
+
+
+
+\end{document}
