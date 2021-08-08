@@ -126,6 +126,7 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\transpose}{\intercal}
 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 
 \newcommand{\sol}[1]{\begin{proof}[Solution]#1\end{proof}}
 \newcommand{\prff}[1]{\begin{proof}#1\end{proof}}
