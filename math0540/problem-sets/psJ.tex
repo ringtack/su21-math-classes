@@ -100,6 +100,19 @@
 \begin{problem}{\S 3}
   Find the singular values of the map $T:\R^2\to \R^2$ given by $T(x,y)=(-4y,x)$.
 \end{problem}
+\begin{solution}
+  We first find the value of $T^*\in \mc{L}(V)$. In particular, for all $(x_1,y_1), (x_2,y_2)\in
+  \R^2$, we need
+  \begin{align*}
+    \left<(x_1,y_1),T^*(x_2,y_2) \right> &= \left<T(x_1,y_1),(x_2,y_2) \right>  \\
+                                         &= \left<(-4y_1,x_1),(x_2,y_2) \right> \\
+                                         &= -4x_2y_1+x_1y_2 \\
+                                         &= \left<(x_1,y_1),(y_2,-4x_2) \right>
+  .\end{align*}
+  Thus $T^*(x,y)=(y,-4x)$, so $T^*T(x)=(x, 16y)$, so $\sqrt{T^*T}(x,y)=(x,4y)$. Thus the eigenvalues
+  of $\sqrt{T^*T}$ are $1$ and $4$, each with a corresponding eigenspace $E(\lambda,\sqrt{T^*T})$
+  with dimension $1$. Thus $T$ has singular values $1$ and $4$.
+\end{solution}
 
 
 \begin{problem}{\S 4}
@@ -107,9 +120,58 @@
   linear opeartor, and let $s_1\le \cdots\le s_n$ be its singular values. Prove that for all $v\in
   V\setminus \{ 0 \}$, \[
     s_1\le \frac{\|Tv\|}{\|v\|}\le s_n
-  .\] Additionally, verify that both these upper and lower bounds for $\|Tv\|/\|v\|$ are achieves by
-  some vectors $v_{\min},v_{\max}\in V$ respesctively.
+  .\] Additionally, verify that both these upper and lower bounds for $\|Tv\|/\|v\|$ are achieved by
+  some vectors $v_{\min},v_{\max}\in V$ respectively.
 \end{problem}
+\begin{solution}
+  Since $\sqrt{T^*T}$ is positive, in particular it is self-adjoint, so by the Spectral Theorem it
+  has an orthonormal basis consisting of eigenvectors of $T$, say $e_1,\ldots,e_n$, with
+  corresponding real, non-negative eigenvalues (since positive), say $\lambda_1,\ldots,\lambda_n$
+  (not necessarily distinct). Then any vector $v\in V\setminus \{ 0 \}$ can be written as a linear
+  combination of these eigenvectors:
+  \[
+    v=\left<v,e_1\right> e_1+\ldots+\left<v,e_n \right> e_n
+  .\] Applying $\sqrt{T^*T}v$, we get
+  \begin{align*}
+    \sqrt{T^*T}v&=\sqrt{T^*T}(\left<v,e_1 \right> e_1+\ldots+\left<v,e_n \right> e_n)\\
+    &= \left<v,e_1 \right> \sqrt{T^*T}e_1+\ldots+\left<v,e_n \right> \sqrt{T^*T}e_n \\
+    &= \lambda_1\left<v,e_1 \right>e_1+\ldots+\lambda_n\left<v,e_n \right> e_n
+  .\end{align*}
+  Since $\|\sqrt{T^*T}v\|=\|Tv\|$, we then have \[
+    \|Tv\|=\sqrt{\lambda_1^2\left|\left<v,e_1 \right>\right|^2 +\ldots+\lambda_n^2\left|\left<v,e_n
+    \right>\right|^2 }
+  .\] Let $\lambda_{\text{max}}=\max\{\lambda_1,\ldots,\lambda_n\}$. Then \[
+    \|Tv\|\le \sqrt{\lambda_\text{max}^2\left|\left<v,e_1
+    \right>\right|^2+\ldots+\lambda_\text{max}^2\left<v,e_n \right> }=\left| \lambda_\text{max}
+    \right| \sqrt{\left|\left<v,e_1 \right>\right|^2 +\ldots+\left|\left<v,e_n \right>\right|^2 }
+  \] (by factoring out $\sqrt{\lambda_{\text{max}}^2}$). However, \[
+    \|v\|=\sqrt{\left|\left<v,e_1 \right>\right|^2 +\ldots+\left|\left<v,e_n \right>\right|^2 }
+  ,\] and $\left| \lambda_\text{max} \right| =\lambda_\text{max}=s_n$ (since singular values of $T$ 
+  \textit{are} eigenvalues of $\sqrt{T^*T}$, and all eigenvalues are non-negative real numbers, so
+  $\left| \lambda \right| =\lambda$), so \[
+    \|Tv\|\le \lambda_\text{max}\|v\|
+  ,\] or equivalently \[
+  \frac{\|Tv\|}{\|v\|}\le s_n ~ ~ [\text{since $v\neq \textbf{0}$, $\|v\|>0$}]
+  .\] Similarly, if we define $\lambda_\text{min}=\min\{\lambda_1,\ldots,\lambda_n\}$, then we get \[
+    \|Tv\|\ge \left| \lambda_\text{min} \right| \|v\|=s_1\|v\|
+  ,\] or equivalently \[
+    s_1\le \frac{\|Tv\|}{\|v\|}
+  .\] Thus, for any $v\in V\setminus \{ \textbf{0} \}$, we get \[
+    s_1\le \frac{\|Tv\|}{\|v\|}\le s_n
+  .\] Finally, let $e_\text{max}$ be the eigenvector corresponding to $\lambda_{\text{max}}=s_n$.
+  Then \[
+    \|Te_\text{max}\|=\|\sqrt{T^*T}e_\text{max}\|=\|\lambda_{\text{max}}e_\text{max}\|=\sqrt{\left|
+    \lambda_\text{max} \right| ^2\left| \left<e_\text{max},e_\text{max} \right>  \right| ^2}=\left|
+    \lambda_\text{max} \right| =\lambda_\text{max}
+  \] (since $\left<e_\text{max},e_\text{max} \right> =1$). Clearly $\|e_\text{max}\|=1$; thus \[
+    \frac{\|Te_\text{max}\|}{\|e_\text{max}\|}=\|Te_\text{max}\|=\lambda_\text{max}=s_n
+  .\] Similarly, if $e_\text{min}$ is the eigenvector corresponding to $\lambda_\text{min}=s_1$,
+  then \[
+    \|Te_\text{min}\|=\left| \lambda_\text{min} \right|=\lambda_\text{min}
+  \] (following the same steps as above), so \[
+    \frac{\|Te_\text{min}\|}{\|e_\text{min}\|}=\|Te_\text{min}\|=\lambda_\text{min}=s_1
+  .\] Thus the upper and lower bounds of $\|Tv\|/\|v\|$ are achieved by $e_\text{max},e_\text{min}\in V$ respectively.
+\end{solution}
 
 
 
