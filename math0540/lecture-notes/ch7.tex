@@ -523,7 +523,7 @@ Now, we can finally proceed to the Real Spectral Theorem.
 \end{theorem}
 \begin{proof}[Proof]
   (b) and (c) are clearly equivalent. Suppose (c) holds, so $T$ has a diagonal matrix with respect
-  to some orthonormal basis of $V$. A diagonal matrix equals its transpose, so $T=T^*$; that is, mKT
+  to some orthonormal basis of $V$. A diagonal matrix equals its transpose, so $T=T^*$; that is, $T$
   is self-adjoint. Thus (c) implies (a).
 
   Suppose that $T$ is self-adjoint. We proceed by induction on $\dim{V}$. If $\dim{V}=1$, then
@@ -543,12 +543,271 @@ Now, we can finally proceed to the Real Spectral Theorem.
   of eigenvectors of $T$, completing the proof.
 \end{proof}
 
+\section{Positive Operators and Isometries}
+\subsection{Positive Operators}
+
+Let's start with a preliminary definition.
+\begin{definition}[Square Root]{}
+  Let $T\in \mc{L}(V)$. A \textbf{square root} of $T$ is any $R\in \mc{L}(V)$ with $R^2=T$.
+\end{definition}
+Note that square roots are not necessarily unique (in fact, there are infinitely many!). As an
+example, consider the identity operator $I\in \mc{L}(\R^2)$; $I$ has many square roots, like $I$
+itself, any reflection across a line, a $180^{\circ}$ rotation, etc.
+
+\begin{definition}[Positive Operators]{}
+  An operator $T\in \mc{L}(V)$ is \textbf{positive} if it is self-adjoint and all of
+  its eigenvalues are non-negative (recall that all eigenvalues of self-adjoint operators are real;
+  this further requires non-negative).
+
+  Another name for positive operators is \textbf{positive semi-definite}.
+\end{definition}
+
+It's worth applying the Spectral Theorem to better understand positive operators. Recall that the
+Spectral Theorem implies that there's an orthonormal basis of $V$ with respect to which, for $T$
+positive, \[
+  \mc{M}(T)=\begin{pmatrix} \lambda_1&&0\\&\ddots&\\0&&\lambda_n \end{pmatrix} 
+\] with $\lambda_1,\ldots,\lambda_n\ge 0$.
+
+\begin{mdframed}
+  So, $T$ is positive if and only if there exists an orthonormal basis of $V$ with respect to which
+  $\mc{M}(T)$ is diagonal with non-negative reals on the diagonal (positivity is kind of a misnomer;
+  perhaps non-negative would work better. But we're stuck here).
+\end{mdframed}
+
+Geometrically, a positive operator ``stretches'' the orthonormal basis vectors in a certain
+direction, but maintain orientation (since sign doesn't change):
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.5\textwidth]{last_lec.png}
+\end{figure}
+Note that orthogonality isn't necessarily preserved by $T$; it's simply the orthonormal bases. An
+instructive example of non-positive operators is the negative identity map $-I$, or a rotation such
+as a $60^{\circ}$ counter-clockwise rotation.
+
+\begin{proposition}[Characterization of Positive Operators]{}
+  Let $T\in \mc{L}(V)$. The following are equivalent:
+  \begin{enumerate}
+    \item $\left<Tv,v \right> \ge 0$ for all $v\in V$ and $T$ is self-adjoint.
+    \item $T$ is positive ($T$ is self-adjoint and all eigenvalues are non-negative).
+    \item $T$ has a positive square root.
+    \item $T$ has a self-adjoint square root.
+    \item There exists an operator $R\in \mc{L}(V)$ such that $T=R^*R$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  Assume $\left<Tv,v \right> \ge 0$ for all $v\in V$ and $T$ is self-adjoint. Suppose $\lambda$ is
+  an eigenvalue of $T$; then \[
+    \left<Tv,v \right> =\left<\lambda v,v \right> =\lambda \left<v,v \right> \ge 0
+  .\] Thus any eigenvalue of $T$ is non-negative as well, proving 2 from 1.
+
+  We prove 3 from 2. Assume $T$ is positive; then its matrix
+  representation, \[
+    \mc{M}(T)=\begin{pmatrix} \lambda_1&&0\\&\ddots&\\0&&\lambda_n \end{pmatrix} 
+  ,\] has all non-negative eigenvalues with respect to some orthonormal basis of $V$. Since
+  non-negative real numbers admit non-negative real square roots, $R\in \mc{L}(V)$ with matrix \[
+    \mc{M}(R)=\begin{pmatrix} \sqrt{\lambda_1}&&0\\&\ddots&\\0&&\sqrt{\lambda_n} \end{pmatrix} 
+  \] satisfies $R^2=T$. Thus $T$ has a positive square root $R$, proving 3 from 2.
+
+  Now, assume $T$ has a positive square root. Definitionally, any positive operator is self-adjoint;
+  thus 4 is true from 3.
+
+  Now, assume $T$ has a self-adjoint square root. Then $R=R^*$, so $T=R^2=R^*R$, proving 5 from 4.
+
+  Finally, assume an operator $R\in \mc{L}(V)$ satisfies $T=R^*R$. Then \[
+    T^*=(R^*R)^*=R^*(R^*)^*=R^*R=T
+  ,\] and \[
+    \left<R^*Rv,v \right> =\left<Rv,Rv \right> \le 0
+  \] for every $v\in V$. Thus $T$ has non-negative eigenvalues and is self-adjoint, so is positive.
+\end{proof}
+
+From mathematics, we know that every non-negative number has a unique non-negative square root. It
+turns out the same is true for positive operators.
+\begin{proposition}[Unique Positive Square Root]{}
+  Every positive operator on $V$ has a unique positive square root.
+\end{proposition}
+\begin{proof}[Proof]
+  [TODO: insert Axler proof]
+\end{proof}
+
+Since positive operators have unique positive square root operators, we henceforth denote the
+positive square root of a positive operator $T\in \mc{L}(V)$ as $\sqrt{T}$.
+\begin{mdframed}
+  Note that it's not difficult to find the positive operator's positive square root; it's simply
+  taking the square root of every diagonal value!
+\end{mdframed}
 
 
+\subsection{Isometries}
 
+\begin{definition}[Isometries]{}
+  An operator $S\in \mc{L}(V)$ is an \textbf{isometry} if \[
+    \|Sv\|=\|v\|
+  \] for all $v\in V$. In other words, an isometry is \textit{norm-preserving}.
+\end{definition}
+An intuitive way to consider isometries is via distance. Recall that we defined the ``distance''
+between two vectors as its norm (recall $\R^3$'s norm). An isometry simply preserves distance.
+\begin{mdframed}
+  Over $\R$, isometries are called \textbf{orthogonal operators}, and over $\C$, isometries are
+  called \textbf{unitary operators}. For those with group theory knowledge, orthogonal operators
+  form a group; unitary operators also form a group.
+\end{mdframed}
 
+We've seen many isometries of $\R^2$; for example, all rotations and reflections are $\R^2$
+(actually, that's it!) We contend that isometries also preserve ``angle'' (verify this in $\R^2$);
+the following proposition formalizes this.
+\begin{proposition}[Characterization of Isometries]{}
+  Suppose $S\in \mc{L}(V)$. Then the following are equivalent:
+  \begin{enumerate}
+    \item $S$ is an isometry.
+    \item $\left<Su,Sv \right> =\left<u,v \right> $ for all $u,v\in V$ ($S$ preserves ``angles'').
+    \item $Se_1,\ldots,Se_n$ is orthonormal for every orthonormal list of vectors
+      $e_1,\ldots,e_n\in V$.
+    \item There exists an orthonormal basis $e_1,\ldots,e_n\in V$ such that $Se_1,\ldots,Se_n$ is
+      orthonormal.
+    \item $S^*S=S S^*=I$.
+    \item $S^*$ is an isometry.
+    \item $S$ is invertible and $S^{-1}=S^*$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof]
+  Suppose $S$ is an isometry. Notice that
+  \begin{itemize}
+    \item Over $\R$, $\left<u,v \right> =\frac{\|u+v\|^2+\|u-v\|^2}{4}$. 
+    \item Over $\C$, $\left<u,v \right> =\frac{\|u+v\|^2-\|u-v\|^2+\|u+iv\|^2i-\|u-iv\|^2i}{4}$.
+  \end{itemize}
+  These tell us that we can completely determine inner products from norms. Since $S$ preserves
+  norms, this implies that $S$ preserves inner products, and hence 1 implies 2. Concretely, if $V$
+  is a real inner product space, then for every $u,v\in V$ we have
+  \begin{align*}
+    \left<Su,Sv \right> &= \frac{\|u+v\|^2+\|u-v\|^2}{4} \\
+                        &= \frac{\|S(u+v)\|^2-\|S(u-v)\|^2}{4} \\
+                        &= \frac{\|u+v\|^2-\|u-v\|^2}{4} \\
+                        &=\left<u,v \right> 
+  .\end{align*} A similar computation arises for complex inner product spaces. Intuitively, if the
+  angles did \textit{not} stay the same, then the norms of $u+v$ and $u-v$ would change, breaking
+  isometry (imagine square => parallelogram; the diagonals' lengths change).
 
+  Now, suppose $S$ preserves inner products; in particular, it preserves orthogonality as well; thus
+  3 follows from 2. 4 naturally follows from 3; simply choose an orthonormal basis, instead of just
+  an orthonormal list.
 
+  Now, say $S$ sends an orthonormal basis $e_1,\ldots,e_n$ to another orthonormal basis
+  $f_1,\ldots,f_n$. We claim $S^*Se_j=e_j$ for every $e_j$. Indeed, for each $k=1,\ldots,n$, \[
+    \left<S^*Se_j,e_k \right> =\left<Se_j,Se_k \right> =\left<e_j,e_k \right> 
+  .\] Thus $S^*Se_j=e_j$, and so $S^*S=I$.
+
+  We finally prove that $S$ is an isometry given 5. Given $v\in V$, we want $\|Sv\|=\|v\|$. Since \[
+    \|Sv\|^2=\left<Sv,Sv \right> =\left<S^*Sv,v \right> =\left<v,v \right> =\|v\|^2
+  ,\] $S$ is thus an isometry, and we are done.
+
+  [TODO: do rest]
+\end{proof}
+
+\begin{remark}
+  Indeed, if $S$ is an isometry, then $\det{\mc{M}(S)}=\pm 1$.
+\end{remark}
+
+\section{Polar Decomposition and Singular Decomposition}
+\subsection{Polar Decomposition}
+Recall our analogy of operators $\mc{L}(V)$ and the complex numbers $\C$. In fact, this analogy is
+actually the truth, when $V=\C$!
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{c|c}
+    $\mc{L}(V)$&$\C$\\ \hline
+    Adjoints & Complex conjugation\\ \hline
+    Self-adjoints & $\R$\\ \hline
+    Positive operators & $\R_{\ge 0}$\\ \hline
+    Isometries & Unit circle in $\C: \{z\in \C\mid\|z\|=1 \} $
+  \end{tabular}
+\end{table}
+
+Let's now look at polar decomposition. For any complex number $z$, we can always decompose $z$ into
+a (non-negative) real number, its norm $\|z\|$, and its complex point on the unit circle,
+$\frac{z}{\|z\|}$; that is, $z=(\frac{z}{\|z\|})\|z\|=(\frac{z}{\left| z \right|
+})\sqrt{\overline{z}z}$ (note that in $\C$, $\|\cdot \|=\left| \cdot  \right| $). Sound familiar?
+
+\begin{remark}
+  Sometimes, $z\in C$ will be denoted $z=re^{i\theta}$, where $r=\left| z \right| $ and
+  $e^{i\theta}$ is a point on the unit circle.
+\end{remark}
+
+Continuing with our analogy, it seems that we can decompose any operator $T\in \mc{L}(V)$ as an
+isometry (an operator ``on the unit circle'') and $\sqrt{T^*T}$ (we can do this, since we've shown
+that $T^*T$ is a positive operator, and every positive operator has a unique positive square root).
+This is indeed true!
+\begin{theorem}[Polar Decomposition]{}
+  Suppose $T\in \mc{L}(V)$. Then there exists an isometry $S\in \mc{L}(V)$ such that \[
+    T=S\sqrt{T^*T}
+  .\] 
+\end{theorem}
+
+Why would we want to undergo this complicated transformation? It turns out that the polar
+decomposition theorem actually tells us that singular values, defined below, hold a lot of
+information about $T$.
+
+\begin{definition}[Singular Values]{}
+  For an operator $T\in \mc{L}(V)$, the \textbf{singular values} of $T$ are the eigenvalues of
+  $\sqrt{T^*T}$, where each eigenvalue $\lambda$ is repeated $\dim{E(\lambda,\sqrt{T^T})}$ times.
+\end{definition}
+In other words, the singular values of $T$ are the diagonal entries of a diagonal matrix of
+$\sqrt{T^*T}$ with respect to an orthonormal basis.\\
+
+So, how does polar decomposition show the usefulness of singular values? For $T\in \mc{L}(V)$, polar
+decomposition tells us that $T=S\sqrt{T^*T}$ for some isometry $S$. Then for an orthonormal basis
+$e_1,\ldots,e_n$ (for instance, the standard basis in $\R^2$), we have:
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=0.75\textwidth]{last_lec2.png}
+\end{figure}
+\\
+In other words, for any arbitrary operator $T\in \mc{L}(V)$, we can decompose it into two operators:
+one that ``stretches'' its eigenvalues (\textbf{these are the singular values}), and one that
+preserves the norms (e.g. rotations/reflections in $\R^2$).\\
+
+Now that we somewhat understand the usefulness of this decomposition, let's prove it.
+\begin{proof}[Proof]
+  We start with a lemma:
+  \begin{lemma}{}
+    For all $v\in V$, \[
+      \|Tv\|=\|\sqrt{T^*T}v\|
+    .\] 
+  \end{lemma}
+  \begin{proof}[Proof]
+    If $v\in V$, then
+    \begin{align*}
+      \|Tv\|^2=\left<Tv,Tv \right> &= \left<T^*Tv,v \right>  \\
+      &= \left<\sqrt{T^*T}\sqrt{T^*T}v,v \right>  \\
+      &= \left<\sqrt{T^*T}v,\sqrt{T^*T}v \right>  \\
+      &=\|\sqrt{T^*T}v\|^2
+    .\end{align*}
+    Thus \[
+      \|Tv\|=\|\sqrt{T^*T}v\|~\text{for all}~v\in V
+    ,\] as desired.
+  \end{proof}
+  
+  This is promising; since the norms of the square root $\sqrt{T^*T}$ and $T$ are preserved for any
+  $v\in V$, an isometry is possible. Let's sketch a high-level outline of the proof:
+  \begin{enumerate}
+    \item Define a linear map \[
+        S_1:\range{(\sqrt{T^*T})}\longrightarrow \range{T},\ S_1(\sqrt{T^*T})=Tv
+      .\] Recall our original goal: if we wish for the decomposition to hold, we must be able to
+      define an isometry that maps $S(\sqrt{T^*T}v)\mapsto Tv$. We use $S_1$ to make such an
+      isometry. However, we need to check that this linear map is well-defined; that is, if
+      $v_1,v2\in V$ with $\sqrt{T^*T}v_1=\sqrt{T^*T}v_2$, then $Tv_1=Tv_2$.
+    \item Then, we wish to extend the linear map $S_1$ to an isometry $S\in \mc{L}(V)$ such that
+      $T=S\sqrt{T^*T}$, since currently $S_1$ only maps $\range{(\sqrt{T^*T})}$ to $\range{T}$.
+      Luckily, we can do this by sending an orthonormal basis of $(\range{\sqrt{T^*T}})^\bot$ to an
+      orthonormal basis of $(\range{T})^\bot$, and we're done (since every vector space decomposes
+      into a subspace and its orthogonal complement)!
+  \end{enumerate}
+
+  Now, for the details. We first check that the map \begin{align*}
+    S: \range{(\sqrt{T^*T})} &\longrightarrow \range{T} \\
+    \sqrt{T^*T}v &\longmapsto Tv
+  \end{align*} is well-defined.
+  
+\end{proof}
 
 
 

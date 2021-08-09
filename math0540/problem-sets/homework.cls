@@ -4,6 +4,8 @@
 
 \LoadClass{article}
 
+\RequirePackage[noDcommand]{kpfonts}
+
 \RequirePackage[margin=1in]{geometry} 
 \RequirePackage{amsmath,amsthm,amssymb,amsfonts}
 \RequirePackage{color}

@@ -1,0 +1,119 @@
+\documentclass{homework}
+\homework{J}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Suppose $N$ and $d$ are integers, with $N>d\ge 0$. Let $a_1,\ldots,a_N$ be distinct real numbers,
+  and let $b_1,\ldots,b_N$ be any real numbers. Prove that there exists a unique polynomial $f\in
+  \mc{P}_d(\R)$ that comes ``closest'' to satisfying \[
+    f(a_1)=b_1,\ldots,f(a_N)=b_N
+  .\] More precisely, prove there exists a unique polynomial $f\in \mc{P}_d(\R)$ minimizing \[
+  \sum_{i=1}^{N} (f(a_i)-b_i)^2
+  .\] 
+\end{problem}
+\begin{solution}
+  Consider $\mc{P}_N(\R)$ and its subspace $\mc{P}_d(\R)$, and define an inner product on
+  $\mc{P}_N(\R)$ (the subspace $\mc{P}_d(\R)$ will inherit the same inner product): \[
+    \left<p,q \right> =\sum_{i=1}^{N} p(a_i)q(a_i)
+  .\] We first verify that this is actually an inner product:
+  \begin{itemize}
+    \item Recall from Problem Set F that given $a_1,\ldots,a_N$ distinct real values, a unique
+      polynomial in $\mc{P}_N(\R)$ threads real numbers $b_1,\ldots,b_N$. Since $p(x)=\textbf{0}$
+      achieves this, uniqueness of the polynomial means that no non-zero polynomial can satisfy
+      $p(a_i)=0$ for all $a_1,\ldots,a_N$. Thus \[
+        \left<p,p \right> =\sum_{i=1}^{N} p(a_i)^2\ge 0
+      \] for all $p(x)\in \mc{P}_N(\R)$, with equality holding if and only if $p(x)=\textbf{0}$.
+      Thus $\left<\cdot ,\cdot  \right> $ is positive-definite.
+    \item Commutativity of multiplication in $\R$ means \[
+        \left<p,q \right> =\sum_{i=1}^{N} p(a_i)q(a_i)=\sum_{i=1}^{N} q(a_i)p(a_i)=\left<q,p \right>
+      \] for every $p,q\in \mc{P}_N(\R)$, so $\left<\cdot ,\cdot  \right> $ is symmetric.
+    \item For any $p,q,r\in \mc{P}_N(\R)$, $\lambda_1,\lambda_2\in \R$, we have \[
+        \left<\lambda_1p+\lambda_2q,r \right> =\sum_{i=1}^{N}
+        (\lambda_1p(a_i)+\lambda_2q(a_i))r(a_i)=\lambda_1\sum_{i=1}^{N}p(a_i)r(a_i)+\lambda_2
+        \sum_{i=1}^{N} q(a_i)r(a_i)=\lambda_1\left<p,r \right> +\lambda_2\left<q,r \right> 
+      .\] Hence $\left<\cdot ,\cdot  \right> $ is linear in the first slot.
+  \end{itemize}
+  Thus, the above inner product is, in fact, an inner product.
+
+  Now, decompose the vector space $\mc{P}_N(\R)$ into $\mc{P}_d(\R)$ and its orthogonal complement:
+  \[
+    \mc{P}_N(\R)=\mc{P}_d(\R)\oplus (\mc{P}_d(\R))^\bot
+  .\] Let $U=\mc{P}_d(\R)$, let $e_0,\ldots,e_d$ be an orthonormal basis of $U$, and let $g(x)\in
+  \mc{P}_N(\R)$ be the unique polynomial that satisfies \[
+    g(a_1)=b_1,\ldots,g(a_N)=b_N
+  \] (existence and uniqueness come from Problem Set F, again). Project the polynomial onto
+  $U$: \[
+    \mc{P}_U(g)=\left<g,e_0 \right> e_0+\left<g,e_1 \right> e_1+\ldots+\left<g,e_d \right> e_d\in U
+  .\] From the minimization problem (Axler 6.56), $\mc{P}_U(g)$ satisfies \[
+    \|g-\mc{P}_U(g)\|\le \|g-u\|
+  \] for any $u\in U$, with equality holding if and only if $u=\mc{P}_U(g)$ (in other
+  words, $\mc{P}_U(g)\in \mc{P}_d(\R)$ is the unique polynomial in $\mc{P}_d(\R)$ that minimizes the
+  norm of $g(x)-u(x)$ for any $u(x)\in \mc{P}_d(\R)$). Squaring
+  both sides, we get
+  \begin{align*}
+    \|g-\mc{P}_U(g)\|^2&\le \|g-u\|^2\\
+    \left<g-\mc{P}_U(g),g-\mc{P}_U(g) \right> &\le \left<g-u,g-u \right> \\
+    \sum_{i=1}^{N} (g(a_i)-\mc{P}_U(g)(a_i))^2 &\le \sum_{i=1}^{N} (g(a_i)-u(a_i))^2\\
+    \sum_{i=1}^{N} (\mc{P}_U(g)(a_i)-b_i)^2 &\le \sum_{i=1}^{N} (u(a_i)-b_i)^2
+  \end{align*} for any $u(x)\in \mc{P}_d(\R)$, with equality holding if and only if
+  $u(x)=\mc{P}_U(\R)$ (we get the last equation since $g(a_i)=b_i$ for all $a_1,\ldots,a_N$, and
+  $(a-b)^2=(b-a)^2$ for any real numbers $a,b\in \R$). In other words, $\mc{P}_U(g)$ is the unique
+  polynomial $f$ in $\mc{P}_d(\R)$ that minimizes \[
+    \sum_{i=1}^{N} (f(a_i)-b_i)^2
+  ,\] as desired.
+\end{solution}
+
+\begin{problem}{\S 2}
+  Let $p(x)=x^{12}+x^2-x+7$. Let $T$ be a self-adjoint operator on a finite-dimensional inner
+  product space $V$ over $\R$. Prove that $p(T)$ is invertible.
+\end{problem}
+\begin{solution}
+  It suffices to show that $\left<(T^{12}+T^2-T+7I)v,v \right>\neq 0 $ for all non-zero $v\in V$
+  (recall that a trivial null space implies injectivity, and operators are invertible iff
+  injective). We make two observations:
+  \begin{itemize}
+    \item For any integer $n\in \Z$, if $T$ is a self-adjoint operator, then \[
+        \left<T^{2n}v,w \right> =\left<T^{n}v,T^{n}w \right> 
+      .\] One can quickly verify this by repeating $\left<T^{2n}v,w \right> =\left<T^{2n-1}v,Tw
+      \right> =\left<T^{2n-2}v,T^2w \right> =\ldots=\left<T^{n}v,T^{n}w \right> $.
+    \item For any two vectors $u,v\in V$, Cauchy-Schwarz gives us \[
+      \left| \left<u,v \right> \right| \le \|u\|\cdot \|v\|
+    ,\] or equivalently, \[
+      -\|u\|\cdot \|v\|\le \left<u,v \right> \le \|u\|\cdot \|v\|
+    ,\] using basic properties of absolute values.
+  \end{itemize}
+
+  Let $v\in V$ be a non-zero vector. Then
+  \begin{align*}
+    \left<\left( T^{12}+T^2-T+7I \right),v  \right> &= \left<T^{12}v,v \right> +\left<T^2v,v
+    \right> -\left<Tv,v \right> +7\left<v,v \right>  \\
+                                                    &= \left<T^6v,T^6v \right>+\left<Tv,Tv \right>
+    -\left<Tv,v \right> +7\left<v,v \right>   \\
+                                                    &\ge \|T^6v\|^2+\|Tv\|^2+\|Tv\|\cdot
+    \|v\|+7\|v^2\|^2&&[\text{by Cauchy-Schwarz; see observation}]\\
+    &>0
+  ,\end{align*} since $v$ non-zero means $\|v\|^2>0$, and clearly $\|\cdot \|\ge 0$ for any vector
+  in $V$. Thus $(T^{12}+T^2-T+7I)v\neq 0$ for any non-zero $v\in V$, so $p(T)$ is injective; in
+  particular, it is invertible as well.
+\end{solution}
+
+\begin{problem}{\S 3}
+  Find the singular values of the map $T:\R^2\to \R^2$ given by $T(x,y)=(-4y,x)$.
+\end{problem}
+
+
+\begin{problem}{\S 4}
+  Let $V$ be an $n$-dimensional inner product space over $\F=\R$ or $\C$. Let $T\in \mc{L}(V)$ be a
+  linear opeartor, and let $s_1\le \cdots\le s_n$ be its singular values. Prove that for all $v\in
+  V\setminus \{ 0 \}$, \[
+    s_1\le \frac{\|Tv\|}{\|v\|}\le s_n
+  .\] Additionally, verify that both these upper and lower bounds for $\|Tv\|/\|v\|$ are achieves by
+  some vectors $v_{\min},v_{\max}\in V$ respesctively.
+\end{problem}
+
+
+
+
+
+
+\end{document}
