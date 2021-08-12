@@ -145,5 +145,5 @@
 %\@ifundefined{@homework}{\def\@homework{i}}
 
 \rhead{\@course} 
-\chead{\textbf{Problem Set \@homework}}
+\chead{\textbf{Exam \@homework}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

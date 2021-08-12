@@ -1,0 +1,207 @@
+\documentclass{homework}
+\homework{3}
+
+\begin{document}
+\begin{problem}{\S 1}
+  Suppose $u,w\in V$ are vectors with norm $1$. Let $U=\Span{(u)}$ and $W=\Span{(w)}$. Prove that \[
+    \mc{P}_W\mc{P}_Uw=\left| \left<u,w \right>  \right| ^2w
+  .\] 
+\end{problem}
+
+\begin{solution}
+  Since $\|u\|=1$ and $\|w\|=1$ and they clearly form a basis for $U$ and $W$ respectively, $u$ and
+  $w$ are orthonormal bases for $U$ and $W$ respectively. Recall that for any $v\in V$ and any
+  subspace $U$ of $V$, \[
+    \mc{P}_Uv=\left<v,e_1 \right> e_1+\ldots+\left<v,e_m \right> e_m
+  ,\] where $e_1,\ldots,e_m$ is an orthonormal basis for $U$. Then \[
+    \mc{P}_Uw=\left<w,u \right> u
+  ,\] so \[
+    \mc{P}_W\mc{P}_Uw=\left<\mc{P}_Uw,w \right>w =\left<\left<w,u \right> u,w \right> w=\left<w,u
+    \right> \left<u,w \right>w =\overline{\left<u,w \right> }\left<u,w \right>w=\left| \left<u,w
+    \right>  \right| ^2w
+  ,\] as required.
+\end{solution}
+
+\begin{problem}{\S 2}
+  Prove that for any polynomial $f\in \mc{P}(\R)$, \[
+    \frac{1}{3}\int_0^1(f(x))^2dx\ge \left( \int_0^1xf(x) \right) ^2
+  .\] When is the above inequality an equality?
+\end{problem}
+\begin{solution}
+  We begin with a few observations:
+  \begin{itemize}
+    \item From class and previous homeworks, \[
+        \left<p,q \right> =\int_0^1p(x)q(x)dx
+      \] is an inner product on $\mc{P}(\R)$.
+    \item For any $p,q\in \mc{P}(\R)$, the inner product \[
+        \left<p,q \right> =\int_0^1 p(x)q(x)dx\in \R
+    .\] That is, the inner product is a real number. In other words, the integral of a real function
+    must be a real number. Geometrically, one can verify this: the ``area under the curve'' of any
+    real function must be a real number.
+  \end{itemize}
+
+  Let $x,f(x)\in \mc{P}(\R)$. Then \[
+    \left<x,f(x) \right> =\int_0^1 xf(x)dx
+  .\] By the Cauchy-Schwarz inequality, \[
+    \left| \left<x,f(x) \right>  \right|\le \|x\|~\|f(x)\|
+  .\] Since $\left<\cdot ,\cdot  \right> \in \R$, we have $\left| \left<x,f(x) \right>  \right|
+  =\left<x,f(x) \right> $. Now, square both sides in the above inequality:
+  \begin{align*}
+    \left<x,f(x) \right> ^2&\le \|x\|^2\|f(x)\|^2\\
+                           &= \left<x,x \right> \left<f(x),f(x) \right>  \\
+                           &= \int_0^1x^2dx\cdot \int_0^1(f(x))^2dx \\
+                           &= \frac{1}{3}x^3|_0^1\int_0^1(f(x))^2dx \\
+                           &=\frac{1}{3}\int_0^1(f(x))^2dx
+  ,\end{align*} as required.
+
+  From Cauchy-Schwarz, inequality becomes an equality if and only if $f(x)$ is a scalar multiple of
+  $x$. Thus, equality holds when $f(x)=ax$ for some $a\in \R$.
+\end{solution}
+
+\begin{problem}{\S 3}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+      Let $T\in \mc{L}(\R^2)$ be given by \[
+        T(x,y)=(\frac{7}{2}x+\frac{1}{2}y, \frac{7}{2}x+\frac{1}{2}y)
+      .\] Compute the singular values of $T$.
+    \item Find a non-zero vector $v$ such that $\|Tv\|=5\|v\|$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+  We first find the adjoint operator $T^*\in \mc{L}(\R^2)$. Let $(x_1,y_1),(x_2,y_2)\in \R^2$; then
+  \begin{align*}
+    \left<(x_1,y_1),T^*(x_2,y_2) \right> &= \left<T(x_1,y_1),(x_2,y_2) \right>  \\
+                                         &= \left< (\frac{7}{2}x_1+\frac{1}{2}y_1,
+                                         \frac{7}{2}x_1+\frac{1}{2}y_1), (x_2,y_2)\right>  \\
+                                         &=
+                                         \frac{7}{2}x_1x_2+\frac{1}{2}x_2y_1+\frac{7}{2}x_1y_2+\frac{1}{2}y_1y_2 \\
+                                         &=
+                                         \left<(x_1,y_1),(\frac{7}{2}x_2+\frac{7}{2}y_2,\frac{1}{2}x_2+\frac{1}{2}y_2) \right> 
+  .\end{align*}
+  Thus we need \[
+    T^*(x,y)=(\frac{7}{2}x+\frac{7}{2}y,\frac{1}{2}x+\frac{1}{2}y)
+  ,\] and so \[
+    T^*T(x,y)=(\frac{49}{2}x+\frac{7}{2}y,\frac{7}{2}x+\frac{1}{2}y)
+  .\] $T^*T$ has the following matrix with respect to the standard basis: \[
+  \mc{M}(T^*T)=\begin{pmatrix} \frac{49}{2}&\frac{7}{2}\\\frac{7}{2}&\frac{1}{2} \end{pmatrix} 
+  .\] Computing the determinant of $T^*T-\lambda I$, we get
+  \begin{align*}
+  \begin{vmatrix} \frac{49}{2}-\lambda&\frac{7}{2}\\\frac{7}{2}&\frac{1}{2}-\lambda \end{vmatrix}
+                                      &=\frac{49}{4}-\frac{50}{2}\lambda+\lambda_2-\frac{49}{4}\\
+                                      &= \lambda^2-25\lambda=0 \\
+                                      &=\lambda(\lambda-25)
+  .\end{align*}
+  Thus $T^*T$ has eigenvalues $\lambda=0$ and $25$, so $\sqrt{T^*T}$ has eigenvalues $ \lambda=0$
+  and $5$. Therefore $T$ has singular values $0$ and $5$.
+    \item We want \[
+        \sqrt{T^*T}(x,y)=5(x,y_)
+    ,\] since $\|av\|=\left| a \right| \|v\|$ for any scalar $a\in \F$, and
+    $\|Tv\|=\|\sqrt{T^*T}v\|$. Thus,
+    \begin{align*}
+      \sqrt{T^*T}(x,y)&= 5(x,y) \\
+      \sqrt{(\frac{49}{2}x+\frac{7}{2}y,\frac{7}{2}x+\frac{1}{2}y)}&=(5x,5y)\\
+      \frac{49}{2}x+\frac{7}{2}y&= 25x^2 \\
+      \frac{7}{2}y&= 25x^2-\frac{49}{2}x \\
+      y&=\frac{50}{7}x^2-\frac{49}{7}x
+    .\end{align*}
+    Inspection reveals $x=1,\ y=\frac{1}{7}$. Therefore, the vector $v=(1,\frac{1}{7})\in \R^2$
+    satsfies \[
+      \|Tv\|=5\|v\|
+    .\] 
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 4}
+  \begin{enumerate}[label=(\alph*)]
+    \item Use cofactors to compute the inverse of the matrix \[
+        A=\begin{pmatrix} 1&0&1\\2&0&0\\3&1&0 \end{pmatrix} 
+      .\] 
+    \item Let $n\ge 2$, and let $A$ be an $n\times n$ matrix over a field $\F$. Let $C$ be its
+      matrix of cofactors. Find and prove a formula for $\det{C}$, by relating $\det{C}$ to
+      $\det{A}$.
+  \end{enumerate}
+\end{problem}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First, observe that $\det{A}=1(2-0)=2\neq 0$, so a matrix exists. Let $C$ be the cofactor
+      matrix of $A$; then \[
+      C=\begin{pmatrix} 0&0&2\\1&-3&-1\\0&2&0 \end{pmatrix} 
+    .\] In class, we showed that if $\det{A}\neq 0$, then $A^{-1}=\frac{1}{\det{A}}C^T$ (Corollary
+    .28). Thus \[
+      A^{-1}=\frac{1}{\det{A}}C^T=\frac{1}{2}\begin{pmatrix} 0&1&0\\0&-3&2\\2&-1&0 \end{pmatrix}
+      =\begin{pmatrix} 0&\frac{1}{2}&0\\0&-\frac{3}{2}&1\\1&-\frac{1}{2}&0 \end{pmatrix} 
+    .\] 
+    \item In class, we proved that for any square matrix $A$ and its matrix of cofactors $C$, we
+      have
+      \[
+        AC^T=(\det{A})I=\begin{pmatrix} \det{A}&&0\\&\ddots&\\0&&\det{A} \end{pmatrix} 
+      \] (Proposition 8.26). Additionally, we showed that $\det{AB}=\det{A}\det{B}$ (Proposition
+      8.21). Taking the determinant of both sides, we get
+      \begin{align*}
+        \det{AC^T}&=\det{\begin{pmatrix} \det{A}&&0\\&\ddots&\\0&&\det{A} \end{pmatrix} }\\
+        (\det{A})(\det{C^T})&=(\det{A})^n\\
+        \det{C^T}&=\frac{(\det{A})^n}{\det{A}}=(\det{A})^{n-1}
+      .\end{align*} Recall additionally that for any square matrix $A$, \[
+        \det{A^T}=\det{A}
+      \] (Proposiiton 8.20). Thus the determinant of the cofactor matrix of $A$ is given by \[
+        \det{C}=(\det{A})^{n-1}
+      .\] 
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{\S 5}
+  Classify the self-adjoint isometries of $\R^3$ and describe each one geometrically.\\
+  \hrule
+  \vspace{1ex}
+  \textbf{Alternative Problem}:
+
+  Suppose $T\in \mc{L}(V)$ is a positive operator and an isometry. Does it follow that $T=I$?
+\end{problem}
+
+\begin{solution}
+  We start with the \textbf{alternative problem}:
+  Suppose $T\in \mc{L}(V)$ is a positive operator and an isometry. Then $T$ is self-adjoint, and
+  must have non-negative eigenvalues; moreover, for any $v\in V$, we must have \[
+    \|Tv\|=\|v\|
+  .\] By the Spectral Theorem, since $T$ is self-adjoint, $T$ has an orthonormal basis composed of
+  eigenvectors, say $e_1,\ldots,e_m$ (let $m=\dim{V}$) and corresponding eigenvectors
+  $\lambda_1,\ldots,\lambda_m$ (not necessarily distinct). By the properties of isometries
+  (Proposition 10.23), $T$ sends the orthonormal basis $e_1,\ldots,e_m$ to another orthonormal basis
+  $Te_1,\ldots,Te_m$. Since $T$ is an isometry, we need \[
+    \|Te_i\|=\left| \lambda_i \right| \|e_i\|=\|e_i\|
+  \] for any $1\le i\le m$. In other words, we need $\left| \lambda_i \right| =1$, or equivalently
+  \[
+    \lambda_i=1,-1,i,~\text{or}~-i
+  ;\] however, $T$ is positive, so all $\lambda_i$ must be non-negative. Additionally, $T$ is
+  self-adjoint, so all eigenvalues must be real. Hence only $\lambda_i=1$ works. Therefore, every
+  eigenvalue $\lambda_i$ of $T$ must equal $\lambda_i=1$. Since $T$ has a basis of eigenvectors
+  $e_1,\ldots,e_m$, every corresponding eigenvalue $\lambda_1,\ldots,\lambda_m$ must also equal $1$;
+  therefore, for any vector $v\in V$, we have \[
+    Tv=T(\left<v,e_1 \right>e_1)+\ldots+T(\left<v,e_m \right> e_m)=1\cdot \left<v,e_1 \right>
+    e_1+\ldots+1\cdot \left<v,e_m \right> e_m=v
+  .\] That is, $T=I$.
+  \hrule
+  \vspace{1ex}
+  Now, we attempt the \textbf{main problem}. Suppose $T\in \mc{L}(\R^3)$ is an isometry. Then by
+  isometry properties, we have $T^*T=I$; but $T$ is self-adjoint, so $T^*=T$, so $T^2=I$. In other
+  words, $T$ is the square root of the identity matrix. Since $T$ is self-adjoint, it is
+  diagonalizable by the Spectral Theorem, and additionally must have all real eigenvalues.
+  Therefore, $T$ is of the form: \[
+    \begin{pmatrix} \pm 1&0&0 \\0&\pm 1&0\\0&0&\pm 1\end{pmatrix} 
+  .\] For all positive and all negative $1$s on the diagonal, this is the \textbf{identity operator and the
+  $180^{\circ}$ rotation about the origin} respectively. We observe that the cases of $2$ $+1$s and
+  $1$ $-1$ along the diagonal are the same as the cases of $1$ $+1$ and $2$ $-1$s along the diagonal
+  (since we can swap the basis vectors associated with $1$, achieving the same result). There are
+  three separate classes of operators that have this property (of $2$ $+1$s and $1$ $-1$ along the
+  diagonal): a \textbf{reflection across the $xy$-plane}, a \textbf{reflection across the
+  $xz$-plane}, and a \textbf{reflection across the $yz$-plane}, given by $T(x,y,z)=(x,y,-z)$,
+  $T(x,y,z)=(x,-y,z)$, and $T(x,y,z)=(-x,y,z)$ respectively (this also shows the property of
+  eigenvalues above). These are thus all four self-adjoint isometries of $\R^3$.
+\end{solution}
+
+
+
+
+\end{document}
